@@ -221,10 +221,7 @@ public class EntityWorker extends EntityMob implements IBot {
 
 			if (hasHome)
 			{
-				nextDest.setCoord(
-						home.x,
-						home.y,
-						home.z);
+				nextDest.setCoord(home);
 				nextDest.addCoord(
 						rand.nextInt(32) - 16,
 						rand.nextInt(4) - 2,
@@ -261,10 +258,7 @@ public class EntityWorker extends EntityMob implements IBot {
 			{
 				if (hasHome)
 				{
-					nextDest.setCoord(
-							home.x,
-							home.y,
-							home.z);
+					nextDest.setCoord(home);
 				}
 				else
 				{
