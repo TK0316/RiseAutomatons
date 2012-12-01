@@ -2,6 +2,8 @@ package riseautomatons.common;
 
 import java.util.logging.Logger;
 
+import riseautomatons.common.entity.Entities;
+
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.Configuration;
@@ -33,6 +35,8 @@ public class RiseAutomatons {
 
 	@Mod.Init
 	public void load(FMLInitializationEvent event) {
+
+		Entities.init();
 	}
 
 	@PreInit
