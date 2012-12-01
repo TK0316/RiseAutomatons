@@ -13,7 +13,7 @@ public class Entities {
 		LanguageRegistry.instance().addStringLocalization("entity.Worker.name", "en_US", "Worker");
 		EntityRegistry.registerGlobalEntityID(EntityWorker.class, "Worker", EntityRegistry.findGlobalUniqueEntityId(), 0x00CC00, 0x77FF49);
 		registerTextures();
-
+		EntityWorker.init();
 	}
 
 	@SideOnly(Side.CLIENT)
