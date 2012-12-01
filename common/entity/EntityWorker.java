@@ -14,6 +14,7 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.PathEntity;
 import net.minecraft.src.World;
+import riseautomatons.common.Coord;
 import riseautomatons.common.Universal;
 
 public class EntityWorker extends EntityMob implements IBot {
@@ -151,9 +152,7 @@ public class EntityWorker extends EntityMob implements IBot {
 
 	}
 
-	public int dX;
-	public int dY;
-	public int dZ;
+	public Coord dest;
 	int hx;
 	int hy;
 	int hz;
@@ -251,9 +250,9 @@ public class EntityWorker extends EntityMob implements IBot {
 				//System.out.println("stage 2!");
 				setState(1);
 				gotoSpot(xo, yo, zo, 16F);
-				dX = xo;
-				dY = yo;
-				dZ = zo;
+				dest.x = xo;
+				dest.y = yo;
+				dest.z = zo;
 			}
 			else
 			{
@@ -281,15 +280,15 @@ public class EntityWorker extends EntityMob implements IBot {
 				{
 					setState(1);
 					gotoSpot(xo, yo, zo, 5F);
-					dX = xo;
-					dY = yo;
-					dZ = zo;
+					dest.x = xo;
+					dest.y = yo;
+					dest.z = zo;
 				}
 			}
 		}
 		else if (getState() == 1)
 		{
-			if (getDistance(dX, dY, dZ) < 2)
+			if (getDistance(dest.x, dest.y, dest.z) < 2)
 			{
 				setState(2);
 			}
@@ -307,7 +306,7 @@ public class EntityWorker extends EntityMob implements IBot {
 		}
 		else if (getState() == 2)
 		{
-			int bbb = worldObj.getBlockId(dX, dY, dZ);
+			int bbb = worldObj.getBlockId(dest.x, dest.y, dest.z);
 
 			if (bbb == 2)
 			{
@@ -326,16 +325,16 @@ public class EntityWorker extends EntityMob implements IBot {
 				}
 
 				int dd = getDig();
-				setD("" + dX + "," + dY + "," + dZ);
+				setD("" + dest.x + "," + dest.y + "," + dest.z);
 				Block bb = Block.blocksList[getInventoryType()];
 
 				if(bb==null)
 					return;
 
-				if (dd >= bb.getBlockHardness(worldObj, dX, dY, dZ) * 30)
+				if (dd >= bb.getBlockHardness(worldObj, dest.x, dest.y, dest.z) * 30)
 				{
-					 worldObj.setBlockWithNotify(dX, dY, dZ, 0);
-					EntityItem entityitem = new EntityItem(worldObj, dX, dY, dZ, new ItemStack(bb.idDropped(0, rand, 0), 1, 0));
+					 worldObj.setBlockWithNotify(dest.x, dest.y, dest.z, 0);
+					EntityItem entityitem = new EntityItem(worldObj, dest.x, dest.y, dest.z, new ItemStack(bb.idDropped(0, rand, 0), 1, 0));
 					entityitem.delayBeforeCanPickup = 10;
 					worldObj.spawnEntityInWorld(entityitem);
 					setT(0);
@@ -345,7 +344,7 @@ public class EntityWorker extends EntityMob implements IBot {
 					if (optimizeDig())
 					{
 						setState(1);
-						gotoSpot(dX, dY, dZ, 5F);
+						gotoSpot(dest.x, dest.y, dest.z, 5F);
 					}
 					else
 					{
@@ -366,9 +365,9 @@ public class EntityWorker extends EntityMob implements IBot {
 	}
 	private boolean optimizeDig()
 	{
-		int xo = MathHelper.floor_double(dX);
-		int yo = MathHelper.floor_double(dY);
-		int zo = MathHelper.floor_double(dZ);
+		int xo = MathHelper.floor_double(dest.x);
+		int yo = MathHelper.floor_double(dest.y);
+		int zo = MathHelper.floor_double(dest.z);
 		boolean bool = even(R);
 		if(Universal.distance(hx, hy, hz, posX, posY, posZ)>24){
 			return false;
@@ -440,9 +439,9 @@ public class EntityWorker extends EntityMob implements IBot {
 	{
 		if (worldObj.getBlockId(xo, yo, zo) == getInventoryType())
 		{
-			dX = xo;
-			dY = yo;
-			dZ = zo;
+			dest.x = xo;
+			dest.y = yo;
+			dest.z = zo;
 			return true;
 		}
 
