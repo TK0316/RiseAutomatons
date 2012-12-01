@@ -217,9 +217,9 @@ public class EntityWorker extends EntityMob implements IBot {
 		if (getState() == 0)
 		{
 			Coord nextDest = new Coord(0,0,0);
-			boolean boo = (getHome() != null);
+			boolean hasHome = (getHome() != null);
 
-			if (boo)
+			if (hasHome)
 			{
 				nextDest.x = home.x + rand.nextInt(32) - 16;
 				nextDest.z = home.z + rand.nextInt(32) - 16;
@@ -252,7 +252,7 @@ public class EntityWorker extends EntityMob implements IBot {
 			}
 			else
 			{
-				if (boo)
+				if (hasHome)
 				{
 					nextDest.x = home.x + rand.nextInt(6) - 3;
 					nextDest.z = home.z + rand.nextInt(6) - 3;
