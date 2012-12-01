@@ -29,8 +29,7 @@ public class EntityWorker extends EntityMob implements IBot {
 
 	@Override
 	public int getMaxHealth() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 10;
+		return 6;
 	}
 
 	@Override
