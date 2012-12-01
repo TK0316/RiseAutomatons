@@ -153,9 +153,7 @@ public class EntityWorker extends EntityMob implements IBot {
 	}
 
 	public Coord dest;
-	int hx;
-	int hy;
-	int hz;
+	Coord home;
 	int F = 0;
 	int R = 0;
 	private int state;
@@ -225,9 +223,9 @@ public class EntityWorker extends EntityMob implements IBot {
 
 			if (boo)
 			{
-				xo = hx + rand.nextInt(32) - 16;
-				zo = hz + rand.nextInt(32) - 16;
-				yo = hy + rand.nextInt(4) - 2;
+				xo = home.x + rand.nextInt(32) - 16;
+				zo = home.z + rand.nextInt(32) - 16;
+				yo = home.y + rand.nextInt(4) - 2;
 			}
 			else
 			{
@@ -258,9 +256,9 @@ public class EntityWorker extends EntityMob implements IBot {
 			{
 				if (boo)
 				{
-					xo = hx + rand.nextInt(6) - 3;
-					zo = hz + rand.nextInt(6) - 3;
-					yo = hy + rand.nextInt(4) - 2;
+					xo = home.x + rand.nextInt(6) - 3;
+					zo = home.z + rand.nextInt(6) - 3;
+					yo = home.y + rand.nextInt(4) - 2;
 				}
 				else
 				{
@@ -369,7 +367,7 @@ public class EntityWorker extends EntityMob implements IBot {
 		int yo = MathHelper.floor_double(dest.y);
 		int zo = MathHelper.floor_double(dest.z);
 		boolean bool = even(R);
-		if(Universal.distance(hx, hy, hz, posX, posY, posZ)>24){
+		if(Universal.distance(home.x, home.y, home.z, posX, posY, posZ)>24){
 			return false;
 		}
 
