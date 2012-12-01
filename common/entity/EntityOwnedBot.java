@@ -2,12 +2,12 @@ package riseautomatons.common.entity;
 
 import net.minecraft.src.DamageSource;
 import net.minecraft.src.Entity;
-import net.minecraft.src.EntityCreature;
+import net.minecraft.src.EntityGolem;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.World;
 
-public class EntityOwnedBot extends EntityCreature {
+public class EntityOwnedBot extends EntityGolem {
 
 	public EntityOwnedBot(World par1World) {
 		super(par1World);
