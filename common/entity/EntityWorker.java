@@ -85,8 +85,6 @@ public class EntityWorker extends EntityMob implements IBot {
 			return false;
 		}
 
-		mode = EnumWorkMode.values()[(mode.ordinal() + 1) % EnumWorkMode.values().length];
-
 
 		String s  = "explode";
 		Random rand = worldObj.rand;
