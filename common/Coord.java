@@ -17,6 +17,13 @@ public class Coord {
 
 	}
 
+	public Coord(Coord c) {
+		this.x = c.x;
+		this.y = c.y;
+		this.z = c.z;
+		isValid = c.isValid;
+	}
+
 	public void setCoord(int x, int y, int z) {
 		this.x = x;
 		this.y = y;

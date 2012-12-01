@@ -216,12 +216,15 @@ public class EntityWorker extends EntityMob implements IBot {
 
 		if (getState() == 0)
 		{
-			Coord nextDest = new Coord(0,0,0);
 			boolean hasHome = (getHome() != null);
 
+			int posX = MathHelper.floor_double(entityplayer.posX);
+			int posY = MathHelper.floor_double(entityplayer.posY);
+			int posZ = MathHelper.floor_double(entityplayer.posZ);
+
+			Coord nextDest = hasHome ? new Coord(home) : new Coord(posX, posY, posZ) ;
 			if (hasHome)
 			{
-				nextDest.setCoord(home);
 				nextDest.addCoord(
 						rand.nextInt(32) - 16,
 						rand.nextInt(4) - 2,
@@ -229,10 +232,6 @@ public class EntityWorker extends EntityMob implements IBot {
 			}
 			else
 			{
-				nextDest.setCoord(
-						MathHelper.floor_double(entityplayer.posX),
-						MathHelper.floor_double(entityplayer.posY),
-						MathHelper.floor_double(entityplayer.posZ));
 				nextDest.addCoord(
 						rand.nextInt(16) - 8,
 						rand.nextInt(4) - 2,
@@ -262,10 +261,7 @@ public class EntityWorker extends EntityMob implements IBot {
 				}
 				else
 				{
-					nextDest.setCoord(
-							MathHelper.floor_double(entityplayer.posX),
-							MathHelper.floor_double(entityplayer.posY),
-							MathHelper.floor_double(entityplayer.posZ));
+					nextDest.setCoord(posX, posY, posZ);
 				}
 				nextDest.addCoord(
 						rand.nextInt(6) - 3,
