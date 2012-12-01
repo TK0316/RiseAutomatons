@@ -19,6 +19,11 @@ public class Entities {
 	@SideOnly(Side.CLIENT)
 	public static void registerTextures() {
 		MinecraftForgeClient.preloadTexture(EntityWorker.GOLEM1_PNG);
+		MinecraftForgeClient.preloadTexture(EntityWorker.GOLEM2_PNG);
+		MinecraftForgeClient.preloadTexture(EntityWorker.GOLEM3_PNG);
+		MinecraftForgeClient.preloadTexture(EntityWorker.GOLEM4_PNG);
+		MinecraftForgeClient.preloadTexture(EntityWorker.GOLEM5_PNG);
+		MinecraftForgeClient.preloadTexture(EntityWorker.GOLEM6_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntityWorker.class, new RenderWorker(new ModelWorker(), 0.5F));
 
 	}
