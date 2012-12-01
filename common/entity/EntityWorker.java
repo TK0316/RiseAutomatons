@@ -9,6 +9,7 @@ import net.minecraft.src.EntityMob;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
+import net.minecraft.src.PathEntity;
 import net.minecraft.src.World;
 import riseautomatons.common.Universal;
 
@@ -145,6 +146,69 @@ public class EntityWorker extends EntityMob implements IBot {
 	private void setInventoryType(int itemID) {
 		inventryItemID  = itemID;
 
+	}
+
+	public int dX;
+	public int dY;
+	public int dZ;
+	int hx;
+	int hy;
+	int hz;
+	int F = 0;
+	int R = 0;
+	private int state;
+	private int dig;
+	private int trigger;
+
+	protected void setState(int i)
+	{
+		state = i;
+		// dataWatcher.updateObject(18, Integer.valueOf(i));
+	}
+
+	protected int getState()
+	{
+		return state;//dataWatcher.getWatchableObjectInt(18); //state;//
+	}
+
+	protected int getDig()
+	{
+		return dig;//dataWatcher.getWatchableObjectInt(19);
+	}
+	protected void setDig(int i)
+	{
+		dig = i;
+		//dataWatcher.updateObject(19, Integer.valueOf(i));
+	}
+
+	public String getD()
+	{
+		return dataWatcher.getWatchableObjectString(20);
+	}
+
+	public void setD(String s)
+	{
+		dataWatcher.updateObject(20, s);
+	}
+
+	protected int getT()
+	{
+		return Universal.getInt(dataWatcher, 19);
+	}
+	protected void setT(int i)
+	{
+		trigger = i;
+		dataWatcher.updateObject(19, Integer.valueOf(i));
+	}
+	void gotoSpot(int x, int y, int z, float f)
+	{
+		PathEntity pathentity = worldObj.getEntityPathToXYZ(this, x, y, z, 16F, true, true, false, true);
+		this.getNavigator().setPath(pathentity, moveSpeed);
+	}
+
+	public Object getHome() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 
 }
