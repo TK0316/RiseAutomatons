@@ -28,6 +28,9 @@ public class RiseAutomatons {
 
 	public static boolean debug = false;
 
+	public static final CreativeTabs tabAutomatons = new CreativeTabAutomatons(
+			"RiseAutomatons");
+
 	@Mod.Init
 	public void load(FMLInitializationEvent event) {
 	}
