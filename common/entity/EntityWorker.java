@@ -156,20 +156,20 @@ public class EntityWorker extends EntityMob implements IBot {
 	private Coord home;
 	int F = 0;
 	int R = 0;
-	private int state;
 	private int dig;
 	private int trigger;
 
-	protected void setState(int i)
-	{
-		state = i;
-		// dataWatcher.updateObject(18, Integer.valueOf(i));
+	enum EnumDigState {MOVE, CHECK, DIG};
+	private EnumDigState state = EnumDigState.MOVE;
+
+	private EnumDigState getState() {
+		return state;
 	}
 
-	protected int getState()
-	{
-		return state;//dataWatcher.getWatchableObjectInt(18); //state;//
+	private void setState(EnumDigState state) {
+		this.state = state;
 	}
+
 
 	protected int getDig()
 	{
@@ -214,7 +214,7 @@ public class EntityWorker extends EntityMob implements IBot {
 	public void modeDig(EntityLiving entityplayer){  //digger
 
 
-		if (getState() == 0)
+		if (getState() == EnumDigState.MOVE)
 		{
 			boolean hasHome = (getHome() != null);
 
@@ -249,7 +249,7 @@ public class EntityWorker extends EntityMob implements IBot {
 			if (bbb == getInventoryType())
 			{
 				//System.out.println("stage 2!");
-				setState(1);
+				setState(EnumDigState.CHECK);
 				gotoSpot(nextDest.x, nextDest.y, nextDest.z, 16F);
 				dest.setCoord(nextDest);
 			}
@@ -277,31 +277,31 @@ public class EntityWorker extends EntityMob implements IBot {
 
 				if (bbb2 == getInventoryType())
 				{
-					setState(1);
+					setState(EnumDigState.CHECK);
 					gotoSpot(nextDest.x, nextDest.y, nextDest.z, 5F);
 					dest.setCoord(nextDest);
 				}
 			}
 		}
-		else if (getState() == 1)
+		else if (getState() == EnumDigState.CHECK)
 		{
 			if (getDistance(dest.x, dest.y, dest.z) < 2)
 			{
-				setState(2);
+				setState(EnumDigState.DIG);
 			}
 			else
 			{
 				if (lastResortDig())
 				{
-					setState(2);
+					setState(EnumDigState.DIG);
 				}
 				else
 				{
-					setState(0);
+					setState(EnumDigState.MOVE);
 				}
 			}
 		}
-		else if (getState() == 2)
+		else if (getState() == EnumDigState.DIG)
 		{
 			int bbb = worldObj.getBlockId(dest.x, dest.y, dest.z);
 
@@ -312,7 +312,7 @@ public class EntityWorker extends EntityMob implements IBot {
 
 			if (bbb != getInventoryType())
 			{
-				setState(0);
+				setState(EnumDigState.MOVE);
 			}
 			else
 			{
@@ -340,14 +340,14 @@ public class EntityWorker extends EntityMob implements IBot {
 					//TODO
 					if (optimizeDig())
 					{
-						setState(1);
+						setState(EnumDigState.CHECK);
 						gotoSpot(dest.x, dest.y, dest.z, 5F);
 					}
 					else
 					{
 						F = 0;
 						R = 0;
-						setState(0);
+						setState(EnumDigState.MOVE);
 					}
 
 					//setState(0);
