@@ -10,7 +10,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class Entities {
 
 	public static void init() {
-		LanguageRegistry.instance().addStringLocalization("entity.Worker.name", "en_US", "Test");
+		LanguageRegistry.instance().addStringLocalization("entity.Worker.name", "en_US", "Worker");
 		EntityRegistry.registerGlobalEntityID(EntityWorker.class, "Worker", EntityRegistry.findGlobalUniqueEntityId(), 0x00CC00, 0x77FF49);
 		registerTextures();
 
