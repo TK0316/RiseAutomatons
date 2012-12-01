@@ -152,8 +152,8 @@ public class EntityWorker extends EntityMob implements IBot {
 
 	}
 
-	public Coord dest;
-	Coord home;
+	private Coord dest;
+	private Coord home;
 	int F = 0;
 	int R = 0;
 	private int state;
