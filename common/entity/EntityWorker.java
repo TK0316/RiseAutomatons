@@ -222,16 +222,24 @@ public class EntityWorker extends EntityMob implements IBot {
 			if (hasHome)
 			{
 				nextDest.setCoord(
-						home.x + rand.nextInt(32) - 16,
-						home.y + rand.nextInt(4) - 2,
-						home.z + rand.nextInt(32) - 16);
+						home.x,
+						home.y,
+						home.z);
+				nextDest.addCoord(
+						rand.nextInt(32) - 16,
+						rand.nextInt(4) - 2,
+						rand.nextInt(32) - 16);
 			}
 			else
 			{
 				nextDest.setCoord(
-						MathHelper.floor_double(entityplayer.posX) + rand.nextInt(16) - 8,
-						MathHelper.floor_double(entityplayer.posY) + rand.nextInt(4) - 2,
-						MathHelper.floor_double(entityplayer.posZ) + rand.nextInt(16) - 8);
+						MathHelper.floor_double(entityplayer.posX),
+						MathHelper.floor_double(entityplayer.posY),
+						MathHelper.floor_double(entityplayer.posZ));
+				nextDest.addCoord(
+						rand.nextInt(16) - 8,
+						rand.nextInt(4) - 2,
+						rand.nextInt(16) - 8);
 			}
 			//System.out.println(xo+","+yo+","+zo);
 
