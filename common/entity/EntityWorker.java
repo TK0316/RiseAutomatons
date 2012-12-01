@@ -239,14 +239,14 @@ public class EntityWorker extends EntityMob implements IBot {
 			}
 			//System.out.println(xo+","+yo+","+zo);
 
-			int bbb = worldObj.getBlockId(nextDest.x, nextDest.y, nextDest.z);
+			int destBlockId = worldObj.getBlockId(nextDest.x, nextDest.y, nextDest.z);
 
-			if (bbb == 2)
+			if (destBlockId == 2)
 			{
-				bbb = 3;
+				destBlockId = 3;
 			}
 			//System.out.println("uh: "+getInventoryType());
-			if (bbb == getInventoryType())
+			if (destBlockId == getInventoryType())
 			{
 				//System.out.println("stage 2!");
 				setState(EnumDigState.CHECK);
