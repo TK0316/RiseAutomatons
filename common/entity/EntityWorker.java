@@ -265,10 +265,6 @@ public class EntityWorker extends EntityMob implements IBot {
 							home.x,
 							home.y,
 							home.z);
-					nextDest.addCoord(
-							rand.nextInt(6) - 3,
-							rand.nextInt(4) - 2,
-							rand.nextInt(6) - 3);
 				}
 				else
 				{
@@ -276,11 +272,11 @@ public class EntityWorker extends EntityMob implements IBot {
 							MathHelper.floor_double(entityplayer.posX),
 							MathHelper.floor_double(entityplayer.posY),
 							MathHelper.floor_double(entityplayer.posZ));
-					nextDest.addCoord(
-							rand.nextInt(6) - 3,
-							rand.nextInt(4) - 2,
-							rand.nextInt(6) - 3);
 				}
+				nextDest.addCoord(
+						rand.nextInt(6) - 3,
+						rand.nextInt(4) - 2,
+						rand.nextInt(6) - 3);
 
 				int bbb2 = worldObj.getBlockId(nextDest.x, nextDest.y, nextDest.z);
 
