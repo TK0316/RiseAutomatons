@@ -216,27 +216,25 @@ public class EntityWorker extends EntityMob implements IBot {
 
 		if (getState() == 0)
 		{
-			int xo;
-			int zo;
-			int yo;
+			Coord nextDest = new Coord(0,0,0);
 			boolean boo = (getHome() != null);
 
 			if (boo)
 			{
-				xo = home.x + rand.nextInt(32) - 16;
-				zo = home.z + rand.nextInt(32) - 16;
-				yo = home.y + rand.nextInt(4) - 2;
+				nextDest.x = home.x + rand.nextInt(32) - 16;
+				nextDest.z = home.z + rand.nextInt(32) - 16;
+				nextDest.y = home.y + rand.nextInt(4) - 2;
 			}
 			else
 			{
 
-				xo = MathHelper.floor_double(entityplayer.posX) + rand.nextInt(16) - 8;
-				zo = MathHelper.floor_double(entityplayer.posZ) + rand.nextInt(16) - 8;
-				yo = MathHelper.floor_double(entityplayer.posY) + rand.nextInt(4) - 2;
+				nextDest.x = MathHelper.floor_double(entityplayer.posX) + rand.nextInt(16) - 8;
+				nextDest.z = MathHelper.floor_double(entityplayer.posZ) + rand.nextInt(16) - 8;
+				nextDest.y = MathHelper.floor_double(entityplayer.posY) + rand.nextInt(4) - 2;
 			}
 			//System.out.println(xo+","+yo+","+zo);
 
-			int bbb = worldObj.getBlockId(xo, yo, zo);
+			int bbb = worldObj.getBlockId(nextDest.x, nextDest.y, nextDest.z);
 
 			if (bbb == 2)
 			{
@@ -247,27 +245,27 @@ public class EntityWorker extends EntityMob implements IBot {
 			{
 				//System.out.println("stage 2!");
 				setState(1);
-				gotoSpot(xo, yo, zo, 16F);
-				dest.x = xo;
-				dest.y = yo;
-				dest.z = zo;
+				gotoSpot(nextDest.x, nextDest.y, nextDest.z, 16F);
+				dest.x = nextDest.x;
+				dest.y = nextDest.y;
+				dest.z = nextDest.z;
 			}
 			else
 			{
 				if (boo)
 				{
-					xo = home.x + rand.nextInt(6) - 3;
-					zo = home.z + rand.nextInt(6) - 3;
-					yo = home.y + rand.nextInt(4) - 2;
+					nextDest.x = home.x + rand.nextInt(6) - 3;
+					nextDest.z = home.z + rand.nextInt(6) - 3;
+					nextDest.y = home.y + rand.nextInt(4) - 2;
 				}
 				else
 				{
-					xo = MathHelper.floor_double(entityplayer.posX) + rand.nextInt(6) - 3;
-					zo = MathHelper.floor_double(entityplayer.posZ) + rand.nextInt(6) - 3;
-					yo = MathHelper.floor_double(entityplayer.posY) + rand.nextInt(4) - 2;
+					nextDest.x = MathHelper.floor_double(entityplayer.posX) + rand.nextInt(6) - 3;
+					nextDest.z = MathHelper.floor_double(entityplayer.posZ) + rand.nextInt(6) - 3;
+					nextDest.y = MathHelper.floor_double(entityplayer.posY) + rand.nextInt(4) - 2;
 				}
 
-				int bbb2 = worldObj.getBlockId(xo, yo, zo);
+				int bbb2 = worldObj.getBlockId(nextDest.x, nextDest.y, nextDest.z);
 
 				if (bbb2 == 2)
 				{
@@ -277,10 +275,10 @@ public class EntityWorker extends EntityMob implements IBot {
 				if (bbb2 == getInventoryType())
 				{
 					setState(1);
-					gotoSpot(xo, yo, zo, 5F);
-					dest.x = xo;
-					dest.y = yo;
-					dest.z = zo;
+					gotoSpot(nextDest.x, nextDest.y, nextDest.z, 5F);
+					dest.x = nextDest.x;
+					dest.y = nextDest.y;
+					dest.z = nextDest.z;
 				}
 			}
 		}
