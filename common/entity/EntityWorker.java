@@ -5,10 +5,13 @@ import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.src.Block;
+import net.minecraft.src.EntityItem;
+import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityMob;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
+import net.minecraft.src.MathHelper;
 import net.minecraft.src.PathEntity;
 import net.minecraft.src.World;
 import riseautomatons.common.Universal;
@@ -209,6 +212,241 @@ public class EntityWorker extends EntityMob implements IBot {
 	public Object getHome() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
+	}
+
+	public void modeDig(EntityLiving entityplayer){  //digger
+
+
+		if (getState() == 0)
+		{
+			int xo;
+			int zo;
+			int yo;
+			boolean boo = (getHome() != null);
+
+			if (boo)
+			{
+				xo = hx + rand.nextInt(32) - 16;
+				zo = hz + rand.nextInt(32) - 16;
+				yo = hy + rand.nextInt(4) - 2;
+			}
+			else
+			{
+
+				xo = MathHelper.floor_double(entityplayer.posX) + rand.nextInt(16) - 8;
+				zo = MathHelper.floor_double(entityplayer.posZ) + rand.nextInt(16) - 8;
+				yo = MathHelper.floor_double(entityplayer.posY) + rand.nextInt(4) - 2;
+			}
+			//System.out.println(xo+","+yo+","+zo);
+
+			int bbb = worldObj.getBlockId(xo, yo, zo);
+
+			if (bbb == 2)
+			{
+				bbb = 3;
+			}
+			//System.out.println("uh: "+getInventoryType());
+			if (bbb == getInventoryType())
+			{
+				//System.out.println("stage 2!");
+				setState(1);
+				gotoSpot(xo, yo, zo, 16F);
+				dX = xo;
+				dY = yo;
+				dZ = zo;
+			}
+			else
+			{
+				if (boo)
+				{
+					xo = hx + rand.nextInt(6) - 3;
+					zo = hz + rand.nextInt(6) - 3;
+					yo = hy + rand.nextInt(4) - 2;
+				}
+				else
+				{
+					xo = MathHelper.floor_double(entityplayer.posX) + rand.nextInt(6) - 3;
+					zo = MathHelper.floor_double(entityplayer.posZ) + rand.nextInt(6) - 3;
+					yo = MathHelper.floor_double(entityplayer.posY) + rand.nextInt(4) - 2;
+				}
+
+				int bbb2 = worldObj.getBlockId(xo, yo, zo);
+
+				if (bbb2 == 2)
+				{
+					bbb2 = 3;
+				}
+
+				if (bbb2 == getInventoryType())
+				{
+					setState(1);
+					gotoSpot(xo, yo, zo, 5F);
+					dX = xo;
+					dY = yo;
+					dZ = zo;
+				}
+			}
+		}
+		else if (getState() == 1)
+		{
+			if (getDistance(dX, dY, dZ) < 2)
+			{
+				setState(2);
+			}
+			else
+			{
+				if (lastResortDig())
+				{
+					setState(2);
+				}
+				else
+				{
+					setState(0);
+				}
+			}
+		}
+		else if (getState() == 2)
+		{
+			int bbb = worldObj.getBlockId(dX, dY, dZ);
+
+			if (bbb == 2)
+			{
+				bbb = 3;
+			}
+
+			if (bbb != getInventoryType())
+			{
+				setState(0);
+			}
+			else
+			{
+				if (getT() != 1)
+				{
+					setT(1);
+				}
+
+				int dd = getDig();
+				setD("" + dX + "," + dY + "," + dZ);
+				Block bb = Block.blocksList[getInventoryType()];
+
+				if(bb==null)
+					return;
+
+				if (dd >= bb.getBlockHardness(worldObj, dX, dY, dZ) * 30)
+				{
+					 worldObj.setBlockWithNotify(dX, dY, dZ, 0);
+					EntityItem entityitem = new EntityItem(worldObj, dX, dY, dZ, new ItemStack(bb.idDropped(0, rand, 0), 1, 0));
+					entityitem.delayBeforeCanPickup = 10;
+					worldObj.spawnEntityInWorld(entityitem);
+					setT(0);
+					setDig(0);
+
+					//TODO
+					if (optimizeDig())
+					{
+						setState(1);
+						gotoSpot(dX, dY, dZ, 5F);
+					}
+					else
+					{
+						F = 0;
+						R = 0;
+						setState(0);
+					}
+
+					//setState(0);
+				}
+				else
+				{
+					setDig(dd + 1);
+				}
+			}
+		}
+
+	}
+	private boolean optimizeDig()
+	{
+		int xo = MathHelper.floor_double(dX);
+		int yo = MathHelper.floor_double(dY);
+		int zo = MathHelper.floor_double(dZ);
+		boolean bool = even(R);
+		if(Universal.distance(hx, hy, hz, posX, posY, posZ)>24){
+			return false;
+		}
+
+
+		if (F < 6 && F>=0 && derp(xo, yo, zo + (bool?1:-1))){
+			if(bool){
+				F++;
+			}else{
+				F--;
+			}
+			return true;
+		}
+		else if (derp(xo - 1, yo, zo)){
+			R++;
+			return true;
+		}
+		else if (derp(xo + 1, yo, zo)){
+			R--;
+			return true;
+		}
+		else if (derp(xo, yo - 1, zo)){
+			R=3;
+			F=3;
+			return true;
+		}
+		return false;
+	}
+
+	private boolean lastResortDig(){
+		int xo = MathHelper.floor_double(posX);
+		int yo = MathHelper.floor_double(posY);
+		int zo = MathHelper.floor_double(posZ);
+
+		if (derp(xo, yo + 1, zo))
+		{
+			return true;
+		}
+		else if (derp(xo - 1, yo, zo))
+		{
+			return true;
+		}
+		else if (derp(xo + 1, yo, zo))
+		{
+			return true;
+		}
+		else if (derp(xo, yo, zo - 1))
+		{
+			return true;
+		}
+		else if (derp(xo, yo, zo + 1))
+		{
+			return true;
+		}
+		else if (derp(xo, yo - 1, zo))
+		{
+			return true;
+		}
+
+		return false;
+	}
+	public boolean even(int i)
+	{
+		return i % 2 == 0;
+	}
+
+	private boolean derp(int xo, int yo, int zo)
+	{
+		if (worldObj.getBlockId(xo, yo, zo) == getInventoryType())
+		{
+			dX = xo;
+			dY = yo;
+			dZ = zo;
+			return true;
+		}
+
+		return false;
 	}
 
 }
