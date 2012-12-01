@@ -21,8 +21,8 @@ public class EntityWorker extends EntityMob implements IBot {
 	public static final String GOLEM5_PNG = "/RiseAutomatons/golem5.png";
 	public static final String GOLEM6_PNG = "/RiseAutomatons/golem6.png";
 
-	enum EnumMode {STAY, FOLLOW, DIG, PANIC, PICKUP};
-	private EnumMode mode = EnumMode.STAY;
+	enum EnumWorkMode {STAY, FOLLOW, DIG, PANIC, PICKUP};
+	private EnumWorkMode mode = EnumWorkMode.STAY;
 	private int inventryItemID = 0;
 
 	public EntityWorker(World par1World) {
@@ -57,30 +57,30 @@ public class EntityWorker extends EntityMob implements IBot {
 
 		ItemStack itemstack = entityplayer.inventory.getCurrentItem();
 		if(itemstack == null) {
-			if(getMode() == EnumMode.STAY) {
-				setMode(EnumMode.FOLLOW);
+			if(getMode() == EnumWorkMode.STAY) {
+				setMode(EnumWorkMode.FOLLOW);
 			}
 			else {
-				setMode(EnumMode.STAY);
+				setMode(EnumWorkMode.STAY);
 			}
 			return true;
 		}
 
 		if(itemstack.itemID == Item.shovelStone.shiftedIndex) {
-			setMode(EnumMode.PANIC);
+			setMode(EnumWorkMode.PANIC);
 		}
 		else if(itemstack.itemID == Item.stick.shiftedIndex) {
-			setMode(EnumMode.PICKUP);
+			setMode(EnumWorkMode.PICKUP);
 		}
 		else if(target.containsKey(itemstack.itemID)) {
-			setMode(EnumMode.DIG);
+			setMode(EnumWorkMode.DIG);
 			setInventoryType(target.get(itemstack.itemID));
 		}
 		else {
 			return false;
 		}
 
-		mode = EnumMode.values()[(mode.ordinal() + 1) % EnumMode.values().length];
+		mode = EnumWorkMode.values()[(mode.ordinal() + 1) % EnumWorkMode.values().length];
 
 
 		String s  = "explode";
@@ -101,13 +101,13 @@ public class EntityWorker extends EntityMob implements IBot {
 	}
 
 
-	private void setMode(EnumMode follow) {
+	private void setMode(EnumWorkMode follow) {
 		if(Universal.improperWorld(worldObj)) {
 			return;
 		}
 	}
 
-	public EnumMode getMode() {
+	public EnumWorkMode getMode() {
 		return mode;
 	}
 
