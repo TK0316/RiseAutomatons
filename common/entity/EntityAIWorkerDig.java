@@ -29,7 +29,7 @@ public class EntityAIWorkerDig extends EntityAIBase {
 	@Override
 	public void startExecuting() {
 		super.startExecuting();
-		bot.modeDig(owner);
+		bot.modeDig();
 	}
 
 	@Override

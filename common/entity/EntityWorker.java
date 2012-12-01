@@ -5,19 +5,25 @@ import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.src.Block;
+import net.minecraft.src.DamageSource;
+import net.minecraft.src.EnchantmentHelper;
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityAILookIdle;
+import net.minecraft.src.EntityAIWatchClosest;
 import net.minecraft.src.EntityItem;
 import net.minecraft.src.EntityLiving;
-import net.minecraft.src.EntityMob;
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EnumSkyBlock;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.PathEntity;
+import net.minecraft.src.Potion;
 import net.minecraft.src.World;
 import riseautomatons.common.Coord;
 import riseautomatons.common.Universal;
 
-public class EntityWorker extends EntityMob implements IBot {
+public class EntityWorker extends EntityOwnedBot implements IBot {
 
 	public static final String GOLEM1_PNG = "/RiseAutomatons/golem1.png";
 	public static final String GOLEM2_PNG = "/RiseAutomatons/golem2.png";
@@ -33,6 +39,15 @@ public class EntityWorker extends EntityMob implements IBot {
 	public EntityWorker(World par1World) {
 		super(par1World);
 		setSize(0.6F, 0.8F);
+
+		getNavigator().setAvoidsWater(true);
+		//tasks.addTask(5, new EntityAIWorkerFollow(this, moveSpeed, 7F, 2.0F));
+		tasks.addTask(5, new EntityAIWorkerDig(this));
+		//tasks.addTask(5, new EntityAIWorkerCollect(this));
+		//tasks.addTask(7, new EntityAIWorkerWander(this, moveSpeed));
+		//tasks.addTask(200, new EntityAIWorkerBeacon(this));
+		tasks.addTask(9, new EntityAIWatchClosest(this, net.minecraft.src.EntityPlayer.class, 8F));
+		tasks.addTask(9, new EntityAILookIdle(this));
 	}
 
 	private static Map<Integer, Integer> target = new LinkedHashMap<Integer, Integer>();
@@ -59,6 +74,9 @@ public class EntityWorker extends EntityMob implements IBot {
 
 	@Override
 	public boolean interact(EntityPlayer entityplayer) {
+
+		// TODO set owner properly
+		setBotOwner(entityplayer.username);
 
 		ItemStack itemstack = entityplayer.inventory.getCurrentItem();
 		if(itemstack == null) {
@@ -136,6 +154,11 @@ public class EntityWorker extends EntityMob implements IBot {
 		return GOLEM1_PNG;
 	}
 
+	@Override
+	protected boolean isAIEnabled() {
+		return true;
+	}
+
 	public int getInventoryDamage() {
 		// TODO 自動生成されたメソッド・スタブ
 		return 0;
@@ -150,8 +173,8 @@ public class EntityWorker extends EntityMob implements IBot {
 
 	}
 
-	private Coord dest;
-	private Coord home;
+	private Coord dest = new Coord();
+	private Coord home = new Coord();
 	int F = 0;
 	int R = 0;
 	private int dig;
@@ -228,8 +251,12 @@ public class EntityWorker extends EntityMob implements IBot {
 		return new Coord();
 	}
 
-	public void modeDig(EntityLiving entityplayer){  //digger
+	public void modeDig() {
 
+		EntityPlayer entityplayer = reallyGetBotOwner();
+		if(entityplayer == null) {
+			return;
+		}
 
 		if (getState() == EnumDigState.MOVE)
 		{
@@ -334,6 +361,7 @@ public class EntityWorker extends EntityMob implements IBot {
 		}
 
 	}
+
 	private boolean optimizeDig()
 	{
 		int xo = MathHelper.floor_double(dest.x);
@@ -418,5 +446,4 @@ public class EntityWorker extends EntityMob implements IBot {
 
 		return false;
 	}
-
 }
