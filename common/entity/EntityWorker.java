@@ -211,6 +211,25 @@ public class EntityWorker extends EntityMob implements IBot {
 		return null;
 	}
 
+	private Coord getNextDest(Coord homePosition, int randX, int randY, int randZ) {
+		Coord nextDest = new Coord(homePosition);
+		nextDest.addCoord(
+				rand.nextInt(randX) - randX / 2,
+				rand.nextInt(randY) - randY / 2,
+				rand.nextInt(randZ) - randZ / 2);
+
+		int destBlockId = worldObj.getBlockId(nextDest.x, nextDest.y, nextDest.z);
+
+		if (destBlockId == 2)
+		{
+			destBlockId = 3;
+		}
+		if (destBlockId == getInventoryType()) {
+			return nextDest;
+		}
+		return new Coord();
+	}
+
 	public void modeDig(EntityLiving entityplayer){  //digger
 
 
@@ -222,65 +241,22 @@ public class EntityWorker extends EntityMob implements IBot {
 			int posY = MathHelper.floor_double(entityplayer.posY);
 			int posZ = MathHelper.floor_double(entityplayer.posZ);
 
-			Coord nextDest = hasHome ? new Coord(home) : new Coord(posX, posY, posZ) ;
-			if (hasHome)
-			{
-				nextDest.addCoord(
-						rand.nextInt(32) - 16,
-						rand.nextInt(4) - 2,
-						rand.nextInt(32) - 16);
-			}
-			else
-			{
-				nextDest.addCoord(
-						rand.nextInt(16) - 8,
-						rand.nextInt(4) - 2,
-						rand.nextInt(16) - 8);
-			}
-			//System.out.println(xo+","+yo+","+zo);
+			// if home exists, search farther
+			Coord homePosition = hasHome ? new Coord(home) : new Coord(posX, posY, posZ) ;
+			Coord nextDest = hasHome ? getNextDest(homePosition, 32, 4, 32) : getNextDest(homePosition, 16, 4, 16);
 
-			int destBlockId = worldObj.getBlockId(nextDest.x, nextDest.y, nextDest.z);
+			float moveSpeed = nextDest.isValid() ? 16F : 5F;
 
-			if (destBlockId == 2)
-			{
-				destBlockId = 3;
+			// dest block unwanted, search nearby
+			if(nextDest.isValid() == false) {
+				nextDest = getNextDest(homePosition, 6, 4, 6);
 			}
-			//System.out.println("uh: "+getInventoryType());
-			if (destBlockId == getInventoryType())
-			{
-				//System.out.println("stage 2!");
+
+			// dest block match searching, change state
+			if(nextDest.isValid()) {
 				setState(EnumDigState.CHECK);
-				gotoSpot(nextDest.x, nextDest.y, nextDest.z, 16F);
+				gotoSpot(nextDest.x, nextDest.y, nextDest.z, moveSpeed);
 				dest.setCoord(nextDest);
-			}
-			else
-			{
-				if (hasHome)
-				{
-					nextDest.setCoord(home);
-				}
-				else
-				{
-					nextDest.setCoord(posX, posY, posZ);
-				}
-				nextDest.addCoord(
-						rand.nextInt(6) - 3,
-						rand.nextInt(4) - 2,
-						rand.nextInt(6) - 3);
-
-				int bbb2 = worldObj.getBlockId(nextDest.x, nextDest.y, nextDest.z);
-
-				if (bbb2 == 2)
-				{
-					bbb2 = 3;
-				}
-
-				if (bbb2 == getInventoryType())
-				{
-					setState(EnumDigState.CHECK);
-					gotoSpot(nextDest.x, nextDest.y, nextDest.z, 5F);
-					dest.setCoord(nextDest);
-				}
 			}
 		}
 		else if (getState() == EnumDigState.CHECK)
