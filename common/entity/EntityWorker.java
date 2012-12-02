@@ -318,7 +318,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		}
 		else if (getState() == EnumDigState.DIG)
 		{
-			if(isInventoryType(worldObj.getBlockId(dest.x, dest.y, dest.z))) {
+			if(isInventoryType(worldObj.getBlockId(dest.x, dest.y, dest.z)) == false) {
 				setState(EnumDigState.MOVE);
 			}
 			else
