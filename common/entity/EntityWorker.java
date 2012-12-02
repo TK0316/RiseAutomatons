@@ -16,13 +16,12 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.NBTTagList;
 import net.minecraft.src.NBTTagInt;
+import net.minecraft.src.NBTTagList;
 import net.minecraft.src.PathEntity;
 import net.minecraft.src.TileEntityChest;
 import net.minecraft.src.World;
 import riseautomatons.common.Coord;
-import riseautomatons.common.Universal;
 
 public class EntityWorker extends EntityOwnedBot implements IBot {
 
@@ -310,16 +309,6 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		//dataWatcher.updateObject(19, Integer.valueOf(i));
 	}
 
-	public String getD()
-	{
-		return dataWatcher.getWatchableObjectString(20);
-	}
-
-	public void setD(String s)
-	{
-		dataWatcher.updateObject(20, s);
-	}
-
 	void gotoSpot(int x, int y, int z, float f)
 	{
 		PathEntity pathentity = worldObj.getEntityPathToXYZ(this, x, y, z, 16F, true, true, false, true);
@@ -420,7 +409,6 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			else
 			{
 				int diggingCount = getDig();
-				setD("" + dest.x + "," + dest.y + "," + dest.z);
 				Block bb = Block.blocksList[getItemID()];
 
 				if(bb==null)
@@ -491,8 +479,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	}
 
 	public Entity getPickupTarget() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		return collectTargetItemEntity;
 	}
 
 	public float getMoveSpeed() {
