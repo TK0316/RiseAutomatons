@@ -33,6 +33,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	public EntityWorker(World par1World) {
 		super(par1World);
 		setSize(0.6F, 0.8F);
+		moveSpeed = 0.25F;
 
 		getNavigator().setAvoidsWater(true);
 		//tasks.addTask(5, new EntityAIWorkerFollow(this, moveSpeed, 7F, 2.0F));
