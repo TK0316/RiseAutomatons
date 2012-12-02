@@ -206,11 +206,11 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		super.entityInit();
 		dataWatcher.addObject(INDEX_MODE, EnumWorkMode.STAY.ordinal());
 		dataWatcher.addObject(INDEX_STATE, EnumWorkState.MOVE.ordinal());
-		dataWatcher.addObject(INDEX_ITEMID, 0);//itemID
-		dataWatcher.addObject(INDEX_STACKSIZE, 0);//stackSize
-		dataWatcher.addObject(INDEX_ITEMDAMAGE, 0);//itemDamage
-		dataWatcher.addObject(INDEX_HOME, "0,0,0");//home
-		dataWatcher.addObject(INDEX_DEST, "0,0,0");//dest
+		dataWatcher.addObject(INDEX_ITEMID, 0);
+		dataWatcher.addObject(INDEX_STACKSIZE, 0);
+		dataWatcher.addObject(INDEX_ITEMDAMAGE, 0);
+		dataWatcher.addObject(INDEX_HOME, "0,0,0");
+		dataWatcher.addObject(INDEX_DEST, "0,0,0");
 	}
 
 	protected NBTTagList newIntNBTList(int ad[])
