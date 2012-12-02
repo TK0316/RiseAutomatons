@@ -238,6 +238,19 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		return null;
 	}
 
+	private boolean isInventoryType(int blockId) {
+		if (blockId == Block.grass.blockID && getInventoryType() == Block.dirt.blockID) {
+			return true;
+		}
+		if (blockId == Block.dirt.blockID && getInventoryType() == Block.grass.blockID) {
+			return true;
+		}
+		if (blockId == getInventoryType()) {
+			return true;
+		}
+		return false;
+	}
+
 	private Coord getNextDest(Coord homePosition, int randX, int randY, int randZ) {
 		Coord nextDest = new Coord(homePosition);
 		nextDest.addCoord(
@@ -245,13 +258,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 				rand.nextInt(randY) - randY / 2,
 				rand.nextInt(randZ) - randZ / 2);
 
-		int destBlockId = worldObj.getBlockId(nextDest.x, nextDest.y, nextDest.z);
-
-		if (destBlockId == Block.grass.blockID)
-		{
-			destBlockId = Block.dirt.blockID;
-		}
-		if (destBlockId == getInventoryType()) {
+		if(isInventoryType(worldObj.getBlockId(nextDest.x, nextDest.y, nextDest.z))) {
 			return nextDest;
 		}
 		return new Coord();
@@ -310,15 +317,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		}
 		else if (getState() == EnumDigState.DIG)
 		{
-			int bbb = worldObj.getBlockId(dest.x, dest.y, dest.z);
-
-			if (bbb == Block.grass.blockID)
-			{
-				bbb = Block.dirt.blockID;
-			}
-
-			if (bbb != getInventoryType())
-			{
+			if(isInventoryType(worldObj.getBlockId(dest.x, dest.y, dest.z))) {
 				setState(EnumDigState.MOVE);
 			}
 			else
@@ -442,7 +441,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 	private boolean derp(int xo, int yo, int zo)
 	{
-		if (worldObj.getBlockId(xo, yo, zo) == getInventoryType())
+		if(isInventoryType(worldObj.getBlockId(xo, yo, zo)))
 		{
 			dest.x = xo;
 			dest.y = yo;
