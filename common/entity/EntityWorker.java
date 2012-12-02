@@ -501,9 +501,9 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			return;
 		}
 
-		Coord dest = getDestCoord();
 		if (getState() == EnumWorkState.MOVE)
 		{
+			Coord dest = getDestCoord();
 			boolean hasHome = (getHome() != null);
 
 			int posX = MathHelper.floor_double(entityplayer.posX);
@@ -516,11 +516,13 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			if (worldObj.getBlockId(nextDest.x, nextDest.y, nextDest.z) == Block.chest.blockID)
 			{
 				dest.setCoord(nextDest);
+				setDestCoord(dest);
 				setState(EnumWorkState.CHECK);
 			}
 		}
 		else if (getState() == EnumWorkState.CHECK)
 		{
+			Coord dest = getDestCoord();
 			if (worldObj.getBlockId(dest.x, dest.y, dest.z) == Block.chest.blockID)
 			{
 				int num = getStackSize();
@@ -565,6 +567,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		}
 		else if (getState() == EnumWorkState.ACTION)
 		{
+			Coord dest = getDestCoord();
 			if (worldObj.getBlockId(dest.x, dest.y, dest.z) == Block.chest.blockID)
 			{
 				if (getDistance(dest.x, dest.y, dest.z) < 2)
@@ -581,7 +584,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		}
 		else if ( getState() == EnumWorkState.RETURN)
 		{
-			System.out.println(getItemID() + "," + getStackSize() + "," + getItemDamage());
+			Coord dest = getDestCoord();
 
 			if (worldObj.getBlockId(dest.x, dest.y, dest.z) == Block.chest.blockID)
 			{
