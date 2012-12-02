@@ -33,61 +33,94 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	public static final String GOLEM5_PNG = "/RiseAutomatons/golem5.png";
 	public static final String GOLEM6_PNG = "/RiseAutomatons/golem6.png";
 
+	public static final int INDEX_MODE = 18;
+	public static final int INDEX_STATE = 19;
+	public static final int INDEX_ITEMID = 20;
+	public static final int INDEX_STACKSIZE = 21;
+	public static final int INDEX_ITEMDAMAGE = 22;
+	public static final int INDEX_HOME = 23;
+	public static final int INDEX_DEST = 24;
+
 	private static Map<Integer, Integer> target = new LinkedHashMap<Integer, Integer>();
 
 	enum EnumWorkMode {STAY, FOLLOW, DIG, PANIC, PICKUP};
-	private EnumWorkMode mode = EnumWorkMode.STAY;
 
 	enum EnumWorkState {MOVE, CHECK, ACTION, RETURN};
-	private EnumWorkState state = EnumWorkState.MOVE;
-
-	private Coord dest = new Coord();
-	private Coord home = new Coord();
 	private int dig;
-
-	private int itemID = 0;
-	private int stackSize = 0;
-	private int itemDamage = 0;
 
 	private Entity collectTargetItemEntity = null;
 
 	int getItemID() {
-		return dataWatcher.getWatchableObjectInt(18);
+		return dataWatcher.getWatchableObjectInt(INDEX_ITEMID);
 	}
 
 	private void setItemID(int itemID) {
-		dataWatcher.updateObject(18, itemID);
-		this.itemID = itemID;
+		dataWatcher.updateObject(INDEX_ITEMID, itemID);
 	}
 
 	private int getStackSize() {
-		return stackSize;
+		return dataWatcher.getWatchableObjectInt(INDEX_STACKSIZE);
 	}
 
 	private void setStackSize(int stackSize) {
-		this.stackSize = stackSize;
+		dataWatcher.updateObject(INDEX_STACKSIZE, stackSize);
 	}
 
 	int getItemDamage() {
-		return itemDamage;
+		return dataWatcher.getWatchableObjectInt(INDEX_ITEMDAMAGE);
 	}
 
 	private void setItemDamage(int itemDamage) {
-		this.itemDamage = itemDamage;
+		dataWatcher.updateObject(INDEX_ITEMDAMAGE, itemDamage);
 	}
 
 	private EnumWorkState getState() {
-		return state;
+		int state = dataWatcher.getWatchableObjectInt(INDEX_STATE);
+		if(0 <= state && state < EnumWorkState.values().length) {
+			return EnumWorkState.values()[state];
+		}
+		return EnumWorkState.MOVE;
 	}
 
 	private void setState(EnumWorkState state) {
-		this.state = state;
+		dataWatcher.updateObject(INDEX_STATE, state.ordinal());
+	}
+
+	private void setMode(EnumWorkMode mode) {
+		dataWatcher.updateObject(INDEX_MODE, mode.ordinal());
+		setState(EnumWorkState.MOVE);
+	}
+
+	public EnumWorkMode getMode() {
+		int mode = dataWatcher.getWatchableObjectInt(INDEX_MODE);
+		if(0 <= mode && mode < EnumWorkMode.values().length) {
+			return EnumWorkMode.values()[mode];
+		}
+		return EnumWorkMode.STAY;
+	}
+
+	private void setHomeCoord(Coord home) {
+		dataWatcher.updateObject(INDEX_HOME, home.toString());
+	}
+
+	public Coord getHomeCoord() {
+		String str = dataWatcher.getWatchableObjectString(INDEX_HOME);
+		return new Coord(str);
+	}
+
+	private void setDestCoord(Coord dest) {
+		dataWatcher.updateObject(INDEX_DEST, dest.toString());
+	}
+
+	public Coord getDestCoord() {
+		String str = dataWatcher.getWatchableObjectString(INDEX_DEST);
+		return new Coord(str);
 	}
 
 
 	public EntityWorker(World par1World) {
 		super(par1World);
-		System.out.println(String.valueOf(this.entityId) + ":" + mode );
+		System.out.println(String.valueOf(this.entityId) + ":" + getMode() );
 		setSize(0.6F, 0.8F);
 		moveSpeed = 0.25F;
 
@@ -168,28 +201,16 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		return true;
 	}
 
-
-	private void setMode(EnumWorkMode mode) {
-		this.mode = mode;
-		dataWatcher.updateObject(16, Integer.valueOf(mode.ordinal()));
-		setState(EnumWorkState.MOVE);
-	}
-
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(16, new Integer(mode != null ? mode.ordinal() : EnumWorkMode.STAY.ordinal()));//mode
-		dataWatcher.addObject(18, new Integer(itemID));//type
-		//dataWatcher.addObject(19, new Integer(trigger));//state
-		dataWatcher.addObject(20, ""); //dstring
-	}
-
-	public EnumWorkMode getMode() {
-		int mode = dataWatcher.getWatchableObjectInt(16);
-		if(0<= mode && mode < EnumWorkMode.values().length) {
-			return EnumWorkMode.values()[mode];
-		}
-		return EnumWorkMode.STAY;
+		dataWatcher.addObject(INDEX_MODE, EnumWorkMode.STAY.ordinal());
+		dataWatcher.addObject(INDEX_STATE, EnumWorkState.MOVE.ordinal());
+		dataWatcher.addObject(INDEX_ITEMID, 0);//itemID
+		dataWatcher.addObject(INDEX_STACKSIZE, 0);//stackSize
+		dataWatcher.addObject(INDEX_ITEMDAMAGE, 0);//itemDamage
+		dataWatcher.addObject(INDEX_HOME, "0,0,0");//home
+		dataWatcher.addObject(INDEX_DEST, "0,0,0");//dest
 	}
 
 	protected NBTTagList newIntNBTList(int ad[])
@@ -210,16 +231,20 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	@Override
 	public void writeEntityToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeEntityToNBT(par1nbtTagCompound);
-		par1nbtTagCompound.setInteger("mode", mode.ordinal());
-		System.out.println("W " + String.valueOf(this.entityId) + ":" + mode );
-		par1nbtTagCompound.setInteger("state", getState().ordinal());
-		par1nbtTagCompound.setTag("Dest", newIntNBTList(new int[]
-				{
-				dest.x, dest.y, dest.z
-				}));
+		par1nbtTagCompound.setInteger("Mode", getMode().ordinal());
+		par1nbtTagCompound.setInteger("State", getState().ordinal());
+		par1nbtTagCompound.setInteger("ItemID", getItemID());
+		par1nbtTagCompound.setInteger("StackSize", getStackSize());
+		par1nbtTagCompound.setInteger("ItemDamage", getItemDamage());
+		Coord home = getHomeCoord();
 		par1nbtTagCompound.setTag("Home", newIntNBTList(new int[]
 				{
 				home.x, home.y, home.z
+				}));
+		Coord dest = getDestCoord();
+		par1nbtTagCompound.setTag("Dest", newIntNBTList(new int[]
+				{
+				dest.x, dest.y, dest.z
 				}));
 	}
 
@@ -227,17 +252,21 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	public void readEntityFromNBT(NBTTagCompound par1nbtTagCompound) {
 
 		super.readEntityFromNBT(par1nbtTagCompound);
-		setMode(EnumWorkMode.values()[par1nbtTagCompound.getInteger("mode")]);
-		System.out.println("R " + String.valueOf(this.entityId) + ":" + mode );
-		setState(EnumWorkState.values()[par1nbtTagCompound.getInteger("state")]);
-		NBTTagList nbttaglist = par1nbtTagCompound.getTagList("Dest");
-		dest.x = ((NBTTagInt)nbttaglist.tagAt(0)).data;
-		dest.y = ((NBTTagInt)nbttaglist.tagAt(1)).data;
-		dest.z = ((NBTTagInt)nbttaglist.tagAt(2)).data;
-		NBTTagList nbttaglist2 = par1nbtTagCompound.getTagList("Home");
-		home.x = ((NBTTagInt)nbttaglist.tagAt(0)).data;
-		home.y = ((NBTTagInt)nbttaglist.tagAt(1)).data;
-		home.z = ((NBTTagInt)nbttaglist.tagAt(2)).data;
+		setMode(EnumWorkMode.values()[par1nbtTagCompound.getInteger("Mode")]);
+		setState(EnumWorkState.values()[par1nbtTagCompound.getInteger("State")]);
+		setItemID(par1nbtTagCompound.getInteger("ItemID"));
+		setStackSize(par1nbtTagCompound.getInteger("StackSize"));
+		setItemDamage(par1nbtTagCompound.getInteger("ItemDamage"));
+		NBTTagList homeTag = par1nbtTagCompound.getTagList("Home");
+		int x = ((NBTTagInt)homeTag.tagAt(0)).data;
+		int y = ((NBTTagInt)homeTag.tagAt(1)).data;
+		int z = ((NBTTagInt)homeTag.tagAt(2)).data;
+		setHomeCoord(new Coord(x,y,z));
+		NBTTagList destTag = par1nbtTagCompound.getTagList("Dest");
+		x = ((NBTTagInt)destTag.tagAt(0)).data;
+		y = ((NBTTagInt)destTag.tagAt(1)).data;
+		z = ((NBTTagInt)destTag.tagAt(2)).data;
+		setDestCoord(new Coord(x,y,z));
 
 		if(getMode() == EnumWorkMode.PANIC){
 			tasks.addTask(1, new EntityAIPanic(this, 0.38F));
@@ -251,7 +280,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 	@Override
 	public String getTexture() {
-		switch(mode) {
+		switch(getMode()) {
 		case STAY:
 			return GOLEM1_PNG;
 		case FOLLOW:
@@ -335,6 +364,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			return;
 		}
 
+		Coord dest = getDestCoord();
 		if (getState() == EnumWorkState.MOVE)
 		{
 			boolean hasHome = (getHome() != null);
@@ -344,7 +374,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			int posZ = MathHelper.floor_double(entityplayer.posZ);
 
 			// if home exists, search farther
-			Coord homePosition = hasHome ? new Coord(home) : new Coord(posX, posY, posZ) ;
+			Coord homePosition = hasHome ? new Coord(getHomeCoord()) : new Coord(posX, posY, posZ) ;
 			Coord nextDest = hasHome ? getNextDest(homePosition, 32, 4, 32) : getNextDest(homePosition, 16, 4, 16);
 			if(isTargetBlockId(worldObj.getBlockId(nextDest.x, nextDest.y, nextDest.z)) == false) {
 				nextDest =  new Coord();
@@ -453,9 +483,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	{
 		if(isTargetBlockId(worldObj.getBlockId(xo, yo, zo)))
 		{
-			dest.x = xo;
-			dest.y = yo;
-			dest.z = zo;
+			setDestCoord(new Coord(xo, yo, zo));
 			return true;
 		}
 
@@ -469,10 +497,6 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 	public float getMoveSpeed() {
 		return moveSpeed;
-	}
-
-	public Coord getHomeCoord() {
-		return home;
 	}
 
 	public void modeCollect() {
@@ -490,6 +514,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			return;
 		}
 
+		Coord dest = getDestCoord();
 		if (getState() == EnumWorkState.MOVE)
 		{
 			boolean hasHome = (getHome() != null);
@@ -498,7 +523,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			int posY = MathHelper.floor_double(entityplayer.posY);
 			int posZ = MathHelper.floor_double(entityplayer.posZ);
 
-			Coord homePosition = hasHome ? new Coord(home) : new Coord(posX, posY, posZ) ;
+			Coord homePosition = hasHome ? new Coord(getHomeCoord()) : new Coord(posX, posY, posZ) ;
 			Coord nextDest = hasHome ? getNextDest(homePosition, 5, 3, 5) : getNextDest(homePosition, 3, 3, 3);
 
 			if (worldObj.getBlockId(nextDest.x, nextDest.y, nextDest.z) == Block.chest.blockID)

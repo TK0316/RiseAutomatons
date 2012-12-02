@@ -24,6 +24,22 @@ public class Coord {
 		isValid = c.isValid;
 	}
 
+	public Coord(String str) {
+		String[] a = str.split(",");
+		if(a.length == 3) {
+			try {
+			int x = Integer.parseInt(a[0]);
+			int y = Integer.parseInt(a[1]);
+			int z = Integer.parseInt(a[2]);
+			this.x = x;
+			this.y = y;
+			this.z = z;
+			isValid = true;
+			}
+			catch(NumberFormatException e) {
+			}
+		}
+	}
 	public void setCoord(int x, int y, int z) {
 		this.x = x;
 		this.y = y;
@@ -50,6 +66,11 @@ public class Coord {
 
 	public void addCoord(Coord c) {
 		addCoord(c.x, c.y, c.z);
+	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(x) + "," + String.valueOf(y) + "," + String.valueOf(z);
 	}
 
 }
