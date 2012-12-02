@@ -345,7 +345,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 					setDig(0);
 
 					//TODO
-					if (optimizeDig())
+					/*if (optimizeDig())
 					{
 						setState(EnumDigState.CHECK);
 						gotoSpot(dest.x, dest.y, dest.z, 5F);
@@ -355,7 +355,8 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 						F = 0;
 						R = 0;
 						setState(EnumDigState.MOVE);
-					}
+					}*/
+					setState(EnumDigState.MOVE);
 
 					//setState(0);
 				}
