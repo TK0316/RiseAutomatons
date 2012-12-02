@@ -5,20 +5,14 @@ import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.src.Block;
-import net.minecraft.src.DamageSource;
-import net.minecraft.src.EnchantmentHelper;
-import net.minecraft.src.Entity;
 import net.minecraft.src.EntityAILookIdle;
 import net.minecraft.src.EntityAIWatchClosest;
 import net.minecraft.src.EntityItem;
-import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.EnumSkyBlock;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.PathEntity;
-import net.minecraft.src.Potion;
 import net.minecraft.src.World;
 import riseautomatons.common.Coord;
 import riseautomatons.common.Universal;
@@ -126,6 +120,18 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		if(Universal.improperWorld(worldObj)) {
 			return;
 		}
+		dataWatcher.updateObject(16, Integer.valueOf(mode.ordinal()));
+		setT(0);
+		setState(EnumDigState.MOVE);
+	}
+
+	@Override
+	protected void entityInit() {
+		super.entityInit();
+		dataWatcher.addObject(16, new Integer(mode != null ? mode.ordinal() : EnumWorkMode.STAY.ordinal()));//mode
+		//dataWatcher.addObject(18, new Integer(invType));//type
+		dataWatcher.addObject(19, new Integer(trigger));//state
+		dataWatcher.addObject(20, ""); //dstring
 	}
 
 	public EnumWorkMode getMode() {
@@ -241,9 +247,9 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 		int destBlockId = worldObj.getBlockId(nextDest.x, nextDest.y, nextDest.z);
 
-		if (destBlockId == 2)
+		if (destBlockId == Block.grass.blockID)
 		{
-			destBlockId = 3;
+			destBlockId = Block.dirt.blockID;
 		}
 		if (destBlockId == getInventoryType()) {
 			return nextDest;
@@ -306,9 +312,9 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		{
 			int bbb = worldObj.getBlockId(dest.x, dest.y, dest.z);
 
-			if (bbb == 2)
+			if (bbb == Block.grass.blockID)
 			{
-				bbb = 3;
+				bbb = Block.dirt.blockID;
 			}
 
 			if (bbb != getInventoryType())
