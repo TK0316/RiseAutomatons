@@ -118,7 +118,6 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	private void setMode(EnumWorkMode mode) {
 		this.mode = mode;
 		dataWatcher.updateObject(16, Integer.valueOf(mode.ordinal()));
-		setT(0);
 		setState(EnumDigState.MOVE);
 	}
 
@@ -127,7 +126,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		super.entityInit();
 		dataWatcher.addObject(16, new Integer(mode != null ? mode.ordinal() : EnumWorkMode.STAY.ordinal()));//mode
 		//dataWatcher.addObject(18, new Integer(invType));//type
-		dataWatcher.addObject(19, new Integer(trigger));//state
+		//dataWatcher.addObject(19, new Integer(trigger));//state
 		dataWatcher.addObject(20, ""); //dstring
 	}
 
@@ -182,10 +181,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 	private Coord dest = new Coord();
 	private Coord home = new Coord();
-	int F = 0;
-	int R = 0;
 	private int dig;
-	private int trigger;
 
 	enum EnumDigState {MOVE, CHECK, DIG};
 	private EnumDigState state = EnumDigState.MOVE;
@@ -219,15 +215,6 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		dataWatcher.updateObject(20, s);
 	}
 
-	protected int getT()
-	{
-		return Universal.getInt(dataWatcher, 19);
-	}
-	protected void setT(int i)
-	{
-		trigger = i;
-		dataWatcher.updateObject(19, Integer.valueOf(i));
-	}
 	void gotoSpot(int x, int y, int z, float f)
 	{
 		PathEntity pathentity = worldObj.getEntityPathToXYZ(this, x, y, z, 16F, true, true, false, true);
@@ -326,11 +313,6 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			}
 			else
 			{
-				if (getT() != 1)
-				{
-					setT(1);
-				}
-
 				int diggingCount = getDig();
 				setD("" + dest.x + "," + dest.y + "," + dest.z);
 				Block bb = Block.blocksList[getInventoryType()];
@@ -344,24 +326,10 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 					EntityItem entityitem = new EntityItem(worldObj, dest.x, dest.y, dest.z, new ItemStack(bb.idDropped(0, rand, 0), 1, 0));
 					entityitem.delayBeforeCanPickup = 10;
 					worldObj.spawnEntityInWorld(entityitem);
-					setT(0);
 					setDig(0);
 
-					//TODO
-					/*if (optimizeDig())
-					{
-						setState(EnumDigState.CHECK);
-						gotoSpot(dest.x, dest.y, dest.z, 5F);
-					}
-					else
-					{
-						F = 0;
-						R = 0;
-						setState(EnumDigState.MOVE);
-					}*/
+					//TODO optimize dig
 					setState(EnumDigState.MOVE);
-
-					//setState(0);
 				}
 				else
 				{
@@ -370,41 +338,6 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			}
 		}
 
-	}
-
-	private boolean optimizeDig()
-	{
-		int xo = MathHelper.floor_double(dest.x);
-		int yo = MathHelper.floor_double(dest.y);
-		int zo = MathHelper.floor_double(dest.z);
-		boolean bool = even(R);
-		if(Universal.distance(home.x, home.y, home.z, posX, posY, posZ)>24){
-			return false;
-		}
-
-
-		if (F < 6 && F>=0 && derp(xo, yo, zo + (bool?1:-1))){
-			if(bool){
-				F++;
-			}else{
-				F--;
-			}
-			return true;
-		}
-		else if (derp(xo - 1, yo, zo)){
-			R++;
-			return true;
-		}
-		else if (derp(xo + 1, yo, zo)){
-			R--;
-			return true;
-		}
-		else if (derp(xo, yo - 1, zo)){
-			R=3;
-			F=3;
-			return true;
-		}
-		return false;
 	}
 
 	private boolean lastResortDig(){
@@ -438,10 +371,6 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		}
 
 		return false;
-	}
-	public boolean even(int i)
-	{
-		return i % 2 == 0;
 	}
 
 	private boolean derp(int xo, int yo, int zo)
