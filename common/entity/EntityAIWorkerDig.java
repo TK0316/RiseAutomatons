@@ -39,7 +39,9 @@ public class EntityAIWorkerDig extends EntityAIBase {
 
 	@Override
 	public boolean shouldExecute() {
-		// TODO 自動生成されたメソッド・スタブ
-		return true;
+		if(bot.getMode() == EnumWorkMode.DIG && bot.reallyGetBotOwner() != null) {
+			return true;
+		}
+		return false;
 	}
 }

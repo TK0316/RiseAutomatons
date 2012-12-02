@@ -1,18 +1,25 @@
 package riseautomatons.common.entity;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.src.Block;
+import net.minecraft.src.Entity;
 import net.minecraft.src.EntityAILookIdle;
+import net.minecraft.src.EntityAIPanic;
 import net.minecraft.src.EntityAIWatchClosest;
 import net.minecraft.src.EntityItem;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.MathHelper;
+import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.NBTTagList;
+import net.minecraft.src.NBTTagInt;
 import net.minecraft.src.PathEntity;
+import net.minecraft.src.TileEntityChest;
 import net.minecraft.src.World;
 import riseautomatons.common.Coord;
 import riseautomatons.common.Universal;
@@ -26,26 +33,73 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	public static final String GOLEM5_PNG = "/RiseAutomatons/golem5.png";
 	public static final String GOLEM6_PNG = "/RiseAutomatons/golem6.png";
 
+	private static Map<Integer, Integer> target = new LinkedHashMap<Integer, Integer>();
+
 	enum EnumWorkMode {STAY, FOLLOW, DIG, PANIC, PICKUP};
 	private EnumWorkMode mode = EnumWorkMode.STAY;
-	private int inventryItemID = 0;
+
+	enum EnumWorkState {MOVE, CHECK, ACTION, RETURN};
+	private EnumWorkState state = EnumWorkState.MOVE;
+
+	private Coord dest = new Coord();
+	private Coord home = new Coord();
+	private int dig;
+
+	private int itemID = 0;
+	private int stackSize = 0;
+	private int itemDamage = 0;
+
+	private Entity collectTargetItemEntity = null;
+
+	int getItemID() {
+		return dataWatcher.getWatchableObjectInt(18);
+	}
+
+	private void setItemID(int itemID) {
+		dataWatcher.updateObject(18, itemID);
+		this.itemID = itemID;
+	}
+
+	private int getStackSize() {
+		return stackSize;
+	}
+
+	private void setStackSize(int stackSize) {
+		this.stackSize = stackSize;
+	}
+
+	int getItemDamage() {
+		return itemDamage;
+	}
+
+	private void setItemDamage(int itemDamage) {
+		this.itemDamage = itemDamage;
+	}
+
+	private EnumWorkState getState() {
+		return state;
+	}
+
+	private void setState(EnumWorkState state) {
+		this.state = state;
+	}
+
 
 	public EntityWorker(World par1World) {
 		super(par1World);
+		System.out.println(String.valueOf(this.entityId) + ":" + mode );
 		setSize(0.6F, 0.8F);
 		moveSpeed = 0.25F;
 
 		getNavigator().setAvoidsWater(true);
 		//tasks.addTask(5, new EntityAIWorkerFollow(this, moveSpeed, 7F, 2.0F));
 		tasks.addTask(5, new EntityAIWorkerDig(this));
-		//tasks.addTask(5, new EntityAIWorkerCollect(this));
+		tasks.addTask(5, new EntityAIWorkerCollect(this));
 		//tasks.addTask(7, new EntityAIWorkerWander(this, moveSpeed));
 		//tasks.addTask(200, new EntityAIWorkerBeacon(this));
 		tasks.addTask(9, new EntityAIWatchClosest(this, net.minecraft.src.EntityPlayer.class, 8F));
 		tasks.addTask(9, new EntityAILookIdle(this));
 	}
-
-	private static Map<Integer, Integer> target = new LinkedHashMap<Integer, Integer>();
 
 	public static void init() {
 		target.put(Block.stone.blockID, Block.stone.blockID);
@@ -90,7 +144,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		}
 		else if(target.containsKey(itemstack.itemID)) {
 			setMode(EnumWorkMode.DIG);
-			setInventoryType(target.get(itemstack.itemID));
+			setItemID(target.get(itemstack.itemID));
 		}
 		else {
 			return false;
@@ -118,14 +172,14 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	private void setMode(EnumWorkMode mode) {
 		this.mode = mode;
 		dataWatcher.updateObject(16, Integer.valueOf(mode.ordinal()));
-		setState(EnumDigState.MOVE);
+		setState(EnumWorkState.MOVE);
 	}
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
 		dataWatcher.addObject(16, new Integer(mode != null ? mode.ordinal() : EnumWorkMode.STAY.ordinal()));//mode
-		//dataWatcher.addObject(18, new Integer(invType));//type
+		dataWatcher.addObject(18, new Integer(itemID));//type
 		//dataWatcher.addObject(19, new Integer(trigger));//state
 		dataWatcher.addObject(20, ""); //dstring
 	}
@@ -136,6 +190,58 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			return EnumWorkMode.values()[mode];
 		}
 		return EnumWorkMode.STAY;
+	}
+
+	protected NBTTagList newIntNBTList(int ad[])
+	{
+		NBTTagList nbttaglist = new NBTTagList();
+		int ad1[] = ad;
+		int i = ad1.length;
+
+		for (int j = 0; j < i; j++)
+		{
+			int d = ad1[j];
+			nbttaglist.appendTag(new NBTTagInt(null, d));
+		}
+
+		return nbttaglist;
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound par1nbtTagCompound) {
+		super.writeEntityToNBT(par1nbtTagCompound);
+		par1nbtTagCompound.setInteger("mode", mode.ordinal());
+		System.out.println("W " + String.valueOf(this.entityId) + ":" + mode );
+		par1nbtTagCompound.setInteger("state", getState().ordinal());
+		par1nbtTagCompound.setTag("Dest", newIntNBTList(new int[]
+				{
+				dest.x, dest.y, dest.z
+				}));
+		par1nbtTagCompound.setTag("Home", newIntNBTList(new int[]
+				{
+				home.x, home.y, home.z
+				}));
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound par1nbtTagCompound) {
+
+		super.readEntityFromNBT(par1nbtTagCompound);
+		setMode(EnumWorkMode.values()[par1nbtTagCompound.getInteger("mode")]);
+		System.out.println("R " + String.valueOf(this.entityId) + ":" + mode );
+		setState(EnumWorkState.values()[par1nbtTagCompound.getInteger("state")]);
+		NBTTagList nbttaglist = par1nbtTagCompound.getTagList("Dest");
+		dest.x = ((NBTTagInt)nbttaglist.tagAt(0)).data;
+		dest.y = ((NBTTagInt)nbttaglist.tagAt(1)).data;
+		dest.z = ((NBTTagInt)nbttaglist.tagAt(2)).data;
+		NBTTagList nbttaglist2 = par1nbtTagCompound.getTagList("Home");
+		home.x = ((NBTTagInt)nbttaglist.tagAt(0)).data;
+		home.y = ((NBTTagInt)nbttaglist.tagAt(1)).data;
+		home.z = ((NBTTagInt)nbttaglist.tagAt(2)).data;
+
+		if(getMode() == EnumWorkMode.PANIC){
+			tasks.addTask(1, new EntityAIPanic(this, 0.38F));
+		}
 	}
 
 	@Override
@@ -164,36 +270,6 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	protected boolean isAIEnabled() {
 		return true;
 	}
-
-	public int getInventoryDamage() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 0;
-	}
-
-	public int getInventoryType() {
-		return inventryItemID;
-	}
-
-	private void setInventoryType(int itemID) {
-		inventryItemID  = itemID;
-
-	}
-
-	private Coord dest = new Coord();
-	private Coord home = new Coord();
-	private int dig;
-
-	enum EnumDigState {MOVE, CHECK, DIG};
-	private EnumDigState state = EnumDigState.MOVE;
-
-	private EnumDigState getState() {
-		return state;
-	}
-
-	private void setState(EnumDigState state) {
-		this.state = state;
-	}
-
 
 	protected int getDig()
 	{
@@ -226,14 +302,14 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		return null;
 	}
 
-	private boolean isInventoryType(int blockId) {
-		if (blockId == Block.grass.blockID && getInventoryType() == Block.dirt.blockID) {
+	private boolean isTargetBlockId(int blockId) {
+		if (blockId == Block.grass.blockID && getItemID() == Block.dirt.blockID) {
 			return true;
 		}
-		if (blockId == Block.dirt.blockID && getInventoryType() == Block.grass.blockID) {
+		if (blockId == Block.dirt.blockID && getItemID() == Block.grass.blockID) {
 			return true;
 		}
-		if (blockId == getInventoryType()) {
+		if (blockId == getItemID()) {
 			return true;
 		}
 		return false;
@@ -246,10 +322,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 				rand.nextInt(randY) - randY / 2,
 				rand.nextInt(randZ) - randZ / 2);
 
-		if(isInventoryType(worldObj.getBlockId(nextDest.x, nextDest.y, nextDest.z))) {
-			return nextDest;
-		}
-		return new Coord();
+		return nextDest;
 	}
 
 	public void modeDig() {
@@ -262,7 +335,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			return;
 		}
 
-		if (getState() == EnumDigState.MOVE)
+		if (getState() == EnumWorkState.MOVE)
 		{
 			boolean hasHome = (getHome() != null);
 
@@ -273,6 +346,9 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			// if home exists, search farther
 			Coord homePosition = hasHome ? new Coord(home) : new Coord(posX, posY, posZ) ;
 			Coord nextDest = hasHome ? getNextDest(homePosition, 32, 4, 32) : getNextDest(homePosition, 16, 4, 16);
+			if(isTargetBlockId(worldObj.getBlockId(nextDest.x, nextDest.y, nextDest.z)) == false) {
+				nextDest =  new Coord();
+			}
 
 			float moveSpeed = nextDest.isValid() ? 16F : 5F;
 
@@ -283,39 +359,39 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 			// dest block match searching, change state
 			if(nextDest.isValid()) {
-				setState(EnumDigState.CHECK);
+				setState(EnumWorkState.CHECK);
 				gotoSpot(nextDest.x, nextDest.y, nextDest.z, moveSpeed);
 				dest.setCoord(nextDest);
 			}
 		}
-		else if (getState() == EnumDigState.CHECK)
+		else if (getState() == EnumWorkState.CHECK)
 		{
 			if (getDistance(dest.x, dest.y, dest.z) < 2)
 			{
-				setState(EnumDigState.DIG);
+				setState(EnumWorkState.ACTION);
 			}
 			else
 			{
 				if (lastResortDig())
 				{
-					setState(EnumDigState.DIG);
+					setState(EnumWorkState.ACTION);
 				}
 				else
 				{
-					setState(EnumDigState.MOVE);
+					setState(EnumWorkState.MOVE);
 				}
 			}
 		}
-		else if (getState() == EnumDigState.DIG)
+		else if (getState() == EnumWorkState.ACTION)
 		{
-			if(isInventoryType(worldObj.getBlockId(dest.x, dest.y, dest.z)) == false) {
-				setState(EnumDigState.MOVE);
+			if(isTargetBlockId(worldObj.getBlockId(dest.x, dest.y, dest.z)) == false) {
+				setState(EnumWorkState.MOVE);
 			}
 			else
 			{
 				int diggingCount = getDig();
 				setD("" + dest.x + "," + dest.y + "," + dest.z);
-				Block bb = Block.blocksList[getInventoryType()];
+				Block bb = Block.blocksList[getItemID()];
 
 				if(bb==null)
 					return;
@@ -329,7 +405,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 					setDig(0);
 
 					//TODO optimize dig
-					setState(EnumDigState.MOVE);
+					setState(EnumWorkState.MOVE);
 				}
 				else
 				{
@@ -375,7 +451,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 	private boolean derp(int xo, int yo, int zo)
 	{
-		if(isInventoryType(worldObj.getBlockId(xo, yo, zo)))
+		if(isTargetBlockId(worldObj.getBlockId(xo, yo, zo)))
 		{
 			dest.x = xo;
 			dest.y = yo;
@@ -385,4 +461,206 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 		return false;
 	}
+
+	public Entity getPickupTarget() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	public float getMoveSpeed() {
+		return moveSpeed;
+	}
+
+	public Coord getHomeCoord() {
+		return home;
+	}
+
+	public void modeCollect() {
+		if(getMode() != EnumWorkMode.PICKUP) {
+			return;
+		}
+
+		if(getItemID() == 0) {
+			setMode(EnumWorkMode.STAY);
+			return;
+		}
+
+		EntityPlayer entityplayer = reallyGetBotOwner();
+		if(entityplayer == null) {
+			return;
+		}
+
+		if (getState() == EnumWorkState.MOVE)
+		{
+			boolean hasHome = (getHome() != null);
+
+			int posX = MathHelper.floor_double(entityplayer.posX);
+			int posY = MathHelper.floor_double(entityplayer.posY);
+			int posZ = MathHelper.floor_double(entityplayer.posZ);
+
+			Coord homePosition = hasHome ? new Coord(home) : new Coord(posX, posY, posZ) ;
+			Coord nextDest = hasHome ? getNextDest(homePosition, 5, 3, 5) : getNextDest(homePosition, 3, 3, 3);
+
+			if (worldObj.getBlockId(nextDest.x, nextDest.y, nextDest.z) == Block.chest.blockID)
+			{
+				dest.setCoord(nextDest);
+				setState(EnumWorkState.CHECK);
+			}
+		}
+		else if (getState() == EnumWorkState.CHECK)
+		{
+			if (worldObj.getBlockId(dest.x, dest.y, dest.z) == Block.chest.blockID)
+			{
+				int num = getStackSize();
+
+				// if stack full, goto chest
+				if(num == 64) {
+					setState(EnumWorkState.ACTION);
+					return;
+				}
+
+				// if had no target to pickup, search new target
+				if (collectTargetItemEntity == null || collectTargetItemEntity.isDead) {
+					collectTargetItemEntity = searchCollectTarget();
+				}
+
+				// if target not found but had stack, goto chest
+				if(collectTargetItemEntity == null && num > 0) {
+					setState(EnumWorkState.ACTION);
+					return;
+				}
+
+				// if target found, goto target
+				if (collectTargetItemEntity != null) {
+					// if target is nearby, pickup and goto chest
+					if (getDistanceToEntity(collectTargetItemEntity) < 2F) {
+						pickup();
+					}
+					// if target is faraway, move to target
+					else {
+						getNavigator().setPath(worldObj.getPathEntityToEntity(this, collectTargetItemEntity, 16F, true, true, false, true), moveSpeed);
+						if(getNavigator().getPath() == null) {
+							setState(EnumWorkState.ACTION);
+						}
+					}
+				}
+				// if target not found, continue searching
+			}
+			else
+			{
+				setState(EnumWorkState.MOVE);
+			}
+		}
+		else if (getState() == EnumWorkState.ACTION)
+		{
+			if (worldObj.getBlockId(dest.x, dest.y, dest.z) == Block.chest.blockID)
+			{
+				if (getDistance(dest.x, dest.y, dest.z) < 2)
+				{
+					setState(EnumWorkState.RETURN);
+				}else{
+					gotoSpot(dest.x, dest.y, dest.z, 16F);
+				}
+			}
+			else
+			{
+				setState(EnumWorkState.MOVE);
+			}
+		}
+		else if ( getState() == EnumWorkState.RETURN)
+		{
+			System.out.println(getItemID() + "," + getStackSize() + "," + getItemDamage());
+
+			if (worldObj.getBlockId(dest.x, dest.y, dest.z) == Block.chest.blockID)
+			{
+				TileEntityChest tc = ((TileEntityChest)worldObj.getBlockTileEntity(dest.x, dest.y, dest.z));
+				int sl = 0;
+
+				while (sl < tc.getSizeInventory())
+				{
+					ItemStack is = tc.getStackInSlot(sl);
+
+					if (is == null)
+					{
+						is = new ItemStack(getItemID(), getStackSize(), getItemDamage());
+						tc.setInventorySlotContents(sl, is);
+						setStackSize(0);
+						setState(EnumWorkState.CHECK);
+						break;
+					}
+					else if ((is.itemID == getItemID() && is.getItemDamage() == getItemDamage() && is.getItem() != null && is.stackSize < is.getMaxStackSize()))
+					{
+						if (is.stackSize + getStackSize() <= is.getMaxStackSize())
+						{
+							is.stackSize += getStackSize();
+							tc.setInventorySlotContents(sl, is);
+							setStackSize(0);
+							setState(EnumWorkState.CHECK);
+							break;
+						}
+						else
+						{
+							int ii = getStackSize() - (is.getMaxStackSize() - is.stackSize);
+							setStackSize(ii);
+							is.stackSize += ii;
+							tc.setInventorySlotContents(sl, is);
+						}
+					}
+					else
+					{
+						sl++;
+					}
+				}
+
+				if (sl > tc.getSizeInventory())
+				{
+					setState(EnumWorkState.MOVE);
+				}
+			}
+			else
+			{
+				setState(EnumWorkState.MOVE);
+			}
+		}
+
+	}
+
+	private Entity searchCollectTarget() {
+
+		List list = worldObj.getEntitiesWithinAABB(
+				net.minecraft.src.EntityItem.class,
+				boundingBox.expand(16D, 3D, 16D));
+
+		if (!list.isEmpty()) {
+			for (int j = 0; j < list.size(); j++) {
+				Entity entity = (Entity) list.get(j);
+
+				if (getItemID() != 0) {
+					ItemStack is = ((EntityItem) entity).item;
+
+					if (is.itemID == getItemID()
+							&& is.getItemDamage() == getItemDamage()) {
+						return entity;
+					}
+				} else {
+					if (!entity.isWet()) {
+						return entity;
+					}
+				}
+			}
+		}
+
+		return null;
+	}
+
+	private void pickup()
+	{
+		EntityItem ent = (EntityItem) collectTargetItemEntity;
+		setItemID(ent.item.itemID);
+		setItemDamage(ent.item.getItemDamage());
+		setStackSize(getStackSize() + ent.item.stackSize);
+		ent.setDead();
+		collectTargetItemEntity = null;
+	}
+
 }

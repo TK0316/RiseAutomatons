@@ -42,11 +42,11 @@ public class RenderWorker extends RenderLiving {
  {
 		if (entityliving instanceof EntityWorker) {
 			EntityWorker ea = ((EntityWorker) entityliving);
-			int ii = ea.getInventoryType();
+			int ii = ea.getItemID();
 
 			if (ii > 0) {
 				ItemStack itemstack = new ItemStack(ii, 1,
-						ea.getInventoryDamage());
+						ea.getItemDamage());
 				// if(itemstack.itemID!=0){
 				GL11.glPushMatrix();
 				model.light.postRender(0.0625F);
