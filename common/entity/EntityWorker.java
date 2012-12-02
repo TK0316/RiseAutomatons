@@ -328,14 +328,14 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 					setT(1);
 				}
 
-				int dd = getDig();
+				int diggingCount = getDig();
 				setD("" + dest.x + "," + dest.y + "," + dest.z);
 				Block bb = Block.blocksList[getInventoryType()];
 
 				if(bb==null)
 					return;
 
-				if (dd >= bb.getBlockHardness(worldObj, dest.x, dest.y, dest.z) * 30)
+				if (diggingCount >= bb.getBlockHardness(worldObj, dest.x, dest.y, dest.z) * 30)
 				{
 					 worldObj.setBlockWithNotify(dest.x, dest.y, dest.z, 0);
 					EntityItem entityitem = new EntityItem(worldObj, dest.x, dest.y, dest.z, new ItemStack(bb.idDropped(0, rand, 0), 1, 0));
@@ -361,7 +361,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 				}
 				else
 				{
-					setDig(dd + 1);
+					setDig(diggingCount + 1);
 				}
 			}
 		}
