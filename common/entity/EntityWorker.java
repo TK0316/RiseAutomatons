@@ -81,10 +81,8 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			else {
 				setMode(EnumWorkMode.STAY);
 			}
-			return true;
 		}
-
-		if(itemstack.itemID == Item.shovelStone.shiftedIndex) {
+		else if(itemstack.itemID == Item.shovelStone.shiftedIndex) {
 			setMode(EnumWorkMode.PANIC);
 		}
 		else if(itemstack.itemID == Item.stick.shiftedIndex) {
@@ -117,10 +115,8 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	}
 
 
-	private void setMode(EnumWorkMode follow) {
-		if(Universal.improperWorld(worldObj)) {
-			return;
-		}
+	private void setMode(EnumWorkMode mode) {
+		this.mode = mode;
 		dataWatcher.updateObject(16, Integer.valueOf(mode.ordinal()));
 		setT(0);
 		setState(EnumDigState.MOVE);
@@ -136,7 +132,11 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	}
 
 	public EnumWorkMode getMode() {
-		return mode;
+		int mode = dataWatcher.getWatchableObjectInt(16);
+		if(0<= mode && mode < EnumWorkMode.values().length) {
+			return EnumWorkMode.values()[mode];
+		}
+		return EnumWorkMode.STAY;
 	}
 
 	@Override
@@ -266,6 +266,9 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	}
 
 	public void modeDig() {
+		if(getMode() != EnumWorkMode.DIG) {
+			return;
+		}
 
 		EntityPlayer entityplayer = reallyGetBotOwner();
 		if(entityplayer == null) {
