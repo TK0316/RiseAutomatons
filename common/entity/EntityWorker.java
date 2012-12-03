@@ -134,18 +134,8 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	}
 
 	public static void init() {
-		target.put(Block.stone.blockID, Block.stone.blockID);
-		target.put(Block.grass.blockID, Block.grass.blockID);
-		target.put(Block.dirt.blockID, Block.dirt.blockID);
 		target.put(Block.cobblestone.blockID, Block.stone.blockID);
 
-		target.put(Block.sand.blockID, Block.sand.blockID);
-		target.put(Block.gravel.blockID, Block.gravel.blockID);
-		target.put(Block.oreGold.blockID, Block.oreGold.blockID);
-		target.put(Block.oreIron.blockID, Block.oreIron.blockID);
-		target.put(Block.sandStone.blockID, Block.sandStone.blockID);
-		target.put(Block.obsidian.blockID, Block.obsidian.blockID);
-		target.put(Block.netherBrick.blockID, Block.netherBrick.blockID);
 		target.put(Item.coal.shiftedIndex, Block.oreCoal.blockID);
 		target.put(Item.dyePowder.shiftedIndex, Block.oreLapis.blockID);
 		target.put(Item.emerald.shiftedIndex, Block.oreEmerald.blockID);
@@ -161,6 +151,9 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 		ItemStack itemstack = entityplayer.inventory.getCurrentItem();
 		if(itemstack == null) {
+			setItemID(0);
+			setStackSize(0);
+			setItemDamage(0);
 			if(getMode() == EnumWorkMode.STAY) {
 				setMode(EnumWorkMode.FOLLOW);
 			}
@@ -168,18 +161,21 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 				setMode(EnumWorkMode.STAY);
 			}
 		}
-		else if(itemstack.itemID == Item.shovelStone.shiftedIndex) {
-			setMode(EnumWorkMode.PANIC);
-		}
-		else if(itemstack.itemID == Item.stick.shiftedIndex) {
-			setMode(EnumWorkMode.PICKUP);
-		}
-		else if(target.containsKey(itemstack.itemID)) {
+		// when hand block and right click again, mode chage PICKUP to DIG
+		else if(itemstack.itemID == getItemID()) {
+			if(target.containsKey(itemstack.itemID)) {
+				setItemID(target.get(itemstack.itemID));
+			}
+			else {
+				setItemID(itemstack.itemID);
+			}
 			setMode(EnumWorkMode.DIG);
-			setItemID(target.get(itemstack.itemID));
 		}
 		else {
-			return false;
+			setMode(EnumWorkMode.PICKUP);
+			setItemID(itemstack.itemID);
+			setStackSize(0);
+			setItemDamage(itemstack.getItemDamage());
 		}
 
 
