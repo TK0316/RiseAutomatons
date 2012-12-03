@@ -132,6 +132,24 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		tasks.addTask(9, new EntityAILookIdle(this));
 	}
 
+	public EntityWorker(World world, double d, double d1, double d2,int turn, String s)
+	{
+		this(world);
+		setPosition(d, d1 + (double)yOffset, d2);
+		prevPosX = d;
+		prevPosY = d1;
+		prevPosZ = d2;
+		//Universal.rotateEntity(this,turn*90);
+
+		if(s==""){
+			setMode(EnumWorkMode.PANIC);
+			tasks.addTask(1, new EntityAIPanic(this, 0.38F));
+		}
+		setBotOwner(s);
+
+
+	}
+
 	public static void init() {
 		target.put(Block.cobblestone.blockID, Block.stone.blockID);
 

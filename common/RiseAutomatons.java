@@ -52,8 +52,18 @@ public class RiseAutomatons {
 
 		try {
 			cfg.load();
-			Ids.itemWorker = cfg.getItem("itemWorker", Ids.itemWorker).getInt();
-			Ids.blockWorker = cfg.getBlock("blockWorker", Ids.blockWorker).getInt();
+			Ids.itemWorker = cfg.get(Configuration.CATEGORY_ITEM, "itemWorker", Ids.itemWorker).getInt();
+			Ids.itemChalk = cfg.get(Configuration.CATEGORY_ITEM, "itemChalk", Ids.itemChalk).getInt();
+			Ids.craftSet = cfg.get(Configuration.CATEGORY_ITEM, "craftSet", Ids.craftSet).getInt();
+			Ids.spring = cfg.get(Configuration.CATEGORY_ITEM, "spring", Ids.spring).getInt();
+			Ids.soulCore = cfg.get(Configuration.CATEGORY_ITEM, "soulCore", Ids.soulCore).getInt();
+			Ids.chisel = cfg.get(Configuration.CATEGORY_ITEM, "chisel", Ids.chisel).getInt();
+
+			Ids.blockWorker = cfg.get(Configuration.CATEGORY_BLOCK, "blockWorker", Ids.blockWorker).getInt();
+			Ids.blockChalk = cfg.get(Configuration.CATEGORY_BLOCK, "blockChalk", Ids.blockChalk).getInt();
+			Ids.blockGearbox = cfg.get(Configuration.CATEGORY_BLOCK, "blockGearbox", Ids.blockGearbox).getInt();
+			Ids.blockTurn = cfg.get(Configuration.CATEGORY_BLOCK, "blockTurn", Ids.blockTurn).getInt();
+			Ids.blockWindmill = cfg.get(Configuration.CATEGORY_BLOCK, "blockWindmill", Ids.blockWindmill).getInt();
 			cfg.save();
 
 			Property debug = cfg

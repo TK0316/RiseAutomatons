@@ -15,7 +15,6 @@ public class EntityOwnedBot extends EntityGolem {
 
 	@Override
 	public int getMaxHealth() {
-		// TODO 自動生成されたメソッド・スタブ
 		return 0;
 	}
 
