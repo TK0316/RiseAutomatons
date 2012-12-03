@@ -119,12 +119,11 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 	public EntityWorker(World par1World) {
 		super(par1World);
-		System.out.println(String.valueOf(this.entityId) + ":" + getMode() );
 		setSize(0.6F, 0.8F);
 		moveSpeed = 0.25F;
 
 		getNavigator().setAvoidsWater(true);
-		//tasks.addTask(5, new EntityAIWorkerFollow(this, moveSpeed, 7F, 2.0F));
+		tasks.addTask(5, new EntityAIWorkerFollow(this, moveSpeed, 7F, 2.0F));
 		tasks.addTask(5, new EntityAIWorkerDig(this));
 		tasks.addTask(5, new EntityAIWorkerCollect(this));
 		//tasks.addTask(7, new EntityAIWorkerWander(this, moveSpeed));
