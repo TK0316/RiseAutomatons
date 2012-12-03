@@ -311,7 +311,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	}
 
 	public Object getHome() {
-		// TODO 自動生成されたメソッド・スタブ
+		// TODO implement getHome
 		return null;
 	}
 
