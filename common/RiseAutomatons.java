@@ -1,13 +1,17 @@
 package riseautomatons.common;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import riseautomatons.common.block.Blocks;
 import riseautomatons.common.entity.Entities;
+import riseautomatons.common.item.Items;
 
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PreInit;
@@ -37,6 +41,8 @@ public class RiseAutomatons {
 	public void load(FMLInitializationEvent event) {
 
 		Entities.init();
+		Blocks.init();
+		Items.init();
 	}
 
 	@PreInit
@@ -44,12 +50,23 @@ public class RiseAutomatons {
 		Configuration cfg = new Configuration(
 				event.getSuggestedConfigurationFile());
 
-		cfg.load();
-		cfg.save();
+		try {
+			cfg.load();
+			Ids.itemWorker = cfg.getItem("itemWorker", Ids.itemWorker).getInt();
+			Ids.blockWorker = cfg.getBlock("blockWorker", Ids.blockWorker).getInt();
+			cfg.save();
 
-		Property debug = cfg
-				.get(Configuration.CATEGORY_GENERAL, "debug", false);
-		this.debug = debug.getBoolean(false);
+			Property debug = cfg
+					.get(Configuration.CATEGORY_GENERAL, "debug", false);
+			this.debug = debug.getBoolean(false);
+		}
+		catch (Exception e) {
+            FMLLog.log(Level.SEVERE, e, "RiseAutomatons load config exception");
+        }
+        finally
+        {
+            cfg.save();
+        }
 	}
 
 }
