@@ -126,7 +126,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		tasks.addTask(5, new EntityAIWorkerFollow(this, moveSpeed, 7F, 2.0F));
 		tasks.addTask(5, new EntityAIWorkerDig(this));
 		tasks.addTask(5, new EntityAIWorkerCollect(this));
-		//tasks.addTask(7, new EntityAIWorkerWander(this, moveSpeed));
+		tasks.addTask(7, new EntityAIWorkerWander(this, moveSpeed));
 		//tasks.addTask(200, new EntityAIWorkerBeacon(this));
 		tasks.addTask(9, new EntityAIWatchClosest(this, net.minecraft.src.EntityPlayer.class, 8F));
 		tasks.addTask(9, new EntityAILookIdle(this));
