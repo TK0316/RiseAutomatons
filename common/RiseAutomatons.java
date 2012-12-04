@@ -41,6 +41,7 @@ public class RiseAutomatons {
 	@Mod.Init
 	public void load(FMLInitializationEvent event) {
 
+		Universal.init();
 		Entities.init();
 		Blocks.init();
 		Items.init();

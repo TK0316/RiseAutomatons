@@ -49,7 +49,7 @@ public class Blocks {
 			.setTextureFile(BLOCK_PNG)
 			.setHardness(1F).setResistance(5F).setStepSound(Block.soundMetalFootstep).setBlockName("Gearbox")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-	public static Block chalk = (new BlockChalk(Ids.itemChalk, 164))
+	public static Block chalk = (new BlockChalk(Ids.blockChalk, 164))
 			.setHardness(0f).setStepSound(Block.soundPowderFootstep).setBlockName("Chalk");
 	public static Block turnBlock = (new BlockTurn(Ids.blockTurn))
 			.setHardness(0.05f).setResistance(0)
