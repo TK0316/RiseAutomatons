@@ -13,12 +13,14 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.World;
 
 public class ChalkLogic {
-	public static Map<String, Method> spellList = new HashMap<String, Method>();
+	public static Map<String, ISpell> spellList = new HashMap<String, ISpell>();
 
 	public static void init() {
 		try {
-			addSpell("11111;10401;14541;10401;11111;", "absorbSoul", true);
-			addSpell("00100;01110;11511;01110;00100;", "copySoul", true);
+            addSpell("111;101;030;", Spells.makeDay, true);
+            addSpell("101;111;030;", Spells.makeNight, true);
+			addSpell("11111;10401;14541;10401;11111;", Spells.absorbSoul, true);
+			addSpell("00100;01110;11511;01110;00100;", Spells.copySoul, true);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -38,20 +40,9 @@ public class ChalkLogic {
 			}
 
 			try {
-				Object obj = spellList.get(s).invoke(Spells.class,
-						new Object[] { world, i, j, k, entityPlayer });
+				usedRecipe = spellList.get(s).cast(world, i, j, k, entityPlayer);
 
-				// usedRecipe=true;
-				if (obj != null) {
-					usedRecipe = (Boolean) obj;
-				} else {
-					usedRecipe = true;
-				}
 			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
 				e.printStackTrace();
 			}
 		}
@@ -235,31 +226,29 @@ public class ChalkLogic {
 	 * <b> IF DESIGN LOOKS THE SAME NO MATTER HOW ITS ROTATED, SET THIS TO TRUE
 	 * </b>
 	 */
-	public static void addSpell(String trigger, String command,
+	public static void addSpell(String trigger, ISpell magic,
 			boolean orientationMatters) throws SecurityException,
 			NoSuchMethodException {
-		Method M = Spells.class.getMethod(command, World.class, int.class,
-				int.class, int.class, EntityPlayer.class);
-		spellList.put(trigger, M);
+		spellList.put(trigger, magic);
 		System.out.print("\nSPELL: " + trigger);
 
 		if (!orientationMatters) {
 			String trig2 = rotateSpell(trigger);
 
 			if (!trig2.contains(trigger)) {
-				spellList.put(trig2, M);
+				spellList.put(trig2, magic);
 				System.out.print("\n\t2:" + trig2);
 				String trig3 = flipUp(trigger);
 
 				if (!trig3.contains(trigger)) {
-					spellList.put(trig3, M);
+					spellList.put(trig3, magic);
 					System.out.print("\n\t3:" + trig3);
 				}
 
 				String trig4 = flipSide(trig2);
 
 				if (!trig4.contains(trig2)) {
-					spellList.put(trig4, M);
+					spellList.put(trig4, magic);
 					System.out.print("\n\t4:" + trig4);
 				}
 			}

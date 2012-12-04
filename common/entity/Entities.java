@@ -1,6 +1,7 @@
 package riseautomatons.common.entity;
 
 import riseautomatons.common.block.*;
+import net.minecraft.src.ModLoader;
 import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Side;
@@ -14,6 +15,10 @@ public class Entities {
 		LanguageRegistry.instance().addStringLocalization("entity.Worker.name", "en_US", "Worker");
 		BlockWorker.renderId = RenderingRegistry.getNextAvailableRenderId();
 		EntityRegistry.registerGlobalEntityID(EntityWorker.class, "Worker", BlockWorker.renderId, 0x00CC00, 0x77FF49);
+		EntityFwooshFX.rendererId = ModLoader.getMinecraftInstance().renderEngine
+				.getTexture("/RiseAutomatons/fwoosh.png");
+		EntityGoreFX.rendererId = ModLoader.getMinecraftInstance().renderEngine
+				.getTexture("/RiseAutomatons/gore.png");
 		registerTextures();
 		EntityWorker.init();
 	}

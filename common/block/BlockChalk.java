@@ -90,7 +90,7 @@ public class BlockChalk extends Block {
 			notifyWireNeighborsOfNeighborChange(world, i, j, k - 1);
 			notifyWireNeighborsOfNeighborChange(world, i, j, k + 1);
 		} else {
-			// TODO Universal.fwoo(world, i, j, k);
+			Universal.fwoo(world, i, j, k);
 			// zei_Universal.makeParticle(new
 			// EntityLargeExplodeFX(zei_Universal.mc.renderEngine, world, i +
 			// 0.5, j + 1, k + 0.5, 0, 0, 0));

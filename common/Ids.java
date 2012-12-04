@@ -11,6 +11,8 @@ public class Ids {
 	public static int spring = 2004;
 	public static int soulCore = 2005;
 	public static int chisel = 2006;
+	public static int skullA = 2007;
+	public static int skull = 2008;
 
 
 	// Blocks

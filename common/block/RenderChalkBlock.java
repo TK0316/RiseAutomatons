@@ -23,7 +23,7 @@ public class RenderChalkBlock implements ISimpleBlockRenderingHandler {
 		Tessellator.instance.startDrawingQuads();
 		RenderEngine renderengine = ModLoader.getMinecraftInstance().renderEngine;
 		renderengine.bindTexture(renderengine
-				.getTexture("/RiseAutomatons/patterns.png"));
+				.getTexture(Blocks.PATTERNS_PNG));
 		boolean bool = RenderChalkBlock.chalkPatterns(block, i, j, k, iblockaccess);
 		Tessellator.instance.draw();
 		Tessellator.instance.startDrawingQuads();

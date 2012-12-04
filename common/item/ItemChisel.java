@@ -70,9 +70,4 @@ public class ItemChisel extends Item {
 		return false;
 	}
 
-	@Override
-	public String getTextureFile() {
-		return Items.ITEMS_PNG;
-	}
-
 }

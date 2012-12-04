@@ -2,6 +2,7 @@ package riseautomatons.common.block;
 
 import riseautomatons.common.Ids;
 import riseautomatons.common.RiseAutomatons;
+import riseautomatons.common.entity.EntityWorker;
 import net.minecraft.src.Block;
 import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
@@ -14,6 +15,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class Blocks {
 	public static final String BLOCK_PNG = "/RiseAutomatons/block.png";
+	public static final String PATTERNS_PNG = "/RiseAutomatons/patterns.png";
 
 	public static void init() {
 		GameRegistry.registerBlock(worker);
@@ -36,6 +38,7 @@ public class Blocks {
 
 	@SideOnly(Side.CLIENT)
 	public static void registerTextures() {
+		MinecraftForgeClient.preloadTexture(PATTERNS_PNG);
 		RenderingRegistry.registerBlockHandler(new RenderWorkerBlock());
 		RenderingRegistry.registerBlockHandler(new RenderChalkBlock());
 	}
