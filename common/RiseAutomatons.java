@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import riseautomatons.common.block.Blocks;
 import riseautomatons.common.entity.Entities;
 import riseautomatons.common.item.Items;
+import riseautomatons.common.spell.ChalkLogic;
 
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.ModLoader;
@@ -43,6 +44,7 @@ public class RiseAutomatons {
 		Entities.init();
 		Blocks.init();
 		Items.init();
+		ChalkLogic.init();
 	}
 
 	@PreInit

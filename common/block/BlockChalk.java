@@ -4,6 +4,7 @@ import java.util.Random;
 
 import riseautomatons.common.Ids;
 import riseautomatons.common.Universal;
+import riseautomatons.common.spell.ChalkLogic;
 
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Block;
@@ -42,7 +43,7 @@ public class BlockChalk extends Block {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int par2, int par3, int par4,
+	public boolean onBlockActivated(World world, int i, int j, int k,
 			EntityPlayer entityplayer, int par6, float par7, float par8,
 			float par9) {
 
@@ -56,7 +57,7 @@ public class BlockChalk extends Block {
 			}
 		}
 
-		// zei_ChalkLogic.translate(world, i, j, k, entityplayer);
+		ChalkLogic.translate(world, i, j, k, entityplayer);
 		return true;
 	}
 
@@ -116,8 +117,7 @@ public class BlockChalk extends Block {
 											// || l == 0
 			{
 				// onPoweredBlockChange(world, i, j, k, flag1);
-				// zei_ChalkLogic.translate(world, i, j, k,
-				// world.getClosestPlayer(i, j, k, -1));
+				ChalkLogic.translate(world, i, j, k, world.getClosestPlayer(i, j, k, -1));
 			}
 		}
 
