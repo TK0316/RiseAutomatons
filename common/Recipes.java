@@ -57,21 +57,21 @@ public class Recipes {
 			'l', lens, 'c', cylinder });
 
 		// Small Gear recipe
-		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 16, EnumCraftSetType.LOOP.ordinal()), new Object[] {
-			" s ",
-			"sss",
-			" s ",
-			's', Block.stone });
+		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 16, EnumCraftSetType.STONECOG.ordinal()), new Object[] {
+		" s ",
+		"sss",
+		" s ",
+		's', Block.stone });
 
-		// Chain Link recipe
-		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 16, EnumCraftSetType.CHAIN.ordinal()), new Object[] {
+		// Metal Rings recipe
+		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 16, EnumCraftSetType.LOOP.ordinal()), new Object[] {
 			" r ",
 			"r r",
 			" r ",
 			'r', rod });
 
 		// Chain recipe
-		GameRegistry.addRecipe(chain, new Object[] {
+		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 16, EnumCraftSetType.CHAIN.ordinal()), new Object[] {
 			"ccc",
 			"c c",
 			"ccc",
@@ -95,21 +95,19 @@ public class Recipes {
 			'g',smallGear, 'r', rod });
 
 		// Small Plate recipe
-		GameRegistry.addRecipe(cylinder, new Object[] {
-			" l ",
-			"ppp",
-			" l ",
-			'p', smallPlate, 'l', chainLink });
 
+		// Chisel recipe
 		GameRegistry.addRecipe(chisel, new Object[] {
 			"r",
 			"w",
 			'w', Block.planks, 'r', rod});
 
 		// Cylinder recipe
-		GameRegistry.addRecipe(eyePiece, new Object[] {
-			"lcl",
-			'l', lens, 'c', cylinder });
+		GameRegistry.addRecipe(cylinder, new Object[] {
+			" l ",
+			"ppp",
+			" l ",
+			'p', smallPlate, 'l', chainLink });
 
 		// Rod recipe
 		GameRegistry.addShapelessRecipe(new ItemStack(Ids.craftSet, 9, EnumCraftSetType.ROD.ordinal()), new Object[] {
@@ -126,7 +124,7 @@ public class Recipes {
 			"c",
 			"r",
 			"c",
-			'c', cylinder, 's', sealant, 'r', rod });
+			'c', cylinder, 'r', rod });
 
 		// Actuator recipe
 		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 4, EnumCraftSetType.ACTUATOR.ordinal()), new Object[] {
