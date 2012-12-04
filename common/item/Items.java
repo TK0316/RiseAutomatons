@@ -13,9 +13,9 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class Items {
 
-	public static final String ITEMS_PNG = "/RiseAutomatons/items.png";
-	public static final String CRAFTSET_PNG = "/RiseAutomatons/craftset.png";
-	public static final String SOULCORE_PNG = "/RiseAutomatons/soulcore.png";
+	public static final String ITEMS_PNG = "/riseautomatons/items.png";
+	public static final String CRAFTSET_PNG = "/riseautomatons/craftset.png";
+	public static final String SOULCORE_PNG = "/riseautomatons/soulcore.png";
 
 	public static void init() {
 		LanguageRegistry.instance().addNameForObject(worker, "en_US", "Worker");

@@ -16,9 +16,9 @@ public class Entities {
 		BlockWorker.renderId = RenderingRegistry.getNextAvailableRenderId();
 		EntityRegistry.registerGlobalEntityID(EntityWorker.class, "Worker", BlockWorker.renderId, 0x00CC00, 0x77FF49);
 		EntityFwooshFX.rendererId = ModLoader.getMinecraftInstance().renderEngine
-				.getTexture("/RiseAutomatons/fwoosh.png");
+				.getTexture("/riseautomatons/fwoosh.png");
 		EntityGoreFX.rendererId = ModLoader.getMinecraftInstance().renderEngine
-				.getTexture("/RiseAutomatons/gore.png");
+				.getTexture("/riseautomatons/gore.png");
 		registerTextures();
 		EntityWorker.init();
 	}

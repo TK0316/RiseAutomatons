@@ -29,12 +29,12 @@ import riseautomatons.common.item.EnumSoulCore;
 
 public class EntityWorker extends EntityOwnedBot implements IBot {
 
-	public static final String GOLEM1_PNG = "/RiseAutomatons/golem1.png";
-	public static final String GOLEM2_PNG = "/RiseAutomatons/golem2.png";
-	public static final String GOLEM3_PNG = "/RiseAutomatons/golem3.png";
-	public static final String GOLEM4_PNG = "/RiseAutomatons/golem4.png";
-	public static final String GOLEM5_PNG = "/RiseAutomatons/golem5.png";
-	public static final String GOLEM6_PNG = "/RiseAutomatons/golem6.png";
+	public static final String GOLEM1_PNG = "/riseautomatons/golem1.png";
+	public static final String GOLEM2_PNG = "/riseautomatons/golem2.png";
+	public static final String GOLEM3_PNG = "/riseautomatons/golem3.png";
+	public static final String GOLEM4_PNG = "/riseautomatons/golem4.png";
+	public static final String GOLEM5_PNG = "/riseautomatons/golem5.png";
+	public static final String GOLEM6_PNG = "/riseautomatons/golem6.png";
 
 	public static final int INDEX_MODE = 18;
 	public static final int INDEX_STATE = 19;

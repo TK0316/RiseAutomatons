@@ -23,13 +23,13 @@ public class BlockWorker extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
-		// TODO 自動生成されたメソッド・スタブ
+		// TODO return new TileEntityBeacon();
 		return null;
 	}
 
 	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
-		// TODO 自動生成されたメソッド・スタブ
+		// TODO set beacon
 		super.onBlockAdded(par1World, par2, par3, par4);
 	}
 

@@ -15,8 +15,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class Blocks {
-	public static final String BLOCK_PNG = "/RiseAutomatons/block.png";
-	public static final String PATTERNS_PNG = "/RiseAutomatons/patterns.png";
+	public static final String BLOCK_PNG = "/riseautomatons/block.png";
+	public static final String PATTERNS_PNG = "/riseautomatons/patterns.png";
 
 	public static void init() {
 		GameRegistry.registerBlock(worker);
