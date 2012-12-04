@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.src.Block;
+import net.minecraft.src.DamageSource;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityAILookIdle;
 import net.minecraft.src.EntityAIPanic;
@@ -22,6 +23,9 @@ import net.minecraft.src.PathEntity;
 import net.minecraft.src.TileEntityChest;
 import net.minecraft.src.World;
 import riseautomatons.common.Coord;
+import riseautomatons.common.Ids;
+import riseautomatons.common.Universal;
+import riseautomatons.common.item.EnumSoulCore;
 
 public class EntityWorker extends EntityOwnedBot implements IBot {
 
@@ -42,7 +46,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 	private static Map<Integer, Integer> target = new LinkedHashMap<Integer, Integer>();
 
-	enum EnumWorkMode {STAY, FOLLOW, DIG, PANIC, PICKUP};
+	enum EnumWorkMode {STAY, FOLLOW, DIG, PANIC, PICKUP, OTHER};
 
 	enum EnumWorkState {MOVE, CHECK, ACTION, RETURN};
 	private int dig;
@@ -429,10 +433,13 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 				if (diggingCount >= bb.getBlockHardness(worldObj, dest.x, dest.y, dest.z) * 30)
 				{
-					 worldObj.setBlockWithNotify(dest.x, dest.y, dest.z, 0);
-					EntityItem entityitem = new EntityItem(worldObj, dest.x, dest.y, dest.z, new ItemStack(bb.idDropped(0, rand, 0), 1, 0));
-					entityitem.delayBeforeCanPickup = 10;
-					worldObj.spawnEntityInWorld(entityitem);
+					int metadata = worldObj.getBlockMetadata(dest.x, dest.y, dest.z);
+					worldObj.setBlockWithNotify(dest.x, dest.y, dest.z, 0);
+					int fortune = 0;
+					bb.dropBlockAsItem(worldObj, dest.x, dest.y, dest.z, metadata, fortune);
+					//EntityItem entityitem = new EntityItem(worldObj, dest.x, dest.y, dest.z, new ItemStack(bb.idDropped(0, rand, 0), 1, 0));
+					//entityitem.delayBeforeCanPickup = 10;
+					//worldObj.spawnEntityInWorld(entityitem);
 					setDig(0);
 
 					//TODO optimize dig
@@ -666,6 +673,10 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 				if (getItemID() != 0) {
 					ItemStack is = ((EntityItem) entity).item;
 
+					if(is.hasTagCompound()) {
+						continue;
+					}
+
 					if (is.itemID == getItemID()
 							&& is.getItemDamage() == getItemDamage()) {
 						return entity;
@@ -683,12 +694,122 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 	private void pickup()
 	{
+
 		EntityItem ent = (EntityItem) collectTargetItemEntity;
+		if(ent.item.hasTagCompound()) {
+			return;
+		}
 		setItemID(ent.item.itemID);
 		setItemDamage(ent.item.getItemDamage());
 		setStackSize(getStackSize() + ent.item.stackSize);
 		ent.setDead();
 		collectTargetItemEntity = null;
+	}
+
+	@Override
+	public boolean attackEntityFrom(DamageSource par1DamageSource, int par2) {
+		if (getMode() == EnumWorkMode.PANIC) {
+			fleeingTick = 60;
+		}
+
+		return super.attackEntityFrom(par1DamageSource, par2);
+	}
+
+	@Override
+	protected String getLivingSound() {
+		return "automatons.beep";
+	}
+
+	@Override
+	protected String getHurtSound() {
+		return "step.stone";
+	}
+
+	@Override
+	protected String getDeathSound() {
+		return "random.glass";
+	}
+
+	@Override
+	public float getEyeHeight() {
+		return height * 0.8F;
+	}
+
+	@Override
+	protected float getSoundVolume() {
+		return 0.4F;
+	}
+
+	@Override
+	public int getMaxSpawnedInChunk() {
+		return 8;
+	}
+
+	private void dropper()
+	{
+		for (int j = 0; j < 20; j++)
+		{
+			double d = rand.nextGaussian() * 0.02D;
+			double d1 = rand.nextGaussian() * 0.02D;
+			double d2 = rand.nextGaussian() * 0.02D;
+			worldObj.spawnParticle("explode", (posX + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, posY + (double)(rand.nextFloat() * height), (posZ + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, d, d1, d2);
+		}
+
+		if (!Universal.improperWorld(worldObj))
+		{
+			//poof();
+			EnumWorkMode e = getMode();
+			EntityItem entityitem = new EntityItem(worldObj, posX, posY + 1 , posZ, new ItemStack(Ids.soulCore, 1, (e != EnumWorkMode.PANIC) ? (e != EnumWorkMode.OTHER ? EnumSoulCore.SOULSYNTH.ordinal() : EnumSoulCore.SOULEVIL.ordinal()) : EnumSoulCore.SOULPURE.ordinal()));
+			entityitem.delayBeforeCanPickup = 10;
+			entityitem.setVelocity(Math.random() * 0.25 - 0.125, 0.25, Math.random() * 0.25 - 0.125);
+			worldObj.spawnEntityInWorld(entityitem);
+			dropInventory();
+			int xx = MathHelper.floor_double(posX);
+			int yy = MathHelper.floor_double(posY);
+			int zz = MathHelper.floor_double(posZ);
+			int id = worldObj.getBlockId(xx, yy, zz);
+
+			if (id == 0 || Block.blocksList[id].getCollisionBoundingBoxFromPool(worldObj, xx, yy, zz) == null)
+			{
+				int meta = MathHelper.floor_double((double)(rotationYawHead * 4.0F / 360.0F) + 0.5D) & 3;
+
+				worldObj.setBlockAndMetadataWithNotify(xx, yy, zz, Ids.blockWorker, meta);
+			}
+			else
+			{
+
+				entityitem = new EntityItem(worldObj, posX, posY , posZ, new ItemStack(Ids.itemWorker, 1, 0));
+				worldObj.spawnEntityInWorld(entityitem);
+			}
+
+			setDead();
+		}
+	}
+
+	private void dropInventory()
+	{
+		if (getStackSize() > 0)
+		{
+			entityDropItem(new ItemStack(getItemID(), getStackSize(), getItemDamage()), 0.0F);
+
+			setStackSize(0);
+			setItemDamage(0);
+		}
+		setItemID(0);
+
+	}
+
+	@Override
+	public void onUpdate() {
+		super.onUpdate();
+
+		if (isWet())
+		{
+			if (isEntityAlive())
+			{
+				dropper();
+			}
+		}
 	}
 
 }
