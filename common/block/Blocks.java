@@ -38,6 +38,7 @@ public class Blocks {
 
 	@SideOnly(Side.CLIENT)
 	public static void registerTextures() {
+		MinecraftForgeClient.preloadTexture(BLOCK_PNG);
 		MinecraftForgeClient.preloadTexture(PATTERNS_PNG);
 		RenderingRegistry.registerBlockHandler(new RenderWorkerBlock());
 		RenderingRegistry.registerBlockHandler(new RenderChalkBlock());
