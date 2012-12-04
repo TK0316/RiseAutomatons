@@ -45,6 +45,7 @@ public class RiseAutomatons {
 		Entities.init();
 		Blocks.init();
 		Items.init();
+		Recipes.init();
 		ChalkLogic.init();
 	}
 
