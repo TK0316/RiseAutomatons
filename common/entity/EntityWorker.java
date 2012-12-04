@@ -167,11 +167,11 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	@Override
 	public boolean interact(EntityPlayer entityplayer) {
 
-		// TODO set owner properly
-		setBotOwner(entityplayer.username);
-
 		ItemStack itemstack = entityplayer.inventory.getCurrentItem();
 		if(itemstack == null) {
+			if(reallyGetBotOwner() != entityplayer) {
+				return true;
+			}
 			setItemID(0);
 			setStackSize(0);
 			setItemDamage(0);
@@ -182,8 +182,19 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 				setMode(EnumWorkMode.STAY);
 			}
 		}
+		else if(itemstack.itemID == Ids.soulCore) {
+			if(getBotOwner() == "") {
+				setBotOwner(entityplayer.username);
+			}
+			else {
+				return true;
+			}
+		}
 		// when hand block and right click again, mode chage PICKUP to DIG
 		else if(itemstack.itemID == getItemID()) {
+			if(reallyGetBotOwner() != entityplayer) {
+				return true;
+			}
 			if(target.containsKey(itemstack.itemID)) {
 				setItemID(target.get(itemstack.itemID));
 			}
@@ -193,6 +204,9 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			setMode(EnumWorkMode.DIG);
 		}
 		else {
+			if(reallyGetBotOwner() != entityplayer) {
+				return true;
+			}
 			setMode(EnumWorkMode.PICKUP);
 			setItemID(itemstack.itemID);
 			setStackSize(0);
