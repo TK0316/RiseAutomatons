@@ -50,11 +50,11 @@ public class Items {
 			.setTextureFile(CRAFTSET_PNG)
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Item chalk = (new ItemChalk(Ids.itemChalk - 256))
-			.setTextureFile(ITEMS_PNG).setIconIndex(29)
+			.setTextureFile(ITEMS_PNG).setIconIndex(16)
 			.setItemName("Chalk")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Item spring = (new Item(Ids.spring - 256))
-			.setTextureFile(ITEMS_PNG).setIconIndex(28)
+			.setTextureFile(ITEMS_PNG).setIconIndex(17)
 			.setItemName("Spring")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Item soulCore = (new ItemSoulCore(Ids.soulCore - 256))
@@ -62,18 +62,18 @@ public class Items {
 			.setItemName("soulCore")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Item skull = (new ItemSkull(Ids.skull - 256))
-			.setTextureFile(ITEMS_PNG).setIconIndex(50)
+			.setTextureFile(ITEMS_PNG).setIconIndex(18)
 			.setItemName("Human Skull")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Item skullAnimal = (new ItemSkullAnimal(Ids.skullA - 256))
-			.setTextureFile(ITEMS_PNG).setIconIndex(51)
+			.setTextureFile(ITEMS_PNG).setIconIndex(19)
 			.setItemName("Animal Skull")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 
 	public static Item chisel;
 	static {
 		chisel = (new ItemChisel(Ids.chisel - 256)).setMaxStackSize(1)
-				.setTextureFile(ITEMS_PNG).setIconIndex(52)
+				.setTextureFile(ITEMS_PNG).setIconIndex(20)
 				.setItemName("Chisel")
 				.setCreativeTab(RiseAutomatons.tabAutomatons);
 		chisel.setContainerItem(chisel);
