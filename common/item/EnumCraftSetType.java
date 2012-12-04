@@ -29,7 +29,7 @@ public enum EnumCraftSetType {
 	SMALLLEG("smallleg", "Small Leg"),
 	SENTRYHEAD("sentryhead", "Sentry Head"),
 	SALT("salt", "Salt"),
-	SURf("sulf", "Sulf");
+	SURF("sulf", "Sulf");
 
 	public final String name;
 	public final String fullname;

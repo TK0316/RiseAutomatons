@@ -22,6 +22,8 @@ public class Ids {
 	public static int blockTurn = 2304;
 	public static int blockWindmill = 2305;
 	public static int blockSlab = 2306;
+	public static int saltOre = 2307;
+	public static int sulfOre = 2308;
 
 
 

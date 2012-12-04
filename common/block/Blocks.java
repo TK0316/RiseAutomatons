@@ -1,6 +1,7 @@
 package riseautomatons.common.block;
 
 import riseautomatons.common.Ids;
+import riseautomatons.common.OreGenerator;
 import riseautomatons.common.RiseAutomatons;
 import riseautomatons.common.entity.EntityWorker;
 import net.minecraft.src.Block;
@@ -35,6 +36,12 @@ public class Blocks {
 				new TileEntityWindmillRenderer());
 		GameRegistry.registerBlock(slabBlock);
 		LanguageRegistry.addName(slabBlock, "Slab");
+		GameRegistry.registerBlock(saltOre);
+		LanguageRegistry.addName(saltOre, "Salt Ore");
+		GameRegistry.registerBlock(sulfOre);
+		LanguageRegistry.addName(sulfOre, "Sulfide");
+
+		GameRegistry.registerWorldGenerator(new OreGenerator());
 		registerTextures();
 	}
 
@@ -56,13 +63,23 @@ public class Blocks {
 			.setHardness(0f).setStepSound(Block.soundPowderFootstep).setBlockName("Chalk");
 	public static Block turnBlock = (new BlockTurn(Ids.blockTurn))
 			.setHardness(0.05f).setResistance(0)
-			.setStepSound(Block.soundStoneFootstep).setBlockName("turnBlock")
+			.setStepSound(Block.soundStoneFootstep).setBlockName("TurnBlock")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block windmill = (new BlockWindmill(Ids.blockWindmill, 4,
 			Material.wood)).setHardness(0.5F).setResistance(1F)
-			.setStepSound(Block.soundWoodFootstep).setBlockName("windmill")
+			.setStepSound(Block.soundWoodFootstep).setBlockName("Windmill")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block slabBlock = (new BlockSlab(Ids.blockSlab))
-			.setHardness(1.5F).setResistance(10F).setBlockName("slabBlock")
+			.setHardness(1.5F).setResistance(10F).setBlockName("SlabBlock")
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
+	public static Block sulfOre = (new BlockOre(Ids.sulfOre, 0))
+			.setTextureFile(BLOCK_PNG)
+			.setHardness(3F).setResistance(5F)
+			.setStepSound(Block.soundStoneFootstep).setBlockName("SulfOre")
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
+	public static Block saltOre = (new BlockOre(Ids.saltOre, 1))
+			.setTextureFile(BLOCK_PNG)
+			.setHardness(3F).setResistance(5F)
+			.setStepSound(Block.soundStoneFootstep).setBlockName("SaltOre")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 }
