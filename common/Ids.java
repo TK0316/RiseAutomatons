@@ -21,6 +21,7 @@ public class Ids {
 	public static int blockGearbox = 2303;
 	public static int blockTurn = 2304;
 	public static int blockWindmill = 2305;
+	public static int blockSlab = 2306;
 
 
 

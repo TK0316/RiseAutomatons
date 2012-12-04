@@ -33,6 +33,8 @@ public class Blocks {
 		LanguageRegistry.addName(windmill, "Windmill");
 		ModLoader.registerTileEntity(TileEntityWindmill.class, "Windmill",
 				new TileEntityWindmillRenderer());
+		GameRegistry.registerBlock(slabBlock);
+		LanguageRegistry.addName(slabBlock, "Slab");
 		registerTextures();
 	}
 
@@ -60,6 +62,7 @@ public class Blocks {
 			Material.wood)).setHardness(0.5F).setResistance(1F)
 			.setStepSound(Block.soundWoodFootstep).setBlockName("windmill")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-
-
+	public static Block slabBlock = (new BlockSlab(Ids.blockSlab))
+			.setHardness(1.5F).setResistance(10F).setBlockName("slabBlock")
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
 }
