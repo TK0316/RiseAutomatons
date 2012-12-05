@@ -12,9 +12,15 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class Entities {
 
 	public static void init() {
+		// Automatons
 		LanguageRegistry.instance().addStringLocalization("entity.Worker.name", "en_US", "Worker");
 		BlockWorker.renderId = RenderingRegistry.getNextAvailableRenderId();
-		EntityRegistry.registerGlobalEntityID(EntityWorker.class, "Worker", BlockWorker.renderId, 0x00CC00, 0x77FF49);
+		EntityRegistry.registerGlobalEntityID(EntityWorker.class, "Worker", BlockWorker.renderId, 0xCCCCCC, 0xFFFFFF);
+		LanguageRegistry.instance().addStringLocalization("entity.Sentry.name", "en_US", "Sentry");
+		BlockSentry.renderId = RenderingRegistry.getNextAvailableRenderId();
+		EntityRegistry.registerGlobalEntityID(EntitySentry.class, "Sentry", BlockSentry.renderId, 0xCCCCCC, 0xFFFFFF);
+
+		// Effect
 		EntityFwooshFX.rendererId = ModLoader.getMinecraftInstance().renderEngine
 				.getTexture("/riseautomatons/fwoosh.png");
 		EntityGoreFX.rendererId = ModLoader.getMinecraftInstance().renderEngine
@@ -32,6 +38,10 @@ public class Entities {
 		MinecraftForgeClient.preloadTexture(EntityWorker.GOLEM5_PNG);
 		MinecraftForgeClient.preloadTexture(EntityWorker.GOLEM6_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntityWorker.class, new RenderWorker(new ModelWorker(), 0.5F));
+
+		MinecraftForgeClient.preloadTexture(EntitySentry.SENTRY_PNG);
+		MinecraftForgeClient.preloadTexture(EntitySentry.SENTRYBLOCK_PNG);
+		RenderingRegistry.registerEntityRenderingHandler(EntitySentry.class, new RenderBot(new ModelSentry(), 0.5F));
 
 	}
 
