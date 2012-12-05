@@ -80,17 +80,15 @@ public class ItemSoulCore extends Item {
 						return false;
 					}
 				}
-				/*else if (ii == Ids.sentryBlock) {
+				else if (ii == Ids.blockSentry) {
 					if (itemDamage != 0) {
 						return false;
 					}
 					int m = world.getBlockMetadata(i, j, k);
-					world.spawnEntityInWorld(new EntitySentry(world,
-							(float) i + 0.5F, (float) j, (float) k + 0.5F, m,
-							entityplayer == null ? "huh" : entityplayer.username));
+					world.spawnEntityInWorld(new EntitySentry(world, (float) i + 0.5F, (float) j, (float) k + 0.5F, m, entityplayer == null ? "" : entityplayer.username));
 					world.setBlockWithNotify(i, j, k, 0);
 				}
-				else if (ii == Ids.toteBlock) {
+				/*else if (ii == Ids.toteBlock) {
 					if (itemDamage != 0) {
 						return false;
 					}
@@ -98,7 +96,7 @@ public class ItemSoulCore extends Item {
 							(float) j, (float) k + 0.5F,
 							entityplayer == null ? "huh" : entityplayer.username);
 					world.spawnEntityInWorld(toter);
-					TileEntityLatch tot = (TileEntityLatch) world
+					TileEntityeLatch tot = (TileEntityLatch) world
 							.getBlockTileEntity(i, j, k);
 					toter.inv.cargoItems = tot.dispenserContents.clone();
 					tot.dispenserContents = new ItemStack[9];
@@ -179,7 +177,7 @@ public class ItemSoulCore extends Item {
 			}
 		}
 
-		if (ii == Ids.blockWorker /*|| ii == Ids.sentryBlock || ii == Ids.toteBlock || ii == Ids.sulfOre || ii == Ids.saltOre*/) {
+		if (ii == Ids.blockWorker || ii == Ids.blockSentry /*|| ii == Ids.toteBlock || ii == Ids.sulfOre || ii == Ids.saltOre*/) {
 			return true;
 		}
 		return false;
