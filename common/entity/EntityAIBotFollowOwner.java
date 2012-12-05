@@ -1,24 +1,23 @@
 package riseautomatons.common.entity;
 
-import riseautomatons.common.entity.EntityWorker.EnumWorkMode;
 import net.minecraft.src.EntityAIBase;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.PathNavigate;
 
-public class EntityAIWorkerFollow extends EntityAIBase {
+public class EntityAIBotFollowOwner extends EntityAIBase {
 
-	private EntityWorker bot;
+	private EntityOwnedBot bot;
 	private PathNavigate pathFinder;
 	private float moveSpeed;
 	private float distanceMin;
 	private float distanceMax;
 	private int interval;
 
-	public EntityAIWorkerFollow(EntityWorker entityWorker, float moveSpeed,
+	public EntityAIBotFollowOwner(EntityOwnedBot entityOwnedBot, float moveSpeed,
 			float min, float max) {
-		bot = entityWorker;
-		pathFinder = entityWorker.getNavigator();
+		bot = entityOwnedBot;
+		pathFinder = entityOwnedBot.getNavigator();
 		this.moveSpeed = moveSpeed;
 		distanceMin = min;
 		distanceMax = max;
@@ -27,7 +26,7 @@ public class EntityAIWorkerFollow extends EntityAIBase {
 
 	@Override
 	public boolean shouldExecute() {
-		if(bot.getMode() != EnumWorkMode.FOLLOW) {
+		if(bot.getMode() != EnumBotMode.FOLLOW) {
 			return false;
 		}
 
@@ -36,7 +35,7 @@ public class EntityAIWorkerFollow extends EntityAIBase {
 			return false;
 		}
 
-		if(bot.getDistanceSqToEntity(theOwner) < distanceMin * distanceMin) {
+		if(bot.getDistanceSqToEntity(theOwner) < distanceMin * distanceMin * (bot.getAITarget() != null ? 1.5 : 1)) {
 			return false;
 		}
 
@@ -46,6 +45,7 @@ public class EntityAIWorkerFollow extends EntityAIBase {
 	@Override
 	public void resetTask() {
 		pathFinder.clearPathEntity();
+		bot.getNavigator().setAvoidsWater(bot.getAvoidsWater());
 	}
 
 	@Override
@@ -107,6 +107,7 @@ public class EntityAIWorkerFollow extends EntityAIBase {
 	@Override
 	public void startExecuting() {
 		interval = 0;
+		bot.getNavigator().setAvoidsWater(bot.getAvoidsWater());
 	}
 
 }
