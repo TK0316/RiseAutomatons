@@ -38,6 +38,8 @@ public class RiseAutomatons {
 	public static final CreativeTabs tabAutomatons = new CreativeTabAutomatons(
 			"RiseAutomatons");
 
+	public static boolean enableCheatRecipe = false;
+
 	@Mod.Init
 	public void load(FMLInitializationEvent event) {
 
@@ -46,6 +48,9 @@ public class RiseAutomatons {
 		Blocks.init();
 		Items.init();
 		Recipes.init();
+		if(enableCheatRecipe) {
+			Recipes.initCheatRecipe();
+		}
 		ChalkLogic.init();
 	}
 
@@ -68,6 +73,8 @@ public class RiseAutomatons {
 			Ids.blockGearbox = cfg.get(Configuration.CATEGORY_BLOCK, "blockGearbox", Ids.blockGearbox).getInt();
 			Ids.blockTurn = cfg.get(Configuration.CATEGORY_BLOCK, "blockTurn", Ids.blockTurn).getInt();
 			Ids.blockWindmill = cfg.get(Configuration.CATEGORY_BLOCK, "blockWindmill", Ids.blockWindmill).getInt();
+
+			enableCheatRecipe = cfg.get(Configuration.CATEGORY_GENERAL, "enableCheatRecipe", false).getBoolean(false);
 
 			cfg.save();
 
