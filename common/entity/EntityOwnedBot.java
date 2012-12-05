@@ -87,4 +87,12 @@ public class EntityOwnedBot extends EntityGolem {
 		return (EntityPlayer) worldObj.getPlayerEntityByName(getBotOwner());
 	}
 
+	public EnumBotMode getMode() {
+		return EnumBotMode.STAY;
+	}
+
+	public boolean getAvoidsWater() {
+		return false;
+	}
+
 }
