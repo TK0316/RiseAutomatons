@@ -381,7 +381,7 @@ public class Recipes {
 		GameRegistry.addRecipe(new ItemStack(Ids.itemSentry, 1, 0), new Object[] {
 			"D D",
 			"D  ",
-			"D  ",
+			"D D",
 			'D', new ItemStack(Item.diamond.shiftedIndex, 1, 0) });
 
 		// SoulCore recipe
