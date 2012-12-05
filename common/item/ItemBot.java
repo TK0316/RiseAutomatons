@@ -67,6 +67,9 @@ public class ItemBot extends Item {
 		case WORKER:
 			world.setBlockAndMetadataWithNotify(i, j, k, Ids.blockWorker, meta);
 			break;
+		case SENTRY:
+			world.setBlockAndMetadataWithNotify(i, j, k, Ids.blockSentry, meta);
+			break;
 		default:
 			return false;
 		}
