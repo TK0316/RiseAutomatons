@@ -21,6 +21,9 @@ public class Blocks {
 	public static void init() {
 		GameRegistry.registerBlock(worker);
 		LanguageRegistry.addName(worker, "Worker");
+		GameRegistry.registerBlock(sentry);
+		LanguageRegistry.addName(sentry, "Sentry");
+
 		GameRegistry.registerBlock(gearbox);
 		LanguageRegistry.addName(gearbox, "Gearbox");
 		GameRegistry.registerBlock(chalk);
@@ -50,11 +53,15 @@ public class Blocks {
 		MinecraftForgeClient.preloadTexture(BLOCK_PNG);
 		MinecraftForgeClient.preloadTexture(PATTERNS_PNG);
 		RenderingRegistry.registerBlockHandler(new RenderWorkerBlock());
+		RenderingRegistry.registerBlockHandler(new RenderSentryBlock());
 		RenderingRegistry.registerBlockHandler(new RenderChalkBlock());
 	}
 
 	public static Block worker = (new BlockWorker(Ids.blockWorker))
 			.setHardness(0.5F).setResistance(10F).setBlockName("Worker");
+    public static Block sentry = (new BlockSentry(Ids.blockSentry))
+    		.setHardness(0.5F).setResistance(10F).setBlockName("Sentry");
+
 	public static Block gearbox = (new BlockGearBox(Ids.blockGearbox, 10, Material.iron))
 			.setTextureFile(BLOCK_PNG)
 			.setHardness(1F).setResistance(5F).setStepSound(Block.soundMetalFootstep).setBlockName("Gearbox")
