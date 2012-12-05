@@ -12,6 +12,7 @@ import net.minecraft.src.EntityAILookIdle;
 import net.minecraft.src.EntityAIPanic;
 import net.minecraft.src.EntityAIWatchClosest;
 import net.minecraft.src.EntityItem;
+import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
@@ -45,8 +46,6 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	public static final int INDEX_DEST = 24;
 
 	private static Map<Integer, Integer> target = new LinkedHashMap<Integer, Integer>();
-
-	enum EnumWorkMode {STAY, FOLLOW, DIG, PANIC, PICKUP, OTHER};
 
 	enum EnumWorkState {MOVE, CHECK, ACTION, RETURN};
 	private int dig;
@@ -89,17 +88,18 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		dataWatcher.updateObject(INDEX_STATE, state.ordinal());
 	}
 
-	private void setMode(EnumWorkMode mode) {
+	private void setMode(EnumBotMode mode) {
 		dataWatcher.updateObject(INDEX_MODE, mode.ordinal());
 		setState(EnumWorkState.MOVE);
 	}
 
-	public EnumWorkMode getMode() {
+	@Override
+	public EnumBotMode getMode() {
 		int mode = dataWatcher.getWatchableObjectInt(INDEX_MODE);
-		if(0 <= mode && mode < EnumWorkMode.values().length) {
-			return EnumWorkMode.values()[mode];
+		if(0 <= mode && mode < EnumBotMode.values().length) {
+			return EnumBotMode.values()[mode];
 		}
-		return EnumWorkMode.STAY;
+		return EnumBotMode.STAY;
 	}
 
 	private void setHomeCoord(Coord home) {
@@ -127,7 +127,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		moveSpeed = 0.25F;
 
 		getNavigator().setAvoidsWater(true);
-		tasks.addTask(5, new EntityAIWorkerFollow(this, moveSpeed, 7F, 2.0F));
+		tasks.addTask(5, new EntityAIBotFollowOwner(this, moveSpeed, 7F, 2.0F));
 		tasks.addTask(5, new EntityAIWorkerDig(this));
 		tasks.addTask(5, new EntityAIWorkerCollect(this));
 		tasks.addTask(7, new EntityAIWorkerWander(this, moveSpeed));
@@ -146,7 +146,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		//Universal.rotateEntity(this,turn*90);
 
 		if(s==""){
-			setMode(EnumWorkMode.PANIC);
+			setMode(EnumBotMode.PANIC);
 			tasks.addTask(1, new EntityAIPanic(this, 0.38F));
 		}
 		setBotOwner(s);
@@ -175,16 +175,17 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			setItemID(0);
 			setStackSize(0);
 			setItemDamage(0);
-			if(getMode() == EnumWorkMode.STAY) {
-				setMode(EnumWorkMode.FOLLOW);
+			if(getMode() == EnumBotMode.STAY) {
+				setMode(EnumBotMode.FOLLOW);
 			}
 			else {
-				setMode(EnumWorkMode.STAY);
+				setMode(EnumBotMode.STAY);
 			}
 		}
-		else if(itemstack.itemID == Ids.soulCore) {
+		else if(itemstack.itemID == Ids.soulCore && itemstack.getItemDamage() == EnumSoulCore.SOULSYNTH.ordinal()) {
 			if(getBotOwner() == "") {
 				setBotOwner(entityplayer.username);
+				setMode(EnumBotMode.FOLLOW);
 			}
 			else {
 				return true;
@@ -201,29 +202,20 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			else {
 				setItemID(itemstack.itemID);
 			}
-			setMode(EnumWorkMode.DIG);
+			setMode(EnumBotMode.DIG);
 		}
 		else {
 			if(reallyGetBotOwner() != entityplayer) {
 				return true;
 			}
-			setMode(EnumWorkMode.PICKUP);
+			setMode(EnumBotMode.PICKUP);
 			setItemID(itemstack.itemID);
 			setStackSize(0);
 			setItemDamage(itemstack.getItemDamage());
 		}
 
 
-		String s  = "explode";
-		Random rand = worldObj.rand;
-
-		for (int i = 0; i < 7; i++)
-		{
-			double d = rand.nextGaussian() * 0.02D;
-			double d1 = rand.nextGaussian() * 0.02D;
-			double d2 = rand.nextGaussian() * 0.02D;
-			worldObj.spawnParticle(s, (posX + rand.nextFloat() * 1.6F - 0.8f), posY + 0.5f + (rand.nextFloat() * 0.2f), (posZ + rand.nextFloat() * 1.6F) - 0.8f, d, d1, d2);
-		}
+		Universal.poof(worldObj, posX, posY, posZ);
 
 		isJumping = false;
 		setPathToEntity(null);
@@ -234,7 +226,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(INDEX_MODE, EnumWorkMode.STAY.ordinal());
+		dataWatcher.addObject(INDEX_MODE, EnumBotMode.STAY.ordinal());
 		dataWatcher.addObject(INDEX_STATE, EnumWorkState.MOVE.ordinal());
 		dataWatcher.addObject(INDEX_ITEMID, 0);
 		dataWatcher.addObject(INDEX_STACKSIZE, 0);
@@ -282,7 +274,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	public void readEntityFromNBT(NBTTagCompound par1nbtTagCompound) {
 
 		super.readEntityFromNBT(par1nbtTagCompound);
-		setMode(EnumWorkMode.values()[par1nbtTagCompound.getInteger("Mode")]);
+		setMode(EnumBotMode.values()[par1nbtTagCompound.getInteger("Mode")]);
 		setState(EnumWorkState.values()[par1nbtTagCompound.getInteger("State")]);
 		setItemID(par1nbtTagCompound.getInteger("ItemID"));
 		setStackSize(par1nbtTagCompound.getInteger("StackSize"));
@@ -298,7 +290,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		z = ((NBTTagInt)destTag.tagAt(2)).data;
 		setDestCoord(new Coord(x,y,z));
 
-		if(getMode() == EnumWorkMode.PANIC){
+		if(getMode() == EnumBotMode.PANIC){
 			tasks.addTask(1, new EntityAIPanic(this, 0.38F));
 		}
 	}
@@ -375,7 +367,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	}
 
 	public void modeDig() {
-		if(getMode() != EnumWorkMode.DIG) {
+		if(getMode() != EnumBotMode.DIG) {
 			return;
 		}
 
@@ -521,12 +513,12 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	}
 
 	public void modeCollect() {
-		if(getMode() != EnumWorkMode.PICKUP) {
+		if(getMode() != EnumBotMode.PICKUP) {
 			return;
 		}
 
 		if(getItemID() == 0) {
-			setMode(EnumWorkMode.STAY);
+			setMode(EnumBotMode.STAY);
 			return;
 		}
 
@@ -722,7 +714,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 	@Override
 	public boolean attackEntityFrom(DamageSource par1DamageSource, int par2) {
-		if (getMode() == EnumWorkMode.PANIC) {
+		if (getMode() == EnumBotMode.PANIC) {
 			fleeingTick = 60;
 		}
 
@@ -772,8 +764,8 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		if (!Universal.improperWorld(worldObj))
 		{
 			//poof();
-			EnumWorkMode e = getMode();
-			EntityItem entityitem = new EntityItem(worldObj, posX, posY + 1 , posZ, new ItemStack(Ids.soulCore, 1, (e != EnumWorkMode.PANIC) ? (e != EnumWorkMode.OTHER ? EnumSoulCore.SOULSYNTH.ordinal() : EnumSoulCore.SOULEVIL.ordinal()) : EnumSoulCore.SOULPURE.ordinal()));
+			EnumBotMode e = getMode();
+			EntityItem entityitem = new EntityItem(worldObj, posX, posY + 1 , posZ, new ItemStack(Ids.soulCore, 1, (e != EnumBotMode.PANIC) ? (e != EnumBotMode.OTHER ? EnumSoulCore.SOULSYNTH.ordinal() : EnumSoulCore.SOULEVIL.ordinal()) : EnumSoulCore.SOULPURE.ordinal()));
 			entityitem.delayBeforeCanPickup = 10;
 			entityitem.setVelocity(Math.random() * 0.25 - 0.125, 0.25, Math.random() * 0.25 - 0.125);
 			worldObj.spawnEntityInWorld(entityitem);
@@ -824,6 +816,15 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 				dropper();
 			}
 		}
+	}
+
+	@Override
+	public void setRevengeTarget(EntityLiving par1EntityLiving) {
+	}
+
+	@Override
+	public boolean getAvoidsWater() {
+		return true;
 	}
 
 }
