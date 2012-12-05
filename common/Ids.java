@@ -13,6 +13,7 @@ public class Ids {
 	public static int chisel = 2206;
 	public static int skullA = 2207;
 	public static int skull = 2208;
+	public static int itemSentry = 2209;
 
 
 	// Blocks
@@ -24,6 +25,7 @@ public class Ids {
 	public static int blockSlab = 2306;
 	public static int saltOre = 2307;
 	public static int sulfOre = 2308;
+	public static int blockSentry = 2309;
 
 
 
