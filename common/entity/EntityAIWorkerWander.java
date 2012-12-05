@@ -1,6 +1,5 @@
 package riseautomatons.common.entity;
 
-import riseautomatons.common.entity.EntityWorker.EnumWorkMode;
 import net.minecraft.src.EntityAIWander;
 import net.minecraft.src.EntityCreature;
 
@@ -14,7 +13,7 @@ public class EntityAIWorkerWander extends EntityAIWander {
 
 	@Override
 	public boolean shouldExecute() {
-		if(bot.getMode() != EnumWorkMode.PANIC) {
+		if(bot.getMode() != EnumBotMode.PANIC) {
 			return false;
 		}
 		return super.shouldExecute();

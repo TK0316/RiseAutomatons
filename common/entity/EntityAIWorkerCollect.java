@@ -1,7 +1,6 @@
 package riseautomatons.common.entity;
 
 import riseautomatons.common.Coord;
-import riseautomatons.common.entity.EntityWorker.EnumWorkMode;
 import net.minecraft.src.EntityAIBase;
 import net.minecraft.src.PathNavigate;
 
@@ -20,7 +19,7 @@ public class EntityAIWorkerCollect extends EntityAIBase {
 
 	@Override
 	public boolean shouldExecute() {
-		if(bot.getMode() == EnumWorkMode.PICKUP && bot.reallyGetBotOwner() != null) {
+		if(bot.getMode() == EnumBotMode.PICKUP && bot.reallyGetBotOwner() != null) {
 			return true;
 		}
 		return false;
@@ -46,7 +45,7 @@ public class EntityAIWorkerCollect extends EntityAIBase {
 			pathFinder.tryMoveToXYZ(home.x, home.y, home.z, bot.getMoveSpeed());
 		}
 
-		return pathFinder.noPath() == false && bot.getMode() == EnumWorkMode.PICKUP;
+		return pathFinder.noPath() == false && bot.getMode() == EnumBotMode.PICKUP;
 	}
 
 	@Override

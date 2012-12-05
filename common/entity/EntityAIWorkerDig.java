@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.src.EntityAIBase;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.PathNavigate;
-import riseautomatons.common.entity.EntityWorker.EnumWorkMode;
 
 public class EntityAIWorkerDig extends EntityAIBase {
 
@@ -23,7 +22,7 @@ public class EntityAIWorkerDig extends EntityAIBase {
 
 	@Override
 	public boolean continueExecuting() {
-		return pathFinder.noPath() == false && bot.getMode() == EnumWorkMode.DIG;
+		return pathFinder.noPath() == false && bot.getMode() == EnumBotMode.DIG;
 	}
 
 	@Override
@@ -39,7 +38,7 @@ public class EntityAIWorkerDig extends EntityAIBase {
 
 	@Override
 	public boolean shouldExecute() {
-		if(bot.getMode() == EnumWorkMode.DIG && bot.reallyGetBotOwner() != null) {
+		if(bot.getMode() == EnumBotMode.DIG && bot.reallyGetBotOwner() != null) {
 			return true;
 		}
 		return false;
