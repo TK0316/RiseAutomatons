@@ -5,6 +5,7 @@ import java.util.List;
 import riseautomatons.common.Ids;
 import riseautomatons.common.Universal;
 import riseautomatons.common.entity.IBot;
+import riseautomatons.common.item.EnumSoulCore;
 
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.DamageSource;
@@ -54,7 +55,9 @@ public class AbsorbSoul extends Spell {
 			for(int n=0;n<L.size();n++){
 				EntityLiving el = (EntityLiving) L.get(n);
 				if(!complete){
+					System.out.println();
 					if(el instanceof EntityPlayer || el instanceof IBot || el instanceof EntityTameable || el instanceof EntityDragon || el instanceof EntityGolem){
+						System.out.println(el.getEntityName() + " is not target type");
 
 					}else if(el instanceof EntityAnimal){
 						if (!(el instanceof EntityChicken)){
@@ -62,10 +65,11 @@ public class AbsorbSoul extends Spell {
 						}
 
 						dropB(world,el);
-						Universal.gorey(world, i, j, k);
+						// TODO Universal.gorey(world, i, j, k);
 						complete=true;
 						targetItem.item.stackSize = 1;
-						targetItem.item.setItemDamage(5);
+						targetItem.item.setItemDamage(EnumSoulCore.SOULPURE.ordinal());
+						System.out.println("Pure Soul");
 
 					}else if(el instanceof EntityMob){
 						if(el instanceof EntityZombie){
@@ -75,7 +79,7 @@ public class AbsorbSoul extends Spell {
 								dropC(world,el);
 							}
 							dropB(world,el);
-							Universal.gorey(world, i, j, k);
+							// TODO Universal.gorey(world, i, j, k);
 						}else if(el instanceof EntitySkeleton){
 							dropC(world,el);
 							dropB(world,el);
@@ -84,15 +88,17 @@ public class AbsorbSoul extends Spell {
 							world.spawnEntityInWorld(ei);
 						}else{
 							dropB(world,el);
-							Universal.gorey(world, i, j, k);
+							// TODO Universal.gorey(world, i, j, k);
 						}
 						complete=true;
 						targetItem.item.stackSize = 1;
-						targetItem.item.setItemDamage(6);
+						targetItem.item.setItemDamage(EnumSoulCore.SOULEVIL.ordinal());
+						System.out.println("Evil Soul");
 					}
 
 					if(complete){
-						el.attackEntityFrom(DamageSource.magic, 999);
+						el.setDead();
+						//el.attackEntityFrom(DamageSource.magic, 999);
 					}
 				}
 				el.attackEntityFrom(DamageSource.magic, 4);
