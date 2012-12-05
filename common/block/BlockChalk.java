@@ -48,7 +48,7 @@ public class BlockChalk extends Block {
 			float par9) {
 
 		if (world.isRemote) {
-			return true;
+			//return true;
 		}
 
 		if (entityplayer.getCurrentEquippedItem() != null) {
@@ -72,7 +72,7 @@ public class BlockChalk extends Block {
 		super.onBlockDestroyedByPlayer(world, i, j, k, l);
 
 		if (world.isRemote) {
-			return;
+			//return;
 		}
 
 		int meta = world.getBlockMetadata(i, j, k);
@@ -101,7 +101,7 @@ public class BlockChalk extends Block {
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
 
 		if (world.isRemote) {
-			return;
+			//return;
 		}
 
 		int i1 = world.getBlockMetadata(i, j, k);
@@ -130,7 +130,7 @@ public class BlockChalk extends Block {
 		super.onBlockAdded(world, i, j, k);
 
 		if (world.isRemote) {
-			return;
+			//return;
 		}
 
 		notifyWireNeighborsOfNeighborChange(world, i - 1, j, k);
