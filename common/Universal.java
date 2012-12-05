@@ -3,6 +3,9 @@ package riseautomatons.common;
 import java.io.File;
 import java.util.Random;
 
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
+
 import riseautomatons.common.entity.EntityFwooshFX;
 import riseautomatons.common.entity.EntityGoreFX;
 
@@ -77,6 +80,20 @@ public class Universal {
 			// world.spawnParticle(s, (posX + rand.nextFloat() * 1.6F - 0.8f),
 			// posY + (rand.nextFloat() * 1.6f), (posZ +rand.nextFloat() * 1.6F)
 			// - 0.8f, d, d1, d2);
+		}
+	}
+
+	public static void poof(World world, double posX, double posY, double posZ)
+	{
+		String s  = "explode";
+		Random rand = world.rand;
+
+		for (int i = 0; i < 7; i++)
+		{
+			double d = rand.nextGaussian() * 0.02D;
+			double d1 = rand.nextGaussian() * 0.02D;
+			double d2 = rand.nextGaussian() * 0.02D;
+			world.spawnParticle(s, (posX + rand.nextFloat() * 1.6F - 0.8f), posY + 0.5f + (rand.nextFloat() * 0.2f), (posZ + rand.nextFloat() * 1.6F) - 0.8f, d, d1, d2);
 		}
 	}
 
