@@ -25,7 +25,7 @@ public enum EnumCraftSetType {
 	SMALLHEAD("shead", "Small Head"),
 	SMALLBODY("smallbody", "Small Body"),
 	TOTEHEAD("totehead", "Tote Head"),
-	MEDBODY("medbody", "Greater Body"),
+	MIDBODY("medbody", "Greater Body"),
 	SMALLLEG("smallleg", "Small Leg"),
 	SENTRYHEAD("sentryhead", "Sentry Head"),
 	SALT("salt", "Salt"),
