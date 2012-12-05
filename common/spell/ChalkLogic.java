@@ -36,7 +36,7 @@ public class ChalkLogic {
 		boolean usedRecipe = false;
 		if (spellList.containsKey(s)) {
 			if (world.isRemote) {
-				return false;
+				//return false;
 			}
 
 			try {
