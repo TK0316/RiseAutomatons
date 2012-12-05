@@ -16,7 +16,7 @@ public class Recipes {
 	static ItemStack chain = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.CHAIN.ordinal());
 	static ItemStack sprocket = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SPROCKET.ordinal());
 	static ItemStack joint = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.JOINT.ordinal());
-	// TODO sharp
+	static ItemStack sharp = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SHARP.ordinal());
 	static ItemStack smallPlate = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SMALLPLATE.ordinal());
 	static ItemStack cylinder = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.CYLINDER.ordinal());
 	static ItemStack rod = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.ROD.ordinal());
@@ -25,17 +25,17 @@ public class Recipes {
 	static ItemStack canvas = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.CANVAS.ordinal());
 	static ItemStack wing = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.WING.ordinal());
 	static ItemStack passive = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.PASSIVE.ordinal());
-	// TODO aggressive
-	// TODO jaw
+	static ItemStack aggressive = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.AGGRESSIVE.ordinal());
+	static ItemStack jaw = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.JAW.ordinal());
 	static ItemStack sensor = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SENSOR.ordinal());
 	static ItemStack drill = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.DRILL.ordinal());
 	static ItemStack rollerChain = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.ROLLERCHAIN.ordinal());
 	static ItemStack sHead = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SMALLHEAD.ordinal());
 	static ItemStack sBody = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SMALLBODY.ordinal());
-	// TODO totehead
-	// TODO midbody
+	static ItemStack toteHead = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.TOTEHEAD.ordinal());
+	static ItemStack midBody = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.MIDBODY.ordinal());
 	static ItemStack sLeg = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SMALLLEG.ordinal());
-	// TODO shead
+	static ItemStack sentryHead = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SENTRYHEAD.ordinal());
 
 	static ItemStack spring = new ItemStack(Ids.spring, 1, 0);
 	static ItemStack gearbox = new ItemStack(Ids.blockGearbox, 1, 0);
@@ -102,6 +102,12 @@ public class Recipes {
 			"g",
 			'g',smallGear, 'r', rod });
 
+		// Sharp recipe
+		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 16, EnumCraftSetType.SHARP.ordinal()), new Object[] {
+			" i ",
+			"iii",
+			'i', Item.ingotIron});
+
 		// Small Plate recipe
 
 		// Chisel recipe
@@ -166,6 +172,23 @@ public class Recipes {
 			" g ",
 			'p', smallPlate, 'a', actuator, 'g', smallGear });
 
+		// Aggressive recipe
+		GameRegistry.addRecipe(aggressive, new Object[] {
+			"a a",
+			"rgr",
+			"rgr",
+			'r', Block.torchRedstoneActive, 'a', actuator, 'g', smallGear});
+
+		// Jaw recipe
+		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 1, EnumCraftSetType.JAW.ordinal()), new Object[] {
+			"lll",
+			"sss",
+			'l', sharp, 's',smallPlate});
+		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 1, EnumCraftSetType.JAW.ordinal()), new Object[] {
+			"sss",
+			"lll",
+			'l', sharp, 's',smallPlate});
+
 		// Sensor recipe
 		GameRegistry.addRecipe(sensor, new Object[] {
 			"tGt",
@@ -201,12 +224,34 @@ public class Recipes {
 			"rGr",
 			'p', smallPlate, 'G', gearbox, 'r', rod, 'd', drill });
 
+		// Tote Head recipe
+		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 1, EnumCraftSetType.TOTEHEAD.ordinal()), new Object[] {
+			"psp",
+			"lPl",
+			"ppp",
+			'p', smallPlate, 's', sensor, 'l', lens, 'P', passive});
+
+
+		// Mid Body recipe
+		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 1, EnumCraftSetType.MIDBODY.ordinal()), new Object[] {
+			"gpg",
+			"rGr",
+			"gpg",
+			'g', smallGear , 'p', smallPlate, 'G', gearbox, 'r', rod});
+
 		// Small Leg recipe
 		GameRegistry.addRecipe(sLeg, new Object[] {
 			" j ",
 			"ini",
 			"psp",
 			'n', spring, 'j', joint, 's', Block.stone, 'p', smallPlate, 'i', piston });
+
+		// Sentry Head recipe
+		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SENTRYHEAD.ordinal()), new Object[] {
+			"sS",
+			" G",
+			"sa",
+			's', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.JAW.ordinal()) , 'G', gearbox, 'a', aggressive,'S',sensor});
 
 	}
 
@@ -293,6 +338,12 @@ public class Recipes {
 			'A', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SMALLHEAD.ordinal()),
 			'B', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SMALLBODY.ordinal()),
 			'C', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SMALLLEG.ordinal()) });
+
+		GameRegistry.addRecipe(new ItemStack(Ids.itemSentry, 1, 0), new Object[] {
+			" ll",
+			"h##",
+			" ll",
+			'#', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.MIDBODY.ordinal()), 'l', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SMALLLEG.ordinal()), 'h', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SENTRYHEAD.ordinal())});
 	}
 
 	private static void addSoulCoreRecipes() {
@@ -326,11 +377,18 @@ public class Recipes {
 			"  D",
 			'D', new ItemStack(Item.diamond.shiftedIndex, 1, 0) });
 
-		// SoulCore recipe
-		GameRegistry.addRecipe(new ItemStack(Ids.soulCore, 1, EnumSoulCore.SOULSYNTH.ordinal()), new Object[] {
+		// Sentry recipe
+		GameRegistry.addRecipe(new ItemStack(Ids.itemSentry, 1, 0), new Object[] {
 			"D D",
 			"D  ",
 			"D  ",
 			'D', new ItemStack(Item.diamond.shiftedIndex, 1, 0) });
+
+		// SoulCore recipe
+		GameRegistry.addRecipe(new ItemStack(Ids.soulCore, 1, EnumSoulCore.SOULSYNTH.ordinal()), new Object[] {
+			"CCC",
+			"C C",
+			"CCC",
+			'C', new ItemStack(Ids.itemChalk, 1, 0) });
 	}
 }
