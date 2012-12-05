@@ -18,22 +18,31 @@ public class Items {
 	public static final String SOULCORE_PNG = "/riseautomatons/soulcore.png";
 
 	public static void init() {
+		// Automatons
 		LanguageRegistry.instance().addNameForObject(worker, "en_US", "Worker");
+		LanguageRegistry.instance().addNameForObject(sentry, "en_US", "Sentry");
+
+		// CraftSet
 		for (int i = 0; i < EnumCraftSetType.values().length; i++) {
 			LanguageRegistry.instance().addNameForObject(
 					new ItemStack(Ids.craftSet, 1, i), "en_US",
 					EnumCraftSetType.values()[i].fullname);
 		}
-		LanguageRegistry.instance().addNameForObject(spring, "en_US", "Spring");
-		LanguageRegistry.instance().addNameForObject(chalk, "en_US", "Chalk");
+
+		// SoulCore
 		for (int i = 0; i < EnumSoulCore.values().length; i++) {
 			LanguageRegistry.instance().addNameForObject(
 					new ItemStack(Ids.soulCore, 1, i), "en_US",
 					EnumSoulCore.values()[i].fullname);
 		}
+
+		// Normal Items
+		LanguageRegistry.instance().addNameForObject(spring, "en_US", "Spring");
+		LanguageRegistry.instance().addNameForObject(chalk, "en_US", "Chalk");
 		LanguageRegistry.instance().addNameForObject(skull, "en_US", "Human Skull");
 		LanguageRegistry.instance().addNameForObject(skullAnimal, "en_US", "Animal Skull");
 		LanguageRegistry.instance().addNameForObject(chisel, "en_US", "Chisel");
+
 		registerTextures();
 	}
 
@@ -42,10 +51,17 @@ public class Items {
 		MinecraftForgeClient.preloadTexture(ITEMS_PNG);
 	}
 
+	// Automatons
 	public static Item worker = (new ItemBot(Ids.itemWorker - 256, EnumBotType.WORKER))
 			.setTextureFile(ITEMS_PNG).setIconIndex(0)
 			.setItemName("Worker").setMaxStackSize(8)
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
+    public static Item sentry = (new ItemBot(Ids.itemSentry - 256, EnumBotType.SENTRY))
+			.setTextureFile(ITEMS_PNG).setIconIndex(1)
+    		.setItemName("Sentry").setMaxStackSize(1)
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
+
+	// Normal Items
 	public static Item craftset = (new ItemCraftSet(Ids.craftSet - 256))
 			.setTextureFile(CRAFTSET_PNG)
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
