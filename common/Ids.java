@@ -26,6 +26,16 @@ public class Ids {
 	public static int saltOre = 2307;
 	public static int sulfOre = 2308;
 	public static int blockSentry = 2309;
+	public static int blockTech = 2310;
+	public static int blockArch = 2311;
+	public static int blockSky = 2312;
+	public static int blockArchBend = 2313;
+	public static int blockArchitect = 2314;
+	public static int blockCrink = 2315;
+	public static int blockFrass = 2316;
+
+	// Dimension
+	public static int eupraxia = 99;
 
 
 

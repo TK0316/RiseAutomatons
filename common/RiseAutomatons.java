@@ -3,15 +3,14 @@ package riseautomatons.common;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import net.minecraft.src.CreativeTabs;
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.Property;
 import riseautomatons.common.block.Blocks;
 import riseautomatons.common.entity.Entities;
 import riseautomatons.common.item.Items;
 import riseautomatons.common.spell.ChalkLogic;
-
-import net.minecraft.src.CreativeTabs;
-import net.minecraft.src.ModLoader;
-import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.Property;
+import riseautomatons.common.world.Biomes;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
@@ -20,7 +19,6 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = "RiseAutomatons", name = "RiseAutomatons", version = "1.0")
 @NetworkMod(clientSideRequired = false, serverSideRequired = true, channels = { "rota" }, packetHandler = PacketHandler.class, connectionHandler = ConnectionHandler.class, versionBounds = "[1.0]")
@@ -48,6 +46,7 @@ public class RiseAutomatons {
 		Blocks.init();
 		Items.init();
 		Recipes.init();
+		Biomes.init();
 		if(enableCheatRecipe) {
 			Recipes.initCheatRecipe();
 		}
@@ -73,6 +72,8 @@ public class RiseAutomatons {
 			Ids.blockGearbox = cfg.get(Configuration.CATEGORY_BLOCK, "blockGearbox", Ids.blockGearbox).getInt();
 			Ids.blockTurn = cfg.get(Configuration.CATEGORY_BLOCK, "blockTurn", Ids.blockTurn).getInt();
 			Ids.blockWindmill = cfg.get(Configuration.CATEGORY_BLOCK, "blockWindmill", Ids.blockWindmill).getInt();
+
+			Ids.eupraxia = cfg.get(Configuration.CATEGORY_GENERAL, "eupraxia", Ids.eupraxia).getInt();
 
 			enableCheatRecipe = cfg.get(Configuration.CATEGORY_GENERAL, "enableCheatRecipe", false).getBoolean(false);
 
