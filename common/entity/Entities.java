@@ -16,9 +16,18 @@ public class Entities {
 		LanguageRegistry.instance().addStringLocalization("entity.Worker.name", "en_US", "Worker");
 		BlockWorker.renderId = RenderingRegistry.getNextAvailableRenderId();
 		EntityRegistry.registerGlobalEntityID(EntityWorker.class, "Worker", BlockWorker.renderId, 0xCCCCCC, 0xFFFFFF);
+
 		LanguageRegistry.instance().addStringLocalization("entity.Sentry.name", "en_US", "Sentry");
 		BlockSentry.renderId = RenderingRegistry.getNextAvailableRenderId();
 		EntityRegistry.registerGlobalEntityID(EntitySentry.class, "Sentry", BlockSentry.renderId, 0xCCCCCC, 0xFFFFFF);
+
+		LanguageRegistry.instance().addStringLocalization("entity.Golem.name", "en_US", "Golem");
+		EntityGolem.renderId = RenderingRegistry.getNextAvailableRenderId();
+		EntityRegistry.registerGlobalEntityID(EntityGolem.class, "Golem", EntityGolem.renderId, 0xCCCCCC, 0xFFFFFF);
+
+		LanguageRegistry.instance().addStringLocalization("entity.GolemPure.name", "en_US", "GolemPure");
+		EntityGolem.renderId = RenderingRegistry.getNextAvailableRenderId();
+		EntityRegistry.registerGlobalEntityID(EntityGolemPure.class, "GolemPure", EntityGolemPure.renderId, 0xCCCCCC, 0xFFFFFF);
 
 		// Effect
 		EntityFwooshFX.rendererId = ModLoader.getMinecraftInstance().renderEngine
@@ -41,7 +50,14 @@ public class Entities {
 
 		MinecraftForgeClient.preloadTexture(EntitySentry.SENTRY_PNG);
 		MinecraftForgeClient.preloadTexture(EntitySentry.SENTRYBLOCK_PNG);
-		RenderingRegistry.registerEntityRenderingHandler(EntitySentry.class, new RenderBot(new ModelSentry(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySentry.class, new RenderBot(new ModelSentry(), 0.75F));
+
+		MinecraftForgeClient.preloadTexture(EntityGolem.GOLEM_PNG);
+		MinecraftForgeClient.preloadTexture(EntityGolemPure.GOLEM_PURE_PNG);
+		MinecraftForgeClient.preloadTexture(EntityGolemPure.GOLEM_PURE_BI_PNG);
+		MinecraftForgeClient.preloadTexture(EntityGolemPure.GOLEM_PURE_LONG_PNG);
+		RenderingRegistry.registerEntityRenderingHandler(EntityGolem.class, new RenderGolem(new ModelGolem(), 0.25F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGolemPure.class, new RenderGolem(new ModelGolem(), 0.25F));
 
 	}
 
