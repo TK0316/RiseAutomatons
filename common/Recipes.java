@@ -1,12 +1,11 @@
 package riseautomatons.common;
 
-import riseautomatons.common.item.EnumCraftSetType;
-import riseautomatons.common.item.EnumSoulCore;
-import riseautomatons.common.item.Items;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
+import riseautomatons.common.item.EnumCraftSetType;
+import riseautomatons.common.item.EnumSoulCore;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Recipes {
 	static ItemStack lens = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.LENS.ordinal());
