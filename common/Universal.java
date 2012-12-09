@@ -10,6 +10,7 @@ import riseautomatons.common.entity.EntityFwooshFX;
 import riseautomatons.common.entity.EntityGoreFX;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.DataWatcher;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.World;
@@ -95,6 +96,10 @@ public class Universal {
 			double d2 = rand.nextGaussian() * 0.02D;
 			world.spawnParticle(s, (posX + rand.nextFloat() * 1.6F - 0.8f), posY + 0.5f + (rand.nextFloat() * 0.2f), (posZ + rand.nextFloat() * 1.6F) - 0.8f, d, d1, d2);
 		}
+	}
+
+	public static double anotherAxisFunc(AxisAlignedBB aa) {
+		return aa.getAverageEdgeLength() * 4D;
 	}
 
 }
