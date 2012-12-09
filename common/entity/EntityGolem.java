@@ -30,7 +30,8 @@ public class EntityGolem extends EntityAniBot implements IBot,
 
 	public EntityGolem(World par1World) {
 		super(par1World);
-		//
+		health = 5;
+		maxHealth = 5;
 	}
 
 	public EntityGolem(World world, double d, double d1, double d2, int I,
@@ -245,6 +246,11 @@ public class EntityGolem extends EntityAniBot implements IBot,
 	@Override
 	public EntityAgeable func_90011_a(EntityAgeable var1) {
 		return null;
+	}
+
+	@Override
+	public String getTexture() {
+		return GOLEM_PNG;
 	}
 
 }

@@ -19,6 +19,12 @@ public class EntityGolemPure extends EntityGolem implements IBot {
 	public static final String GOLEM_PURE_LONG_PNG = "/riseautomatons/golemPureLong.png";
 	public int form = 0;
 
+	public EntityGolemPure(World par1World) {
+		super(par1World);
+		health = 5;
+		maxHealth = 5;
+	}
+
 	public EntityGolemPure(World world, double d, double d1, double d2, int I,
 			int h, int dam) {
 		super(world, d, d1, d2, I, h, dam);
@@ -148,6 +154,11 @@ public class EntityGolemPure extends EntityGolem implements IBot {
 	public void readFromNBT(NBTTagCompound nbttagcompound) {
 		super.readEntityFromNBT(nbttagcompound);
 		setForm(nbttagcompound.getInteger("form"));
+	}
+
+	@Override
+	public String getTexture() {
+		return GOLEM_PURE_PNG;
 	}
 
 }
