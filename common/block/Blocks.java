@@ -53,7 +53,7 @@ public class Blocks {
 		LanguageRegistry.addName(new ItemStack(tech, 1, 0), "Ancient Construct");
 		LanguageRegistry.addName(new ItemStack(tech, 1, 1), "Bionic Mass");
 		LanguageRegistry.addName(new ItemStack(tech, 1, 2), "Domestic Tile");
-		LanguageRegistry.addName(new ItemStack(tech, 1, 3), "Domestic Tile2");
+		LanguageRegistry.addName(new ItemStack(tech, 1, 3), "Domestic Tile");
 		GameRegistry.registerBlock(sky, ItemLumo.class);
 		LanguageRegistry.addName(new ItemStack(sky, 1, 0), "Atmospheric simulator");
 		LanguageRegistry.addName(new ItemStack(sky, 1, 1), "Walkway Tile");
