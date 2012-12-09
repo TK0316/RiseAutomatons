@@ -25,8 +25,6 @@ public class BiomeGenTech extends BiomeGenForest {
 //		this.spawnableCreatureList.add(new SpawnListEntry(EntityGolem.class, 10, 4, 4));
 //		this.spawnableCreatureList.add(new SpawnListEntry(EntitySlider.class, 10, 4, 4));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityWatcher.class, 10, 4, 4));
-		this.biomeDecorator.clayPerChunk = 10;
-		this.biomeDecorator.sandPerChunk = 20;
 	}
 
 	@Override
