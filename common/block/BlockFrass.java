@@ -44,13 +44,6 @@ public class BlockFrass extends Block {
 	@Override
 	public void updateTick(World world, int i, int j, int k,
 			Random random) {
-		{
-			int m = world.getBlockMetadata(i, j, k);
-			if(m > -1) {
-				//world.setBlockAndMetadataWithNotify(i, j, k, m, 0);
-				//ereturn;
-			}
-		}
 		for(int n = j + 1; n < 255; n++) {
 			if(world.isAirBlock(i, n, k) == false) {
 				return;
