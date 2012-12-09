@@ -120,9 +120,7 @@ public class BlockFrass extends Block {
 		if(meta == 0) {
 			return 26;
 		}
-		System.out.println(String.valueOf(par1) + ", " + String.valueOf(meta));
 		if(meta == 3) {
-			System.out.println("clay");
 			if(par1 == 0 || par1 == 1) {
 				return 19;
 			}
@@ -138,7 +136,6 @@ public class BlockFrass extends Block {
 			return 23;
 		}
 		else if(meta == 2) {
-			System.out.println("grass");
 			if(par1 == 0 || par1 == 1) {
 				return 24;
 			}

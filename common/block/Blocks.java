@@ -69,6 +69,14 @@ public class Blocks {
 		LanguageRegistry.addName(crink, "Foliage Array");
 		GameRegistry.registerBlock(frass);
 		LanguageRegistry.addName(frass, "Frass");
+		GameRegistry.registerBlock(plantMass);
+		LanguageRegistry.addName(plantMass, "Bionic Stalk");
+		GameRegistry.registerBlock(glowy);
+		LanguageRegistry.addName(glowy, "Illuminator");
+		GameRegistry.registerBlock(fakeCrystal);
+		LanguageRegistry.addName(fakeCrystal, "Power Shard");
+		GameRegistry.registerBlock(crystal);
+		LanguageRegistry.addName(crystal, "Power Shard");
 
 		GameRegistry.registerBlock(teleporter);
 		LanguageRegistry.addName(teleporter, "Teleporter");
@@ -143,6 +151,27 @@ public class Blocks {
 			.setTextureFile(BLOCK_PNG)
     		.setHardness(0.25F).setStepSound(Block.soundGlassFootstep).setBlockName("frass")
     		.setCreativeTab(RiseAutomatons.tabAutomatons);
+	public static Block plantMass = (new BlockPlant(Ids.blockPlantMass))
+			.setTextureFile(BLOCK_PNG)
+			.setHardness(0.5F).setStepSound(Block.soundGrassFootstep)
+			.setBlockName("plantMass")
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
+	public static Block crystal = new BlockGlow(Ids.blockCrystal)
+			.setTextureFile(BLOCK_PNG)
+			.setHardness(0.4F).setResistance(5.0F)
+			.setLightValue(0.625F).setStepSound(Block.soundGlassFootstep).setBlockName("crystal")
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
+	public static Block fakeCrystal = new BlockBad(Ids.blockFakeCrystal)
+			.setTextureFile(BLOCK_PNG)
+			.setHardness(0.4F).setResistance(5.0F)
+			.setLightValue(0.625F).setStepSound(Block.soundGlassFootstep)
+			.setBlockName("crystal")
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
+	public static Block glowy = new BlockGlow(Ids.blockGlowy)
+	.setTextureFile(BLOCK_PNG)
+			.setHardness(0.4F).setResistance(5.0F).setLightValue(0.95F)
+			.setStepSound(Block.soundGlassFootstep).setBlockName("glowy")
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
 
 	public static Block teleporter = (new BlockTeleporter())
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
