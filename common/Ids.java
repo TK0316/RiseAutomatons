@@ -33,10 +33,11 @@ public class Ids {
 	public static int blockArchitect = 2314;
 	public static int blockCrink = 2315;
 	public static int blockFrass = 2316;
+	public static int blockPlantMass = 2317;
+	public static int blockCrystal = 2318;
+	public static int blockFakeCrystal = 2319;
+	public static int blockGlowy = 2320;
 
 	// Dimension
 	public static int eupraxia = 99;
-
-
-
 }
