@@ -41,6 +41,10 @@ public class Entities {
 		EntityBobby.renderId = RenderingRegistry.getNextAvailableRenderId();
 		EntityRegistry.registerGlobalEntityID(EntityBobby.class, "Bobby", EntityRegistry.findGlobalUniqueEntityId(), 0xCCCCCC, 0xFFFFFF);
 
+		LanguageRegistry.instance().addStringLocalization("entity.Helios.name", "en_US", "Helios");
+		EntityHelios.renderId = RenderingRegistry.getNextAvailableRenderId();
+		EntityRegistry.registerGlobalEntityID(EntityHelios.class, "Helios", EntityRegistry.findGlobalUniqueEntityId(), 0xCCCCCC, 0xFFFFFF);
+
 		// Effect
 		EntityFwooshFX.rendererId = ModLoader.getMinecraftInstance().renderEngine
 				.getTexture("/riseautomatons/fwoosh.png");
@@ -79,6 +83,9 @@ public class Entities {
 
 		MinecraftForgeClient.preloadTexture(EntityBobby.BOBBY_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBobby.class, new RenderBot(new ModelBobby(), 0.25F));
+
+		MinecraftForgeClient.preloadTexture(EntityHelios.HELIOS_PNG);
+		RenderingRegistry.registerEntityRenderingHandler(EntityHelios.class, new RenderBot(new ModelHelios(), 0.3F));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityLaser.class, new RenderLaser());
 	}
