@@ -26,7 +26,7 @@ public class TechSurfaceGenerator implements IWorldGenerator {
 
 	private void generateSurface(World world, Random random, int chunkX,
 			int chunkZ) {
-		System.out.println(world.getBiomeGenForCoords(chunkX, chunkZ).biomeName);
+		//System.out.println(world.getBiomeGenForCoords(chunkX, chunkZ).biomeName);
 		if(world.getBiomeGenForCoords(chunkX, chunkZ).biomeName.equals(Biomes.tech.biomeName)) {
 			int randPosX = chunkX;
 			int randPosY = 63;
