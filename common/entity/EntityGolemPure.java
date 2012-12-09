@@ -14,15 +14,16 @@ import net.minecraft.src.World;
 
 public class EntityGolemPure extends EntityGolem implements IBot {
 
-	public static final String GOLEM_PURE_PNG = "/riseautomatons/golemPure.png";
-	public static final String GOLEM_PURE_BI_PNG = "/riseautomatons/golemPureBi.png";
-	public static final String GOLEM_PURE_LONG_PNG = "/riseautomatons/golemPureLong.png";
+	public static final String GOLEM_PURE_PNG = "/riseautomatons/agol1.png";
+	public static final String GOLEM_PURE_BI_PNG = "/riseautomatons/agol1.png";
+	public static final String GOLEM_PURE_LONG_PNG = "/riseautomatons/agol1.png";
 	public int form = 0;
 
 	public EntityGolemPure(World par1World) {
 		super(par1World);
 		health = 5;
 		maxHealth = 5;
+		setForm(worldObj.rand.nextInt(3));
 	}
 
 	public EntityGolemPure(World world, double d, double d1, double d2, int I,
@@ -158,7 +159,7 @@ public class EntityGolemPure extends EntityGolem implements IBot {
 
 	@Override
 	public String getTexture() {
-		return GOLEM_PURE_PNG;
+		return texture;
 	}
 
 }

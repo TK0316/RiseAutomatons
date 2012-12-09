@@ -22,7 +22,7 @@ import net.minecraft.src.World;
 public class EntityGolem extends EntityAniBot implements IBot,
 		IBehaviorDispenseItem {
 
-	public static final String GOLEM_PNG = "/riseautomatons/agol.png";
+	public static final String GOLEM_PNG = "/riseautomatons/agol1.png";
 	public static int renderId;
 	int maxHealth = 5;
 	public int type = 0;
@@ -32,6 +32,7 @@ public class EntityGolem extends EntityAniBot implements IBot,
 		super(par1World);
 		health = 5;
 		maxHealth = 5;
+		texture = GOLEM_PNG;
 	}
 
 	public EntityGolem(World world, double d, double d1, double d2, int I,
@@ -190,9 +191,11 @@ public class EntityGolem extends EntityAniBot implements IBot,
 			Material mat = worldObj.getBlockMaterial(xx, yy, zz);
 			int iii = getType();
 
-			if (Block.blocksList[iii].canPlaceBlockAt(worldObj, xx, yy, zz)) {
-				worldObj.setBlockAndMetadataWithNotify(xx, yy, zz, iii,
-						getColo());
+			if(Block.blocksList[iii] != null) {
+				if (Block.blocksList[iii].canPlaceBlockAt(worldObj, xx, yy, zz)) {
+					worldObj.setBlockAndMetadataWithNotify(xx, yy, zz, iii,
+							getColo());
+				}
 			}
 
 			setDead();
