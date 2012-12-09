@@ -14,8 +14,10 @@ public class Biomes {
 
 	public static final BiomeGenBase tech = (new BiomeGenTech(46)).setColor(0xff0000).setBiomeName("Tech");
 
-	public static void init() {
-		GameRegistry.addBiome(tech);
+	public static void init(boolean generateTechBiome) {
+		if(generateTechBiome) {
+			GameRegistry.addBiome(tech);
+		}
 		GameRegistry.registerWorldGenerator(new OreGenerator());
 		GameRegistry.registerWorldGenerator(new TechSurfaceGenerator());
 		GameRegistry.registerWorldGenerator(new TechRuinGenerator());
