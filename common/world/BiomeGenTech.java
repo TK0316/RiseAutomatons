@@ -22,7 +22,7 @@ public class BiomeGenTech extends BiomeGenForest {
 			return this.worldGeneratorForest;
 		}
 		if (par1Random.nextInt(10) == 0) {
-			return this.worldGeneratorBigTree;
+			//return this.worldGeneratorBigTree;
 		}
 
 		return this.worldGeneratorTrees;

@@ -22,7 +22,7 @@ public class WorldGenFakeTrees extends WorldGenTrees
     private final int metaWood;
 
     /** The metadata value of the leaves to use in tree generation. */
-    private final int metaLeaves;
+    private int metaLeaves;
 
     public WorldGenFakeTrees(boolean par1)
     {
@@ -40,6 +40,7 @@ public class WorldGenFakeTrees extends WorldGenTrees
 
     public boolean generate(World par1World, Random par2Random, int par3, int par4, int par5)
     {
+    	metaLeaves = par2Random.nextInt(10);
         int var6 = par2Random.nextInt(3) + this.minTreeHeight;
         boolean var7 = true;
 
