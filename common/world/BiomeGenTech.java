@@ -19,7 +19,6 @@ public class BiomeGenTech extends BiomeGenForest {
 		worldGeneratorTrees = new WorldGenFakeTrees(false);
 		worldGeneratorForest = new WorldGenFakeForest(false);
 
-		this.topBlock = (byte) Block.dirt.blockID;
 //		this.spawnableCreatureList.add(new SpawnListEntry(EntityChopper.class, 10, 4, 4));
 //		this.spawnableCreatureList.add(new SpawnListEntry(EntityBobby.class, 10, 4, 4));
 //		this.spawnableCreatureList.add(new SpawnListEntry(EntityGolem.class, 10, 4, 4));
