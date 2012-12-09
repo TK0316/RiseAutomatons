@@ -77,6 +77,8 @@ public class Blocks {
 		LanguageRegistry.addName(fakeCrystal, "Power Shard");
 		GameRegistry.registerBlock(crystal);
 		LanguageRegistry.addName(crystal, "Power Shard");
+		GameRegistry.registerBlock(boing);
+		LanguageRegistry.addName(boing, "Slider Shell");
 
 		GameRegistry.registerBlock(teleporter);
 		LanguageRegistry.addName(teleporter, "Teleporter");
@@ -168,9 +170,13 @@ public class Blocks {
 			.setBlockName("crystal")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block glowy = new BlockGlow(Ids.blockGlowy)
-	.setTextureFile(BLOCK_PNG)
+			.setTextureFile(BLOCK_PNG)
 			.setHardness(0.4F).setResistance(5.0F).setLightValue(0.95F)
 			.setStepSound(Block.soundGlassFootstep).setBlockName("glowy")
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
+    public static Block boing = (new BlockBoing(Ids.blockBoing))
+			.setTextureFile(BLOCK_PNG)
+			.setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setBlockName("boing")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 
 	public static Block teleporter = (new BlockTeleporter())

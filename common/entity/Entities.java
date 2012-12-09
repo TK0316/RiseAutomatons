@@ -33,6 +33,10 @@ public class Entities {
 		EntityWatcher.renderId = RenderingRegistry.getNextAvailableRenderId();
 		EntityRegistry.registerGlobalEntityID(EntityWatcher.class, "Watcher", EntityRegistry.findGlobalUniqueEntityId(), 0xCCCCCC, 0xFFFFFF);
 
+		LanguageRegistry.instance().addStringLocalization("entity.Slider.name", "en_US", "Slider");
+		EntitySlider.renderId = RenderingRegistry.getNextAvailableRenderId();
+		EntityRegistry.registerGlobalEntityID(EntitySlider.class, "Slider", EntityRegistry.findGlobalUniqueEntityId(), 0xCCCCCC, 0xFFFFFF);
+
 		// Effect
 		EntityFwooshFX.rendererId = ModLoader.getMinecraftInstance().renderEngine
 				.getTexture("/riseautomatons/fwoosh.png");
@@ -65,6 +69,9 @@ public class Entities {
 
 		MinecraftForgeClient.preloadTexture(EntityWatcher.WATCHER_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntityWatcher.class, new RenderWatcher(new ModelWatcher(), 0.5F));
+
+		MinecraftForgeClient.preloadTexture(EntitySlider.SLIDER_PNG);
+		RenderingRegistry.registerEntityRenderingHandler(EntitySlider.class, new RenderBot(new ModelSlider(), 1F));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityLaser.class, new RenderLaser());
 	}
