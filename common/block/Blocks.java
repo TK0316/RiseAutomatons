@@ -1,12 +1,12 @@
 package riseautomatons.common.block;
 
 import riseautomatons.common.Ids;
-import riseautomatons.common.OreGenerator;
 import riseautomatons.common.RiseAutomatons;
 import riseautomatons.common.entity.EntityWorker;
 import riseautomatons.common.item.ItemArch;
 import riseautomatons.common.item.ItemComplex;
 import riseautomatons.common.item.ItemLumo;
+import riseautomatons.common.world.OreGenerator;
 import net.minecraft.src.Block;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
@@ -73,7 +73,6 @@ public class Blocks {
 		GameRegistry.registerBlock(teleporter);
 		LanguageRegistry.addName(teleporter, "Teleporter");
 
-		GameRegistry.registerWorldGenerator(new OreGenerator());
 		registerTextures();
 	}
 
