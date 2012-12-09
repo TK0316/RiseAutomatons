@@ -68,11 +68,11 @@ public class BlockFrass extends Block {
 					else if(blockId == Block.grass.blockID) {
 						meta = 2;
 					}
-					else if(blockId == Block.blockClay.blockID) {
-						meta = 3;
-					}
 					else if(blockId == Block.dirt.blockID) {
 						meta = 2;
+					}
+					else if(blockId == Block.blockClay.blockID) {
+						meta = 3;
 					}
 					else if(blockId == Block.waterStill.blockID) {
 						meta = 4;
@@ -120,26 +120,26 @@ public class BlockFrass extends Block {
 		if(meta == 0) {
 			return 26;
 		}
-		if(meta == 3) {
-			if(par1 == 0 || par1 == 1) {
-				return 19;
-			}
-			return 20;
-		}
 		else if(meta == 1) {
 			if(par1 == 0 || par1 == 1) {
 				return 21;
 			}
 			return 22;
 		}
-		else if(meta == 4) {
-			return 23;
-		}
 		else if(meta == 2) {
 			if(par1 == 0 || par1 == 1) {
 				return 24;
 			}
 			return 25;
+		}
+		else if(meta == 3) {
+			if(par1 == 0 || par1 == 1) {
+				return 19;
+			}
+			return 20;
+		}
+		else if(meta == 4) {
+			return 23;
 		}
 		return 26;
 	}
