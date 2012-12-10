@@ -21,6 +21,7 @@ public class Items {
 		// Automatons
 		LanguageRegistry.instance().addNameForObject(worker, "en_US", "Worker");
 		LanguageRegistry.instance().addNameForObject(sentry, "en_US", "Sentry");
+		LanguageRegistry.instance().addNameForObject(factotum, "en_US", "Factotum");
 
 		// CraftSet
 		for (int i = 0; i < EnumCraftSetType.values().length; i++) {
@@ -60,6 +61,10 @@ public class Items {
     public static Item sentry = (new ItemBot(Ids.itemSentry - 256, EnumBotType.SENTRY))
 			.setTextureFile(ITEMS_PNG).setIconIndex(1)
     		.setItemName("Sentry").setMaxStackSize(1)
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
+	public static Item factotum = (new ItemBot(Ids.itemFactotum - 256,EnumBotType.FACTOTUM))
+			.setTextureFile(ITEMS_PNG).setIconIndex(2)
+			.setItemName("factotum").setMaxStackSize(1)
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 
 	// Normal Items

@@ -15,6 +15,7 @@ public class Ids {
 	public static int skull = 2208;
 	public static int itemSentry = 2209;
 	public static int blaster = 2210;
+	public static int itemFactotum = 2211;
 
 
 	// Blocks
@@ -42,4 +43,7 @@ public class Ids {
 
 	// Dimension
 	public static int eupraxia = 99;
+
+	// GUI
+	public static int guiFactotum = 30;
 }

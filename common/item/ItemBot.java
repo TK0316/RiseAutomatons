@@ -1,6 +1,7 @@
 package riseautomatons.common.item;
 
 import riseautomatons.common.Ids;
+import riseautomatons.common.entity.EntityFactotum;
 import net.minecraft.src.Block;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
@@ -69,6 +70,9 @@ public class ItemBot extends Item {
 			break;
 		case SENTRY:
 			world.setBlockAndMetadataWithNotify(i, j, k, Ids.blockSentry, meta);
+			break;
+		case FACTOTUM:
+            world.spawnEntityInWorld(new EntityFactotum(world, (double)i + 0.5, (double)j + 0.5, (double)k + 0.5, entityplayer.username));
 			break;
 		default:
 			return false;

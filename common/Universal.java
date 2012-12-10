@@ -6,12 +6,15 @@ import java.util.Random;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
+import riseautomatons.common.entity.EntityFactotum;
 import riseautomatons.common.entity.EntityFwooshFX;
 import riseautomatons.common.entity.EntityGoreFX;
+import riseautomatons.common.entity.GuiFactotum;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.DataWatcher;
+import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.World;
 
@@ -100,6 +103,12 @@ public class Universal {
 
 	public static double anotherAxisFunc(AxisAlignedBB aa) {
 		return aa.getAverageEdgeLength() * 4D;
+	}
+
+	public static void factotumGui(EntityPlayer entityplayer,
+			EntityFactotum F) {
+		ModLoader.openGUI(entityplayer, new GuiFactotum(
+				entityplayer.inventory, F));
 	}
 
 }

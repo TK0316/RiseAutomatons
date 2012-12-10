@@ -19,6 +19,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod(modid = "RiseAutomatons", name = "RiseAutomatons", version = "1.0")
 @NetworkMod(clientSideRequired = false, serverSideRequired = true, channels = { "rota" }, packetHandler = PacketHandler.class, connectionHandler = ConnectionHandler.class, versionBounds = "[1.0]")
@@ -52,6 +53,7 @@ public class RiseAutomatons {
 			Recipes.initCheatRecipe();
 		}
 		ChalkLogic.init();
+		NetworkRegistry.instance().registerGuiHandler(instance,  proxy);
 	}
 
 	@PreInit

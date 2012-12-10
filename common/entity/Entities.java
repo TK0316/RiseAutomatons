@@ -45,6 +45,10 @@ public class Entities {
 		EntityHelios.renderId = RenderingRegistry.getNextAvailableRenderId();
 		EntityRegistry.registerGlobalEntityID(EntityHelios.class, "Helios", EntityRegistry.findGlobalUniqueEntityId(), 0xCCCCCC, 0xFFFFFF);
 
+		LanguageRegistry.instance().addStringLocalization("entity.Factotum.name", "en_US", "Factotum");
+		EntityFactotum.renderId = RenderingRegistry.getNextAvailableRenderId();
+		EntityRegistry.registerGlobalEntityID(EntityFactotum.class, "Factotum", EntityRegistry.findGlobalUniqueEntityId(), 0xCCCCCC, 0xFFFFFF);
+
 		// Effect
 		EntityFwooshFX.rendererId = ModLoader.getMinecraftInstance().renderEngine
 				.getTexture("/riseautomatons/fwoosh.png");
@@ -86,6 +90,11 @@ public class Entities {
 
 		MinecraftForgeClient.preloadTexture(EntityHelios.HELIOS_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntityHelios.class, new RenderBot(new ModelHelios(), 0.3F));
+
+		MinecraftForgeClient.preloadTexture(EntityFactotum.FACTOTUM1_PNG);
+		MinecraftForgeClient.preloadTexture(EntityFactotum.FACTOTUM2_PNG);
+		MinecraftForgeClient.preloadTexture(EntityFactotum.FACTOTUM3_PNG);
+		RenderingRegistry.registerEntityRenderingHandler(EntityFactotum.class, new RenderFactotum(new ModelFactotum(), 1.5F));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityLaser.class, new RenderLaser());
 	}
