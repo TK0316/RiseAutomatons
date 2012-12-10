@@ -72,6 +72,7 @@ public class RiseAutomatons {
 			Ids.skullA = cfg.get(Configuration.CATEGORY_ITEM, "skullA", Ids.skullA).getInt();
 			Ids.skull = cfg.get(Configuration.CATEGORY_ITEM, "skull", Ids.skull).getInt();
 			Ids.itemSentry = cfg.get(Configuration.CATEGORY_ITEM, "itemSentry", Ids.itemSentry).getInt();
+			Ids.itemFactotum = cfg.get(Configuration.CATEGORY_ITEM, "itemFactotum", Ids.itemFactotum).getInt();
 
 			Ids.blockWorker = cfg.get(Configuration.CATEGORY_BLOCK, "blockWorker", Ids.blockWorker).getInt();
 			Ids.blockChalk = cfg.get(Configuration.CATEGORY_BLOCK, "blockChalk", Ids.blockChalk).getInt();
@@ -94,8 +95,11 @@ public class RiseAutomatons {
 			Ids.blockCrystal = cfg.get(Configuration.CATEGORY_BLOCK, "blockCrystal", Ids.blockCrystal).getInt();
 			Ids.blockFakeCrystal = cfg.get(Configuration.CATEGORY_BLOCK, "blockFakeCrystal", Ids.blockFakeCrystal).getInt();
 			Ids.blockGlowy = cfg.get(Configuration.CATEGORY_BLOCK, "blockGlowy", Ids.blockGlowy).getInt();
+			Ids.blockBoing = cfg.get(Configuration.CATEGORY_BLOCK, "blockBoing", Ids.blockBoing).getInt();
 
 			Ids.eupraxia = cfg.get(Configuration.CATEGORY_GENERAL, "eupraxia", Ids.eupraxia).getInt();
+
+			Ids.guiFactotum = cfg.get(Configuration.CATEGORY_GENERAL, "guiFactotum", Ids.guiFactotum).getInt();
 
 			enableCheatRecipe = cfg.get(Configuration.CATEGORY_GENERAL, "enableCheatRecipe", false).getBoolean(false);
 			generateTechBiome = cfg.get(Configuration.CATEGORY_GENERAL, "generateTechBiome", true).getBoolean(true);
