@@ -383,6 +383,13 @@ public class Recipes {
 			"D D",
 			'D', new ItemStack(Item.diamond.shiftedIndex, 1, 0) });
 
+		// Factotum recipe
+		GameRegistry.addRecipe(new ItemStack(Ids.itemFactotum, 1, 0), new Object[] {
+			"D D",
+			"D D",
+			"D  ",
+			'D', new ItemStack(Item.diamond.shiftedIndex, 1, 0) });
+
 		// SoulCore recipe
 		GameRegistry.addRecipe(new ItemStack(Ids.soulCore, 1, EnumSoulCore.SOULSYNTH.ordinal()), new Object[] {
 			"CCC",
