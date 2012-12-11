@@ -23,6 +23,7 @@ public class Items {
 		LanguageRegistry.instance().addNameForObject(sentry, "en_US", "Sentry");
 		LanguageRegistry.instance().addNameForObject(factotum, "en_US", "Factotum");
 		LanguageRegistry.instance().addNameForObject(beacon, "en_US", "Beacon");
+		LanguageRegistry.instance().addNameForObject(guard, "en_US", "Guard Turret");
 
 		// CraftSet
 		for (int i = 0; i < EnumCraftSetType.values().length; i++) {
@@ -70,6 +71,10 @@ public class Items {
 	public static Item beacon = (new ItemBot(Ids.itemBeacon - 256, EnumBotType.BEACON))
 			.setTextureFile(ITEMS_PNG).setIconIndex(3)
 			.setItemName("beacon")
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
+	public static Item guard = (new ItemBot(Ids.itemGuard - 256, EnumBotType.GUARD))
+			.setTextureFile(ITEMS_PNG).setIconIndex(4)
+			.setItemName("guard").setMaxStackSize(64)
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 
 	// Normal Items

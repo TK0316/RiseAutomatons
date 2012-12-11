@@ -53,6 +53,10 @@ public class Entities {
 		EntityBeacon.renderId = RenderingRegistry.getNextAvailableRenderId();
 		EntityRegistry.registerGlobalEntityID(EntityBeacon.class, "Beacon", EntityRegistry.findGlobalUniqueEntityId(), 0xCCCCCC, 0xFFFFFF);
 
+		LanguageRegistry.instance().addStringLocalization("entity.Guard.name", "en_US", "Guard");
+		EntityGuard.renderId = RenderingRegistry.getNextAvailableRenderId();
+		EntityRegistry.registerGlobalEntityID(EntityGuard.class, "Guard", EntityRegistry.findGlobalUniqueEntityId(), 0xCCCCCC, 0xFFFFFF);
+
 		// Effect
 		EntityFwooshFX.rendererId = ModLoader.getMinecraftInstance().renderEngine
 				.getTexture("/riseautomatons/fwoosh.png");
@@ -104,6 +108,9 @@ public class Entities {
 		MinecraftForgeClient.preloadTexture(EntityBeacon.BEACON1_PNG);
 		MinecraftForgeClient.preloadTexture(EntityBeacon.BEACON2_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBeacon.class, new RenderBot(new ModelBeacon(), 0.5F));
+
+		MinecraftForgeClient.preloadTexture(EntityGuard.GUARD_PNG);
+		RenderingRegistry.registerEntityRenderingHandler(EntityGuard.class, new RenderBot(new ModelGuard(), 0.3F));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityLaser.class, new RenderLaser());
 	}

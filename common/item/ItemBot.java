@@ -2,6 +2,7 @@ package riseautomatons.common.item;
 
 import riseautomatons.common.Ids;
 import riseautomatons.common.entity.EntityFactotum;
+import riseautomatons.common.entity.EntityGuard;
 import net.minecraft.src.Block;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
@@ -77,6 +78,8 @@ public class ItemBot extends Item {
 		case BEACON:
 			world.setBlockWithNotify(i, j, k, Ids.blockBeacon);
 			break;
+		case GUARD:
+        	world.spawnEntityInWorld(new EntityGuard(world, (float)i + 0.5F, (float)j, (float)k + 0.5F));
 		default:
 			return false;
 		}
