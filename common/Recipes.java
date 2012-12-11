@@ -5,6 +5,7 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import riseautomatons.common.item.EnumCraftSetType;
 import riseautomatons.common.item.EnumSoulCore;
+import riseautomatons.common.item.Items;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Recipes {
@@ -35,6 +36,7 @@ public class Recipes {
 	static ItemStack midBody = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.MIDBODY.ordinal());
 	static ItemStack sLeg = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SMALLLEG.ordinal());
 	static ItemStack sentryHead = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SENTRYHEAD.ordinal());
+	static ItemStack factotumChunk = new ItemStack(Ids.craftSet, 1, EnumCraftSetType.FACTOTUMCHUNK.ordinal());
 
 	static ItemStack spring = new ItemStack(Ids.spring, 1, 0);
 	static ItemStack gearbox = new ItemStack(Ids.blockGearbox, 1, 0);
@@ -252,6 +254,13 @@ public class Recipes {
 			"sa",
 			's', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.JAW.ordinal()) , 'G', gearbox, 'a', aggressive,'S',sensor});
 
+		// Factotum Chunk recipe
+		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 1, EnumCraftSetType.FACTOTUMCHUNK.ordinal()), new Object[] {
+			"faf",
+			"iri",
+			"sfs",
+			's', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SMALLPLATE.ordinal()) , 'f', Block.stoneOvenIdle, 'r', Item.redstone, 'a', Item.flintAndSteel, 'i', Item.ingotIron});
+
 	}
 
 	private static void addItemRecipes() {
@@ -338,11 +347,19 @@ public class Recipes {
 			'B', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SMALLBODY.ordinal()),
 			'C', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SMALLLEG.ordinal()) });
 
+		// Sentry recipe
 		GameRegistry.addRecipe(new ItemStack(Ids.itemSentry, 1, 0), new Object[] {
 			" ll",
 			"h##",
 			" ll",
 			'#', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.MIDBODY.ordinal()), 'l', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SMALLLEG.ordinal()), 'h', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SENTRYHEAD.ordinal())});
+
+		// Factotum recipe
+		GameRegistry.addRecipe(new ItemStack(Ids.itemFactotum, 1, 0), new Object[] {
+			" ll",
+			"h#C",
+			" ll",
+			'#', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.MIDBODY.ordinal()), 'l', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SMALLLEG.ordinal()), 'C', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.FACTOTUMCHUNK.ordinal()), 'h', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.TOTEHEAD.ordinal())});
 	}
 
 	private static void addSoulCoreRecipes() {
