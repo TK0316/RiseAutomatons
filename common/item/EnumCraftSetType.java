@@ -30,7 +30,10 @@ public enum EnumCraftSetType {
 	SENTRYHEAD("sentryhead", "Sentry Head"),
 	SALT("salt", "Salt"),
 	SURF("sulf", "Sulf"),
-	FACTOTUMCHUNK("factotumChunk", "FactotumChunk");
+	FACTOTUMHEAD("factotumHead", "Factotum Head"),
+	FACTOTUMCHUNK("factotumChunk", "Factotum Chunk"),
+	BLUECORE("blueCore", "Blue Core"),
+	REDCORE("redCore", "Red Core");
 
 	public final String name;
 	public final String fullname;

@@ -262,6 +262,18 @@ public class Recipes {
 			"sfs",
 			's', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SMALLPLATE.ordinal()) , 'f', Block.stoneOvenIdle, 'r', Item.redstone, 'a', Item.flintAndSteel, 'i', Item.ingotIron});
 
+		// Blue Core recipe
+		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 1, EnumCraftSetType.BLUECORE.ordinal()), new Object[] {
+			"sss",
+			"rrr",
+			"rrr",
+			's', Block.stone, 'r', Item.redstone});
+
+		// Red Core recipe
+		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 1, EnumCraftSetType.REDCORE.ordinal()), new Object[] {
+			"bbb",
+			'b', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.BLUECORE.ordinal())});
+
 	}
 
 	private static void addItemRecipes() {
@@ -326,6 +338,16 @@ public class Recipes {
 			"##",
 			"##",
 			'#', new ItemStack(Blocks.tech, 1, 1)});
+
+		// Pulse Rifle recipe
+		GameRegistry.addRecipe(new ItemStack(Ids.blaster, 1, 0), new Object[] {
+			"iis",
+			"ccc",
+			"  r",
+			'i', Item.ingotIron,
+			's', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.REDCORE.ordinal()),
+			'c', Blocks.crystal,
+			'r', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.ROD.ordinal())});
 
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.slimeBall, 3), new Object[] {
 			new ItemStack(Block.sapling, 1, 0), Item.bucketWater, Item.clay});
