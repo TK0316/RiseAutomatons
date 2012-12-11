@@ -3,6 +3,7 @@ package riseautomatons.common.world;
 import java.util.Random;
 
 import riseautomatons.common.Ids;
+import riseautomatons.common.block.Blocks;
 
 import net.minecraft.src.Block;
 import net.minecraft.src.Material;
@@ -93,13 +94,13 @@ public class WorldGenTechRuin extends WorldGenerator {
 	    }/*
 	    else if (r < 60) {
 	      world.setBlockWithNotify(i, j + 1, k, Blocks.heal.blockID);
-	    }
+	    }*/
 	    else if (r < 80) {
 	      world.setBlockWithNotify(i, j + 1, k, Blocks.fakeCrystal.blockID);
 	    }
 	    else {
 	      world.setBlockWithNotify(i, j + 1, k, Blocks.crystal.blockID);
-	    }*/
+	    }
 
 	    return true;
 	}
