@@ -3,7 +3,7 @@ package riseautomatons.common.world;
 import java.util.Random;
 
 import riseautomatons.common.Ids;
-import riseautomatons.common.entity.EntityWatcher;
+import riseautomatons.common.entity.*;
 
 import net.minecraft.src.BiomeDecorator;
 import net.minecraft.src.BiomeGenForest;
@@ -19,11 +19,11 @@ public class BiomeGenTech extends BiomeGenForest {
 		worldGeneratorTrees = new WorldGenFakeTrees(false);
 		worldGeneratorForest = new WorldGenFakeForest(false);
 
-//		this.spawnableCreatureList.add(new SpawnListEntry(EntityChopper.class, 10, 4, 4));
-//		this.spawnableCreatureList.add(new SpawnListEntry(EntityBobby.class, 10, 4, 4));
-//		this.spawnableCreatureList.add(new SpawnListEntry(EntityGolem.class, 10, 4, 4));
-//		this.spawnableCreatureList.add(new SpawnListEntry(EntitySlider.class, 10, 4, 4));
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityWatcher.class, 10, 4, 4));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityHelios.class, 14, 4, 4));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityBobby.class, 16, 4, 4));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityGolem.class, 5, 4, 4));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntitySlider.class, 4, 4, 4));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityWatcher.class, 12, 4, 4));
 	}
 
 	@Override
