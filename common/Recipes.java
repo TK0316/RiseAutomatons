@@ -359,6 +359,13 @@ public class Recipes {
 			"h#C",
 			" ll",
 			'#', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.MIDBODY.ordinal()), 'l', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SMALLLEG.ordinal()), 'C', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.FACTOTUMCHUNK.ordinal()), 'h', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.TOTEHEAD.ordinal())});
+
+		// Beacon recipe
+		GameRegistry.addRecipe(new ItemStack(Ids.itemBeacon, 1, 0), new Object[] {
+			"s",
+			"S",
+			"S",
+			's', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SENSOR.ordinal()), 'S', Block.stone});
 	}
 
 	private static void addSoulCoreRecipes() {
