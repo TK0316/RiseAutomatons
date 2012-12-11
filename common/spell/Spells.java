@@ -6,4 +6,5 @@ public class Spells {
 	static Spell makeNight = new MakeNight();
 	static Spell absorbSoul = new AbsorbSoul();
 	static Spell copySoul = new CopySoul();
+	static Spell eupraxia = new Eupraxia();
 }
