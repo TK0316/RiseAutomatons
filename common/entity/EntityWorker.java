@@ -26,6 +26,7 @@ import net.minecraft.src.World;
 import riseautomatons.common.Coord;
 import riseautomatons.common.Ids;
 import riseautomatons.common.Universal;
+import riseautomatons.common.block.TileEntityBeacon;
 import riseautomatons.common.item.EnumSoulCore;
 
 public class EntityWorker extends EntityOwnedBot implements IBot {
@@ -49,6 +50,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 	enum EnumWorkState {MOVE, CHECK, ACTION, RETURN};
 	private int dig;
+	TileEntityBeacon home = null;
 
 	private Entity collectTargetItemEntity = null;
 
@@ -88,7 +90,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		dataWatcher.updateObject(INDEX_STATE, state.ordinal());
 	}
 
-	private void setMode(EnumBotMode mode) {
+	void setMode(EnumBotMode mode) {
 		dataWatcher.updateObject(INDEX_MODE, mode.ordinal());
 		setState(EnumWorkState.MOVE);
 	}
@@ -131,7 +133,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		tasks.addTask(5, new EntityAIWorkerDig(this));
 		tasks.addTask(5, new EntityAIWorkerCollect(this));
 		tasks.addTask(7, new EntityAIWorkerWander(this, moveSpeed));
-		//tasks.addTask(200, new EntityAIWorkerBeacon(this));
+		tasks.addTask(200, new EntityAIWorkerBeacon(this));
 		tasks.addTask(9, new EntityAIWatchClosest(this, net.minecraft.src.EntityPlayer.class, 8F));
 		tasks.addTask(9, new EntityAILookIdle(this));
 	}
@@ -338,9 +340,32 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		this.getNavigator().setPath(pathentity, moveSpeed);
 	}
 
-	public Object getHome() {
-		// TODO implement getHome
-		return null;
+	protected TileEntityBeacon getHome()
+ {
+		Coord homeCoord = getHomeCoord();
+		if(homeCoord.isValid() == false) {
+			return null;
+		}
+		if (worldObj.getBlockId(homeCoord.x, homeCoord.y, homeCoord.z) != Ids.blockBeacon) {
+			home = null;
+			return home;
+		} else {
+			if (home == null) {
+				home = null;
+				TileEntityBeacon beacon = (TileEntityBeacon) worldObj
+						.getBlockTileEntity(homeCoord.x, homeCoord.y, homeCoord.z);
+				if (beacon != null) {
+					home = beacon;
+				}
+			}
+		}
+
+		return home;
+	}
+	protected void setHome(TileEntityBeacon i) {
+		home = i;
+		Coord homeCoord = new Coord(home.xCoord, home.yCoord, home.zCoord);
+		setHomeCoord(homeCoord);
 	}
 
 	private boolean isTargetBlockId(int blockId) {
@@ -751,7 +776,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		return 8;
 	}
 
-	private void dropper()
+	void dropper()
 	{
 		for (int j = 0; j < 20; j++)
 		{

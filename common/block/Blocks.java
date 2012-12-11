@@ -29,6 +29,8 @@ public class Blocks {
 		LanguageRegistry.addName(worker, "Worker");
 		GameRegistry.registerBlock(sentry);
 		LanguageRegistry.addName(sentry, "Sentry");
+		GameRegistry.registerBlock(beacon);
+		LanguageRegistry.addName(beacon, "Beacon");
 
 		GameRegistry.registerBlock(gearbox);
 		LanguageRegistry.addName(gearbox, "Gearbox");
@@ -83,6 +85,7 @@ public class Blocks {
 		GameRegistry.registerBlock(teleporter);
 		LanguageRegistry.addName(teleporter, "Teleporter");
 
+		GameRegistry.registerTileEntity(TileEntityBeacon.class, "BotBeacon");
 		registerTextures();
 	}
 
@@ -99,6 +102,8 @@ public class Blocks {
 			.setHardness(0.5F).setResistance(10F).setBlockName("Worker");
     public static Block sentry = (new BlockSentry(Ids.blockSentry))
     		.setHardness(0.5F).setResistance(10F).setBlockName("Sentry");
+    public static Block beacon = (new BlockBeacon(Ids.blockBeacon))
+    		.setHardness(0.5F).setResistance(10F).setBlockName("Beacon");
 
 	public static Block gearbox = (new BlockGearBox(Ids.blockGearbox, 10, Material.iron))
 			.setTextureFile(BLOCK_PNG)

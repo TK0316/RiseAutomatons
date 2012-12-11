@@ -23,14 +23,16 @@ public class BlockSentry extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
-		// TODO return new TileEntityBeacon();
-		return null;
+		return new TileEntityBeacon();
 	}
 
 	@Override
-	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
-		// TODO set beacon
-		super.onBlockAdded(par1World, par2, par3, par4);
+	public void onBlockAdded(World world, int i, int j, int k) {
+		int ii = BeaconManager.addBeacon(world, i, j, k);
+		TileEntityBeacon beacon = (TileEntityBeacon) world
+				.getBlockTileEntity(i, j, k);
+		beacon.numeral = ii;
+		beacon.mode = 8; // sentry
 	}
 
 	@Override

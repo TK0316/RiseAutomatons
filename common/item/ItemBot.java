@@ -74,6 +74,9 @@ public class ItemBot extends Item {
 		case FACTOTUM:
             world.spawnEntityInWorld(new EntityFactotum(world, (double)i + 0.5, (double)j + 0.5, (double)k + 0.5, entityplayer.username));
 			break;
+		case BEACON:
+			world.setBlockWithNotify(i, j, k, Ids.blockBeacon);
+			break;
 		default:
 			return false;
 		}

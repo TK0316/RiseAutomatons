@@ -16,6 +16,7 @@ public class Ids {
 	public static int itemSentry = 2209;
 	public static int blaster = 2210;
 	public static int itemFactotum = 2211;
+	public static int itemBeacon = 2212;
 
 
 	// Blocks
@@ -40,6 +41,8 @@ public class Ids {
 	public static int blockFakeCrystal = 2319;
 	public static int blockGlowy = 2320;
 	public static int blockBoing = 2321;
+	public static int blockBeacon = 2322;
+	public static int blockTote = 2323;
 
 	// Dimension
 	public static int eupraxia = 99;
