@@ -388,6 +388,12 @@ public class Recipes {
 			"S",
 			"S",
 			's', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SENSOR.ordinal()), 'S', Block.stone});
+
+		// Guard Turret recipe
+		GameRegistry.addRecipe(new ItemStack(Ids.itemGuard, 1, 0), new Object[] {
+			"p",
+			"b",
+			'p', Items.blaster, 'b', Items.beacon});
 	}
 
 	private static void addSoulCoreRecipes() {
