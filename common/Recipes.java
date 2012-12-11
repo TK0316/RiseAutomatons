@@ -320,22 +320,14 @@ public class Recipes {
 			" w ",
 			'w', wing, 'g', smallGear});
 
-		GameRegistry.addShapelessRecipe(new ItemStack(Item.slimeBall, 3), new Object[]
-				{
-			new ItemStack(Block.sapling, 1, 0), Item.bucketWater, Item.clay
-				});
-		GameRegistry.addShapelessRecipe(new ItemStack(Item.slimeBall, 3), new Object[]
-				{
-			new ItemStack(Block.sapling, 1, 1), Item.bucketWater, Item.clay
-				});
-		GameRegistry.addShapelessRecipe(new ItemStack(Item.slimeBall, 3), new Object[]
-				{
-			new ItemStack(Block.sapling, 1, 2), Item.bucketWater, Item.clay
-				});
-		GameRegistry.addShapelessRecipe(new ItemStack(Item.slimeBall, 3), new Object[]
-				{
-			new ItemStack(Block.sapling, 1, 3), Item.bucketWater, Item.clay
-				});
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.slimeBall, 3), new Object[] {
+			new ItemStack(Block.sapling, 1, 0), Item.bucketWater, Item.clay});
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.slimeBall, 3), new Object[] {
+			new ItemStack(Block.sapling, 1, 1), Item.bucketWater, Item.clay});
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.slimeBall, 3), new Object[] {
+			new ItemStack(Block.sapling, 1, 2), Item.bucketWater, Item.clay});
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.slimeBall, 3), new Object[] {
+			new ItemStack(Block.sapling, 1, 3), Item.bucketWater, Item.clay});
 	}
 
 	private static void addAutomatonRecipes() {
