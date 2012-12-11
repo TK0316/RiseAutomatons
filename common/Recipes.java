@@ -3,6 +3,7 @@ package riseautomatons.common;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
+import riseautomatons.common.block.Blocks;
 import riseautomatons.common.item.EnumCraftSetType;
 import riseautomatons.common.item.EnumSoulCore;
 import riseautomatons.common.item.Items;
@@ -319,6 +320,12 @@ public class Recipes {
 			, "wgw",
 			" w ",
 			'w', wing, 'g', smallGear});
+
+		// Craft Table recipe
+		GameRegistry.addRecipe(new ItemStack(Block.workbench), new Object[] {
+			"##",
+			"##",
+			'#', new ItemStack(Blocks.tech, 1, 1)});
 
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.slimeBall, 3), new Object[] {
 			new ItemStack(Block.sapling, 1, 0), Item.bucketWater, Item.clay});
