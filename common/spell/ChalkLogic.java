@@ -17,6 +17,8 @@ public class ChalkLogic {
 
 	public static void init() {
 		try {
+			addSpell("010;101;010;", Spells.makeExplosion, false);
+			addSpell("050;505;050;", Spells.makeBigExplosion, false);
 			addSpell("111;101;030;", Spells.makeDay, true);
 			addSpell("101;111;030;", Spells.makeNight, true);
 			addSpell("11111;10401;14541;10401;11111;", Spells.absorbSoul, true);
