@@ -7,6 +7,7 @@ import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
 import riseautomatons.common.Ids;
+import riseautomatons.common.world.Biomes;
 
 import net.minecraft.src.Block;
 import net.minecraft.src.CreativeTabs;
@@ -17,6 +18,8 @@ import net.minecraft.src.Material;
 import net.minecraft.src.World;
 
 public class BlockFrass extends Block {
+
+	public static boolean spread = true;
 
 	public BlockFrass(int par1) {
 		super(par1, Material.grass);
@@ -44,6 +47,9 @@ public class BlockFrass extends Block {
 	@Override
 	public void updateTick(World world, int i, int j, int k,
 			Random random) {
+		if(spread == false && world.getBiomeGenForCoords(i, k).biomeName != Biomes.tech.biomeName) {
+			return;
+		}
 		for(int n = j + 1; n < 255; n++) {
 			if(world.isAirBlock(i, n, k) == false) {
 				return;
@@ -135,6 +141,12 @@ public class BlockFrass extends Block {
 			return 23;
 		}
 		return 26;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void getSubBlocks(int par1, CreativeTabs tab, List subItems) {
+		subItems.add(new ItemStack(this, 1, 0));
+		subItems.add(new ItemStack(this, 1, 8));
 	}
 
 }

@@ -199,4 +199,8 @@ public class Blocks {
 	public static Block teleporter = (new BlockTeleporter())
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 
+	public static void setFrassSpread(boolean enableFrassSpread) {
+		BlockFrass.spread = enableFrassSpread;
+	}
+
 }

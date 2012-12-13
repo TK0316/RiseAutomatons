@@ -39,6 +39,7 @@ public class RiseAutomatons {
 
 	public static boolean enableCheatRecipe = false;
 	public static boolean generateTechBiome = true;
+	public static  boolean enableFrassSpread = true;
 
 	@Mod.Init
 	public void load(FMLInitializationEvent event) {
@@ -46,6 +47,7 @@ public class RiseAutomatons {
 		Universal.init();
 		Entities.init();
 		Blocks.init();
+		Blocks.setFrassSpread(enableFrassSpread);
 		Items.init();
 		Recipes.init();
 		Biomes.init(generateTechBiome);
@@ -73,6 +75,8 @@ public class RiseAutomatons {
 			Ids.skull = cfg.get(Configuration.CATEGORY_ITEM, "skull", Ids.skull).getInt();
 			Ids.itemSentry = cfg.get(Configuration.CATEGORY_ITEM, "itemSentry", Ids.itemSentry).getInt();
 			Ids.itemFactotum = cfg.get(Configuration.CATEGORY_ITEM, "itemFactotum", Ids.itemFactotum).getInt();
+			Ids.itemBeacon = cfg.get(Configuration.CATEGORY_ITEM, "itemBeacon", Ids.itemBeacon).getInt();
+			Ids.itemGuard = cfg.get(Configuration.CATEGORY_ITEM, "itemGuard", Ids.itemGuard).getInt();
 
 			Ids.blockWorker = cfg.get(Configuration.CATEGORY_BLOCK, "blockWorker", Ids.blockWorker).getInt();
 			Ids.blockChalk = cfg.get(Configuration.CATEGORY_BLOCK, "blockChalk", Ids.blockChalk).getInt();
@@ -96,6 +100,10 @@ public class RiseAutomatons {
 			Ids.blockFakeCrystal = cfg.get(Configuration.CATEGORY_BLOCK, "blockFakeCrystal", Ids.blockFakeCrystal).getInt();
 			Ids.blockGlowy = cfg.get(Configuration.CATEGORY_BLOCK, "blockGlowy", Ids.blockGlowy).getInt();
 			Ids.blockBoing = cfg.get(Configuration.CATEGORY_BLOCK, "blockBoing", Ids.blockBoing).getInt();
+			Ids.blockBeacon = cfg.get(Configuration.CATEGORY_BLOCK, "blockBeacon", Ids.blockBeacon).getInt();
+			Ids.blockTote = cfg.get(Configuration.CATEGORY_BLOCK, "blockTote", Ids.blockTote).getInt();
+			Ids.blockGrower = cfg.get(Configuration.CATEGORY_BLOCK, "blockGrower", Ids.blockGrower).getInt();
+			Ids.blockHeal = cfg.get(Configuration.CATEGORY_BLOCK, "blockHeal", Ids.blockHeal).getInt();
 
 			Ids.eupraxia = cfg.get(Configuration.CATEGORY_GENERAL, "eupraxia", Ids.eupraxia).getInt();
 
@@ -103,6 +111,8 @@ public class RiseAutomatons {
 
 			enableCheatRecipe = cfg.get(Configuration.CATEGORY_GENERAL, "enableCheatRecipe", false).getBoolean(false);
 			generateTechBiome = cfg.get(Configuration.CATEGORY_GENERAL, "generateTechBiome", true).getBoolean(true);
+			enableFrassSpread  = cfg.get(Configuration.CATEGORY_GENERAL, "enableFrassSpread", true).getBoolean(true);
+
 
 			cfg.save();
 
