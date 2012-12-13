@@ -72,7 +72,9 @@ public class Blocks {
 		GameRegistry.registerBlock(frass);
 		LanguageRegistry.addName(frass, "Frass");
 		GameRegistry.registerBlock(plantMass);
-		LanguageRegistry.addName(plantMass, "Bionic Stalk");
+		LanguageRegistry.addName(plantMass, "Plant Mass");
+		GameRegistry.registerBlock(grower);
+		LanguageRegistry.addName(grower, "Bionic Stalk");
 		GameRegistry.registerBlock(glowy);
 		LanguageRegistry.addName(glowy, "Illuminator");
 		GameRegistry.registerBlock(fakeCrystal);
@@ -174,8 +176,8 @@ public class Blocks {
 			.setLightValue(0.625F).setStepSound(Block.soundGlassFootstep)
 			.setBlockName("crystal")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-	public static Block glowy = new BlockGlow(Ids.blockGlowy)
-			.setTextureFile(BLOCK_PNG)
+	public static Block glowy = (new BlockGlow(Ids.blockGlowy))
+			.loadSprites(32,31).setTextureFile(BLOCK_PNG)
 			.setHardness(0.4F).setResistance(5.0F).setLightValue(0.95F)
 			.setStepSound(Block.soundGlassFootstep).setBlockName("glowy")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
@@ -183,6 +185,11 @@ public class Blocks {
 			.setTextureFile(BLOCK_PNG)
 			.setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setBlockName("boing")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
+    public static Block grower = new BlockGrower(Ids.blockGrower)
+			.setTextureFile(BLOCK_PNG)
+    		.setHardness(0.5F).setStepSound(Block.soundGlassFootstep).setBlockName("grower")
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
+    		;
 
 	public static Block teleporter = (new BlockTeleporter())
 			.setCreativeTab(RiseAutomatons.tabAutomatons);

@@ -7,7 +7,7 @@ import net.minecraft.src.World;
 
 public class BlockGlow extends Block {
 
-	public int D[] = new int[2];
+	public int D[] = {27, 28};
 
 	protected BlockGlow(int i) {
 		super(i, Material.glass);
@@ -26,9 +26,14 @@ public class BlockGlow extends Block {
 		return 13;
 	}
 
+	public Block loadSprites(int i, int j) {
+		this.D[0] = i;
+		this.D[1] = j;
+		return this;
+	}
+
 	@Override
 	public int getBlockTextureFromSide(int i) {
-
 		if (i <= 1) {
 			return D[1];
 		} else {

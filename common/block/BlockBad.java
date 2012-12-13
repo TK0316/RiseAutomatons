@@ -12,7 +12,7 @@ import net.minecraft.src.World;
 
 public class BlockBad extends Block {
 
-	public int D[] = {1, 1};
+	public int D[] = {27, 28};
 
 	protected BlockBad(int i) {
 		super(i, Material.glass);
