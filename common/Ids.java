@@ -44,6 +44,7 @@ public class Ids {
 	public static int blockBoing = 2321;
 	public static int blockBeacon = 2322;
 	public static int blockTote = 2323;
+	public static int blockGrower = 2324;
 
 	// Dimension
 	public static int eupraxia = 99;
