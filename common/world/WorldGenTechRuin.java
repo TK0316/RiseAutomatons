@@ -91,10 +91,10 @@ public class WorldGenTechRuin extends WorldGenerator {
 	    }
 	    else if (r < 40) {
 	      world.setBlockAndMetadataWithNotify(i, j + 1, k, Ids.blockSky, 0);
-	    }/*
+	    }
 	    else if (r < 60) {
 	      world.setBlockWithNotify(i, j + 1, k, Blocks.heal.blockID);
-	    }*/
+	    }
 	    else if (r < 80) {
 	      world.setBlockWithNotify(i, j + 1, k, Blocks.fakeCrystal.blockID);
 	    }

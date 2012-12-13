@@ -83,6 +83,8 @@ public class Blocks {
 		LanguageRegistry.addName(crystal, "Power Shard");
 		GameRegistry.registerBlock(boing);
 		LanguageRegistry.addName(boing, "Slider Shell");
+		GameRegistry.registerBlock(heal);
+		LanguageRegistry.addName(heal, "Biomatter Regenerator");
 
 		GameRegistry.registerBlock(teleporter);
 		LanguageRegistry.addName(teleporter, "Teleporter");
@@ -189,7 +191,10 @@ public class Blocks {
 			.setTextureFile(BLOCK_PNG)
     		.setHardness(0.5F).setStepSound(Block.soundGlassFootstep).setBlockName("grower")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-    		;
+	public static Block heal = new BlockHeal(Ids.blockHeal)
+			.setTextureFile(BLOCK_PNG)
+			.setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setBlockName("heal")
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
 
 	public static Block teleporter = (new BlockTeleporter())
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
