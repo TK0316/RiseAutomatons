@@ -33,7 +33,10 @@ public enum EnumCraftSetType {
 	FACTOTUMHEAD("factotumHead", "Factotum Head"),
 	FACTOTUMCHUNK("factotumChunk", "Factotum Chunk"),
 	BLUECORE("blueCore", "Blue Core"),
-	REDCORE("redCore", "Red Core");
+	REDCORE("redCore", "Red Core"),
+	PLANTMATTER("Plant Matter", "Plant Matter"),
+	PARTICULATE("Cybernetic Particulate", "Cybernetic Particulate"),
+	BIONICCONGLOMERATE("Adaptive Bionic Conglomerate", "Adaptive Bionic Conglomerate");
 
 	public final String name;
 	public final String fullname;

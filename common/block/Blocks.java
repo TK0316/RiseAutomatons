@@ -85,6 +85,8 @@ public class Blocks {
 		LanguageRegistry.addName(boing, "Slider Shell");
 		GameRegistry.registerBlock(heal);
 		LanguageRegistry.addName(heal, "Biomatter Regenerator");
+		GameRegistry.registerBlock(dapling);
+		LanguageRegistry.addName(dapling, "Dapling");
 
 		GameRegistry.registerBlock(teleporter);
 		LanguageRegistry.addName(teleporter, "Teleporter");
@@ -194,6 +196,11 @@ public class Blocks {
 	public static Block heal = new BlockHeal(Ids.blockHeal)
 			.setTextureFile(BLOCK_PNG)
 			.setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setBlockName("heal")
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
+	public static Block dapling = new BlockDapling(Ids.blockDapling)
+			.setTextureFile(BLOCK_PNG)
+			.setHardness(0.0F).setStepSound(Block.soundGrassFootstep)
+			.setBlockName("dapling").setRequiresSelfNotify()
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 
 	public static Block teleporter = (new BlockTeleporter())
