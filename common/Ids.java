@@ -20,6 +20,8 @@ public class Ids {
 	public static int itemGuard = 2213;
 	public static int smack = 2214;
 	public static int mortar = 2215;
+	public static int techifier = 2316;
+	public static int naturizer = 2317;
 
 
 	// Blocks

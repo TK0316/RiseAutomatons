@@ -48,6 +48,8 @@ public class Items {
 		LanguageRegistry.instance().addNameForObject(blaster, "en_US", "Pulse Rifle");
 		LanguageRegistry.instance().addNameForObject(smack, "en_US", "Slider Pan");
 		LanguageRegistry.instance().addNameForObject(mortar, "en_US", "Grinder");
+		LanguageRegistry.instance().addNameForObject(naturizer, "en_US", "Organic Conversion System");
+		LanguageRegistry.instance().addNameForObject(techifier, "en_US", "Bionic Conversion System");
 
 		registerTextures();
 	}
@@ -110,6 +112,14 @@ public class Items {
 	public static Item smack = new ItemSmack(Ids.smack - 256)
 	.setTextureFile(ITEMS_PNG).setIconIndex(22)
 			.setItemName("smack")
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
+	public static Item naturizer = new ItemFunctional(Ids.naturizer - 256, 4)
+	.setTextureFile(ITEMS_PNG).setIconIndex(24)
+			.setItemName("naturizer")
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
+	public static Item techifier = new ItemFunctional(Ids.techifier - 256, 2)
+	.setTextureFile(ITEMS_PNG).setIconIndex(25)
+			.setIconCoord(4, 10).setItemName("techifier")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 
 	public static Item chisel;
