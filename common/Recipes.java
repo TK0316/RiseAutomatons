@@ -349,6 +349,12 @@ public class Recipes {
 			'c', Blocks.crystal,
 			'r', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.ROD.ordinal())});
 
+		GameRegistry.addRecipe(new ItemStack(Ids.smack, 1, 0), new Object[] {
+			" S",
+			"i ",
+			'S', Blocks.boing,
+			'i', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.ROD.ordinal()) });
+
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.slimeBall, 3), new Object[] {
 			new ItemStack(Block.sapling, 1, 0), Item.bucketWater, Item.clay});
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.slimeBall, 3), new Object[] {

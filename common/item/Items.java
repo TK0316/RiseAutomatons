@@ -46,6 +46,7 @@ public class Items {
 		LanguageRegistry.instance().addNameForObject(skullAnimal, "en_US", "Animal Skull");
 		LanguageRegistry.instance().addNameForObject(chisel, "en_US", "Chisel");
 		LanguageRegistry.instance().addNameForObject(blaster, "en_US", "Pulse Rifle");
+		LanguageRegistry.instance().addNameForObject(smack, "en_US", "Slider Pan");
 
 		registerTextures();
 	}
@@ -104,6 +105,10 @@ public class Items {
 	public static Item blaster = (new ItemBlaster(Ids.blaster - 256))
 			.setTextureFile(ITEMS_PNG).setIconIndex(21)
 			.setItemName("blaster")
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
+	public static Item smack = new ItemSmack(Ids.smack - 256)
+	.setTextureFile(ITEMS_PNG).setIconIndex(22)
+			.setItemName("smack")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 
 	public static Item chisel;
