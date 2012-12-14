@@ -77,6 +77,11 @@ public class RiseAutomatons {
 			Ids.itemFactotum = cfg.get(Configuration.CATEGORY_ITEM, "itemFactotum", Ids.itemFactotum).getInt();
 			Ids.itemBeacon = cfg.get(Configuration.CATEGORY_ITEM, "itemBeacon", Ids.itemBeacon).getInt();
 			Ids.itemGuard = cfg.get(Configuration.CATEGORY_ITEM, "itemGuard", Ids.itemGuard).getInt();
+			Ids.smack = cfg.get(Configuration.CATEGORY_ITEM, "smack", Ids.smack).getInt();
+			Ids.mortar = cfg.get(Configuration.CATEGORY_ITEM, "mortar", Ids.mortar).getInt();
+			Ids.techifier = cfg.get(Configuration.CATEGORY_ITEM, "techifier", Ids.techifier).getInt();
+			Ids.naturizer = cfg.get(Configuration.CATEGORY_ITEM, "naturizer", Ids.naturizer).getInt();
+			Ids.pickTech = cfg.get(Configuration.CATEGORY_ITEM, "pickTech", Ids.pickTech).getInt();
 
 			Ids.blockWorker = cfg.get(Configuration.CATEGORY_BLOCK, "blockWorker", Ids.blockWorker).getInt();
 			Ids.blockChalk = cfg.get(Configuration.CATEGORY_BLOCK, "blockChalk", Ids.blockChalk).getInt();
@@ -104,6 +109,8 @@ public class RiseAutomatons {
 			Ids.blockTote = cfg.get(Configuration.CATEGORY_BLOCK, "blockTote", Ids.blockTote).getInt();
 			Ids.blockGrower = cfg.get(Configuration.CATEGORY_BLOCK, "blockGrower", Ids.blockGrower).getInt();
 			Ids.blockHeal = cfg.get(Configuration.CATEGORY_BLOCK, "blockHeal", Ids.blockHeal).getInt();
+			Ids.blockDapling = cfg.get(Configuration.CATEGORY_BLOCK, "blockDapling", Ids.blockDapling).getInt();
+			Ids.blockDuplex = cfg.get(Configuration.CATEGORY_BLOCK, "blockDuplex", Ids.blockDuplex).getInt();
 
 			Ids.eupraxia = cfg.get(Configuration.CATEGORY_GENERAL, "eupraxia", Ids.eupraxia).getInt();
 
