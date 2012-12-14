@@ -87,6 +87,8 @@ public class Blocks {
 		LanguageRegistry.addName(heal, "Biomatter Regenerator");
 		GameRegistry.registerBlock(dapling);
 		LanguageRegistry.addName(dapling, "Dapling");
+		GameRegistry.registerBlock(duplex);
+		LanguageRegistry.addName(duplex, "Duplex");
 
 		GameRegistry.registerBlock(teleporter);
 		LanguageRegistry.addName(teleporter, "Teleporter");
@@ -201,6 +203,11 @@ public class Blocks {
 			.setTextureFile(BLOCK_PNG)
 			.setHardness(0.0F).setStepSound(Block.soundGrassFootstep)
 			.setBlockName("dapling").setRequiresSelfNotify()
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
+	public static Block duplex = new BlockDuplex(Ids.blockDuplex)
+			.setTextureFile(BLOCK_PNG)
+			.setHardness(0.1F).setLightOpacity(1).setLightValue(0.5F)
+			.setStepSound(Block.soundGlassFootstep).setBlockName("duplex")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 
 	public static Block teleporter = (new BlockTeleporter())

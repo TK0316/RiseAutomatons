@@ -22,7 +22,8 @@ public class ItemFunctional extends Item {
 			setMaxDamage(13);
 			this.maxStackSize = 1;
 		}
-		this.derp = j;	}
+		this.derp = j;
+	}
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world,

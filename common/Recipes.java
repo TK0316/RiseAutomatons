@@ -355,6 +355,88 @@ public class Recipes {
 			'S', Blocks.boing,
 			'i', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.ROD.ordinal()) });
 
+		GameRegistry.addRecipe(new ItemStack(Ids.pickTech, 1, 0), new Object[] {
+			"i",
+			"L",
+			'i', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.ROD.ordinal()),
+			'L', Blocks.grower });
+		GameRegistry.addRecipe(new ItemStack(Ids.mortar, 1, 0), new Object[] {
+			"#-#",
+			"#-#",
+			"#-#",
+			'#', Block.stone,
+			'-',  new ItemStack(Ids.craftSet, 1, EnumCraftSetType.ROD.ordinal())});
+
+		GameRegistry.addRecipe(new ItemStack(Ids.techifier, 1, 0), new Object[] {
+			"OOO",
+			"OfO",
+			"i i",
+			'O', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.BIONICCONGLOMERATE.ordinal()),
+			'f', Blocks.frass,
+			'i', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.ROD.ordinal()) });
+
+		GameRegistry.addRecipe(new ItemStack(Ids.naturizer, 1, 0),new Object[] {
+			"i i",
+			"OfO",
+			"OOO",
+			'O', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.BIONICCONGLOMERATE.ordinal()),
+			'f', Block.sapling,
+			'i', Item.stick });
+
+		GameRegistry.addRecipe(new ItemStack(Ids.blockDapling, 1, 0), new Object[] {
+			" O ",
+			"OCO",
+			" s ",
+			'O', Blocks.crink,
+			'C', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.BLUECORE.ordinal()),
+			's', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.BIONICCONGLOMERATE.ordinal()) });
+
+		GameRegistry.addRecipe(new ItemStack(Ids.blockDuplex, 1, 0), new Object[] {
+			"O",
+			"D",
+			'O', Blocks.crystal,
+			'D', Blocks.crink });
+
+		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 1, EnumCraftSetType.BIONICCONGLOMERATE.ordinal()), new Object[] {
+			"O",
+			"D",
+			'O', new ItemStack(Ids.craftSet, 2, EnumCraftSetType.PLANTMATTER.ordinal()),
+			'D', new ItemStack(Ids.craftSet, 2, EnumCraftSetType.PARTICULATE.ordinal()) });
+		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 2, EnumCraftSetType.PLANTMATTER.ordinal()), new Object[] {
+			"O",
+			"D",
+			'O', Block.sapling,
+			'D', Items.mortar });
+
+		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 2, EnumCraftSetType.PLANTMATTER.ordinal()), new Object[] {
+			"O",
+			"D",
+			'O', Item.seeds,
+			'D', Items.mortar });
+
+		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 2, EnumCraftSetType.PARTICULATE.ordinal()), new Object[] {
+			"O",
+			"M",
+			'O', Blocks.frass,
+			'M', Items.mortar });
+
+		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 2, EnumCraftSetType.PARTICULATE.ordinal()), new Object[] {
+			"O",
+			"D",
+			'O', Blocks.crink,
+			'D', Items.mortar });
+		GameRegistry.addRecipe(new ItemStack(Item.redstone, 3), new Object[] {
+			"O",
+			"D",
+			'O', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.BLUECORE.ordinal()),
+			'D', Items.mortar });
+
+		GameRegistry.addRecipe(new ItemStack(Item.redstone, 6), new Object[] {
+			"O",
+			"D",
+			'O', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.REDCORE.ordinal()),
+			'D', Items.mortar });
+
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.slimeBall, 3), new Object[] {
 			new ItemStack(Block.sapling, 1, 0), Item.bucketWater, Item.clay});
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.slimeBall, 3), new Object[] {

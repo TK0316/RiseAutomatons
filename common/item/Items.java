@@ -50,6 +50,7 @@ public class Items {
 		LanguageRegistry.instance().addNameForObject(mortar, "en_US", "Grinder");
 		LanguageRegistry.instance().addNameForObject(naturizer, "en_US", "Organic Conversion System");
 		LanguageRegistry.instance().addNameForObject(techifier, "en_US", "Bionic Conversion System");
+		LanguageRegistry.instance().addNameForObject(pickTech, "en_US", "Charged Pick");
 
 		registerTextures();
 	}
@@ -114,12 +115,16 @@ public class Items {
 			.setItemName("smack")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Item naturizer = new ItemFunctional(Ids.naturizer - 256, 4)
-	.setTextureFile(ITEMS_PNG).setIconIndex(24)
+			.setTextureFile(ITEMS_PNG).setIconIndex(24)
 			.setItemName("naturizer")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Item techifier = new ItemFunctional(Ids.techifier - 256, 2)
-	.setTextureFile(ITEMS_PNG).setIconIndex(25)
-			.setIconCoord(4, 10).setItemName("techifier")
+			.setTextureFile(ITEMS_PNG).setIconIndex(25)
+			.setItemName("techifier")
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
+	public static Item pickTech = new ItemAPickaxe(Ids.pickTech - 256)
+			.setTextureFile(ITEMS_PNG).setIconIndex(26)
+			.setItemName("pickTech")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 
 	public static Item chisel;

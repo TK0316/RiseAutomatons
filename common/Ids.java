@@ -22,6 +22,7 @@ public class Ids {
 	public static int mortar = 2215;
 	public static int techifier = 2316;
 	public static int naturizer = 2317;
+	public static int pickTech = 2318;
 
 
 	// Blocks
@@ -51,6 +52,7 @@ public class Ids {
 	public static int blockGrower = 2324;
 	public static int blockHeal = 2325;
 	public static int blockDapling = 2326;
+	public static int blockDuplex = 2327;
 
 	// Dimension
 	public static int eupraxia = 99;
