@@ -47,6 +47,7 @@ public class Items {
 		LanguageRegistry.instance().addNameForObject(chisel, "en_US", "Chisel");
 		LanguageRegistry.instance().addNameForObject(blaster, "en_US", "Pulse Rifle");
 		LanguageRegistry.instance().addNameForObject(smack, "en_US", "Slider Pan");
+		LanguageRegistry.instance().addNameForObject(mortar, "en_US", "Grinder");
 
 		registerTextures();
 	}
@@ -112,12 +113,18 @@ public class Items {
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 
 	public static Item chisel;
+	public static Item mortar;
 	static {
 		chisel = (new ItemChisel(Ids.chisel - 256)).setMaxStackSize(1)
 				.setTextureFile(ITEMS_PNG).setIconIndex(20)
 				.setItemName("Chisel")
 				.setCreativeTab(RiseAutomatons.tabAutomatons);
 		chisel.setContainerItem(chisel);
+		mortar = new Item(Ids.mortar - 256)
+				.setTextureFile(ITEMS_PNG).setIconIndex(23)
+				.setMaxStackSize(1).setContainerItem(mortar)
+				.setItemName("mortar")
+				.setCreativeTab(RiseAutomatons.tabAutomatons);
 	}
 }
 

@@ -19,6 +19,7 @@ public class Ids {
 	public static int itemBeacon = 2212;
 	public static int itemGuard = 2213;
 	public static int smack = 2214;
+	public static int mortar = 2215;
 
 
 	// Blocks
