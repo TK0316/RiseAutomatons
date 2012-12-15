@@ -18,11 +18,12 @@ import static net.minecraft.src.BiomeGenBase.*;
 
 public class WorldChunkManagerEupraxia extends WorldChunkManager {
 
+    public static final BiomeGenBase[] biomeList = new BiomeGenBase[256];
 
 	public static final BiomeGenBase giants = (new BiomeGenGiants(42)).setColor(0xff0000).setBiomeName("Giants");
-	//public static final BiomeGenBase autumn = (new BiomeGenAutumn(43)).setColor(0xff0000).setBiomeName("Autumn");
+	public static final BiomeGenBase autumn = (new BiomeGenAutumn(43)).setColor(0xff0000).setBiomeName("Autumn");
 
-	//public static final BiomeGenBase windFarm = (new BiomeGenWindFarm(44)).setColor(0xff0000).setBiomeName("Autumn");
+	public static final BiomeGenBase windFarm = (new BiomeGenWindFarm(44)).setColor(0xff0000).setBiomeName("Autumn");
 
 	public static final BiomeGenBase city = (new BiomeGenCity(45)).setColor(0xff0000).setBiomeName("Autumn");
 
@@ -39,7 +40,24 @@ public class WorldChunkManagerEupraxia extends WorldChunkManager {
     /** A list of biomes that the player can spawn in. */
     private List biomesToSpawnIn;
 
-    protected WorldChunkManagerEupraxia()
+	public static void init() {
+		for(int i = 0; i < 256; ++i) {
+			if(i % 4 == 0) {
+				biomeList[i] = giants;
+			}
+			else if(i % 4 == 1) {
+				biomeList[i] = autumn;
+			}
+			else if(i % 4 == 2) {
+				biomeList[i] = windFarm;
+			}
+			else if(i % 4 == 3) {
+				biomeList[i] = city;
+			}
+		}
+	}
+
+	protected WorldChunkManagerEupraxia()
     {
         this.biomeCache = new BiomeCache(this);
         this.biomesToSpawnIn = new ArrayList();
@@ -91,7 +109,7 @@ public class WorldChunkManagerEupraxia extends WorldChunkManager {
 
         for (int var7 = 0; var7 < par4 * par5; ++var7)
         {
-            float var8 = (float)BiomeGenBase.biomeList[var6[var7]].getIntRainfall() / 65536.0F;
+            float var8 = (float)biomeList[var6[var7]].getIntRainfall() / 65536.0F;
 
             if (var8 > 1.0F)
             {
@@ -130,7 +148,7 @@ public class WorldChunkManagerEupraxia extends WorldChunkManager {
 
         for (int var7 = 0; var7 < par4 * par5; ++var7)
         {
-            float var8 = (float)BiomeGenBase.biomeList[var6[var7]].getIntTemperature() / 65536.0F;
+            float var8 = (float)biomeList[var6[var7]].getIntTemperature() / 65536.0F;
 
             if (var8 > 1.0F)
             {
@@ -159,7 +177,7 @@ public class WorldChunkManagerEupraxia extends WorldChunkManager {
 
         for (int var7 = 0; var7 < par4 * par5; ++var7)
         {
-            par1ArrayOfBiomeGenBase[var7] = BiomeGenBase.biomeList[var6[var7]];
+            par1ArrayOfBiomeGenBase[var7] = biomeList[var6[var7]];
         }
 
         return par1ArrayOfBiomeGenBase;
@@ -199,7 +217,7 @@ public class WorldChunkManagerEupraxia extends WorldChunkManager {
 
             for (int var8 = 0; var8 < par4 * par5; ++var8)
             {
-                par1ArrayOfBiomeGenBase[var8] = BiomeGenBase.biomeList[var7[var8]];
+                par1ArrayOfBiomeGenBase[var8] = biomeList[var7[var8]];
             }
 
             return par1ArrayOfBiomeGenBase;
@@ -222,7 +240,7 @@ public class WorldChunkManagerEupraxia extends WorldChunkManager {
 
         for (int var12 = 0; var12 < var9 * var10; ++var12)
         {
-            BiomeGenBase var13 = BiomeGenBase.biomeList[var11[var12]];
+            BiomeGenBase var13 = biomeList[var11[var12]];
 
             if (!par4List.contains(var13))
             {
@@ -254,7 +272,7 @@ public class WorldChunkManagerEupraxia extends WorldChunkManager {
         {
             int var16 = var6 + var15 % var10 << 2;
             int var17 = var7 + var15 / var10 << 2;
-            BiomeGenBase var18 = BiomeGenBase.biomeList[var12[var15]];
+            BiomeGenBase var18 = biomeList[var12[var15]];
 
             if (par4List.contains(var18) && (var13 == null || par5Random.nextInt(var14 + 1) == 0))
             {

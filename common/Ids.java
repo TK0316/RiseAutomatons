@@ -59,4 +59,7 @@ public class Ids {
 
 	// GUI
 	public static int guiFactotum = 30;
+
+	// etc.
+	public static int builderLevel = 60;
 }

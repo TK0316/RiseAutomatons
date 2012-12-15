@@ -18,6 +18,7 @@ public class BiomeGenTech extends BiomeGenForest {
 		super(par1);
 		worldGeneratorTrees = new WorldGenFakeTrees(false);
 		worldGeneratorForest = new WorldGenFakeForest(false);
+		worldGeneratorBigTree = new WorldGenFakeBigTree(false);
 
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityHelios.class, 14, 4, 4));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityBobby.class, 16, 4, 4));
