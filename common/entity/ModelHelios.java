@@ -60,10 +60,11 @@ public class ModelHelios extends ModelBase {
 	}
 
 	@Override
-	public void setRotationAngles(float par1, float par2, float par3,
-			float par4, float par5, float par6, Entity par7Entity) {
-		// TODO 自動生成されたメソッド・スタブ
-		super.setRotationAngles(par1, par2, par3, par4, par5, par6, par7Entity);
+	public void setRotationAngles(float f, float f1, float f2,
+			float f3, float f4, float f5, Entity par7Entity) {
+		head.rotateAngleX = f4 / (180F / (float) Math.PI);
+		head.rotateAngleY = f3 / (180F / (float) Math.PI);
+		propeller.rotateAngleY = f * f2 * 3.14F;
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
