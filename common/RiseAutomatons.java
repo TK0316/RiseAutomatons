@@ -24,7 +24,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 @Mod(modid = "RiseAutomatons", name = "RiseAutomatons", version = "1.0")
 @NetworkMod(clientSideRequired = false, serverSideRequired = true, channels = { "rota" }, packetHandler = PacketHandler.class, connectionHandler = ConnectionHandler.class, versionBounds = "[1.0]")
 public class RiseAutomatons {
-	@SidedProxy(clientSide = "riseautomatons.client.ClientProxy", serverSide = "riseautomatons.CommonProxy")
+	@SidedProxy(clientSide = "riseautomatons.client.ClientProxy", serverSide = "riseautomatons.common.CommonProxy")
 	public static CommonProxy proxy;
 
 	@Instance("RiseAutomatons")
@@ -44,7 +44,6 @@ public class RiseAutomatons {
 	@Mod.Init
 	public void load(FMLInitializationEvent event) {
 
-		Universal.init();
 		Entities.init();
 		Blocks.init();
 		Blocks.setFrassSpread(enableFrassSpread);
@@ -56,6 +55,8 @@ public class RiseAutomatons {
 		}
 		ChalkLogic.init();
 		NetworkRegistry.instance().registerGuiHandler(instance,  proxy);
+		Universal.init();
+		proxy.regiserTextures();
 	}
 
 	@PreInit

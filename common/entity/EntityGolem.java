@@ -123,7 +123,7 @@ public class EntityGolem extends EntityAniBot implements IBot,
 	}
 
 	protected int getType() {
-		return Universal.getInt(dataWatcher, 16);
+		return dataWatcher.getWatchableObjectInt(16);
 	}
 
 	protected void setType(int i) {
@@ -207,7 +207,7 @@ public class EntityGolem extends EntityAniBot implements IBot,
 	}
 
 	protected int getColo() {
-		return Universal.getInt(dataWatcher, 17);
+		return dataWatcher.getWatchableObjectInt(17);
 	}
 
 	protected void setColo(int i) {

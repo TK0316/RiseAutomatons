@@ -51,8 +51,6 @@ public class Items {
 		LanguageRegistry.instance().addNameForObject(naturizer, "en_US", "Organic Conversion System");
 		LanguageRegistry.instance().addNameForObject(techifier, "en_US", "Bionic Conversion System");
 		LanguageRegistry.instance().addNameForObject(pickTech, "en_US", "Charged Pick");
-
-		registerTextures();
 	}
 
 	@SideOnly(Side.CLIENT)

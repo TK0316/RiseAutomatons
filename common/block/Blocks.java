@@ -39,12 +39,8 @@ public class Blocks {
 		BlockChalk.rendererId = RenderingRegistry.getNextAvailableRenderId();
 		GameRegistry.registerBlock(turnBlock);
 		LanguageRegistry.addName(turnBlock, "Shaft");
-		ModLoader.registerTileEntity(TileEntityTurn.class, "Turn",
-				new TileEntityTurnRenderer());
 		GameRegistry.registerBlock(windmill);
 		LanguageRegistry.addName(windmill, "Windmill");
-		ModLoader.registerTileEntity(TileEntityWindmill.class, "Windmill",
-				new TileEntityWindmillRenderer());
 		GameRegistry.registerBlock(slabBlock);
 		LanguageRegistry.addName(slabBlock, "Slab");
 		GameRegistry.registerBlock(saltOre);
@@ -63,8 +59,6 @@ public class Blocks {
 		LanguageRegistry.addName(arch, "Architectural Shell");
 		GameRegistry.registerBlock(architect);
 		LanguageRegistry.addName(architect, "Architect");
-		ModLoader.registerTileEntity(TileEntityArchitect.class, "Architect",
-				new TileEntityArchitectRenderer());
 		GameRegistry.registerBlock(archBend);
 		LanguageRegistry.addName(archBend, "Architectural Connector");
 		GameRegistry.registerBlock(crink);
@@ -94,7 +88,16 @@ public class Blocks {
 		LanguageRegistry.addName(teleporter, "Teleporter");
 
 		GameRegistry.registerTileEntity(TileEntityBeacon.class, "BotBeacon");
-		registerTextures();
+	}
+
+	@SideOnly(Side.CLIENT)
+	public static void registerTileEntities() {
+		ModLoader.registerTileEntity(TileEntityTurn.class, "Turn",
+				new TileEntityTurnRenderer());
+		ModLoader.registerTileEntity(TileEntityWindmill.class, "Windmill",
+				new TileEntityWindmillRenderer());
+		ModLoader.registerTileEntity(TileEntityArchitect.class, "Architect",
+				new TileEntityArchitectRenderer());
 	}
 
 	@SideOnly(Side.CLIENT)

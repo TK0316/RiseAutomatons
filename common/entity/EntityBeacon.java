@@ -3,6 +3,7 @@ package riseautomatons.common.entity;
 import riseautomatons.common.Ids;
 import riseautomatons.common.Universal;
 import net.minecraft.src.DamageSource;
+import net.minecraft.src.DataWatcher;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
@@ -168,6 +169,6 @@ public class EntityBeacon extends EntityOwnedBot {
 	}
 
 	public int getSiren() {
-		return Universal.getInt(dataWatcher, 18);
+		return dataWatcher.getWatchableObjectInt(18);
 	}
 }

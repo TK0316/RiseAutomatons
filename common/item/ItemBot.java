@@ -64,7 +64,6 @@ public class ItemBot extends Item {
 		}
 		int meta = MathHelper
 				.floor_double((double) (entityplayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-		System.out.println("meta: " + meta);
 		switch(type) {
 		case WORKER:
 			world.setBlockAndMetadataWithNotify(i, j, k, Ids.blockWorker, meta);

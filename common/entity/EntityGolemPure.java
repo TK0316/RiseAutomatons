@@ -110,7 +110,7 @@ public class EntityGolemPure extends EntityGolem implements IBot {
 	}
 
 	protected int getForm() {
-		return Universal.getInt(dataWatcher, 18);
+		return dataWatcher.getWatchableObjectInt(18);
 	}
 
 	protected void setForm(int i) {

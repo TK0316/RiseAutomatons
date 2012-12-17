@@ -58,12 +58,16 @@ public class Entities {
 		EntityRegistry.registerGlobalEntityID(EntityGuard.class, "Guard", EntityRegistry.findGlobalUniqueEntityId(), 0xCCCCCC, 0xFFFFFF);
 
 		// Effect
+
+		EntityWorker.init();
+	}
+
+	@SideOnly(Side.CLIENT)
+	public static void initEffect() {
 		EntityFwooshFX.rendererId = ModLoader.getMinecraftInstance().renderEngine
 				.getTexture("/riseautomatons/fwoosh.png");
 		EntityGoreFX.rendererId = ModLoader.getMinecraftInstance().renderEngine
 				.getTexture("/riseautomatons/gore.png");
-		registerTextures();
-		EntityWorker.init();
 	}
 
 	@SideOnly(Side.CLIENT)

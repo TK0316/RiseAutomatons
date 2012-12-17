@@ -357,7 +357,7 @@ public class EntityLaser extends Entity {
 	@Override
 	public boolean isInRangeToRenderDist(double d) {
 
-		double d1 = Universal.anotherAxisFunc(boundingBox);
+		double d1 = boundingBox.getAverageEdgeLength() * 4D;
 		d1 *= 64D;
 		return d < d1 * d1;
 	}
