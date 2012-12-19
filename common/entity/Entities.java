@@ -3,6 +3,7 @@ package riseautomatons.common.entity;
 import net.minecraft.src.ModLoader;
 import net.minecraftforge.client.MinecraftForgeClient;
 import riseautomatons.common.Ids;
+import riseautomatons.common.RiseAutomatons;
 import riseautomatons.common.block.BlockSentry;
 import riseautomatons.common.block.BlockWorker;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -58,6 +59,9 @@ public class Entities {
 		LanguageRegistry.instance().addStringLocalization("entity.Guard.name", "en_US", "Guard");
 		EntityGuard.renderId = RenderingRegistry.getNextAvailableRenderId();
 		EntityRegistry.registerGlobalEntityID(EntityGuard.class, "Guard", Ids.entityGuardId, 0xCCCCCC, 0xFFFFFF);
+
+		EntityRegistry.registerModEntity(EntityLaser.class, "Laser", Ids.entityLaserId, RiseAutomatons.instance, 64, 2, true);
+		EntityRegistry.registerGlobalEntityID(EntityLaser.class, "Laser", Ids.entityLaserId);
 
 		// Effect
 

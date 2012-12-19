@@ -2,18 +2,20 @@ package riseautomatons.common.entity;
 
 import java.util.List;
 
-import riseautomatons.common.Universal;
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.DamageSource;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityLiving;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EntityThrowable;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.Vec3;
 import net.minecraft.src.World;
+import riseautomatons.common.Universal;
 
-public class EntityLaser extends Entity {
+public class EntityLaser extends EntityThrowable {
 
 	private int xTile;
 	private int yTile;
@@ -146,7 +148,7 @@ public class EntityLaser extends Entity {
 	}
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound nbttagcompound) {
+	public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
 
 		xTile = nbttagcompound.getShort("xTile");
 		yTile = nbttagcompound.getShort("yTile");
@@ -158,7 +160,7 @@ public class EntityLaser extends Entity {
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound nbttagcompound) {
+	public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
 
 		nbttagcompound.setShort("xTile", (short) xTile);
 		nbttagcompound.setShort("yTile", (short) yTile);
@@ -371,6 +373,20 @@ public class EntityLaser extends Entity {
 	@Override
 	public float getCollisionBorderSize() {
 		return 1.0F;
+	}
+
+	@Override
+	protected void onImpact(MovingObjectPosition var1) {
+
+		if (var1.entityHit != null) {
+			if (var1.entityHit instanceof EntityLiving) {
+				var1.entityHit.attackEntityFrom(DamageSource.generic, 1);
+			}
+		}
+
+		if (!this.worldObj.isRemote) {
+			this.setDead();
+		}
 	}
 
 }
