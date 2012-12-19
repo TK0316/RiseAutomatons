@@ -1,6 +1,7 @@
 package riseautomatons.common.item;
 
 import riseautomatons.common.Ids;
+import riseautomatons.common.Universal;
 import riseautomatons.common.entity.EntityFactotum;
 import riseautomatons.common.entity.EntityGuard;
 import net.minecraft.src.Block;
@@ -72,13 +73,20 @@ public class ItemBot extends Item {
 			world.setBlockAndMetadataWithNotify(i, j, k, Ids.blockSentry, meta);
 			break;
 		case FACTOTUM:
-            world.spawnEntityInWorld(new EntityFactotum(world, (double)i + 0.5, (double)j + 0.5, (double)k + 0.5, entityplayer.username));
+			if (!Universal.improperWorld(world)) {
+				world.spawnEntityInWorld(new EntityFactotum(world, (double)i + 0.5, (double)j + 0.5, (double)k + 0.5, entityplayer.username));
+			}
 			break;
 		case BEACON:
-			world.setBlockWithNotify(i, j, k, Ids.blockBeacon);
+			if (!Universal.improperWorld(world)) {
+				world.setBlockWithNotify(i, j, k, Ids.blockBeacon);
+			}
 			break;
 		case GUARD:
-        	world.spawnEntityInWorld(new EntityGuard(world, (float)i + 0.5F, (float)j, (float)k + 0.5F));
+			if (!Universal.improperWorld(world)) {
+				world.spawnEntityInWorld(new EntityGuard(world, (float)i + 0.5F, (float)j, (float)k + 0.5F));
+			}
+			break;
 		default:
 			return false;
 		}
