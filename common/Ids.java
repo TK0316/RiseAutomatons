@@ -60,6 +60,20 @@ public class Ids {
 	// GUI
 	public static int guiFactotum = 30;
 
+	// entities
+	public static int entityWorkerId = 101;
+	public static int entitySentryId = 102;
+	public static int entityGolemId = 103;
+	public static int entityGolemPureId = 104;
+	public static int entityWatcherId = 105;
+	public static int entitySliderId = 106;
+	public static int entityBobbyId = 107;
+	public static int entityHeliosId = 108;
+	public static int entityFactotumId = 109;
+	public static int entityBeaconId = 110;
+	public static int entityGuardId = 111;
+	public static int entityLaserId = 112;
+
 	// etc.
 	public static int builderLevel = 60;
 }
