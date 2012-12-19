@@ -5,24 +5,25 @@ import net.minecraft.src.Block;
 public class Ids {
 
 	// Items
-	public static int itemWorker = 2201;
-	public static int itemChalk = 2202;
-	public static int craftSet = 2203;
-	public static int spring = 2204;
-	public static int soulCore = 2205;
-	public static int chisel = 2206;
-	public static int skullA = 2207;
-	public static int skull = 2208;
-	public static int itemSentry = 2209;
-	public static int blaster = 2210;
-	public static int itemFactotum = 2211;
-	public static int itemBeacon = 2212;
-	public static int itemGuard = 2213;
-	public static int smack = 2214;
-	public static int mortar = 2215;
-	public static int techifier = 2316;
-	public static int naturizer = 2317;
-	public static int pickTech = 2318;
+	public static int soulCore = 2001;
+	public static int itemChalk = 2002;
+	public static int blaster = 2003;
+	public static int smack = 2004;
+	public static int pickTech = 2005;
+	public static int mortar = 2006;
+	public static int chisel = 2007;
+	public static int techifier = 2008;
+	public static int naturizer = 2009;
+	public static int craftSet = 2010;
+	public static int spring = 2011;
+	public static int skull = 2012;
+	public static int skullA = 2013;
+
+	public static int itemWorker = 2031;
+	public static int itemSentry = 2032;
+	public static int itemFactotum = 2033;
+	public static int itemBeacon = 2034;
+	public static int itemGuard = 2035;
 
 
 	// Blocks
@@ -63,16 +64,17 @@ public class Ids {
 	// entities
 	public static int entityWorkerId = 101;
 	public static int entitySentryId = 102;
-	public static int entityGolemId = 103;
-	public static int entityGolemPureId = 104;
-	public static int entityWatcherId = 105;
-	public static int entitySliderId = 106;
-	public static int entityBobbyId = 107;
-	public static int entityHeliosId = 108;
-	public static int entityFactotumId = 109;
-	public static int entityBeaconId = 110;
-	public static int entityGuardId = 111;
-	public static int entityLaserId = 112;
+	public static int entityFactotumId = 103;
+	public static int entityBeaconId = 104;
+	public static int entityGuardId = 105;
+	public static int entityLaserId = 106;
+
+	public static int entityGolemId = 131;
+	public static int entityGolemPureId = 132;
+	public static int entityWatcherId = 133;
+	public static int entitySliderId = 134;
+	public static int entityBobbyId = 135;
+	public static int entityHeliosId = 136;
 
 	// etc.
 	public static int builderLevel = 60;

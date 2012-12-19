@@ -66,23 +66,24 @@ public class RiseAutomatons {
 
 		try {
 			cfg.load();
-			Ids.itemWorker = cfg.get(Configuration.CATEGORY_ITEM, "itemWorker", Ids.itemWorker).getInt();
+			Ids.soulCore = cfg.get(Configuration.CATEGORY_ITEM, "soulCore", Ids.soulCore).getInt();
 			Ids.itemChalk = cfg.get(Configuration.CATEGORY_ITEM, "itemChalk", Ids.itemChalk).getInt();
+			Ids.blaster = cfg.get(Configuration.CATEGORY_ITEM, "blaster", Ids.blaster).getInt();
+			Ids.smack = cfg.get(Configuration.CATEGORY_ITEM, "smack", Ids.smack).getInt();
+			Ids.pickTech = cfg.get(Configuration.CATEGORY_ITEM, "pickTech", Ids.pickTech).getInt();
+			Ids.mortar = cfg.get(Configuration.CATEGORY_ITEM, "mortar", Ids.mortar).getInt();
+			Ids.chisel = cfg.get(Configuration.CATEGORY_ITEM, "chisel", Ids.chisel).getInt();
+			Ids.techifier = cfg.get(Configuration.CATEGORY_ITEM, "techifier", Ids.techifier).getInt();
+			Ids.naturizer = cfg.get(Configuration.CATEGORY_ITEM, "naturizer", Ids.naturizer).getInt();
 			Ids.craftSet = cfg.get(Configuration.CATEGORY_ITEM, "craftSet", Ids.craftSet).getInt();
 			Ids.spring = cfg.get(Configuration.CATEGORY_ITEM, "spring", Ids.spring).getInt();
-			Ids.soulCore = cfg.get(Configuration.CATEGORY_ITEM, "soulCore", Ids.soulCore).getInt();
-			Ids.chisel = cfg.get(Configuration.CATEGORY_ITEM, "chisel", Ids.chisel).getInt();
-			Ids.skullA = cfg.get(Configuration.CATEGORY_ITEM, "skullA", Ids.skullA).getInt();
 			Ids.skull = cfg.get(Configuration.CATEGORY_ITEM, "skull", Ids.skull).getInt();
+			Ids.skullA = cfg.get(Configuration.CATEGORY_ITEM, "skullA", Ids.skullA).getInt();
+			Ids.itemWorker = cfg.get(Configuration.CATEGORY_ITEM, "itemWorker", Ids.itemWorker).getInt();
 			Ids.itemSentry = cfg.get(Configuration.CATEGORY_ITEM, "itemSentry", Ids.itemSentry).getInt();
 			Ids.itemFactotum = cfg.get(Configuration.CATEGORY_ITEM, "itemFactotum", Ids.itemFactotum).getInt();
 			Ids.itemBeacon = cfg.get(Configuration.CATEGORY_ITEM, "itemBeacon", Ids.itemBeacon).getInt();
 			Ids.itemGuard = cfg.get(Configuration.CATEGORY_ITEM, "itemGuard", Ids.itemGuard).getInt();
-			Ids.smack = cfg.get(Configuration.CATEGORY_ITEM, "smack", Ids.smack).getInt();
-			Ids.mortar = cfg.get(Configuration.CATEGORY_ITEM, "mortar", Ids.mortar).getInt();
-			Ids.techifier = cfg.get(Configuration.CATEGORY_ITEM, "techifier", Ids.techifier).getInt();
-			Ids.naturizer = cfg.get(Configuration.CATEGORY_ITEM, "naturizer", Ids.naturizer).getInt();
-			Ids.pickTech = cfg.get(Configuration.CATEGORY_ITEM, "pickTech", Ids.pickTech).getInt();
 
 			Ids.blockWorker = cfg.get(Configuration.CATEGORY_BLOCK, "blockWorker", Ids.blockWorker).getInt();
 			Ids.blockChalk = cfg.get(Configuration.CATEGORY_BLOCK, "blockChalk", Ids.blockChalk).getInt();
@@ -121,6 +122,17 @@ public class RiseAutomatons {
 			generateTechBiome = cfg.get(Configuration.CATEGORY_GENERAL, "generateTechBiome", true).getBoolean(true);
 			enableFrassSpread  = cfg.get(Configuration.CATEGORY_GENERAL, "enableFrassSpread", true).getBoolean(true);
 
+			Ids.entityWorkerId = cfg.get(Configuration.CATEGORY_GENERAL, "entityWorkerId", Ids.entityWorkerId).getInt();
+			Ids.entitySentryId = cfg.get(Configuration.CATEGORY_GENERAL, "entitySentryId", Ids.entitySentryId).getInt();
+			Ids.entityFactotumId = cfg.get(Configuration.CATEGORY_GENERAL, "entityFactotumId", Ids.entityFactotumId).getInt();
+			Ids.entityBeaconId = cfg.get(Configuration.CATEGORY_GENERAL, "entityBeaconId", Ids.entityBeaconId).getInt();
+			Ids.entityGuardId = cfg.get(Configuration.CATEGORY_GENERAL, "entityGuardId", Ids.entityGuardId).getInt();
+			Ids.entityLaserId = cfg.get(Configuration.CATEGORY_GENERAL, "entityLaserId", Ids.entityLaserId).getInt();
+			Ids.entityGolemId = cfg.get(Configuration.CATEGORY_GENERAL, "entityGolemId", Ids.entityGolemId).getInt();
+			Ids.entityGolemPureId = cfg.get(Configuration.CATEGORY_GENERAL, "entityGolemPureId", Ids.entityGolemPureId).getInt();
+			Ids.entityWatcherId = cfg.get(Configuration.CATEGORY_GENERAL, "entityWatcherId", Ids.entityWatcherId).getInt();
+			Ids.entitySliderId = cfg.get(Configuration.CATEGORY_GENERAL, "entitySliderId", Ids.entitySliderId).getInt();
+			Ids.entityBobbyId = cfg.get(Configuration.CATEGORY_GENERAL, "entityBobbyId", Ids.entityBobbyId).getInt();
 
 			cfg.save();
 
