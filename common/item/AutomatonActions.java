@@ -21,9 +21,6 @@ public class AutomatonActions
   public static int max = 88;
   public static int[] blocks = new int[max];
 
-  static { sphereGen(M);
-    sphereGen2(H);
-  }
 
   private static int getType(int i) {
 	  switch(i) {
@@ -211,74 +208,4 @@ public class AutomatonActions
     world.markBlocksDirtyVertical(i - i1, j - i1, k - i1, i + i1);
   }
 
-  public static int FValue(int i, int j, int k, int l)
-  {
-    return i * i + j * j + k * k - l * l;
-  }
-
-  public static void sphereGen(int i)
-  {
-    int j = i * 2 + 1;
-    ArrayList arraylist = new ArrayList();
-    for (int k = 0; k < j; k++)
-    {
-      for (int i1 = 0; i1 < j; i1++)
-      {
-        for (int k1 = 0; k1 < j; k1++)
-        {
-          if (FValue(i1 - i, k - i, k1 - i, i) > 0)
-            continue;
-          ArrayList arraylist1 = new ArrayList();
-          arraylist1.add(Integer.valueOf(i1 - i));
-          arraylist1.add(Integer.valueOf(k - i));
-          arraylist1.add(Integer.valueOf(k1 - i));
-          arraylist.add(arraylist1);
-        }
-
-      }
-
-    }
-
-    int l = arraylist.size();
-    nerp = new int[l][3];
-    for (int j1 = 0; j1 < l; j1++)
-    {
-      nerp[j1][0] = ((Integer)((ArrayList)arraylist.get(j1)).get(0)).intValue();
-      nerp[j1][1] = ((Integer)((ArrayList)arraylist.get(j1)).get(1)).intValue();
-      nerp[j1][2] = ((Integer)((ArrayList)arraylist.get(j1)).get(2)).intValue();
-    }
-  }
-
-  public static void sphereGen2(int i)
-  {
-    int j = i * 2 + 1;
-    ArrayList arraylist = new ArrayList();
-    for (int k = 0; k < j; k++)
-    {
-      for (int i1 = 0; i1 < j; i1++)
-      {
-        for (int k1 = 0; k1 < j; k1++)
-        {
-          if (FValue(i1 - i, k - i, k1 - i, i) > 0)
-            continue;
-          ArrayList arraylist1 = new ArrayList();
-          arraylist1.add(Integer.valueOf(i1 - i));
-          arraylist1.add(Integer.valueOf(k - i));
-          arraylist1.add(Integer.valueOf(k1 - i));
-          arraylist.add(arraylist1);
-        }
-
-      }
-
-    }
-
-    int l = arraylist.size();
-    nerk = new int[l][3];
-    for (int j1 = 0; j1 < l; j1++)
-    {
-      nerk[j1][0] = ((Integer)((ArrayList)arraylist.get(j1)).get(0)).intValue();
-      nerk[j1][1] = ((Integer)((ArrayList)arraylist.get(j1)).get(1)).intValue();
-      nerk[j1][2] = ((Integer)((ArrayList)arraylist.get(j1)).get(2)).intValue();
-    }
-  }
 }
