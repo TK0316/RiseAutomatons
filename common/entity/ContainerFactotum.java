@@ -114,44 +114,44 @@ public class ContainerFactotum extends Container {
             ItemStack var5 = var4.getStack();
             var3 = var5.copy();
 
-            if (par2 == 2)
+            if (6 <= par2 && par2 <= 20)
             {
-                if (!this.mergeItemStack(var5, 3, 39, true))
+                if (!this.mergeItemStack(var5, 21, 57, true))
                 {
                     return null;
                 }
 
                 var4.onSlotChange(var5, var3);
             }
-            else if (par2 != 1 && par2 != 0)
+            else if ( !( 0 <= par2 && par2 <= 5) )
             {
                 if (FurnaceRecipes.smelting().getSmeltingResult(var5) != null)
                 {
-                    if (!this.mergeItemStack(var5, 0, 1, false))
+                    if (!this.mergeItemStack(var5, 0, 3, false))
                     {
                         return null;
                     }
                 }
                 else if (TileEntityFurnace.isItemFuel(var5))
                 {
-                    if (!this.mergeItemStack(var5, 1, 2, false))
+                    if (!this.mergeItemStack(var5, 3, 6, false))
                     {
                         return null;
                     }
                 }
-                else if (par2 >= 3 && par2 < 30)
+                else if (par2 >= 21 && par2 < 48)
                 {
-                    if (!this.mergeItemStack(var5, 30, 39, false))
+                    if (!this.mergeItemStack(var5, 48, 57, false))
                     {
                         return null;
                     }
                 }
-                else if (par2 >= 30 && par2 < 39 && !this.mergeItemStack(var5, 3, 30, false))
+                else if (par2 >= 48 && par2 < 57 && !this.mergeItemStack(var5, 21, 58, false))
                 {
                     return null;
                 }
             }
-            else if (!this.mergeItemStack(var5, 3, 39, false))
+            else if (!this.mergeItemStack(var5, 21, 57, false))
             {
                 return null;
             }
