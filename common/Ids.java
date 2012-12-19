@@ -62,19 +62,19 @@ public class Ids {
 	public static int guiFactotum = 30;
 
 	// entities
-	public static int entityWorkerId = 1;
-	public static int entitySentryId = 2;
-	public static int entityFactotumId = 3;
-	public static int entityBeaconId = 4;
-	public static int entityGuardId = 5;
-	public static int entityLaserId = 6;
+	public static int entityWorkerId = 101;
+	public static int entitySentryId = 102;
+	public static int entityFactotumId = 103;
+	public static int entityBeaconId = 104;
+	public static int entityGuardId = 105;
+	public static int entityLaserId = 106;
 
-	public static int entityGolemId = 7;
-	public static int entityGolemPureId = 8;
-	public static int entityWatcherId = 9;
-	public static int entitySliderId = 10;
-	public static int entityBobbyId = 11;
-	public static int entityHeliosId = 12;
+	public static int entityGolemId = 107;
+	public static int entityGolemPureId = 108;
+	public static int entityWatcherId = 109;
+	public static int entitySliderId = 110;
+	public static int entityBobbyId = 111;
+	public static int entityHeliosId = 112;
 
 	// etc.
 	public static int builderLevel = 60;
