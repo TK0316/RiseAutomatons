@@ -7,5 +7,6 @@ public enum EnumBotType {
 	TOTE,
 	FACTOTUM,
 	GUARD,
+	OMNI,
 
 }

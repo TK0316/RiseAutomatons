@@ -4,6 +4,7 @@ import riseautomatons.common.Ids;
 import riseautomatons.common.Universal;
 import riseautomatons.common.entity.EntityFactotum;
 import riseautomatons.common.entity.EntityGuard;
+import riseautomatons.common.entity.EntityOmni;
 import net.minecraft.src.Block;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
@@ -85,6 +86,11 @@ public class ItemBot extends Item {
 		case GUARD:
 			if (!Universal.improperWorld(world)) {
 				world.spawnEntityInWorld(new EntityGuard(world, (float)i + 0.5F, (float)j, (float)k + 0.5F));
+			}
+			break;
+		case OMNI:
+			if (!Universal.improperWorld(world)) {
+				world.spawnEntityInWorld(new EntityOmni(world, (float)i + 0.5F, (float)j, (float)k + 0.5F));
 			}
 			break;
 		default:

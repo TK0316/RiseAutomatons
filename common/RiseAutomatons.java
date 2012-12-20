@@ -128,6 +128,8 @@ public class RiseAutomatons {
 			Ids.entityBeaconId = cfg.get(Configuration.CATEGORY_GENERAL, "entityBeaconId", Ids.entityBeaconId).getInt();
 			Ids.entityGuardId = cfg.get(Configuration.CATEGORY_GENERAL, "entityGuardId", Ids.entityGuardId).getInt();
 			Ids.entityLaserId = cfg.get(Configuration.CATEGORY_GENERAL, "entityLaserId", Ids.entityLaserId).getInt();
+			Ids.entityOmniId = cfg.get(Configuration.CATEGORY_GENERAL, "entityOmniId", Ids.entityOmniId).getInt();
+
 			Ids.entityGolemId = cfg.get(Configuration.CATEGORY_GENERAL, "entityGolemId", Ids.entityGolemId).getInt();
 			Ids.entityGolemPureId = cfg.get(Configuration.CATEGORY_GENERAL, "entityGolemPureId", Ids.entityGolemPureId).getInt();
 			Ids.entityWatcherId = cfg.get(Configuration.CATEGORY_GENERAL, "entityWatcherId", Ids.entityWatcherId).getInt();

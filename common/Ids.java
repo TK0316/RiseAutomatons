@@ -24,6 +24,7 @@ public class Ids {
 	public static int itemFactotum = 2033;
 	public static int itemBeacon = 2034;
 	public static int itemGuard = 2035;
+	public static int itemOmni = 2036;
 
 
 	// Blocks
@@ -68,13 +69,14 @@ public class Ids {
 	public static int entityBeaconId = 104;
 	public static int entityGuardId = 105;
 	public static int entityLaserId = 106;
+	public static int entityOmniId = 107;
 
-	public static int entityGolemId = 107;
-	public static int entityGolemPureId = 108;
-	public static int entityWatcherId = 109;
-	public static int entitySliderId = 110;
-	public static int entityBobbyId = 111;
-	public static int entityHeliosId = 112;
+	public static int entityGolemId = 108;
+	public static int entityGolemPureId = 109;
+	public static int entityWatcherId = 110;
+	public static int entitySliderId = 111;
+	public static int entityBobbyId = 112;
+	public static int entityHeliosId = 113;
 
 	// etc.
 	public static int builderLevel = 60;

@@ -60,6 +60,10 @@ public class Entities {
 		EntityGuard.renderId = RenderingRegistry.getNextAvailableRenderId();
 		EntityRegistry.registerGlobalEntityID(EntityGuard.class, "Guard", Ids.entityGuardId, 0xCCCCCC, 0xFFFFFF);
 
+		LanguageRegistry.instance().addStringLocalization("entity.Omni.name", "en_US", "Omni");
+		EntityOmni.renderId = RenderingRegistry.getNextAvailableRenderId();
+		EntityRegistry.registerGlobalEntityID(EntityOmni.class, "Omni", Ids.entityOmniId, 0xCCCCCC, 0xFFFFFF);
+
 		EntityRegistry.registerModEntity(EntityLaser.class, "Laser", Ids.entityLaserId, RiseAutomatons.instance, 64, 2, true);
 		EntityRegistry.registerGlobalEntityID(EntityLaser.class, "Laser", Ids.entityLaserId);
 
@@ -121,6 +125,9 @@ public class Entities {
 
 		MinecraftForgeClient.preloadTexture(EntityGuard.GUARD_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntityGuard.class, new RenderBot(new ModelGuard(), 0.3F));
+
+		MinecraftForgeClient.preloadTexture(EntityOmni.OMNI_PNG);
+		RenderingRegistry.registerEntityRenderingHandler(EntityOmni.class, new RenderBot(new ModelOmni(), 0.25F));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityLaser.class, new RenderLaser());
 	}

@@ -482,6 +482,13 @@ public class Recipes {
 			"p",
 			"b",
 			'p', Items.blaster, 'b', Items.beacon});
+
+		GameRegistry.addRecipe(new ItemStack(Ids.itemOmni, 1, 0), new Object[] {
+			"OOO",
+			"OCO",
+			"OOO",
+			'O', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.BIONICCONGLOMERATE.ordinal()),
+			'C', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.REDCORE.ordinal()) });
 	}
 
 	private static void addSoulCoreRecipes() {
