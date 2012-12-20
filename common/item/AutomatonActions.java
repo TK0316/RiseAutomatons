@@ -22,7 +22,6 @@ public class AutomatonActions
   public static int[] blocks = new int[max];
 
   static { sphereGen(M);
-    sphereGen2(H);
   }
 
   private static int getType(int i) {
@@ -153,59 +152,55 @@ public class AutomatonActions
     Naturalization(world, i, j, k);
   }
 
-  public static void Naturalization(World world, int i, int j, int k)
-  {
-    for (int l = 0; l < nerp.length; l++)
-    {
-      int j1 = world.getBlockId(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2]);
-      int k1 = world.getBlockMetadata(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2]);
-      if (j1 > 96)
-      {
-        if ((j1 == 3) || ((j1 == Ids.blockFrass) && ((k1 == 0) || (k1 == 3))))
-        {
-          world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], 0);
-          world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], 2);
-        }
-        else if ((j1 == Ids.blockFrass))
-        {
-          world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], 0);
-        }
-        else if (j1 == Ids.blockCrink)
-        {
-          world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], 18);
-        }
-        else if ((j1 == Ids.blockTech) && (k1 == 1))
-        {
-          world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], 17);
-        }
-        else {
-          if (j1 != Ids.blockTech)
-            continue;
-          world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], 4);
-        }
-      }
-      else {
-        if ((j1 != Ids.blockGrower))
-        {
-          continue;
-        }
-        int l1 = world.rand.nextInt(4);
-        switch (l1)
-        {
-        case 0:
-          world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.sapling.blockID);
-          break;
-        case 1:
-          world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.plantYellow.blockID);
-          break;
-        case 2:
-          world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.plantRed.blockID);
-          break;
-        default:
-          world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.reed.blockID);
-        }
-      }
-    }
+	public static void Naturalization(World world, int i, int j, int k) {
+		for (int l = 0; l < nerp.length; l++) {
+			int blockId = world.getBlockId(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2]);
+			int metadata = world.getBlockMetadata(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2]);
+			if (blockId == Ids.blockFrass) {
+				if (metadata == 0) {
+					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], 0);
+				} else if (metadata == 1) {
+					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.sand.blockID);
+				} else if (metadata == 2) {
+					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.dirt.blockID);
+				} else if (metadata == 3) {
+					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.blockClay.blockID);
+				} else if (metadata == 4) {
+					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.waterStill.blockID);
+				} else {
+					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], 0);
+				}
+			} else if (blockId == Ids.blockCrink) {
+				world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.leaves.blockID);
+			} else if (blockId == Ids.blockTech) {
+				if (metadata == 1) {
+					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.wood.blockID);
+				} else {
+					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.cobblestone.blockID);
+				}
+			} else if ((blockId == Ids.blockGrower)) {
+				int stayingBlockId = world.getBlockId(i + nerp[l][0], j + nerp[l][1] - 1, k + nerp[l][2]);
+				if(stayingBlockId == 0 || stayingBlockId == Ids.blockGrower || stayingBlockId == Block.sapling.blockID || stayingBlockId == Block.plantYellow.blockID || stayingBlockId == Block.plantRed.blockID || stayingBlockId == Block.reed.blockID) {
+					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], 0);
+				}
+				else {
+					int l1 = world.rand.nextInt(4);
+					switch (l1) {
+					case 0:
+						world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.sapling.blockID);
+						break;
+					case 1:
+						world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.plantYellow.blockID);
+						break;
+					case 2:
+						world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.plantRed.blockID);
+						break;
+					default:
+						world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.reed.blockID);
+					}
+				}
+			}
+		}
 
     int i1 = M - 1;
     world.markBlocksDirtyVertical(i - i1, j - i1, k - i1, i + i1);
@@ -249,36 +244,4 @@ public class AutomatonActions
     }
   }
 
-  public static void sphereGen2(int i)
-  {
-    int j = i * 2 + 1;
-    ArrayList arraylist = new ArrayList();
-    for (int k = 0; k < j; k++)
-    {
-      for (int i1 = 0; i1 < j; i1++)
-      {
-        for (int k1 = 0; k1 < j; k1++)
-        {
-          if (FValue(i1 - i, k - i, k1 - i, i) > 0)
-            continue;
-          ArrayList arraylist1 = new ArrayList();
-          arraylist1.add(Integer.valueOf(i1 - i));
-          arraylist1.add(Integer.valueOf(k - i));
-          arraylist1.add(Integer.valueOf(k1 - i));
-          arraylist.add(arraylist1);
-        }
-
-      }
-
-    }
-
-    int l = arraylist.size();
-    nerk = new int[l][3];
-    for (int j1 = 0; j1 < l; j1++)
-    {
-      nerk[j1][0] = ((Integer)((ArrayList)arraylist.get(j1)).get(0)).intValue();
-      nerk[j1][1] = ((Integer)((ArrayList)arraylist.get(j1)).get(1)).intValue();
-      nerk[j1][2] = ((Integer)((ArrayList)arraylist.get(j1)).get(2)).intValue();
-    }
-  }
 }
