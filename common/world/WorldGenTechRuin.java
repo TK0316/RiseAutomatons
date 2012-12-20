@@ -18,29 +18,28 @@ public class WorldGenTechRuin extends WorldGenerator {
 		System.out.println(String.valueOf(i) + "," + String.valueOf(j) + "," + String.valueOf(k));
 
 	    byte byte0 = 5;
-	    int l = 3;
-	    int i1 = 3;
+	    int width = 3;
 	    int j1 = 0;
-	    for (int k1 = i - 1; k1 <= i + l + 1; k1++)
+	    for (int x = i - 1; x <= i + width + 1; x++)
 	    {
-	      for (int i3 = k - 1; i3 <= k + i1 + 1; i3++)
+	      for (int z = k - 1; z <= k + width + 1; z++)
 	      {
-	        for (int j2 = j - 1; j2 <= j + byte0 + 1; j2++)
+	        for (int y = j - 1; y <= j + byte0 + 1; y++)
 	        {
-	          Material material = world.getBlockMaterial(k1, j2, i3);
-	          if ((j2 == j - 1) && (!material.isSolid()))
+	          Material material = world.getBlockMaterial(x, y, z);
+	          if ((y == j - 1) && (!material.isSolid()))
 	          {
-	            int blockID = world.getBlockId(k1, j2, i3);
+	            int blockID = world.getBlockId(x, y, z);
 	            if ((blockID != Block.dirt.blockID) && (blockID != Block.grass.blockID) && (blockID != Block.sand.blockID))
 	            {
 	              return false;
 	            }
 	          }
-	          if ((j2 == j + byte0 + 1) && (material != Material.air))
+	          if ((y == j + byte0 + 1) && (material != Material.air))
 	          {
 	            return false;
 	          }
-	          if (((k1 != i - 1) && (k1 != i + l + 1) && (i3 != k - 1) && (i3 != k + i1 + 1)) || (j2 != j) || (!world.isAirBlock(k1, j2, i3)) || (!world.isAirBlock(k1, j2 + 1, i3)))
+	          if (((x != i - 1) && (x != i + width + 1) && (z != k - 1) && (z != k + width + 1)) || (y != j) || (!world.isAirBlock(x, y, z)) || (!world.isAirBlock(x, y + 1, z)))
 	            continue;
 	          j1++;
 	        }
@@ -50,25 +49,25 @@ public class WorldGenTechRuin extends WorldGenerator {
 
 	    if (j1 >= 1);
 	    System.out.println("ruin");
-	    for (int l1 = i - 1; l1 <= i + l + 1; l1++)
+	    for (int x = i - 1; x < i + width + 1; x++)
 	    {
-	      for (int k2 = j + byte0; k2 >= j; k2--)
+	      for (int y = j + byte0; y >= j; y--)
 	      {
-	        for (int j3 = k - 1; j3 <= k + i1 + 1; j3++)
+	        for (int z = k - 1; z < k + width + 1; z++)
 	        {
-	          if (k2 == j) {
-	            world.setBlockAndMetadataWithNotify(l1, k2, j3, Ids.blockTech, 0);
+	          if (y == j) {
+	            world.setBlockAndMetadataWithNotify(x, y, z, Ids.blockTech, 0);
 	          }
-	          else if (k2 == j + byte0) {
-	            world.setBlockAndMetadataWithNotify(l1, k2, j3, Block.stoneDoubleSlab.blockID, 0);
+	          else if (y == j + byte0) {
+	            world.setBlockAndMetadataWithNotify(x, y, z, Block.stoneDoubleSlab.blockID, 0);
 	          }
-	          else if ((l1 == i - 1) || (j3 == k - 1) || (l1 == i + l + 1) || (j3 == k + i1 + 1))
+	          else if ((x == i - 1) || (z == k - 1) || (x == i + width) || (z == k + width))
 	          {
-	            world.setBlockAndMetadataWithNotify(l1, k2, j3, Ids.blockTech, 0);
+	            world.setBlockAndMetadataWithNotify(x, y, z, Ids.blockTech, 0);
 	          }
 	          else
 	          {
-	            world.setBlockAndMetadataWithNotify(l1, k2, j3, 0, 0);
+	            world.setBlockAndMetadataWithNotify(x, y, z, 0, 0);
 	          }
 
 	        }
@@ -87,19 +86,19 @@ public class WorldGenTechRuin extends WorldGenerator {
 	    System.out.print(",");
 	    System.out.println(r);
 	    if (r < 20) {
-	      world.setBlockAndMetadataWithNotify(i, j + 1, k, Ids.blockSky, 1);
+	      world.setBlockAndMetadataWithNotify(i + width / 2, j + 1, k + width / 2, Ids.blockSky, 1);
 	    }
 	    else if (r < 40) {
-	      world.setBlockAndMetadataWithNotify(i, j + 1, k, Ids.blockSky, 0);
+	      world.setBlockAndMetadataWithNotify(i + width / 2, j + 1, k + width / 2, Ids.blockSky, 0);
 	    }
 	    else if (r < 60) {
-	      world.setBlockWithNotify(i, j + 1, k, Blocks.heal.blockID);
+	      world.setBlockWithNotify(i + width / 2, j + 1, k + width / 2, Blocks.heal.blockID);
 	    }
 	    else if (r < 80) {
-	      world.setBlockWithNotify(i, j + 1, k, Blocks.fakeCrystal.blockID);
+	      world.setBlockWithNotify(i + width / 2, j + 1, k + width / 2, Blocks.fakeCrystal.blockID);
 	    }
 	    else {
-	      world.setBlockWithNotify(i, j + 1, k, Blocks.crystal.blockID);
+	      world.setBlockWithNotify(i + width / 2, j + 1, k + width / 2, Blocks.crystal.blockID);
 	    }
 
 	    return true;

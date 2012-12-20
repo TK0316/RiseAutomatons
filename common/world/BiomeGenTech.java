@@ -34,6 +34,7 @@ public class BiomeGenTech extends BiomeGenForest {
 			return this.worldGeneratorForest;
 		}
 		if (par1Random.nextInt(10) == 0) {
+			return new WorldGenTechRuin();
 			//return this.worldGeneratorBigTree;
 		}
 
