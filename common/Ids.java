@@ -59,6 +59,13 @@ public class Ids {
 	// Dimension
 	public static int eupraxia = 99;
 
+	// Biome
+	public static int biomeGiants = 42;
+	public static int biomeAutumn = 43;
+	public static int biomeWindFarm = 44;
+	public static int biomeCity = 45;
+	public static int biomeTech = 46;
+	public static int techBiomeFrequency = 1;
 	// GUI
 	public static int guiFactotum = 30;
 

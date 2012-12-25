@@ -7,21 +7,20 @@ import net.minecraftforge.common.DimensionManager;
 
 public class Biomes {
 
-	public static final BiomeGenBase giants = (new BiomeGenGiants(42)).setColor(0xff0000).setBiomeName("Giants");
-	public static final BiomeGenBase autumn = (new BiomeGenAutumn(43)).setColor(0xff0000).setBiomeName("Autumn");
-	public static final BiomeGenBase windFarm = (new BiomeGenWindFarm(44)).setColor(0xff0000).setBiomeName("Autumn");
-	public static final BiomeGenBase city = (new BiomeGenCity(45)).setColor(0xff0000).setBiomeName("Autumn");
+	public static final BiomeGenBase giants = (new BiomeGenGiants(Ids.biomeGiants)).setColor(0xff0000).setBiomeName("Giants");
+	public static final BiomeGenBase autumn = (new BiomeGenAutumn(Ids.biomeAutumn)).setColor(0xff0000).setBiomeName("Autumn");
+	public static final BiomeGenBase windFarm = (new BiomeGenWindFarm(Ids.biomeWindFarm)).setColor(0xff0000).setBiomeName("Autumn");
+	public static final BiomeGenBase city = (new BiomeGenCity(Ids.biomeCity)).setColor(0xff0000).setBiomeName("Autumn");
 
-	public static final BiomeGenBase tech = (new BiomeGenTech(46)).setColor(0xff0000).setBiomeName("Tech");
+	public static final BiomeGenBase tech = (new BiomeGenTech(Ids.biomeTech)).setColor(0xff0000).setBiomeName("Tech");
 
 	public static void init(boolean generateTechBiome) {
 		if(generateTechBiome) {
-			GameRegistry.addBiome(tech);
+			for(int i = 0; i < Ids.techBiomeFrequency; i++) {
+				GameRegistry.addBiome((new BiomeGenTech(Ids.biomeTech + i)).setColor(0xff0000).setBiomeName("Tech"));
+			}
 		}
-		for(int i = 0; i < 20; i++) {
-			//GameRegistry.addBiome((new BiomeGenTech(47 + i)).setColor(0xff0000).setBiomeName("Tech"));
 
-		}
 		GameRegistry.registerWorldGenerator(new OreGenerator());
 		GameRegistry.registerWorldGenerator(new TechSurfaceGenerator());
 		GameRegistry.registerWorldGenerator(new TechRuinGenerator());
