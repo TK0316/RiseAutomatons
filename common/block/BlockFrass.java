@@ -56,45 +56,74 @@ public class BlockFrass extends Block {
 			}
 		}
 
+		int m = world.getBlockMetadata(i, j, k);
 		for(int x = -1; x <= 1; x++) {
 			for(int z = -1; z <= 1; z++) {
 				for(int y = -1; y <= 1; y++) {
-					int blockId = world.getBlockId(i + x, j + y, k + z);
-					int meta = 0;
-					if(blockId == Block.sand.blockID) {
-						meta = 1;
-					}
-					else if(blockId == Block.grass.blockID) {
-						meta = 2;
-					}
-					else if(blockId == Block.dirt.blockID) {
-						meta = 2;
-					}
-					else if(blockId == Block.blockClay.blockID) {
-						meta = 3;
-					}
-					else if(blockId == Block.waterStill.blockID) {
-						meta = 4;
-					}
-					else if(blockId == Block.ice.blockID) {
-						meta = 4;
+					if(m < 8) {
+						int blockId = world.getBlockId(i + x, j + y, k + z);
+						int meta = 0;
+						if(blockId == Block.sand.blockID) {
+							meta = 1;
+						}
+						else if(blockId == Block.grass.blockID) {
+							meta = 8;
+						}
+						else if(blockId == Block.dirt.blockID) {
+							meta = 2;
+						}
+						else if(blockId == Block.blockClay.blockID) {
+							meta = 3;
+						}
+						else if(blockId == Block.waterStill.blockID) {
+							meta = 4;
+						}
+						else if(blockId == Block.ice.blockID) {
+							meta = 4;
+						}
+						else {
+							continue;
+						}
+						boolean isShine = true;
+						for(int n = j + y + 1; n < 255; n++) {
+							if(world.isAirBlock(i + x, n, k + z) == false) {
+								isShine = false;
+								break;
+							}
+						}
+						if(isShine == false) {
+							continue;
+						}
+						world.setBlockAndMetadataWithNotify(i + x, j + y, k + z, Ids.blockFrass, meta);
 					}
 					else {
-						continue;
-					}
-					boolean isShine = true;
-					for(int n = j + y + 1; n < 255; n++) {
-						if(world.isAirBlock(i + x, n, k + z) == false) {
-							isShine = false;
-							break;
+						int blockId = world.getBlockId(i + x, j + y, k + z);
+						int meta = world.getBlockMetadata(i + x, j + y, k + z);
+						if(blockId == blockID) {
+							if(meta < 8) {
+								world.setBlockMetadata(i + x, j + y, k + z, meta + 8);
+							}
 						}
 					}
-					if(isShine == false) {
-						continue;
-					}
-					world.setBlockAndMetadataWithNotify(i + x, j + y, k + z, Ids.blockFrass, meta);
 				}
 			}
+		}
+		switch(m) {
+		case 9:
+			world.setBlockAndMetadata(i, j, k, Block.sand.blockID, 0);
+			break;
+		case 10:
+			world.setBlockAndMetadata(i, j, k, Block.dirt.blockID, 0);
+			break;
+		case 11:
+			world.setBlockAndMetadata(i, j, k, Block.blockClay.blockID, 0);
+			break;
+		case 12:
+			world.setBlockAndMetadata(i, j, k, Block.waterStill.blockID, 0);
+			break;
+		default:
+			world.setBlockAndMetadata(i, j, k, 0, 0);
+			break;
 		}
 	}
 
@@ -106,15 +135,19 @@ public class BlockFrass extends Block {
 			world.setBlockWithNotify(i, j, k, 0);
 			break;
 		case 1:
+		case 9:
 			world.setBlockWithNotify(i, j, k, Block.sand.blockID);
 			break;
 		case 2:
+		case 10:
 			world.setBlockWithNotify(i, j, k, Block.dirt.blockID);
 			break;
 		case 3:
+		case 11:
 			world.setBlockWithNotify(i, j, k, Block.blockClay.blockID);
 			break;
 		case 4:
+		case 12:
 			world.setBlockWithNotify(i, j, k, Block.waterStill.blockID);
 			break;
 		default:
@@ -138,25 +171,25 @@ public class BlockFrass extends Block {
 		if(meta == 0) {
 			return 26;
 		}
-		else if(meta == 1) {
+		else if(meta == 1 || meta == 8) {
 			if(par1 == 0 || par1 == 1) {
 				return 21;
 			}
 			return 22;
 		}
-		else if(meta == 2) {
+		else if(meta == 2 || meta == 9) {
 			if(par1 == 0 || par1 == 1) {
 				return 24;
 			}
 			return 25;
 		}
-		else if(meta == 3) {
+		else if(meta == 3 || meta == 10) {
 			if(par1 == 0 || par1 == 1) {
 				return 19;
 			}
 			return 20;
 		}
-		else if(meta == 4) {
+		else if(meta == 4 || meta == 11) {
 			return 23;
 		}
 		return 26;
