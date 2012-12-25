@@ -101,7 +101,26 @@ public class BlockFrass extends Block {
 	@Override
 	public void onBlockDestroyedByPlayer(World world, int i, int j,
 			int k, int l) {
-		world.setBlockWithNotify(i, j, k, l);
+		switch(l) {
+		case 0:
+			world.setBlockWithNotify(i, j, k, 0);
+			break;
+		case 1:
+			world.setBlockWithNotify(i, j, k, Block.sand.blockID);
+			break;
+		case 2:
+			world.setBlockWithNotify(i, j, k, Block.dirt.blockID);
+			break;
+		case 3:
+			world.setBlockWithNotify(i, j, k, Block.blockClay.blockID);
+			break;
+		case 4:
+			world.setBlockWithNotify(i, j, k, Block.waterStill.blockID);
+			break;
+		default:
+			world.setBlockWithNotify(i, j, k, 0);
+			break;
+		}
 	}
 
 	@Override
