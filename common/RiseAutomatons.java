@@ -116,6 +116,13 @@ public class RiseAutomatons {
 
 			Ids.eupraxia = cfg.get(Configuration.CATEGORY_GENERAL, "eupraxia", Ids.eupraxia).getInt();
 
+			Ids.biomeGiants = cfg.get(Configuration.CATEGORY_GENERAL, "biomeGiants", Ids.biomeGiants).getInt();
+			Ids.biomeAutumn = cfg.get(Configuration.CATEGORY_GENERAL, "biomeAutumn", Ids.biomeAutumn).getInt();
+			Ids.biomeWindFarm = cfg.get(Configuration.CATEGORY_GENERAL, "biomeWindFarm", Ids.biomeWindFarm).getInt();
+			Ids.biomeCity = cfg.get(Configuration.CATEGORY_GENERAL, "biomeCity", Ids.biomeCity).getInt();
+			Ids.biomeTech = cfg.get(Configuration.CATEGORY_GENERAL, "biomeTech", Ids.biomeTech).getInt();
+			Ids.techBiomeFrequency = cfg.get(Configuration.CATEGORY_GENERAL, "techBiomeFrequency", Ids.techBiomeFrequency).getInt();
+
 			Ids.guiFactotum = cfg.get(Configuration.CATEGORY_GENERAL, "guiFactotum", Ids.guiFactotum).getInt();
 
 			enableCheatRecipe = cfg.get(Configuration.CATEGORY_GENERAL, "enableCheatRecipe", false).getBoolean(false);
