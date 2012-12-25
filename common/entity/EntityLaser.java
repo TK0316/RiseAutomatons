@@ -379,6 +379,9 @@ public class EntityLaser extends EntityThrowable {
 	protected void onImpact(MovingObjectPosition var1) {
 
 		if (var1.entityHit != null) {
+			if(var1.entityHit == shootingEntity) {
+				return;
+			}
 			if (var1.entityHit instanceof EntityLiving) {
 				var1.entityHit.attackEntityFrom(DamageSource.generic, 1);
 			}
