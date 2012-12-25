@@ -48,6 +48,7 @@ public class EntityGuard extends EntityOwnedBot implements IBot {
 
 		this(world);
 		setPosition(d, d1 + this.yOffset, d2);
+		this.texture = GUARD_PNG;
 		this.motionX = 0.0D;
 		this.motionY = 0.0D;
 		this.motionZ = 0.0D;
@@ -135,11 +136,12 @@ public class EntityGuard extends EntityOwnedBot implements IBot {
 	@Override
 	protected Entity findPlayerToAttack() {
 
-		List list = this.worldObj.getEntitiesWithinAABB(EntityMob.class,
-				this.boundingBox.expand(12.0D, 6.0D, 12.0D));
-		List list1 = this.worldObj.getEntitiesWithinAABB(EntitySlime.class,
-				this.boundingBox.expand(12.0D, 6.0D, 12.0D));
-		list.addAll(list1);
+		List list = this.worldObj.getEntitiesWithinAABB(EntityMob.class, this.boundingBox.expand(12.0D, 6.0D, 12.0D));
+		list.addAll(this.worldObj.getEntitiesWithinAABB(EntitySlime.class, this.boundingBox.expand(12.0D, 6.0D, 12.0D)));
+		list.addAll(this.worldObj.getEntitiesWithinAABB(EntityAniBot.class, this.boundingBox.expand(12.0D, 6.0D, 12.0D)));
+		list.addAll(this.worldObj.getEntitiesWithinAABB(EntitySlime.class, this.boundingBox.expand(12.0D, 6.0D, 12.0D)));
+		list.addAll(this.worldObj.getEntitiesWithinAABB(EntitySlime.class, this.boundingBox.expand(12.0D, 6.0D, 12.0D)));
+		//list.addAll(list1);
 		if (!list.isEmpty()) {
 			return closest(list);
 		}
