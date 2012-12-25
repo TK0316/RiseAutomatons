@@ -102,7 +102,9 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 		if (isWet()) {
 			if (isEntityAlive()) {
 
-				dropper();
+				if (!worldObj.isRemote) {
+					dropper();
+				}
 				health = 0;
 			}
 		}
@@ -132,7 +134,7 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 	public void onDeath(DamageSource damagesource) {
 		super.onDeath(damagesource);
 
-		if (!Universal.improperWorld(worldObj)) {
+		if (!worldObj.isRemote) {
 
 			dropper();// a(field_34905_c > 0);
 			setDead();
@@ -163,12 +165,11 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 							- (double) width, d, d1, d2);
 		}
 
-		if (!Universal.improperWorld(worldObj)) {
+		if (!worldObj.isRemote) {
 			EntityItem entityitem = new EntityItem(worldObj, posX, posY + 1,
 					posZ, new ItemStack(Ids.soulCore, 1, 0));
 			entityitem.delayBeforeCanPickup = 10;
-			entityitem.setVelocity(Math.random() * 0.25 - 0.125, 0.25,
-					Math.random() * 0.25 - 0.125);
+			//entityitem.setVelocity(Math.random() * 0.25 - 0.125, 0.25, Math.random() * 0.25 - 0.125);
 			worldObj.spawnEntityInWorld(entityitem);
 			//
 			int meta = MathHelper
