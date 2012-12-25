@@ -23,8 +23,8 @@ public class BiomeGenTech extends BiomeGenForest {
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityHelios.class, 14, 4, 4));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityBobby.class, 16, 4, 4));
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityGolem.class, 5, 4, 4));
-		this.spawnableCreatureList.add(new SpawnListEntry(EntitySlider.class, 4, 4, 4));
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityWatcher.class, 12, 4, 4));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntitySlider.class, 4, 4, 4));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityWatcher.class, 12, 4, 4));
 	}
 
 	@Override
