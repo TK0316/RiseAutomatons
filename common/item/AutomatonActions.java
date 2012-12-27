@@ -25,44 +25,31 @@ public class AutomatonActions
   }
 
   private static int getType(int i) {
-	  switch(i) {
-	  case 82:
+	  if(i == Block.sand.blockID) {
 		  return 1;
-	  case 12:
-		  return 2;
-	  case 9:
-		  return 3;
-	  case 8:
-	  case 79:
-		  return 4;
-	  case 2:
-	  case 3:
-	  case 4:
-		  return 5;
-	  case 39:
-	  case 40:
-	  case 83:
-	  case 81:
-	  case 86:
-	  case 59:
-		  return 6;
-	  case 17:
-	  case 18:
-		  return 7;
-	  case 37:
-	  case 38:
-	  case 6:
-	  case 31:
-	  case 32:
-		  return 8;
-	  case 60:
-		  return 9;
-	  case 78:
-		  return 10;
-	  default:
-		  return 0;
 	  }
-
+	  else if(i == Block.grass.blockID || i == Block.dirt.blockID) {
+		  return 2;
+	  }
+	  else if(i == Block.blockClay.blockID) {
+		  return 3;
+	  }
+	  else if(i == Block.waterMoving.blockID || i == Block.waterStill.blockID || i == Block.ice.blockID) {
+		  return 4;
+	  }
+	  else if(i == Block.mushroomBrown.blockID || i == Block.mushroomRed.blockID || i == Block.crops.blockID || i == Block.cactus.blockID || i == Block.reed.blockID || i == Block.pumpkin.blockID) {
+		  return 5;
+	  }
+	  else if(i == Block.wood.blockID || i == Block.leaves.blockID) {
+		  return 6;
+	  }
+	  else if(i == Block.sapling.blockID || i == Block.tallGrass.blockID || i == Block.deadBush.blockID || i == Block.plantYellow.blockID || i == Block.plantRed.blockID) {
+		  return 7;
+	  }
+	  else if(i == Block.snow.blockID) {
+		  return 8;
+	  }
+	  return 0;
   }
 
   public static void Frassify(World world, EntityPlayer entityplayer)
@@ -88,37 +75,31 @@ public class AutomatonActions
       int l1 = i + nerp[l][0];
       int i2 = j + nerp[l][1];
       int j2 = k + nerp[l][2];
-      switch (k1)
-      {
-      case 1:
-        world.setBlockWithNotify(l1, i2, j2, Ids.blockFrass);
-      case 2:
-        world.setBlockAndMetadataWithNotify(l1, i2, j2, Ids.blockFrass, 2);
-        break;
-      case 3:
-        world.setBlockAndMetadataWithNotify(l1, i2, j2, Ids.blockFrass, 0);
-        break;
-      case 4:
-        world.setBlockAndMetadataWithNotify(l1, i2, j2, Ids.blockFrass, 1);
-        break;
-      case 5:
-        world.setBlockAndMetadataWithNotify(l1, i2, j2, Ids.blockFrass, 3);
-        break;
-      case 6:
-        world.setBlockWithNotify(l1, i2, j2, Ids.blockGrower);
-        break;
-      case 7:
-        world.setBlockAndMetadataWithNotify(l1, i2, j2, j1 != 17 ? Ids.blockCrink : Ids.blockTech, j1 != 17 ? 0 : 1);
-        break;
-      case 8:
-        world.setBlockWithNotify(l1, i2, j2, Ids.blockDapling);
-        break;
-      case 9:
-        world.setBlockAndMetadataWithNotify(l1, i2, j2, Ids.blockFrass, 1);
-        break;
-      case 10:
-        world.setBlockWithNotify(l1, i2, j2, 0);
-      }
+			switch (k1) {
+			case 1:
+				world.setBlockAndMetadata(l1, i2, j2, Ids.blockFrass, 1);
+				break;
+			case 2:
+				world.setBlockAndMetadata(l1, i2, j2, Ids.blockFrass, 2);
+				break;
+			case 3:
+				world.setBlockAndMetadata(l1, i2, j2, Ids.blockFrass, 3);
+				break;
+			case 4:
+				world.setBlockAndMetadata(l1, i2, j2, Ids.blockFrass, 4);
+				break;
+			case 5:
+				world.setBlock(l1, i2, j2, Ids.blockGrower);
+				break;
+			case 6:
+				world.setBlockAndMetadataWithNotify(l1, i2, j2, j1 != 17 ? Ids.blockCrink : Ids.blockTech, j1 != 17 ? 0 : 1);
+				break;
+			case 7:
+				world.setBlock(l1, i2, j2, Ids.blockDapling);
+				break;
+			default:
+				world.setBlockWithNotify(l1, i2, j2, 0);
+			}
 
     }
 
