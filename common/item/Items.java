@@ -52,6 +52,9 @@ public class Items {
 		LanguageRegistry.instance().addNameForObject(naturizer, "en_US", "Organic Conversion System");
 		LanguageRegistry.instance().addNameForObject(techifier, "en_US", "Bionic Conversion System");
 		LanguageRegistry.instance().addNameForObject(pickTech, "en_US", "Charged Pick");
+
+		LanguageRegistry.instance().addNameForObject(new ItemStack(Ids.itemVirus, 1, 0), "en_US", "Self-Destruction Program(Inactive)");
+		LanguageRegistry.instance().addNameForObject(new ItemStack(Ids.itemVirus, 1, 1), "en_US", "Self-Destruction Program(Active)");
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -129,6 +132,10 @@ public class Items {
 			.setTextureFile(ITEMS_PNG).setIconIndex(26)
 			.setItemName("pickTech")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
+	public static Item virus = new ItemVirus(Ids.itemVirus - 256)
+	.setTextureFile(ITEMS_PNG).setIconIndex(27)
+	.setItemName("virus")
+	.setCreativeTab(RiseAutomatons.tabAutomatons);
 
 	public static Item chisel;
 	public static Item mortar;

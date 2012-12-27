@@ -445,6 +445,8 @@ public class Recipes {
 			new ItemStack(Block.sapling, 1, 2), Item.bucketWater, Item.clay});
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.slimeBall, 3), new Object[] {
 			new ItemStack(Block.sapling, 1, 3), Item.bucketWater, Item.clay});
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.virus, 1, 1), new Object[] {
+			new ItemStack(Items.virus, 1, 0), Blocks.crystal});
 	}
 
 	private static void addAutomatonRecipes() {

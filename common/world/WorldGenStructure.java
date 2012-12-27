@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import riseautomatons.common.Ids;
+import riseautomatons.common.item.Items;
 
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
@@ -724,6 +725,9 @@ public class WorldGenStructure extends WorldGenerator {
 		}
 		if (i == 18) {
 			return new ItemStack(Block.sapling, random.nextInt(30) + 1);
+		}
+		if (i == 19) {
+			return new ItemStack(Items.virus, random.nextInt(30) + 1, 0);
 		}
 		if( i > 40) {
 			int j = random.nextInt(1000);

@@ -1,11 +1,13 @@
 package riseautomatons.common.entity;
 
 import net.minecraft.src.ModLoader;
+import net.minecraft.src.RenderSnowball;
 import net.minecraftforge.client.MinecraftForgeClient;
 import riseautomatons.common.Ids;
 import riseautomatons.common.RiseAutomatons;
 import riseautomatons.common.block.BlockSentry;
 import riseautomatons.common.block.BlockWorker;
+import riseautomatons.common.item.Items;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
@@ -66,6 +68,9 @@ public class Entities {
 
 		EntityRegistry.registerModEntity(EntityLaser.class, "Laser", Ids.entityLaserId, RiseAutomatons.instance, 64, 2, true);
 		EntityRegistry.registerGlobalEntityID(EntityLaser.class, "Laser", Ids.entityLaserId);
+
+		EntityRegistry.registerModEntity(EntityVirus.class, "Virus", Ids.entityVirusId, RiseAutomatons.instance, 64, 2, true);
+		EntityRegistry.registerGlobalEntityID(EntityVirus.class, "Virus", Ids.entityVirusId);
 
 		// Effect
 
@@ -130,6 +135,8 @@ public class Entities {
 		RenderingRegistry.registerEntityRenderingHandler(EntityOmni.class, new RenderBot(new ModelOmni(), 0.25F));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityLaser.class, new RenderLaser());
+
+		RenderingRegistry.registerEntityRenderingHandler(EntityVirus.class, new RenderVirus());
 	}
 
 }

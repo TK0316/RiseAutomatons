@@ -25,6 +25,7 @@ public class Ids {
 	public static int itemBeacon = 2034;
 	public static int itemGuard = 2035;
 	public static int itemOmni = 2036;
+	public static int itemVirus = 2037;
 
 
 	// Blocks
@@ -84,6 +85,8 @@ public class Ids {
 	public static int entitySliderId = 111;
 	public static int entityBobbyId = 112;
 	public static int entityHeliosId = 113;
+
+	public static int entityVirusId = 115;
 
 	// etc.
 	public static int builderLevel = 60;
