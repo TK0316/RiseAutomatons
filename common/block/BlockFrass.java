@@ -61,13 +61,16 @@ public class BlockFrass extends Block {
 			for(int z = -1; z <= 1; z++) {
 				for(int y = -1; y <= 1; y++) {
 					if(m < 8) {
+						if(random.nextInt(3) != 1) {
+							continue;
+						}
 						int blockId = world.getBlockId(i + x, j + y, k + z);
 						int meta = 0;
 						if(blockId == Block.sand.blockID) {
 							meta = 1;
 						}
 						else if(blockId == Block.grass.blockID) {
-							meta = 8;
+							meta = 2;
 						}
 						else if(blockId == Block.dirt.blockID) {
 							meta = 2;
@@ -99,14 +102,17 @@ public class BlockFrass extends Block {
 					else {
 						int blockId = world.getBlockId(i + x, j + y, k + z);
 						int meta = world.getBlockMetadata(i + x, j + y, k + z);
-						if(blockId == blockID) {
+						if(blockId == Blocks.frass.blockID) {
 							if(meta < 8) {
-								world.setBlockMetadata(i + x, j + y, k + z, meta + 8);
+								world.setBlockAndMetadataWithNotify(i + x, j + y, k + z, Ids.blockFrass, meta + 8);
 							}
 						}
 					}
 				}
 			}
+		}
+		if(random.nextInt(3) != 1) {
+			return;
 		}
 		switch(m) {
 		case 9:
@@ -122,7 +128,6 @@ public class BlockFrass extends Block {
 			world.setBlockAndMetadata(i, j, k, Block.waterStill.blockID, 0);
 			break;
 		default:
-			world.setBlockAndMetadata(i, j, k, 0, 0);
 			break;
 		}
 	}
@@ -171,25 +176,25 @@ public class BlockFrass extends Block {
 		if(meta == 0) {
 			return 26;
 		}
-		else if(meta == 1 || meta == 8) {
+		else if(meta == 1 || meta == 9) {
 			if(par1 == 0 || par1 == 1) {
 				return 21;
 			}
 			return 22;
 		}
-		else if(meta == 2 || meta == 9) {
+		else if(meta == 2 || meta == 10) {
 			if(par1 == 0 || par1 == 1) {
 				return 24;
 			}
 			return 25;
 		}
-		else if(meta == 3 || meta == 10) {
+		else if(meta == 3 || meta == 11) {
 			if(par1 == 0 || par1 == 1) {
 				return 19;
 			}
 			return 20;
 		}
-		else if(meta == 4 || meta == 11) {
+		else if(meta == 4 || meta == 12) {
 			return 23;
 		}
 		return 26;
