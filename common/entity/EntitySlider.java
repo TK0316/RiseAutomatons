@@ -52,6 +52,10 @@ public class EntitySlider extends EntityAniBot implements IBot {
 	@Override
 	public boolean attackEntityFrom(DamageSource damagesource, int i) {
 
+		if(damagesource.damageType == DamageSource.fall.damageType) {
+			return true;
+		}
+
 		if (super.attackEntityFrom(damagesource, i)) {
 			fleeingTick = 0;
 			Entity entity = damagesource.getEntity();
