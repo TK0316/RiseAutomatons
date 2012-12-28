@@ -12,7 +12,9 @@ import net.minecraft.src.EntityAILeapAtTarget;
 import net.minecraft.src.EntityAILookIdle;
 import net.minecraft.src.EntityAINearestAttackableTarget;
 import net.minecraft.src.EntityAIWatchClosest;
+import net.minecraft.src.EntityChicken;
 import net.minecraft.src.EntityItem;
+import net.minecraft.src.EntityMob;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.MathHelper;
@@ -45,11 +47,10 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 		targetTasks.addTask(1, new EntityAIBotOwnerHurtByTarget(this));
 		targetTasks.addTask(2, new EntityAIBotOwnerHurtTarget(this));
 		targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this,
-				net.minecraft.src.EntityChicken.class, 16F, 50, false));
-		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this,
-				net.minecraft.src.EntityMob.class, 24F, 1, true));
-
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityChicken.class, 16F, 50, false));
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityMob.class, 24F, 1, true));
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityAniBot.class, 24F, 1, true));
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityBot.class, 24F, 1, true));
 	}
 
 	public EntitySentry(World world, double d, double d1, double d2, int turn,
