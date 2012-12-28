@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import riseautomatons.common.Ids;
+import riseautomatons.common.item.EnumCraftSetType;
+import riseautomatons.common.item.EnumSoulCore;
 import riseautomatons.common.item.Items;
 
 import net.minecraft.src.Block;
@@ -680,16 +682,16 @@ public class WorldGenStructure extends WorldGenerator {
 			return new ItemStack(Item.ingotIron, random.nextInt(4) + 1);
 		}
 		if (i == 2) {
-			return new ItemStack(Ids.soulCore, 1, 4);
+			return new ItemStack(Ids.soulCore, 1, EnumSoulCore.STONEEMPTY.ordinal());
 		}
 		if (i == 3) {
-			return new ItemStack(Ids.soulCore, 1, 5);
+			return new ItemStack(Ids.soulCore, 1, EnumSoulCore.SOULSYNTH.ordinal());
 		}
 		if (i == 4) {
 			return new ItemStack(Ids.itemWorker, random.nextInt(4) + 1, 0);
 		}
 		if (i == 5) {
-			// return new ItemStack(Ids.crystal, random.nextInt(4) + 1,0);
+			return new ItemStack(Ids.blockCrystal, random.nextInt(4) + 1,0);
 		}
 
 		if (i == 7) {
@@ -705,13 +707,13 @@ public class WorldGenStructure extends WorldGenerator {
 		}
 
 		if (i == 12) {
-			return new ItemStack(Ids.soulCore, random.nextInt(20) + 3, 0);
+			return new ItemStack(Ids.soulCore, random.nextInt(20) + 3, EnumSoulCore.SOULPURE.ordinal());
 		}
 		if (i == 13) {
 			return new ItemStack(Item.diamond, 1);
 		}
 		if (i == 14) {
-			return new ItemStack(Ids.craftSet, random.nextInt(15) + 3, 0);
+			return new ItemStack(Ids.craftSet, random.nextInt(15) + 3, random.nextInt(EnumCraftSetType.values().length));
 		}
 		if (i == 15) {
 			return new ItemStack(Item.reed, random.nextInt(15) + 3);
