@@ -2,6 +2,7 @@ package riseautomatons.common.entity;
 
 import riseautomatons.common.Ids;
 import riseautomatons.common.Universal;
+import riseautomatons.common.item.EnumCraftSetType;
 import net.minecraft.src.DamageSource;
 import net.minecraft.src.EntityAgeable;
 import net.minecraft.src.ItemStack;
@@ -92,7 +93,7 @@ public class EntityBobby extends EntityBot implements IBot {
 				}
 			} else {
 				if (rand.nextInt(3) == 0) {
-					entityDropItem(new ItemStack(Ids.craftSet, 1, 11),
+					entityDropItem(new ItemStack(Ids.craftSet, 1, EnumCraftSetType.ROD.ordinal()),
 							0.0F);
 				}
 			}
