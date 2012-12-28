@@ -1,6 +1,7 @@
 package riseautomatons.common.spell;
 
 import riseautomatons.common.Ids;
+import riseautomatons.common.world.TeleporterEupraxia;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.World;
@@ -22,7 +23,7 @@ public class Eupraxia extends Spell {
 				.transferPlayerToDimension(thePlayer, 0);
 			} else {
 				thePlayer.mcServer.getConfigurationManager()
-				.transferPlayerToDimension(thePlayer, Ids.eupraxia);
+				.transferPlayerToDimension(thePlayer, Ids.eupraxia, new TeleporterEupraxia(thePlayer.mcServer.worldServerForDimension(Ids.eupraxia)));
 			}
 		}
 		return false;
