@@ -691,7 +691,7 @@ public class WorldGenStructure extends WorldGenerator {
 			return new ItemStack(Ids.itemWorker, random.nextInt(4) + 1, 0);
 		}
 		if (i == 5) {
-			return new ItemStack(Ids.blockCrystal, random.nextInt(4) + 1,0);
+			//return new ItemStack(Ids.blockCrystal, random.nextInt(4) + 1,0);
 		}
 
 		if (i == 7) {
