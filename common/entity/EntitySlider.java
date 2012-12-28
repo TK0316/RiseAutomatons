@@ -2,6 +2,7 @@ package riseautomatons.common.entity;
 
 import riseautomatons.common.Ids;
 import riseautomatons.common.Universal;
+import riseautomatons.common.item.EnumCraftSetType;
 import net.minecraft.src.DamageSource;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityAgeable;
@@ -180,14 +181,16 @@ public class EntitySlider extends EntityAniBot implements IBot {
 		}
 
 		if (!Universal.improperWorld(worldObj)) {
-			int R = rand.nextInt(4);
+			int R = rand.nextInt(5);
 
 			if (R == 1) {
 				entityDropItem(new ItemStack(Ids.blockBoing, 1, 0), 0.0F);
 			} else if (R == 2) {
 				entityDropItem(new ItemStack(Ids.soulCore, 1, 0), 0.0F);
 			} else if (R == 3) {
-				entityDropItem(new ItemStack(Ids.craftSet, 1, 11), 0.0F);
+				entityDropItem(new ItemStack(Ids.craftSet, 1, EnumCraftSetType.ROD.ordinal()), 0.0F);
+			} else if (R == 4) {
+				entityDropItem(new ItemStack(Ids.craftSet, 1, EnumCraftSetType.BLUECORE.ordinal()), 0.0F);
 			} else {
 				entityDropItem(new ItemStack(Ids.spring, 3, 0), 0.0F);
 			}
