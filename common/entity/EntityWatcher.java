@@ -31,12 +31,11 @@ public class EntityWatcher extends EntityMob implements IBot {
 				1, 6));
 
 		tasks.addTask(4, new EntityAIAttackOnCollide(this, moveSpeed, true));
-		tasks.addTask(8, new EntityAIWatchClosest(this,
-				net.minecraft.src.EntityPlayer.class, 8F));
+		tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8F));
 		tasks.addTask(9, new EntityAILookIdle(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this,
-				net.minecraft.src.EntityLiving.class, 24F, 1, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 2F, 1, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityOwnedBot.class, 2F, 1, true));
 
 	}
 
