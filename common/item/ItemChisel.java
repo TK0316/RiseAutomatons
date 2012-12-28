@@ -33,7 +33,7 @@ public class ItemChisel extends Item {
 					if (!world.isRemote)
 						world.spawnEntityInWorld(new EntityItem(world,
 								i + 0.5f, j + 1, k + 0.5f, new ItemStack(
-										Ids.craftSet, 1, 9)));
+										Ids.craftSet, 1, EnumCraftSetType.SMALLPLATE.ordinal())));
 
 					itemstack.damageItem(1, entityplayer);
 				}
@@ -51,7 +51,7 @@ public class ItemChisel extends Item {
 
 				if (!world.isRemote)
 					world.spawnEntityInWorld(new EntityItem(world, i + 0.5f,
-							j + 1, k + 0.5f, new ItemStack(Ids.craftSet, 1, 9)));
+							j + 1, k + 0.5f, new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SMALLPLATE.ordinal())));
 				itemstack.damageItem(1, entityplayer);
 				return true;
 			}
