@@ -27,14 +27,14 @@ public class WorldGenWindMill extends WorldGenerator {
 
 		for (n = 0; n < size - 1; n++) {
 			if (n < size - 2) {
-				world.setBlock(i - 1, j + n, k, 4);
-				world.setBlock(i + 1, j + n, k, 4);
-				world.setBlock(i, j + n, k - 1, 4);
-				world.setBlock(i, j + n, k + 1, 4);
+				//world.setBlock(i - 1, j + n, k, 4);
+				//world.setBlock(i + 1, j + n, k, 4);
+				//world.setBlock(i, j + n, k - 1, 4);
+				//world.setBlock(i, j + n, k + 1, 4);
 			}
 
 			world.setBlockAndMetadataWithNotify(i, j + n, k, Ids.blockTurn, 8);
-			world.setBlock(i, j + n, k, 4);
+			//world.setBlock(i, j + n, k, 4);
 		}
 		world.setBlockAndMetadataWithNotify(i, j + n - 1, k, Ids.blockTurn, 8);
 		world.setBlockAndMetadataWithNotify(i, j + n, k, Ids.blockWindmill, 2);
