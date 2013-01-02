@@ -18,7 +18,7 @@ import net.minecraft.src.WorldGenerator;
 public class WorldGenStructure extends WorldGenerator {
 	public int M = 7;
 	public int W;
-	public int set = 0;
+	public int set = 1;
 
 	@Override
 	public boolean generate(World world, Random random, int i, int j,
@@ -56,7 +56,8 @@ public class WorldGenStructure extends WorldGenerator {
 		// for(int jj=0;jj<M;jj++){
 
 		int RRR = set;
-		if (RRR == 0) {
+		if (random.nextInt(2) == 0) {
+		//if (RRR == 0) {
 			emptyOut(world, 24, m, m, i, j, k);
 		} else {
 			cavernize(world, random, 27, m, m, i, j, k);
@@ -394,8 +395,9 @@ public class WorldGenStructure extends WorldGenerator {
 				world.setBlockAndMetadata(i + (x - w2), j, k + (z - l2),
 						Ids.blockArch, 1); // AndMetadata
 			}
-
 		}
+		world.setBlockAndMetadata(i, j + 1, k,
+				Ids.blockArchitect, 1); // AndMetadata
 
 		for (int z = 0; z <= length; z++) {
 			for (int y = 1; y <= he; y++) {
