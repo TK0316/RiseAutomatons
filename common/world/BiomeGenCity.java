@@ -19,11 +19,13 @@ public class BiomeGenCity extends BiomeGenBase {
 		spawnableCreatureList.clear();
 		spawnableWaterCreatureList.clear();
 
-		spawnableMonsterList.add(new SpawnListEntry(EntitySlider.class, 50, 1, 6));
-		spawnableCreatureList.add(new SpawnListEntry(EntityHelios.class, 100, 1, 8));
+		spawnableMonsterList.add(new SpawnListEntry(EntitySlider.class, 10, 1, 6));
+		spawnableCreatureList.add(new SpawnListEntry(EntityHelios.class, 10, 1, 8));
+		spawnableCreatureList.add(new SpawnListEntry(EntityBobby.class, 16, 4, 4));
+		spawnableCreatureList.add(new SpawnListEntry(EntityGolem.class, 5, 4, 4));
 
 		//spawnableMonsterList.add(new SpawnListEntry(EntityAncient.class, 1, 1, 1));
-		spawnableMonsterList.add(new SpawnListEntry(EntityWatcher.class, 50, 1, 3));
+		spawnableMonsterList.add(new SpawnListEntry(EntityWatcher.class, 10, 1, 3));
 	}
 
 	@Override
