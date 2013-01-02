@@ -13,6 +13,9 @@ public class CopySoul extends Spell {
 
 	@Override
 	public boolean cast(World world, int i, int j, int k, EntityPlayer entityPlayer) {
+		if (world.isRemote) {
+			return false;
+		}
 		List L = world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(i - 2, j - 2, k - 2, i + 2, j + 2, k + 2));
 		EntityItem targetItem = null;
 
@@ -48,5 +51,6 @@ public class CopySoul extends Spell {
 			}
 		}
 
-		return success;	}
+		return success;
+	}
 }
