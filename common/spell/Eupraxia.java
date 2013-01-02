@@ -20,7 +20,7 @@ public class Eupraxia extends Spell {
 
 			if (world.provider.dimensionId == Ids.eupraxia) {
 				thePlayer.mcServer.getConfigurationManager()
-				.transferPlayerToDimension(thePlayer, 0);
+				.transferPlayerToDimension(thePlayer, 0, new TeleporterEupraxia(thePlayer.mcServer.worldServerForDimension(Ids.eupraxia)));
 			} else {
 				thePlayer.mcServer.getConfigurationManager()
 				.transferPlayerToDimension(thePlayer, Ids.eupraxia, new TeleporterEupraxia(thePlayer.mcServer.worldServerForDimension(Ids.eupraxia)));
