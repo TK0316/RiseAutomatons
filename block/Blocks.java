@@ -27,6 +27,8 @@ public class Blocks {
 		LanguageRegistry.addName(worker, "Worker");
 		GameRegistry.registerBlock(sentry);
 		LanguageRegistry.addName(sentry, "Sentry");
+		GameRegistry.registerBlock(tote);
+		LanguageRegistry.addName(tote, "Tote");
 		GameRegistry.registerBlock(beacon);
 		LanguageRegistry.addName(beacon, "Beacon");
 
@@ -81,11 +83,14 @@ public class Blocks {
 		LanguageRegistry.addName(dapling, "Dapling");
 		GameRegistry.registerBlock(duplex);
 		LanguageRegistry.addName(duplex, "Duplex");
+		GameRegistry.registerBlock(latch);
+		LanguageRegistry.addName(latch, "Latch");
 
 		GameRegistry.registerBlock(teleporter);
 		LanguageRegistry.addName(teleporter, "Teleporter");
 
 		GameRegistry.registerTileEntity(TileEntityBeacon.class, "BotBeacon");
+		GameRegistry.registerTileEntity(TileEntityLatch.class, "Latch");
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -105,13 +110,17 @@ public class Blocks {
 		RenderingRegistry.registerBlockHandler(new RenderWorkerBlock());
 		RenderingRegistry.registerBlockHandler(new RenderSentryBlock());
 		RenderingRegistry.registerBlockHandler(new RenderChalkBlock());
+		RenderingRegistry.registerBlockHandler(new RenderToteBlock());
 	}
 
 	public static Block worker = (new BlockWorker(Ids.blockWorker))
 			.setHardness(0.5F).setResistance(10F).setBlockName("Worker");
     public static Block sentry = (new BlockSentry(Ids.blockSentry))
     		.setHardness(0.5F).setResistance(10F).setBlockName("Sentry");
-    public static Block beacon = (new BlockBeacon(Ids.blockBeacon))
+	public static Block tote = (new BlockTote(Ids.blockTote))
+			.setHardness(1F).setResistance(20F)
+			.setStepSound(Block.soundMetalFootstep).setBlockName("Tote");
+	public static Block beacon = (new BlockBeacon(Ids.blockBeacon))
     		.setHardness(0.5F).setResistance(10F).setBlockName("Beacon");
 
 	public static Block gearbox = (new BlockGearBox(Ids.blockGearbox, 10, Material.iron))
@@ -209,6 +218,10 @@ public class Blocks {
 			.setTextureFile(BLOCK_PNG)
 			.setHardness(0.1F).setLightOpacity(1).setLightValue(0.5F)
 			.setStepSound(Block.soundGlassFootstep).setBlockName("duplex")
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
+	public static Block latch = (new BlockLatch(Ids.blockLatch))
+			.setHardness(1F).setResistance(20F)
+			.setStepSound(Block.soundMetalFootstep).setBlockName("latch")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 
 	public static Block teleporter = (new BlockTeleporter())

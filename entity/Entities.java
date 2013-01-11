@@ -5,6 +5,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import riseautomatons.Ids;
 import riseautomatons.RiseAutomatons;
 import riseautomatons.block.BlockSentry;
+import riseautomatons.block.BlockTote;
 import riseautomatons.block.BlockWorker;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -23,6 +24,10 @@ public class Entities {
 		LanguageRegistry.instance().addStringLocalization("entity.Sentry.name", "en_US", "Sentry");
 		BlockSentry.renderId = RenderingRegistry.getNextAvailableRenderId();
 		EntityRegistry.registerGlobalEntityID(EntitySentry.class, "Sentry", Ids.entitySentryId, 0xCCCCCC, 0xFFFFFF);
+
+		LanguageRegistry.instance().addStringLocalization("entity.Tote.name", "en_US", "Tote");
+		BlockTote.renderId = RenderingRegistry.getNextAvailableRenderId();
+		EntityRegistry.registerGlobalEntityID(EntityTote.class, "Tote", Ids.entityToteId, 0xCCCCCC, 0xFFFFFF);
 
 		LanguageRegistry.instance().addStringLocalization("entity.Golem.name", "en_US", "Golem");
 		EntityGolemNormal.renderId = RenderingRegistry.getNextAvailableRenderId();
@@ -96,6 +101,9 @@ public class Entities {
 		MinecraftForgeClient.preloadTexture(EntitySentry.SENTRY_PNG);
 		MinecraftForgeClient.preloadTexture(EntitySentry.SENTRYBLOCK_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySentry.class, new RenderBot(new ModelSentry(), 0.75F));
+
+		MinecraftForgeClient.preloadTexture(EntityTote.TOTE_PNG);
+		RenderingRegistry.registerEntityRenderingHandler(EntityTote.class, new RenderTote(new ModelTote(), 0.5F));
 
 		MinecraftForgeClient.preloadTexture(EntityGolemNormal.GOLEM_PNG);
 		MinecraftForgeClient.preloadTexture(EntityGolemPure.GOLEM_PURE_PNG);

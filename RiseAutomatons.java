@@ -84,6 +84,9 @@ public class RiseAutomatons {
 			Ids.itemFactotum = cfg.get(Configuration.CATEGORY_ITEM, "itemFactotum", Ids.itemFactotum).getInt();
 			Ids.itemBeacon = cfg.get(Configuration.CATEGORY_ITEM, "itemBeacon", Ids.itemBeacon).getInt();
 			Ids.itemGuard = cfg.get(Configuration.CATEGORY_ITEM, "itemGuard", Ids.itemGuard).getInt();
+			Ids.itemOmni = cfg.get(Configuration.CATEGORY_ITEM, "itemOmni", Ids.itemOmni).getInt();
+			Ids.itemVirus = cfg.get(Configuration.CATEGORY_ITEM, "itemVirus", Ids.itemVirus).getInt();
+			Ids.itemTote = cfg.get(Configuration.CATEGORY_ITEM, "itemTote", Ids.itemTote).getInt();
 
 			Ids.blockWorker = cfg.get(Configuration.CATEGORY_BLOCK, "blockWorker", Ids.blockWorker).getInt();
 			Ids.blockChalk = cfg.get(Configuration.CATEGORY_BLOCK, "blockChalk", Ids.blockChalk).getInt();
@@ -113,6 +116,7 @@ public class RiseAutomatons {
 			Ids.blockHeal = cfg.get(Configuration.CATEGORY_BLOCK, "blockHeal", Ids.blockHeal).getInt();
 			Ids.blockDapling = cfg.get(Configuration.CATEGORY_BLOCK, "blockDapling", Ids.blockDapling).getInt();
 			Ids.blockDuplex = cfg.get(Configuration.CATEGORY_BLOCK, "blockDuplex", Ids.blockDuplex).getInt();
+			Ids.blockLatch = cfg.get(Configuration.CATEGORY_BLOCK, "blockLatch", Ids.blockLatch).getInt();
 
 			Ids.eupraxia = cfg.get(Configuration.CATEGORY_GENERAL, "eupraxia", Ids.eupraxia).getInt();
 
@@ -124,6 +128,7 @@ public class RiseAutomatons {
 			Ids.techBiomeFrequency = cfg.get(Configuration.CATEGORY_GENERAL, "techBiomeFrequency", Ids.techBiomeFrequency).getInt();
 
 			Ids.guiFactotum = cfg.get(Configuration.CATEGORY_GENERAL, "guiFactotum", Ids.guiFactotum).getInt();
+			Ids.guiTote = cfg.get(Configuration.CATEGORY_GENERAL, "guiTote", Ids.guiTote).getInt();
 
 			enableCheatRecipe = cfg.get(Configuration.CATEGORY_GENERAL, "enableCheatRecipe", false).getBoolean(false);
 			generateTechBiome = cfg.get(Configuration.CATEGORY_GENERAL, "generateTechBiome", true).getBoolean(true);
@@ -142,6 +147,9 @@ public class RiseAutomatons {
 			Ids.entityWatcherId = cfg.get(Configuration.CATEGORY_GENERAL, "entityWatcherId", Ids.entityWatcherId).getInt();
 			Ids.entitySliderId = cfg.get(Configuration.CATEGORY_GENERAL, "entitySliderId", Ids.entitySliderId).getInt();
 			Ids.entityBobbyId = cfg.get(Configuration.CATEGORY_GENERAL, "entityBobbyId", Ids.entityBobbyId).getInt();
+			Ids.entityHeliosId = cfg.get(Configuration.CATEGORY_GENERAL, "entityHeliosId", Ids.entityHeliosId).getInt();
+			Ids.entityVirusId = cfg.get(Configuration.CATEGORY_GENERAL, "entityVirusId", Ids.entityVirusId).getInt();
+			Ids.entityToteId = cfg.get(Configuration.CATEGORY_GENERAL, "entityToteId", Ids.entityToteId).getInt();
 
 			cfg.save();
 

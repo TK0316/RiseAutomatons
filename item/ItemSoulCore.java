@@ -9,7 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 import riseautomatons.Universal;
+import riseautomatons.block.TileEntityLatch;
 import riseautomatons.entity.EntitySentry;
+import riseautomatons.entity.EntityTote;
 import riseautomatons.entity.EntityWorker;
 
 public class ItemSoulCore extends Item {
@@ -81,6 +83,18 @@ public class ItemSoulCore extends Item {
 					}
 					int m = world.getBlockMetadata(i, j, k);
 					world.spawnEntityInWorld(new EntitySentry(world, (float) i + 0.5F, (float) j, (float) k + 0.5F, m, entityplayer == null ? "" : entityplayer.username));
+					world.setBlockWithNotify(i, j, k, 0);
+				}
+				else if (ii == Ids.blockTote) {
+					if (itemDamage != 0) {
+						return false;
+					}
+					int m = world.getBlockMetadata(i, j, k);
+					EntityTote tote = new EntityTote(world, (float) i + 0.5F, (float) j, (float) k + 0.5F, entityplayer == null ? "" : entityplayer.username);
+					world.spawnEntityInWorld(tote);
+					TileEntityLatch tot = (TileEntityLatch) world
+							.getBlockTileEntity(i, j, k);
+					tote.cargoItems = tot.dispenserContents.clone();
 					world.setBlockWithNotify(i, j, k, 0);
 				}
 				/*else if (ii == Ids.toteBlock) {
@@ -172,7 +186,7 @@ public class ItemSoulCore extends Item {
 			}
 		}
 
-		if (ii == Ids.blockWorker || ii == Ids.blockSentry /*|| ii == Ids.toteBlock || ii == Ids.sulfOre || ii == Ids.saltOre*/) {
+		if (ii == Ids.blockWorker || ii == Ids.blockSentry || ii == Ids.blockTote /*|| ii == Ids.sulfOre || ii == Ids.saltOre*/) {
 			return true;
 		}
 		return false;

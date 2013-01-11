@@ -93,6 +93,11 @@ public class ItemBot extends Item {
 				world.spawnEntityInWorld(new EntityOmni(world, (float)i + 0.5F, (float)j, (float)k + 0.5F));
 			}
 			break;
+		case TOTE:
+			if (!Universal.improperWorld(world)) {
+				world.setBlockWithNotify(i, j, k, Ids.blockTote);
+			}
+			break;
 		default:
 			return false;
 		}

@@ -19,6 +19,7 @@ public class Items {
 		// Automatons
 		LanguageRegistry.instance().addNameForObject(worker, "en_US", "Worker");
 		LanguageRegistry.instance().addNameForObject(sentry, "en_US", "Sentry");
+		LanguageRegistry.instance().addNameForObject(tote, "en_US", "Tote");
 		LanguageRegistry.instance().addNameForObject(factotum, "en_US", "Factotum");
 		LanguageRegistry.instance().addNameForObject(beacon, "en_US", "Beacon");
 		LanguageRegistry.instance().addNameForObject(guard, "en_US", "Guard Turret");
@@ -84,6 +85,10 @@ public class Items {
 	public static Item omni = (new ItemBot(Ids.itemOmni - 256, EnumBotType.OMNI))
 			.setTextureFile(ITEMS_PNG).setIconIndex(5)
 			.setItemName("omni").setMaxStackSize(1)
+			.setCreativeTab(RiseAutomatons.tabAutomatons);
+	public static Item tote = (new ItemBot(Ids.itemTote - 256, EnumBotType.TOTE))
+			.setTextureFile(ITEMS_PNG).setIconIndex(6)
+			.setItemName("tote").setMaxStackSize(1)
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 
 	// Normal Items

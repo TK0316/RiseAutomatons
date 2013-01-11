@@ -25,6 +25,7 @@ public class Ids {
 	public static int itemGuard = 2035;
 	public static int itemOmni = 2036;
 	public static int itemVirus = 2037;
+	public static int itemTote = 2038;
 
 
 	// Blocks
@@ -55,6 +56,7 @@ public class Ids {
 	public static int blockHeal = 2325;
 	public static int blockDapling = 2326;
 	public static int blockDuplex = 2327;
+	public static int blockLatch = 2328;
 
 	// Dimension
 	public static int eupraxia = 99;
@@ -66,8 +68,10 @@ public class Ids {
 	public static int biomeCity = 45;
 	public static int biomeTech = 46;
 	public static int techBiomeFrequency = 1;
+
 	// GUI
 	public static int guiFactotum = 30;
+	public static int guiTote = 31;
 
 	// entities
 	public static int entityWorkerId = 101;
@@ -86,6 +90,7 @@ public class Ids {
 	public static int entityHeliosId = 113;
 
 	public static int entityVirusId = 115;
+	public static int entityToteId = 116;
 
 	// etc.
 	public static int builderLevel = 60;

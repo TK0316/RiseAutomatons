@@ -447,6 +447,27 @@ public class Recipes {
 			new ItemStack(Block.sapling, 1, 3), Item.bucketWater, Item.clay});
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.virus, 1, 1), new Object[] {
 			new ItemStack(Items.virus, 1, 0), Blocks.crystal});
+
+		for(int i = 0; i < 4; i++) {
+			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.tech, 2, i), new Object[] {
+				new ItemStack(Blocks.tech, 1, i), Blocks.duplex});
+		}
+
+		for(int i = 0; i < 2; i++) {
+			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.sky, 2, i), new Object[] {
+				new ItemStack(Blocks.sky, 1, i), Blocks.duplex});
+		}
+
+		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.arch, 2), new Object[] {
+			new ItemStack(Blocks.arch, 1), Blocks.duplex});
+		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.archBend, 2), new Object[] {
+			new ItemStack(Blocks.archBend, 1), Blocks.duplex});
+
+		GameRegistry.addRecipe(new ItemStack(Ids.blockLatch, 1, 0), new Object[] {
+			"##g",
+			"s #",
+			"#r#",
+			'#', smallPlate,'r',Item.redstone,'g',smallGear,'s',spring});
 	}
 
 	private static void addAutomatonRecipes() {
@@ -485,12 +506,20 @@ public class Recipes {
 			"b",
 			'p', Items.blaster, 'b', Items.beacon});
 
+		// Omni recipe
 		GameRegistry.addRecipe(new ItemStack(Ids.itemOmni, 1, 0), new Object[] {
 			"OOO",
 			"OCO",
 			"OOO",
 			'O', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.BIONICCONGLOMERATE.ordinal()),
 			'C', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.REDCORE.ordinal()) });
+
+		// Tote recipe
+		GameRegistry.addRecipe(new ItemStack(Ids.itemTote, 1, 0), new Object[] {
+			"ll",
+			"hL",
+			"ll",
+			'l', sLeg, 'h', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.TOTEHEAD.ordinal()), 'L', new ItemStack(Ids.blockLatch, 1, 0)});
 	}
 
 	private static void addSoulCoreRecipes() {
