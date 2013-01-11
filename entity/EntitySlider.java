@@ -41,7 +41,8 @@ public class EntitySlider extends EntityAniBot implements IBot {
 
 	@Override
 	public EntityAgeable func_90011_a(EntityAgeable var1) {
-		return new EntitySlider(worldObj);
+		//return new EntitySlider(worldObj);
+		return null;
 	}
 
 	@Override
@@ -82,6 +83,12 @@ public class EntitySlider extends EntityAniBot implements IBot {
 		}
 
 		super.onLivingUpdate();
+	}
+
+	@Override
+	public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
+		super.onCollideWithPlayer(par1EntityPlayer);
+		par1EntityPlayer.motionY = 1F;
 	}
 
 	@Override
