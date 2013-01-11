@@ -112,6 +112,9 @@ public class BlockFrass extends Block {
 			return;
 		}
 		switch(m) {
+		case 8:
+			world.setBlockAndMetadata(i, j, k, 0, 0);
+			break;
 		case 9:
 			world.setBlockAndMetadata(i, j, k, Block.sand.blockID, 0);
 			break;
@@ -125,7 +128,6 @@ public class BlockFrass extends Block {
 			world.setBlockAndMetadata(i, j, k, Block.waterStill.blockID, 0);
 			break;
 		default:
-			world.setBlockAndMetadata(i, j, k, 0, 0);
 			break;
 		}
 	}

@@ -7,6 +7,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import riseautomatons.Ids;
+import riseautomatons.block.Blocks;
 
 public class WorldGenFakeTrees extends WorldGenTrees
 {
@@ -98,9 +99,11 @@ public class WorldGenFakeTrees extends WorldGenTrees
             {
                 var8 = par1World.getBlockId(par3, par4 - 1, par5);
 
-                if ((var8 == Block.grass.blockID || var8 == Block.dirt.blockID) && par4 < 256 - var6 - 1)
+                if ((var8 == Block.grass.blockID || var8 == Block.dirt.blockID || var8 == Blocks.frass.blockID) && par4 < 256 - var6 - 1)
                 {
-                    this.setBlock(par1World, par3, par4 - 1, par5, Block.dirt.blockID);
+                	if(var8 == Block.grass.blockID) {
+                		this.setBlock(par1World, par3, par4 - 1, par5, Block.dirt.blockID);
+                	}
                     var9 = 3;
                     byte var18 = 0;
                     int var13;

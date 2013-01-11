@@ -47,7 +47,7 @@ public class BlockDapling extends Block {
 			return;
 		}*/
 
-		if (random.nextInt(1) == 0) {
+		if (random.nextInt(5) == 0) {
 			growTree(world, i, j, k, random);
 		}
 	}
