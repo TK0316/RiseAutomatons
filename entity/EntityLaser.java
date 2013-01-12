@@ -334,6 +334,10 @@ public class EntityLaser extends EntityThrowable {
 		Entity entity = par1DamageSource.getSourceOfDamage();
 
 		if (entity != null) {
+			if(entity instanceof EntityGuard) {
+				return false;
+			}
+
 			Vec3 vec3d = entity.getLookVec();
 
 			if (vec3d != null) {
@@ -382,7 +386,9 @@ public class EntityLaser extends EntityThrowable {
 				return;
 			}
 			if (var1.entityHit instanceof EntityLiving) {
-				var1.entityHit.attackEntityFrom(DamageSource.generic, 1);
+//				DamageSource.causeThrownDamage(var1.entityHit, shootingEntity);
+				;
+				var1.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(var1.entityHit, shootingEntity), 1);
 			}
 		}
 
