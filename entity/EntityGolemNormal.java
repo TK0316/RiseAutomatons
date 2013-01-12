@@ -17,11 +17,12 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 import riseautomatons.Universal;
+import riseautomatons.block.Blocks;
 
 public class EntityGolemNormal extends EntityAniBot implements IBot,
 		IBehaviorDispenseItem {
 
-	public static final String GOLEM_PNG = "/riseautomatons/agol1.png";
+	public static final String GOLEM_PNG = "/riseautomatons/agol3.png";
 	public static int renderId;
 	int maxHealth = 5;
 	public int type = 0;
@@ -190,11 +191,13 @@ public class EntityGolemNormal extends EntityAniBot implements IBot,
 			Material mat = worldObj.getBlockMaterial(xx, yy, zz);
 			int iii = getType();
 
-			if(Block.blocksList[iii] != null) {
-				if (Block.blocksList[iii].canPlaceBlockAt(worldObj, xx, yy, zz)) {
-					worldObj.setBlockAndMetadataWithNotify(xx, yy, zz, iii,
-							getColo());
-				}
+			Block b = Block.blocksList[iii];
+			if(b == null) {
+				b = Blocks.frass;
+			}
+			if (b.canPlaceBlockAt(worldObj, xx, yy, zz)) {
+				worldObj.setBlockAndMetadataWithNotify(xx, yy, zz, b.blockID,
+						getColo());
 			}
 
 			setDead();
