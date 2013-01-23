@@ -16,9 +16,11 @@ public class ChalkLogic {
 			addSpell("050;505;050;", Spells.makeBigExplosion, false);
 			addSpell("111;101;030;", Spells.makeDay, true);
 			addSpell("101;111;030;", Spells.makeNight, true);
-			addSpell("11111;10401;14541;10401;11111;", Spells.absorbSoul, true);
-			addSpell("00100;01110;11511;01110;00100;", Spells.copySoul, true);
-			addSpell("666;666;666;", Spells.eupraxia, true);
+			addSpell("11111;10401;14541;10401;11111;", Spells.absorbSoul, false);
+			addSpell("00100;01110;11511;01110;00100;", Spells.copySoul, false);
+			addSpell("666;666;666;", Spells.eupraxia, false);
+			addSpell("02320;42623;02020;00200;", Spells.teleportEnd, false);
+			addSpell("050;555;050;", Spells.teleportNether, false);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

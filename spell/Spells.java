@@ -9,4 +9,6 @@ public class Spells {
 	static Spell eupraxia = new Eupraxia();
 	static Spell makeExplosion = new MakeExplosion();
 	static Spell makeBigExplosion = new MakeBigExplosion();
+	static Spell teleportNether = new TeleportNether();
+	static Spell teleportEnd = new TeleportEnd();
 }
