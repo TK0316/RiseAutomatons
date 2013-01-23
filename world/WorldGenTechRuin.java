@@ -14,7 +14,6 @@ public class WorldGenTechRuin extends WorldGenerator {
 	@Override
 	public boolean generate(World world, Random random, int i, int j,
 			int k) {
-		System.out.println(String.valueOf(i) + "," + String.valueOf(j) + "," + String.valueOf(k));
 
 	    byte byte0 = 5;
 	    int width = 3;
@@ -47,7 +46,6 @@ public class WorldGenTechRuin extends WorldGenerator {
 	    }
 
 	    if (j1 >= 1);
-	    System.out.println("ruin");
 	    for (int x = i - 1; x < i + width + 1; x++)
 	    {
 	      for (int y = j + byte0; y >= j; y--)
@@ -77,13 +75,6 @@ public class WorldGenTechRuin extends WorldGenerator {
 
 	    int r = random.nextInt(100);
 
-	    System.out.print(i);
-	    System.out.print(",");
-	    System.out.print(j);
-	    System.out.print(",");
-	    System.out.print(k);
-	    System.out.print(",");
-	    System.out.println(r);
 	    if (r < 20) {
 	      world.setBlockAndMetadataWithNotify(i + width / 2, j + 1, k + width / 2, Ids.blockSky, 1);
 	    }
