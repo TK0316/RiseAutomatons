@@ -5,6 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.oredict.OreDictionary;
 import riseautomatons.Ids;
 import riseautomatons.RiseAutomatons;
 import riseautomatons.item.ItemArch;
@@ -45,8 +46,10 @@ public class Blocks {
 		LanguageRegistry.addName(slabBlock, "Slab");
 		GameRegistry.registerBlock(saltOre);
 		LanguageRegistry.addName(saltOre, "Salt Ore");
+		OreDictionary.registerOre("oreSalt", new ItemStack(saltOre, 1, 1));
 		GameRegistry.registerBlock(sulfOre);
 		LanguageRegistry.addName(sulfOre, "Sulfide");
+		OreDictionary.registerOre("oreSulfur", new ItemStack(sulfOre, 1, 0));
 		GameRegistry.registerBlock(tech, ItemComplex.class);
 		LanguageRegistry.addName(new ItemStack(tech, 1, 0), "Ancient Construct");
 		LanguageRegistry.addName(new ItemStack(tech, 1, 1), "Bionic Mass");
