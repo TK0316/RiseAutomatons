@@ -8,6 +8,7 @@ import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
@@ -47,6 +48,7 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 		targetTasks.addTask(2, new EntityAIBotOwnerHurtTarget(this));
 		targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
 		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityChicken.class, 16F, 50, false));
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityCreeper.class, 24F, 1, true));
 		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityMob.class, 24F, 1, true));
 		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityAniBot.class, 24F, 1, true));
 		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityBot.class, 24F, 1, true));
