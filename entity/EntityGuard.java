@@ -72,7 +72,7 @@ public class EntityGuard extends EntityOwnedBot implements IBot {
 
 	@Override
 	protected int getDropItemId() {
-		return Item.arrow.shiftedIndex;
+		return 0;
 	}
 
 	@Override
