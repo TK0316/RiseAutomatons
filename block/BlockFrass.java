@@ -47,9 +47,11 @@ public class BlockFrass extends Block {
 		if(spread == false && world.getBiomeGenForCoords(i, k).biomeName != Biomes.tech.biomeName) {
 			return;
 		}
+
+		boolean sun = true;
 		for(int n = j + 1; n < 255; n++) {
 			if(world.isAirBlock(i, n, k) == false) {
-				return;
+				sun = false;;
 			}
 		}
 
@@ -58,6 +60,9 @@ public class BlockFrass extends Block {
 			for(int z = -1; z <= 1; z++) {
 				for(int y = -1; y <= 1; y++) {
 					if(m < 8) {
+						if(sun == false) {
+							continue;
+						}
 						if(random.nextInt(3) != 1) {
 							continue;
 						}
