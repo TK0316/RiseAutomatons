@@ -40,12 +40,6 @@ public class EntitySlider extends EntityAniBot implements IBot {
 	}
 
 	@Override
-	public EntityAgeable func_90011_a(EntityAgeable var1) {
-		//return new EntitySlider(worldObj);
-		return null;
-	}
-
-	@Override
 	public int getMaxHealth() {
 		return 8;
 	}

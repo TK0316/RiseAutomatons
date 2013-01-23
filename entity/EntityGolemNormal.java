@@ -249,11 +249,6 @@ public class EntityGolemNormal extends EntityAniBot implements IBot,
 	}
 
 	@Override
-	public EntityAgeable func_90011_a(EntityAgeable var1) {
-		return null;
-	}
-
-	@Override
 	public String getTexture() {
 		return GOLEM_PNG;
 	}

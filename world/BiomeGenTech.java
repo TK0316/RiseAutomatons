@@ -21,11 +21,11 @@ public class BiomeGenTech extends BiomeGenForest {
 		worldGeneratorForest = new WorldGenFakeForest(false);
 		worldGeneratorBigTree = new WorldGenFakeBigTree(false);
 
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityHelios.class, 7, 4, 4));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityBobby.class, 8, 4, 4));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityGolemNormal.class, 5, 4, 4));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntitySlider.class, 2, 2, 4));
-		this.spawnableMonsterList.add(new SpawnListEntry(EntityWatcher.class, 1, 1, 4));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityHelios.class, 16, 4, 4));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityBobby.class, 16, 4, 4));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityGolemNormal.class, 10, 4, 4));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntitySlider.class, 16, 1, 1));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityWatcher.class, 4, 1, 1));
 	}
 
 	@Override
