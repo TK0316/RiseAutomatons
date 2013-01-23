@@ -19,7 +19,7 @@ public class ChalkLogic {
 			addSpell("11111;10401;14541;10401;11111;", Spells.absorbSoul, false);
 			addSpell("00100;01110;11511;01110;00100;", Spells.copySoul, false);
 			addSpell("666;666;666;", Spells.eupraxia, false);
-			addSpell("02320;42623;02020;00200;", Spells.teleportEnd, false);
+			addSpell("222;151;202;020;", Spells.teleportEnd, false);
 			addSpell("050;555;050;", Spells.teleportNether, false);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
