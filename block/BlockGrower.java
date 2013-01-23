@@ -85,7 +85,7 @@ public class BlockGrower extends Block {
 			for (l = 1; world.getBlockId(i, j - l, k) == blockID; l++) {
 			}
 
-			if (l < 15) {
+			if (l < 6) {
 				if (i1 >= 3) {
 					// world.setBlockMetadataWithNotify(i, j, k, 5);
 					world.setBlockWithNotify(i, j + 1, k, blockID);
@@ -94,6 +94,9 @@ public class BlockGrower extends Block {
 					world.setBlockAndMetadataWithNotify(i, j, k, blockID,
 							i1 + 1);
 				}
+			}
+			else {
+				world.setBlockWithNotify(i, j + 1, k, Blocks.crink.blockID);
 			}
 		} else if (i1 < 5) {
 			world.setBlockAndMetadataWithNotify(i, j, k, blockID, i1 + 1);
@@ -131,7 +134,7 @@ public class BlockGrower extends Block {
 	public int colorMultiplier(IBlockAccess iblockaccess, int i,
 			int j, int k) {
 		int g = iblockaccess.getBlockMetadata(i, j, k);
-		return derk[g];
+		return derk[Math.min(g, 5)];
 	}
 
 	@Override
