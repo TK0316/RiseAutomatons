@@ -3,12 +3,14 @@ package riseautomatons.entity;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,6 +41,9 @@ public class EntityGuard extends EntityOwnedBot implements IBot {
 		tasks.addTask(9, new EntityAILookIdle(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityMob.class, 24F, 1, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityDragon.class, 24F, 1, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityFlying.class, 24F, 1, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySlime.class, 24F, 1, true));
 	}
 
 	public EntityGuard(World world, double d, double d1, double d2) {
@@ -126,7 +131,11 @@ public class EntityGuard extends EntityOwnedBot implements IBot {
 				this.worldObj.playSoundAtEntity(this, "mob.fwoom", 1.0F, 1.0F);
 				this.attackTime = 40;
 			}
-			this.rotationYaw = ((float) (Math.atan2(d1, d) * 180.0D / 3.141592741012573D) - 90.0F);
+			this.rotationYawHead = (float) ((Math.atan2(d1, d)) * 180D / Math.PI - 90D);
+
+			double xx = entity.posX - (double) ((float) this.posX + 0.5F);
+			double zz = entity.posZ - (double) ((float) this.posZ + 0.5F);
+			double yy = entity.posY - (double) ((float) this.posY + 0.5F);
 		}
 	}
 
@@ -166,7 +175,6 @@ public class EntityGuard extends EntityOwnedBot implements IBot {
 
 	@Override
 	public void onLivingUpdate() {
-
 		if (!Universal.improperWorld(this.worldObj)) {
 			if (!this.worldObj.getBlockMaterial(
 					MathHelper.floor_double(this.posX),
