@@ -128,7 +128,7 @@ public class EntityGuard extends EntityOwnedBot implements IBot {
 				entitylaser.posY = (this.posY + this.height / 1.5F);
 				entitylaser.posZ = this.posZ;
 				this.worldObj.spawnEntityInWorld(entitylaser);
-				this.worldObj.playSoundAtEntity(this, "mob.fwoom", 1.0F, 1.0F);
+				this.worldObj.playSoundAtEntity(this, "automatons.fwoom", 1.0F, 1.0F);
 				this.attackTime = 40;
 			}
 			this.rotationYawHead = (float) ((Math.atan2(d1, d)) * 180D / Math.PI - 90D);

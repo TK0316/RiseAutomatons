@@ -19,7 +19,7 @@ public class ItemBlaster extends Item {
 			EntityPlayer entityplayer) {
 		// if(entityplayer.inventory.consumeInventoryItem(Item.arrow.shiftedIndex))
 		// {
-		world.playSoundAtEntity(entityplayer, "mob.fwoom", 1.0F,
+		world.playSoundAtEntity(entityplayer, "automatons.fwoom", 1.0F,
 				1.0F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
 		//if (!Universal.improperWorld(world)) {
