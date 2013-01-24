@@ -125,7 +125,7 @@ public class EntityLaser extends EntityThrowable {
 		shake = 0;
 		ticksFlying = 0;
 		shootingEntity = entityliving;
-		setSize(0.2F, 0.2F);
+		setSize(0.5F, 0.5F);
 		setLocationAndAngles(entityliving.posX, entityliving.posY,
 				entityliving.posZ, entityliving.rotationYaw,
 				entityliving.rotationPitch);
@@ -235,7 +235,7 @@ public class EntityLaser extends EntityThrowable {
 				continue;
 			}
 
-			float f2 = 0.3F;
+			float f2 = 0.5F;
 			AxisAlignedBB axisalignedbb = entity1.boundingBox
 					.expand(f2, f2, f2);
 			MovingObjectPosition movingobjectposition1 = worldObj
