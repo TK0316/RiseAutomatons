@@ -83,11 +83,11 @@ public class BlockBeacon extends BlockContainer {
 				.getBlockTileEntity(i, j, k);
 		BeaconManager.select(ep, beacon.numeral);
 		ItemStack is = ep.inventory.getCurrentItem();
-		if (is != null && is.itemID == Item.stick.shiftedIndex) {
+		if (is != null && is.itemID == Item.stick.itemID) {
 			beacon.mode = 2;
 			world.setBlockMetadataWithNotify(i, j, k, 2);
 			world.markBlockForUpdate(i, j, k);
-		} else if (is != null && is.itemID == Item.compass.shiftedIndex) {
+		} else if (is != null && is.itemID == Item.compass.itemID) {
 			// beacon.mode=2;
 			// world.setBlockMetadataWithNotify(i, j, k, 2);
 			// world.markBlockAsNeedsUpdate(i, j, k);

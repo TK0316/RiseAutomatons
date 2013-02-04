@@ -332,17 +332,17 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 
 		if (cargoItems[0] != null) {
 			itemstack1 = FurnaceRecipes.smelting().getSmeltingResult(
-					cargoItems[0].getItem().shiftedIndex);
+					cargoItems[0].getItem().itemID);
 		}
 
 		if (cargoItems[1] != null) {
 			itemstack2 = FurnaceRecipes.smelting().getSmeltingResult(
-					cargoItems[1].getItem().shiftedIndex);
+					cargoItems[1].getItem().itemID);
 		}
 
 		if (cargoItems[2] != null) {
 			itemstack3 = FurnaceRecipes.smelting().getSmeltingResult(
-					cargoItems[2].getItem().shiftedIndex);
+					cargoItems[2].getItem().itemID);
 		}
 
 		ItemStack itemstack;
@@ -460,7 +460,7 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 		}
 
 		ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(
-				cargoItems[who2Cook].getItem().shiftedIndex);
+				cargoItems[who2Cook].getItem().itemID);
 
 		if (cargoItems[availableSlot2] == null) {
 			cargoItems[availableSlot2] = itemstack.copy();
@@ -488,21 +488,21 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 			return 0;
 		}
 
-		int i = par1ItemStack.getItem().shiftedIndex;
+		int i = par1ItemStack.getItem().itemID;
 
 		if (i < 256 && Block.blocksList[i].blockMaterial == Material.wood) {
 			return 300;
 		}
 
-		if (i == Item.stick.shiftedIndex) {
+		if (i == Item.stick.itemID) {
 			return 100;
 		}
 
-		if (i == Item.coal.shiftedIndex) {
+		if (i == Item.coal.itemID) {
 			return 1600;
 		}
 
-		if (i == Item.bucketLava.shiftedIndex) {
+		if (i == Item.bucketLava.itemID) {
 			return 20000;
 		}
 
@@ -510,7 +510,7 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 			return 100;
 		}
 
-		if (i == Item.blazeRod.shiftedIndex) {
+		if (i == Item.blazeRod.itemID) {
 			return 2400;
 		} else {
 			return ModLoader.addAllFuel(par1ItemStack.itemID,

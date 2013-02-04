@@ -122,7 +122,7 @@ public class EntityBeacon extends EntityOwnedBot {
 			ItemStack itemstack = entityplayer.inventory.getCurrentItem();
 
 			if (itemstack != null
-					&& itemstack.itemID == Item.stick.shiftedIndex) {
+					&& itemstack.itemID == Item.stick.itemID) {
 					setSiren(2);
 			} else {
 				if (getSiren() != 0) {

@@ -61,9 +61,9 @@ public class ContainerFactotum extends Container {
 	}
 
 	@Override
-	public void updateCraftingResults() {
+	public void detectAndSendChanges() {
 
-		super.updateCraftingResults();
+		super.detectAndSendChanges();
 
 		for (int i = 0; i < crafters.size(); i++) {
 			ICrafting icrafting = (ICrafting) crafters.get(i);

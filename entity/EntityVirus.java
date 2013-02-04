@@ -32,7 +32,7 @@ public class EntityVirus extends EntityThrowable {
 	protected void onImpact(MovingObjectPosition par1MovingObjectPosition) {
         if (par1MovingObjectPosition.entityHit != null)
         {
-            par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.func_85052_h()), 0);
+            par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), 0);
             if(par1MovingObjectPosition.entityHit instanceof EntityLiving) {
             	EntityLiving e = (EntityLiving) par1MovingObjectPosition.entityHit;
                 if(e instanceof EntityOwnedBot || e instanceof EntityBot || e instanceof EntityAniBot || e instanceof EntityWatcher) {
