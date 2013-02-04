@@ -11,6 +11,7 @@ import riseautomatons.RiseAutomatons;
 import riseautomatons.item.ItemArch;
 import riseautomatons.item.ItemComplex;
 import riseautomatons.item.ItemLumo;
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -89,21 +90,18 @@ public class Blocks {
 		GameRegistry.registerBlock(latch);
 		LanguageRegistry.addName(latch, "Latch");
 
-		GameRegistry.registerBlock(teleporter);
-		LanguageRegistry.addName(teleporter, "Teleporter");
-
 		GameRegistry.registerTileEntity(TileEntityBeacon.class, "BotBeacon");
 		GameRegistry.registerTileEntity(TileEntityLatch.class, "Latch");
+		GameRegistry.registerTileEntity(TileEntityTurn.class, "Turn");
+		GameRegistry.registerTileEntity(TileEntityWindmill.class, "Windmill");
+		GameRegistry.registerTileEntity(TileEntityArchitect.class, "Architect");
 	}
 
 	@SideOnly(Side.CLIENT)
 	public static void registerTileEntities() {
-		ModLoader.registerTileEntity(TileEntityTurn.class, "Turn",
-				new TileEntityTurnRenderer());
-		ModLoader.registerTileEntity(TileEntityWindmill.class, "Windmill",
-				new TileEntityWindmillRenderer());
-		ModLoader.registerTileEntity(TileEntityArchitect.class, "Architect",
-				new TileEntityArchitectRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTurn.class, new TileEntityTurnRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWindmill.class, new TileEntityWindmillRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityArchitect.class, new TileEntityArchitectRenderer());
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -225,9 +223,6 @@ public class Blocks {
 	public static Block latch = (new BlockLatch(Ids.blockLatch))
 			.setHardness(1F).setResistance(20F)
 			.setStepSound(Block.soundMetalFootstep).setBlockName("latch")
-			.setCreativeTab(RiseAutomatons.tabAutomatons);
-
-	public static Block teleporter = (new BlockTeleporter())
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 
 	public static void setFrassSpread(boolean enableFrassSpread) {
