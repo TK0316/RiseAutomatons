@@ -735,11 +735,11 @@ public class WorldGenStructure extends WorldGenerator {
 			int j = random.nextInt(1000);
 			int l = 0;
 			for(int k = 0;; k = (k+1) % Item.itemsList.length) {
-				if(Item.itemsList[k] != null && Item.itemsList[k].getCreativeTab() != null) {
+				if(Item.itemsList[k] != null) {
 					l++;
 				}
 				if(l >= j) {
-					if(Item.itemsList[k] != null && Item.itemsList[k].getCreativeTab() != null) {
+					if(Item.itemsList[k] != null) {
 						return new ItemStack(Item.itemsList[k], random.nextInt(30) + 1);
 					}
 				}
