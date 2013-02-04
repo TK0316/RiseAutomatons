@@ -153,7 +153,8 @@ public class Recipes {
 		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 3, EnumCraftSetType.CANVAS.ordinal()), new Object[] {
 			"sss",
 			"sls",
-			"sss", 's', Item.stick, 'l', Item.leather
+			"sss",
+			's', Item.stick, 'l', Item.leather
 				});
 
 		// Wing recipe
@@ -166,6 +167,15 @@ public class Recipes {
 			"sc",
 			"sc",
 			'c', canvas, 's', Item.stick});
+		GameRegistry.addRecipe(wing, new Object[] {
+			"sss",
+			"ccc",
+			'c', Item.painting, 's', Item.stick});
+		GameRegistry.addRecipe(wing, new Object[] {
+			"sc",
+			"sc",
+			"sc",
+			'c', Item.painting, 's', Item.stick});
 
 		// Passive recipe
 		GameRegistry.addRecipe(passive, new Object[] {
@@ -328,8 +338,8 @@ public class Recipes {
 			's' , Item.stick});
 
 		GameRegistry.addRecipe(new ItemStack(Ids.blockWindmill, 1, 0), new Object[] {
-			" w "
-			, "wgw",
+			" w ",
+			"wgw",
 			" w ",
 			'w', wing, 'g', smallGear});
 
@@ -551,21 +561,21 @@ public class Recipes {
 			"D D",
 			"  D",
 			"  D",
-			'D', new ItemStack(Item.diamond.shiftedIndex, 1, 0) });
+			'D', new ItemStack(Item.diamond.itemID, 1, 0) });
 
 		// Sentry recipe
 		GameRegistry.addRecipe(new ItemStack(Ids.itemSentry, 1, 0), new Object[] {
 			"D D",
 			"D  ",
 			"D D",
-			'D', new ItemStack(Item.diamond.shiftedIndex, 1, 0) });
+			'D', new ItemStack(Item.diamond.itemID, 1, 0) });
 
 		// Factotum recipe
 		GameRegistry.addRecipe(new ItemStack(Ids.itemFactotum, 1, 0), new Object[] {
 			"D D",
 			"D D",
 			"D  ",
-			'D', new ItemStack(Item.diamond.shiftedIndex, 1, 0) });
+			'D', new ItemStack(Item.diamond.itemID, 1, 0) });
 
 		// SoulCore recipe
 		GameRegistry.addRecipe(new ItemStack(Ids.soulCore, 1, EnumSoulCore.SOULSYNTH.ordinal()), new Object[] {
