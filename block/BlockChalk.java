@@ -2,6 +2,9 @@ package riseautomatons.block;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -65,35 +68,25 @@ public class BlockChalk extends Block {
 		return false;
 	}
 
+	@SideOnly(Side.CLIENT)
 	@Override
 	public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int l) {
 
 		super.onBlockDestroyedByPlayer(world, i, j, k, l);
+		Universal.fwoo(world, i, j, k);
+	}
 
-		if (world.isRemote) {
-			//return;
-		}
-
+	@Override
+	public boolean removeBlockByPlayer(World world, EntityPlayer player, int i, int j, int k) {
 		int meta = world.getBlockMetadata(i, j, k);
 
 		if (meta > 0) {
-			/*
-			 * if (meta > 1) { EntityItem entityitem = new EntityItem(world, i +
-			 * 0.5f, j + 0.5f, k + 0.5f, new ItemStack(zei_Ids.chalk2, meta - 1,
-			 * 0)); entityitem.delayBeforeCanPickup = 10;
-			 * world.spawnEntityInWorld(entityitem); }
-			 */
-
 			notifyWireNeighborsOfNeighborChange(world, i - 1, j, k);
 			notifyWireNeighborsOfNeighborChange(world, i + 1, j, k);
 			notifyWireNeighborsOfNeighborChange(world, i, j, k - 1);
 			notifyWireNeighborsOfNeighborChange(world, i, j, k + 1);
-		} else {
-			Universal.fwoo(world, i, j, k);
-			// zei_Universal.makeParticle(new
-			// EntityLargeExplodeFX(zei_Universal.mc.renderEngine, world, i +
-			// 0.5, j + 1, k + 0.5, 0, 0, 0));
 		}
+		return super.removeBlockByPlayer(world, player, i, j, k);
 	}
 
 	@Override
