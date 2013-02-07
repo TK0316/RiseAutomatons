@@ -11,8 +11,7 @@ public class Eupraxia extends Spell {
 	@Override
 	public boolean cast(World world, int i, int j, int k,
 			EntityPlayer entityPlayer) {
-		if (entityPlayer.ridingEntity == null
-				&& entityPlayer.riddenByEntity == null
+		if (entityPlayer.isRiding() == false
 				&& entityPlayer instanceof EntityPlayerMP) {
 
 			EntityPlayerMP thePlayer = (EntityPlayerMP) entityPlayer;
