@@ -4,9 +4,11 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import riseautomatons.RiseAutomatons;
 import riseautomatons.entity.EntityWatcher;
 
 public class BlockBad extends Block {
@@ -70,10 +72,17 @@ public class BlockBad extends Block {
 	@Override
 	public void harvestBlock(World world, EntityPlayer entityplayer,
 			int i, int j, int k, int l) {
-		EntityWatcher et = new EntityWatcher(world, (float) i + 0.5F,
-				(float) j + 0.5F, (float) k + 0.5F);
-		world.spawnEntityInWorld(et);
-		et.setTarget(entityplayer);
+		if(RiseAutomatons.disableWatcherCrystal) {
+			EntityBlaze e = new EntityBlaze(world);
+			e.setPosition((float) i + 0.5F, (float) j + 0.5F, (float) k + 0.5F);
+			world.spawnEntityInWorld(e);
+			e.setTarget(entityplayer);
+		}
+		else {
+			EntityWatcher et = new EntityWatcher(world, (float) i + 0.5F, (float) j + 0.5F, (float) k + 0.5F);
+			world.spawnEntityInWorld(et);
+			et.setTarget(entityplayer);
+		}
 	}
 
 	@Override

@@ -39,7 +39,8 @@ public class RiseAutomatons {
 
 	public static boolean enableCheatRecipe = false;
 	public static boolean generateTechBiome = true;
-	public static  boolean enableFrassSpread = true;
+	public static boolean enableFrassSpread = true;
+	public static boolean disableWatcherCrystal = false;
 
 	@Mod.Init
 	public void load(FMLInitializationEvent event) {
@@ -153,9 +154,10 @@ public class RiseAutomatons {
 
 			cfg.save();
 
-			Property debug = cfg
-					.get(Configuration.CATEGORY_GENERAL, "debug", false);
+			Property debug = cfg.get(Configuration.CATEGORY_GENERAL, "debug", false);
 			this.debug = debug.getBoolean(false);
+
+			disableWatcherCrystal = cfg.get(Configuration.CATEGORY_GENERAL, "disableWatcherCrystal", false).getBoolean(false);
 		}
 		catch (Exception e) {
             FMLLog.log(Level.SEVERE, e, "RiseAutomatons load config exception");
