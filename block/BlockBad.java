@@ -4,8 +4,10 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import riseautomatons.RiseAutomatons;
@@ -77,7 +79,8 @@ public class BlockBad extends Block {
 			e.setPosition((float) i + 0.5F, (float) j + 0.5F, (float) k + 0.5F);
 			world.spawnEntityInWorld(e);
 			e.setTarget(entityplayer);
-			world.setBlock(i, j, k, Blocks.crystal.blockID);
+			ItemStack itemStack = new ItemStack(Blocks.crystal);
+			world.spawnEntityInWorld(new EntityItem(world, i, j, k, itemStack));
 		}
 		else {
 			EntityWatcher et = new EntityWatcher(world, (float) i + 0.5F, (float) j + 0.5F, (float) k + 0.5F);
