@@ -77,6 +77,7 @@ public class BlockBad extends Block {
 			e.setPosition((float) i + 0.5F, (float) j + 0.5F, (float) k + 0.5F);
 			world.spawnEntityInWorld(e);
 			e.setTarget(entityplayer);
+			world.setBlock(i, j, k, Blocks.crystal.blockID);
 		}
 		else {
 			EntityWatcher et = new EntityWatcher(world, (float) i + 0.5F, (float) j + 0.5F, (float) k + 0.5F);
