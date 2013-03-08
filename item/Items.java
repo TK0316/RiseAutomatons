@@ -3,6 +3,7 @@ package riseautomatons.item;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.oredict.OreDictionary;
 import riseautomatons.Ids;
 import riseautomatons.RiseAutomatons;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -31,6 +32,8 @@ public class Items {
 					new ItemStack(Ids.craftSet, 1, i), "en_US",
 					EnumCraftSetType.values()[i].fullname);
 		}
+		OreDictionary.registerOre("dustSalt", new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SALT.ordinal()));
+		OreDictionary.registerOre("dustSulfur", new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SURF.ordinal()));
 
 		// SoulCore
 		for (int i = 0; i < EnumSoulCore.values().length; i++) {
