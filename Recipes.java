@@ -457,6 +457,10 @@ public class Recipes {
 			new ItemStack(Block.sapling, 1, 3), Item.bucketWater, Item.clay});
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.virus, 1, 1), new Object[] {
 			new ItemStack(Items.virus, 1, 0), Blocks.crystal});
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder, 3, 15), new Object[] {
+			Items.skull});
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.dyePowder, 3, 15), new Object[] {
+			Items.skullAnimal});
 
 		for(int i = 0; i < 4; i++) {
 			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.tech, 2, i), new Object[] {
