@@ -144,6 +144,11 @@ public class BlockChalk extends Block {
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int i, int j, int k) {
+		int blockID = world.getBlockId(i, j, k);
+		int metadata = world.getBlockMetadata(i, j, k);
+		if(blockID == Blocks.chalk.blockID && metadata < 7) {
+			return true;
+		}
 		return world.isBlockNormalCube(i, j - 1, k);
 	}
 

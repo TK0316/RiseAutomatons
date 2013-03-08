@@ -5,7 +5,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import riseautomatons.Ids;
 import riseautomatons.block.Blocks;
 
 public class ItemChalk extends Item {
@@ -28,7 +27,7 @@ public class ItemChalk extends Item {
 
 		int id = world.getBlockId(i, j, k);
 
-		if (id == Ids.blockChalk) {
+		if (id == Blocks.chalk.blockID) {
 			int meta = world.getBlockMetadata(i, j, k);
 
 			if (meta < 7) {
@@ -64,7 +63,8 @@ public class ItemChalk extends Item {
 				i++;
 			}
 
-			if (!world.isAirBlock(i, j, k)) {
+			id = world.getBlockId(i, j, k);
+			if (!world.isAirBlock(i, j, k) && world.getBlockId(i, j, k) != Blocks.chalk.blockID) {
 				return false;
 			}
 		}
@@ -76,7 +76,11 @@ public class ItemChalk extends Item {
 		if (Blocks.chalk.canPlaceBlockAt(world, i, j, k)) {
 			// itemstack.stackSize--;
 			itemstack.damageItem(1, entityplayer);
-			world.setBlockAndMetadataWithNotify(i, j, k, Blocks.chalk.blockID, 1);
+			int meta = (id == Blocks.chalk.blockID) ? world.getBlockMetadata(i, j, k) : 0;
+			if (meta < 7) {
+				meta++;
+			}
+			world.setBlockAndMetadataWithNotify(i, j, k, Blocks.chalk.blockID, meta);
 		}
 
 		return true;
