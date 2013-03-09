@@ -100,7 +100,7 @@ public class BlockHeal extends Block {
 
 	@Override
 	public int getRenderColor(int par1) {
-		return this.ferp[ferp.length - 1 - par1];
+		return this.ferp[11];
 	}
 
 }
