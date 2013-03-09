@@ -98,7 +98,9 @@ public class Entities {
 		MinecraftForgeClient.preloadTexture(EntityWorker.GOLEM6_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntityWorker.class, new RenderWorker(new ModelWorker(), 0.5F));
 
-		MinecraftForgeClient.preloadTexture(EntitySentry.SENTRY_PNG);
+		MinecraftForgeClient.preloadTexture(EntitySentry.SENTRY1_PNG);
+		MinecraftForgeClient.preloadTexture(EntitySentry.SENTRY2_PNG);
+		MinecraftForgeClient.preloadTexture(EntitySentry.SENTRY3_PNG);
 		MinecraftForgeClient.preloadTexture(EntitySentry.SENTRYBLOCK_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySentry.class, new RenderBot(new ModelSentry(), 0.75F));
 

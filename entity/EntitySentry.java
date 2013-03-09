@@ -1,6 +1,7 @@
 package riseautomatons.entity;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
@@ -23,7 +24,9 @@ import riseautomatons.item.EnumSoulCore;
 
 public class EntitySentry extends EntityOwnedBot implements IBot {
 
-	public static final String SENTRY_PNG =  "/riseautomatons/sentry.png";
+	public static final String SENTRY1_PNG =  "/riseautomatons/sentry1.png";
+	public static final String SENTRY2_PNG =  "/riseautomatons/sentry2.png";
+	public static final String SENTRY3_PNG =  "/riseautomatons/sentry3.png";
 	public static final String SENTRYBLOCK_PNG =  "/riseautomatons/sentryBlock.png";
 
 	public static final int INDEX_MODE = 18;
@@ -41,8 +44,8 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 		tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F)); // 0.4f
 		tasks.addTask(4, new EntityAIAttackOnCollide(this, moveSpeed, true));
 		tasks.addTask(5, new EntityAIBotFollowOwner(this, moveSpeed, 8F, 4.0F));
-		tasks.addTask(9, new EntityAIWatchClosest(this,
-				EntityPlayer.class, 8F));
+		tasks.addTask(5, new EntityAIBotWander(this, moveSpeed));
+		tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8F));
 		tasks.addTask(9, new EntityAILookIdle(this));
 		targetTasks.addTask(1, new EntityAIBotOwnerHurtByTarget(this));
 		targetTasks.addTask(2, new EntityAIBotOwnerHurtTarget(this));
@@ -52,6 +55,7 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityMob.class, 24F, 1, true));
 		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityAniBot.class, 24F, 1, true));
 		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityBot.class, 24F, 1, true));
+		targetTasks.addTask(4, new EntityAIBotNearestAttackableTarget(this, EntityLiving.class, 24F, 1, true));
 	}
 
 	public EntitySentry(World world, double d, double d1, double d2, int turn,
@@ -63,6 +67,11 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 		prevPosZ = d2;
 		//Universal.rotateEntity(this, turn * 90);
 		setBotOwner(s);
+	}
+
+	@Override
+	public int getAge() {
+		return 1;
 	}
 
 	@Override
@@ -187,7 +196,15 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 
 	@Override
 	public String getTexture() {
-		return SENTRY_PNG;
+		switch(getMode()) {
+		case STAY:
+			return SENTRY1_PNG;
+		case FOLLOW:
+			return SENTRY2_PNG;
+		case WANDER:
+			return SENTRY3_PNG;
+		}
+		return SENTRY1_PNG;
 	}
 
 
@@ -223,6 +240,10 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 		}
 		if(getMode() == EnumBotMode.STAY) {
 			setMode(EnumBotMode.FOLLOW);
+		}
+		else if(getMode() == EnumBotMode.FOLLOW) {
+			//setMode(EnumBotMode.STAY);
+			setMode(EnumBotMode.WANDER);
 		}
 		else {
 			setMode(EnumBotMode.STAY);
