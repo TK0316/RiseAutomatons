@@ -270,7 +270,7 @@ public class Recipes {
 			"faf",
 			"iri",
 			"sfs",
-			's', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SMALLPLATE.ordinal()) , 'f', Block.stoneOvenIdle, 'r', Item.redstone, 'a', Item.flintAndSteel, 'i', Item.ingotIron});
+			's', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SMALLPLATE.ordinal()) , 'f', Block.furnaceIdle, 'r', Item.redstone, 'a', Item.flintAndSteel, 'i', Item.ingotIron});
 
 		// Blue Core recipe
 		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 1, EnumCraftSetType.BLUECORE.ordinal()), new Object[] {

@@ -2,6 +2,7 @@ package riseautomatons.item;
 
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import riseautomatons.block.Blocks;
 
 public class ItemLumo extends ItemBlock {
@@ -13,14 +14,14 @@ public class ItemLumo extends ItemBlock {
 	}
 
 	@Override
-	public String getItemNameIS(ItemStack itemstack) {
-		return (new StringBuilder()).append(super.getItemName()).append(".")
+	public String getUnlocalizedName(ItemStack itemstack) {
+		return (new StringBuilder()).append(super.getUnlocalizedName()).append(".")
 				.append(dyeColorNames[itemstack.getItemDamage()]).toString();
 
 	}
 
 	@Override
-	public int getIconFromDamage(int i) {
+	public Icon getIconFromDamage(int i) {
 		return Blocks.sky.getBlockTextureFromSideAndMetadata(2, i);
 	}
 

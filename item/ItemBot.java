@@ -1,9 +1,13 @@
 package riseautomatons.item;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
@@ -15,6 +19,8 @@ import riseautomatons.entity.EntityOmni;
 
 public class ItemBot extends Item {
 
+	private Icon icons[];
+
 	private EnumBotType type;
 
 	public ItemBot(int i, EnumBotType type) {
@@ -22,6 +28,20 @@ public class ItemBot extends Item {
 		this.type = type;
 		if(type == EnumBotType.TOTE) {
 			maxStackSize = 8;
+		}
+	}
+
+	@Override
+	public Icon getIconFromDamage(int par1) {
+		return icons[type.ordinal()];
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void updateIcons(IconRegister par1IconRegister) {
+		icons = new Icon[EnumBotType.values().length];
+		for (int var4 = 0; var4 < EnumBotType.values().length; ++var4) {
+			icons[var4] = par1IconRegister.registerIcon("riseautomatons:"+EnumBotType.values()[var4].name);
 		}
 	}
 
@@ -68,10 +88,10 @@ public class ItemBot extends Item {
 				.floor_double((double) (entityplayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 		switch(type) {
 		case WORKER:
-			world.setBlockAndMetadataWithNotify(i, j, k, Ids.blockWorker, meta);
+			world.setBlock(i, j, k, Ids.blockWorker, meta, 3);
 			break;
 		case SENTRY:
-			world.setBlockAndMetadataWithNotify(i, j, k, Ids.blockSentry, meta);
+			world.setBlock(i, j, k, Ids.blockSentry, meta, 3);
 			break;
 		case FACTOTUM:
 			if (!Universal.improperWorld(world)) {
@@ -80,7 +100,7 @@ public class ItemBot extends Item {
 			break;
 		case BEACON:
 			if (!Universal.improperWorld(world)) {
-				world.setBlockWithNotify(i, j, k, Ids.blockBeacon);
+				world.setBlock(i, j, k, Ids.blockBeacon, 0, 3);
 			}
 			break;
 		case GUARD:
@@ -95,7 +115,7 @@ public class ItemBot extends Item {
 			break;
 		case TOTE:
 			if (!Universal.improperWorld(world)) {
-				world.setBlockWithNotify(i, j, k, Ids.blockTote);
+				world.setBlock(i, j, k, Ids.blockTote, 0, 3);
 			}
 			break;
 		default:

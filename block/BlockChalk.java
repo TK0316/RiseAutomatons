@@ -7,8 +7,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 import riseautomatons.Universal;
@@ -19,7 +21,7 @@ public class BlockChalk extends Block {
 	public static int rendererId;
 
 	public BlockChalk(int i, int j) {
-		super(i, j, Material.circuits);
+		super(i, Material.circuits);
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0625F, 1.0F);
 	}
 
@@ -34,8 +36,9 @@ public class BlockChalk extends Block {
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int par1, int par2) {
-		return blockIndexInTexture;
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		this.blockIcon = par1IconRegister.registerIcon("redstoneDust_cross");
 	}
 
 	@Override
@@ -100,7 +103,7 @@ public class BlockChalk extends Block {
 		boolean flag = canPlaceBlockAt(world, i, j, k);
 
 		if (!flag) {
-			world.setBlockWithNotify(i, j, k, 0);
+			world.setBlock(i, j, k, 0, 0, 3);
 		} else {
 			boolean flag1 = world.isBlockIndirectlyGettingPowered(i, j, k);
 

@@ -2,14 +2,21 @@ package riseautomatons.block;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 
 public class BlockGrower extends Block {
+
+	private Icon icons[];
 
 	static int iconIndexSide = 29;
 	static int iconIndexTop = 31;
@@ -39,13 +46,21 @@ public class BlockGrower extends Block {
 	}
 
 	@Override
-	public int getBlockTextureFromSide(int i) {
+	public Icon getBlockTextureFromSideAndMetadata(int i, int par2) {
 
 		if (i <= 1) {
-			return iconIndexTop;
+			return icons[1];
 		} else {
-			return iconIndexSide;
+			return icons[0];
 		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		icons = new Icon[2];
+		icons[0] = par1IconRegister.registerIcon("riseautomatons:grower1");
+		icons[1] = par1IconRegister.registerIcon("riseautomatons:grower2");
 	}
 
 	@Override
@@ -88,18 +103,17 @@ public class BlockGrower extends Block {
 			if (l < 6) {
 				if (i1 >= 3) {
 					// world.setBlockMetadataWithNotify(i, j, k, 5);
-					world.setBlockWithNotify(i, j + 1, k, blockID);
-					world.setBlockMetadataWithNotify(i, j, k, 3);
+					world.setBlock(i, j + 1, k, blockID, 3, 3);
 				} else {
-					world.setBlockAndMetadataWithNotify(i, j, k, blockID,
-							i1 + 1);
+					world.setBlock(i, j, k, blockID,
+							i1 + 1, 3);
 				}
 			}
 			else {
-				world.setBlockWithNotify(i, j + 1, k, Blocks.crink.blockID);
+				world.setBlock(i, j + 1, k, Blocks.crink.blockID, 0, 3);
 			}
 		} else if (i1 < 5) {
-			world.setBlockAndMetadataWithNotify(i, j, k, blockID, i1 + 1);
+			world.setBlock(i, j, k, blockID, i1 + 1, 3);
 		}
 	}
 
@@ -108,7 +122,7 @@ public class BlockGrower extends Block {
 			int k, int l) {
 		if (world.getBlockId(i, j, k) == 0
 				&& world.getBlockId(i, j - 1, k) == blockID) {
-			world.setBlockMetadataWithNotify(i, j - 1, k, 0);
+			world.setBlockMetadataWithNotify(i, j - 1, k, 0, 3);
 		}
 	}
 
@@ -145,7 +159,7 @@ public class BlockGrower extends Block {
 	protected final void checkBlockCoordValid(World world, int i, int j, int k) {
 		if (!canBlockStay(world, i, j, k)) {
 			dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
-			world.setBlockWithNotify(i, j, k, 0);
+			world.setBlock(i, j, k, 0, 0, 3);
 		}
 	}
 

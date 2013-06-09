@@ -4,19 +4,25 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
+import net.minecraft.util.MathHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockComplex extends Block {
+
+	private Icon icons[];
+
 	protected BlockComplex(int i) {
 		super(i, Material.rock);
 		loadSprites();
 	}
 
 	public BlockComplex(int par1, int par2, Material par3Material) {
-		super(par1, par2, Material.rock);
+		super(par1,  Material.rock);
 		loadSprites();
 	}
 
@@ -26,18 +32,24 @@ public class BlockComplex extends Block {
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j) {
-		return D[j]; // D[0]
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j) {
+		int n = MathHelper.clamp_int(j, 0, 3);
+		return icons[n]; // D[0]
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		icons = new Icon[4];
+		icons[0] = par1IconRegister.registerIcon("riseautomatons:tech");
+		icons[1] = par1IconRegister.registerIcon("riseautomatons:tree");
+		icons[2] = par1IconRegister.registerIcon("riseautomatons:wallo");
+		icons[3] = par1IconRegister.registerIcon("riseautomatons:bwop");
 	}
 
 	@Override
 	public int damageDropped(int par1) {
 		return par1;
-	}
-
-	@Override
-	public String getTextureFile() {
-		return Blocks.BLOCK_PNG;
 	}
 
 	static int D[];

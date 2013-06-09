@@ -42,13 +42,13 @@ public class WorldGenFakeForest extends WorldGenForest {
 						for (int m = j - n; m < j && m < j - n + meta; ++m) {
 							if(par1World.isAirBlock(i, m, k)) {
 								//par1World.setBlockAndMetadata(var7, var12, var9, Blocks.grower.blockID, meta);
-								par1World.setBlockAndMetadata(i, m, k, Blocks.grower.blockID, meta);
+								par1World.setBlock(i, m, k, Blocks.grower.blockID, meta, 3);
 								//par1World.setBlock(i, m, k, Block.brick.blockID);
 								//System.out.println(String.valueOf(var7) + ", " +  String.valueOf(var8)  + ", " +  String.valueOf(var9));
 							}
 						}
 						if(meta == 5) {
-							par1World.setBlock(i, j - n + meta, k, Blocks.crink.blockID);
+							par1World.setBlock(i, j - n + meta, k, Blocks.crink.blockID, 0, 3);
 						}
 						break;
 					}
@@ -78,9 +78,9 @@ public class WorldGenFakeForest extends WorldGenForest {
 					}
 					else if(length > 4){
 						for (int var12 = var11 + 1; var12 < var8; ++var12) {
-							par1World.setBlock(var7, var12, var9, Block.stone.blockID);
+							par1World.setBlock(var7, var12, var9, Block.stone.blockID, 0, 3);
 						}
-						par1World.setBlock(var7, var8, var9, Blocks.glowy.blockID);
+						par1World.setBlock(var7, var8, var9, Blocks.glowy.blockID, 0, 3);
 						break;
 					}
 				}

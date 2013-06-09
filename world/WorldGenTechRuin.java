@@ -53,18 +53,18 @@ public class WorldGenTechRuin extends WorldGenerator {
 	        for (int z = k - 1; z < k + width + 1; z++)
 	        {
 	          if (y == j) {
-	            world.setBlockAndMetadataWithNotify(x, y, z, Ids.blockTech, 0);
+	            world.setBlock(x, y, z, Ids.blockTech, 0, 3);
 	          }
 	          else if (y == j + byte0) {
-	            world.setBlockAndMetadataWithNotify(x, y, z, Block.stoneDoubleSlab.blockID, 0);
+	            world.setBlock(x, y, z, Block.stoneDoubleSlab.blockID, 0, 3);
 	          }
 	          else if ((x == i - 1) || (z == k - 1) || (x == i + width) || (z == k + width))
 	          {
-	            world.setBlockAndMetadataWithNotify(x, y, z, Ids.blockTech, 0);
+	            world.setBlock(x, y, z, Ids.blockTech, 0, 3);
 	          }
 	          else
 	          {
-	            world.setBlockAndMetadataWithNotify(x, y, z, 0, 0);
+	            world.setBlock(x, y, z, 0, 0, 3);
 	          }
 
 	        }
@@ -76,19 +76,19 @@ public class WorldGenTechRuin extends WorldGenerator {
 	    int r = random.nextInt(100);
 
 	    if (r < 20) {
-	      world.setBlockAndMetadataWithNotify(i + width / 2, j + 1, k + width / 2, Ids.blockSky, 1);
+	      world.setBlock(i + width / 2, j + 1, k + width / 2, Ids.blockSky, 1, 3);
 	    }
 	    else if (r < 40) {
-	      world.setBlockAndMetadataWithNotify(i + width / 2, j + 1, k + width / 2, Ids.blockSky, 0);
+	      world.setBlock(i + width / 2, j + 1, k + width / 2, Ids.blockSky, 0, 3);
 	    }
 	    else if (r < 60) {
-	      world.setBlockWithNotify(i + width / 2, j + 1, k + width / 2, Blocks.heal.blockID);
+	      world.setBlock(i + width / 2, j + 1, k + width / 2, Blocks.heal.blockID, 0, 3);
 	    }
 	    else if (r < 80) {
-	      world.setBlockWithNotify(i + width / 2, j + 1, k + width / 2, Blocks.fakeCrystal.blockID);
+	      world.setBlock(i + width / 2, j + 1, k + width / 2, Blocks.fakeCrystal.blockID, 0, 3);
 	    }
 	    else {
-	      world.setBlockWithNotify(i + width / 2, j + 1, k + width / 2, Blocks.crystal.blockID);
+	      world.setBlock(i + width / 2, j + 1, k + width / 2, Blocks.crystal.blockID, 0, 3);
 	    }
 
 	    return true;

@@ -2,10 +2,16 @@ package riseautomatons.item;
 
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 import riseautomatons.Universal;
@@ -17,6 +23,8 @@ import riseautomatons.entity.EntityWorker;
 public class ItemSoulCore extends Item {
 	int textur[];
 
+	private Icon icons[];
+
 	public ItemSoulCore(int i) {
 		super(i);
 
@@ -25,8 +33,18 @@ public class ItemSoulCore extends Item {
 	}
 
 	@Override
-	public int getIconFromDamage(int i) {
-		return i;
+	public Icon getIconFromDamage(int par1) {
+		int i = MathHelper.clamp_int(par1, 0, EnumSoulCore.values().length-1);
+		return icons[i];
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void updateIcons(IconRegister par1IconRegister) {
+		icons = new Icon[EnumSoulCore.values().length];
+		for (int var4 = 0; var4 < EnumSoulCore.values().length; ++var4) {
+			icons[var4] = par1IconRegister.registerIcon("riseautomatons:"+EnumSoulCore.values()[var4].name);
+		}
 	}
 
 	@Override
@@ -57,7 +75,7 @@ public class ItemSoulCore extends Item {
 					int m = world.getBlockMetadata(i, j, k);
 					if (itemDamage == 0) {
 						world.spawnEntityInWorld(new EntityWorker(world, (float) i + 0.5F, (float) j, (float) k + 0.5F, m, entityplayer == null ? "" : entityplayer.username));
-						world.setBlockWithNotify(i, j, k, 0);
+						world.setBlock(i, j, k, 0, 0, 3);
 					}
 					/*else if (itemDamage == 5) {
 						world.spawnEntityInWorld(new EntityWorker(world,
@@ -83,7 +101,7 @@ public class ItemSoulCore extends Item {
 					}
 					int m = world.getBlockMetadata(i, j, k);
 					world.spawnEntityInWorld(new EntitySentry(world, (float) i + 0.5F, (float) j, (float) k + 0.5F, m, entityplayer == null ? "" : entityplayer.username));
-					world.setBlockWithNotify(i, j, k, 0);
+					world.setBlock(i, j, k, 0, 0, 3);
 				}
 				else if (ii == Ids.blockTote) {
 					if (itemDamage != 0) {
@@ -95,7 +113,7 @@ public class ItemSoulCore extends Item {
 					TileEntityLatch tot = (TileEntityLatch) world
 							.getBlockTileEntity(i, j, k);
 					tote.cargoItems = tot.dispenserContents.clone();
-					world.setBlockWithNotify(i, j, k, 0);
+					world.setBlock(i, j, k, 0, 0, 3);
 				}
 				/*else if (ii == Ids.toteBlock) {
 					if (itemDamage != 0) {
@@ -167,8 +185,8 @@ public class ItemSoulCore extends Item {
 	}
 
 	@Override
-	public String getItemNameIS(ItemStack itemstack) {
-		return (new StringBuilder()).append(super.getItemName()).append(".")
+	public String getUnlocalizedName(ItemStack itemstack) {
+		return (new StringBuilder()).append(super.getUnlocalizedName()).append(".")
 				.append(EnumSoulCore.values()[itemstack.getItemDamage()])
 				.toString();
 	}

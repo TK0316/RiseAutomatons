@@ -74,7 +74,7 @@ public class EntityFlyingBot extends EntityBot {
             this.motionZ *= (double)var3;
         }
 
-        this.prevLegYaw = this.legYaw;
+        this.prevLimbYaw = this.limbYaw;
         double var10 = this.posX - this.prevPosX;
         double var9 = this.posZ - this.prevPosZ;
         float var7 = MathHelper.sqrt_double(var10 * var10 + var9 * var9) * 4.0F;
@@ -84,8 +84,8 @@ public class EntityFlyingBot extends EntityBot {
             var7 = 1.0F;
         }
 
-        this.legYaw += (var7 - this.legYaw) * 0.4F;
-        this.legSwing += this.legYaw;
+        this.limbYaw += (var7 - this.limbYaw) * 0.4F;
+        this.limbSwing += this.limbYaw;
 	}
 
 	@Override

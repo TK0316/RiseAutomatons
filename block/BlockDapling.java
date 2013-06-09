@@ -13,7 +13,6 @@ public class BlockDapling extends Block {
 
 	protected BlockDapling(int i) {
 		super(i, Material.plants);
-		blockIndexInTexture = 33;
 		setTickRandomly(true);
 		float f = 0.4F;
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
@@ -66,11 +65,11 @@ public class BlockDapling extends Block {
 
 	public void growTree(World world, int i, int j, int k, Random random) {
 		// int l = world.getBlockMetadata(i, j, k) & 3;
-		world.setBlock(i, j, k, 0);
+		world.setBlock(i, j, k, 0, 0, 3);
 		WorldGenFakeTrees obj = new WorldGenFakeTrees(false);
 
 		if (!obj.generate(world, random, i, j, k)) {
-			world.setBlockAndMetadata(i, j, k, blockID, 0);
+			world.setBlock(i, j, k, blockID, 0, 3);
 		}
 	}
 }

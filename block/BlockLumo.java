@@ -4,21 +4,34 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockLumo extends Block {
+
+	private Icon icons[];
+
 	protected BlockLumo(int i) {
 		super(i, Material.rock);
 	}
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int par1, int par2) {
+	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
 		if(par2 == 1) {
-			return Blocks.skyIconIndex;
+			return icons[0];
 		}
-		return Blocks.walkIconIndex;
+		return icons[1];
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		icons = new Icon[2];
+		icons[0] = par1IconRegister.registerIcon("riseautomatons:sky");
+		icons[1] = par1IconRegister.registerIcon("riseautomatons:walk");
 	}
 
 	@Override
@@ -26,10 +39,6 @@ public class BlockLumo extends Block {
 		return par1;
 	}
 
-	@Override
-	public String getTextureFile() {
-		return Blocks.BLOCK_PNG;
-	}
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(int par1, CreativeTabs tab, List subItems) {
 		for (int ix = 0; ix < 2; ix++) {

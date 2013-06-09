@@ -4,16 +4,22 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import riseautomatons.RiseAutomatons;
 import riseautomatons.entity.EntityWatcher;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBad extends Block {
+
+	private Icon icons[];
 
 	public int D[] = {27, 28};
 
@@ -35,12 +41,20 @@ public class BlockBad extends Block {
 	}
 
 	@Override
-	public int getBlockTextureFromSide(int i) {
+	public Icon getBlockTextureFromSideAndMetadata(int i, int par2) {
 		if (i <= 1) {
-			return D[1];
+			return icons[1];
 		} else {
-			return D[0];
+			return icons[0];
 		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		icons = new Icon[2];
+		icons[0] = par1IconRegister.registerIcon("riseautomatons:crystal1");
+		icons[1] = par1IconRegister.registerIcon("riseautomatons:crystal2");
 	}
 
 	@Override

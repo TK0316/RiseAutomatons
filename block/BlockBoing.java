@@ -1,9 +1,13 @@
 package riseautomatons.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -12,8 +16,6 @@ public class BlockBoing extends Block {
 
 	protected BlockBoing(int i) {
 		super(i, Material.grass);
-		blockIndexInTexture = 5;
-
 	}
 
 	@Override
@@ -22,8 +24,9 @@ public class BlockBoing extends Block {
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int par1, int par2) {
-		return blockIndexInTexture;
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		this.blockIcon = par1IconRegister.registerIcon("riseautomatons:boing");
 	}
 
 	@Override
@@ -123,7 +126,7 @@ public class BlockBoing extends Block {
 	@Override
 	public void onSetBlockIDWithMetaData(World world, int i, int j,
 			int k, int l) {
-		world.setBlockMetadataWithNotify(i, j, k, l);
+		world.setBlockMetadataWithNotify(i, j, k, l, 3);
 	}
 
 }

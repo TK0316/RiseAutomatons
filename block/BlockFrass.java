@@ -5,8 +5,10 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
@@ -15,6 +17,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockFrass extends Block {
+
+	private Icon icons[];
 
 	public static boolean spread = true;
 
@@ -99,14 +103,14 @@ public class BlockFrass extends Block {
 						if(isShine == false) {
 							continue;
 						}
-						world.setBlockAndMetadataWithNotify(i + x, j + y, k + z, Ids.blockFrass, meta);
+						world.setBlock(i + x, j + y, k + z, Ids.blockFrass, meta, 3);
 					}
 					else {
 						int blockId = world.getBlockId(i + x, j + y, k + z);
 						int meta = world.getBlockMetadata(i + x, j + y, k + z);
 						if(blockId == Blocks.frass.blockID) {
 							if(meta < 8) {
-								world.setBlockAndMetadataWithNotify(i + x, j + y, k + z, Ids.blockFrass, meta + 8);
+								world.setBlock(i + x, j + y, k + z, Ids.blockFrass, meta + 8, 3);
 							}
 						}
 					}
@@ -118,19 +122,19 @@ public class BlockFrass extends Block {
 		}
 		switch(m) {
 		case 8:
-			world.setBlockAndMetadata(i, j, k, 0, 0);
+			world.setBlock(i, j, k, 0, 0, 3);
 			break;
 		case 9:
-			world.setBlockAndMetadata(i, j, k, Block.sand.blockID, 0);
+			world.setBlock(i, j, k, Block.sand.blockID, 0, 3);
 			break;
 		case 10:
-			world.setBlockAndMetadata(i, j, k, Block.dirt.blockID, 0);
+			world.setBlock(i, j, k, Block.dirt.blockID, 0, 3);
 			break;
 		case 11:
-			world.setBlockAndMetadata(i, j, k, Block.blockClay.blockID, 0);
+			world.setBlock(i, j, k, Block.blockClay.blockID, 0, 3);
 			break;
 		case 12:
-			world.setBlockAndMetadata(i, j, k, Block.waterStill.blockID, 0);
+			world.setBlock(i, j, k, Block.waterStill.blockID, 0, 3);
 			break;
 		default:
 			break;
@@ -142,23 +146,23 @@ public class BlockFrass extends Block {
 			int k, int l) {
 		switch(l) {
 		case 0:
-			world.setBlockWithNotify(i, j, k, 0);
+			world.setBlock(i, j, k, 0, 0, 3);
 			break;
 		case 1:
 		case 9:
-			world.setBlockWithNotify(i, j, k, Block.sand.blockID);
+			world.setBlock(i, j, k, Block.sand.blockID, 0, 3);
 			break;
 		case 2:
 		case 10:
-			world.setBlockWithNotify(i, j, k, Block.dirt.blockID);
+			world.setBlock(i, j, k, Block.dirt.blockID, 0, 3);
 			break;
 		case 3:
 		case 11:
-			world.setBlockWithNotify(i, j, k, Block.blockClay.blockID);
+			world.setBlock(i, j, k, Block.blockClay.blockID, 0, 3);
 			break;
 		case 4:
 		case 12:
-			world.setBlockWithNotify(i, j, k, Block.waterStill.blockID);
+			world.setBlock(i, j, k, Block.waterStill.blockID, 0, 3);
 			break;
 		default:
 			break;
@@ -176,32 +180,46 @@ public class BlockFrass extends Block {
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int par1, int meta) {
+	public Icon getBlockTextureFromSideAndMetadata(int par1, int meta) {
 		if(meta == 0) {
-			return 26;
+			return icons[7];
 		}
 		else if(meta == 1 || meta == 9) {
 			if(par1 == 0 || par1 == 1) {
-				return 21;
+				return icons[2];
 			}
-			return 22;
+			return icons[3];
 		}
 		else if(meta == 2 || meta == 10) {
 			if(par1 == 0 || par1 == 1) {
-				return 24;
+				return icons[5];
 			}
-			return 25;
+			return icons[6];
 		}
 		else if(meta == 3 || meta == 11) {
 			if(par1 == 0 || par1 == 1) {
-				return 19;
+				return icons[0];
 			}
-			return 20;
+			return icons[1];
 		}
 		else if(meta == 4 || meta == 12) {
-			return 23;
+			return icons[4];
 		}
-		return 26;
+		return icons[7];
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		icons = new Icon[8];
+		icons[0] = par1IconRegister.registerIcon("riseautomatons:frass1");
+		icons[1] = par1IconRegister.registerIcon("riseautomatons:frass2");
+		icons[2] = par1IconRegister.registerIcon("riseautomatons:frass3");
+		icons[3] = par1IconRegister.registerIcon("riseautomatons:frass4");
+		icons[4] = par1IconRegister.registerIcon("riseautomatons:frass5");
+		icons[5] = par1IconRegister.registerIcon("riseautomatons:frass6");
+		icons[6] = par1IconRegister.registerIcon("riseautomatons:frass7");
+		icons[7] = par1IconRegister.registerIcon("riseautomatons:frassn");
 	}
 
 	@SideOnly(Side.CLIENT)

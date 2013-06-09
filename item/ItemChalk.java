@@ -16,11 +16,6 @@ public class ItemChalk extends Item {
 	}
 
 	@Override
-	public String getTextureFile() {
-		return Items.ITEMS_PNG;
-	}
-
-	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer,
 			World world, int i, int j, int k, int l, float par8, float par9,
 			float par10) {
@@ -31,7 +26,7 @@ public class ItemChalk extends Item {
 			int meta = world.getBlockMetadata(i, j, k);
 
 			if (meta < 7) {
-				world.setBlockMetadataWithNotify(i, j, k, meta + 1); // zei_Ids.chalk,
+				world.setBlockMetadataWithNotify(i, j, k, meta + 1, 3); // zei_Ids.chalk,
 				world.markBlockForUpdate(i, j, k);
 				itemstack.damageItem(1, entityplayer);
 				return true;
@@ -80,7 +75,7 @@ public class ItemChalk extends Item {
 			if (meta < 7) {
 				meta++;
 			}
-			world.setBlockAndMetadataWithNotify(i, j, k, Blocks.chalk.blockID, meta);
+			world.setBlock(i, j, k, Blocks.chalk.blockID, meta, 3);
 		}
 
 		return true;

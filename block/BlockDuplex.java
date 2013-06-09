@@ -11,7 +11,6 @@ public class BlockDuplex extends Block {
 
 	public BlockDuplex(int par1) {
 		super(par1, Material.glass);
-		this.blockIndexInTexture = 34;
 	}
 
 	@Override
@@ -39,27 +38,27 @@ public class BlockDuplex extends Block {
 	    world.spawnParticle("reddust", i + 0.5F, j + 0.5F, k + 0.5F, 0.0D, 0.2000000029802322D, 0.0D);
 	    if (world.getBlockId(i + 1, j, k) == this.blockID)
 	    {
-	      world.setBlockWithNotify(i + 1, j, k, 0);
+	      world.setBlock(i + 1, j, k, 0, 0, 3);
 	    }
 	    if (world.getBlockId(i - 1, j, k) == this.blockID)
 	    {
-	      world.setBlockWithNotify(i - 1, j, k, 0);
+	      world.setBlock(i - 1, j, k, 0, 0, 3);
 	    }
 	    if (world.getBlockId(i, j, k - 1) == this.blockID)
 	    {
-	      world.setBlockWithNotify(i, j, k - 1, 0);
+	      world.setBlock(i, j, k - 1, 0, 0, 3);
 	    }
 	    if (world.getBlockId(i, j, k + 1) == this.blockID)
 	    {
-	      world.setBlockWithNotify(i, j, k + 1, 0);
+	      world.setBlock(i, j, k + 1, 0, 0, 3);
 	    }
 	    if (world.getBlockId(i, j - 1, k) == this.blockID)
 	    {
-	      world.setBlockWithNotify(i, j - 1, k, 0);
+	      world.setBlock(i, j - 1, k, 0, 0, 3);
 	    }
 	    if (world.getBlockId(i, j + 1, k) == this.blockID)
 	    {
-	      world.setBlockWithNotify(i, j + 1, k, 0);
+	      world.setBlock(i, j + 1, k, 0, 0, 3);
 	    }
 	}
 

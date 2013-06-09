@@ -2,13 +2,20 @@ package riseautomatons.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCrink extends Block {
+
+	private Icon icons[];
 	protected BlockCrink(int i, int j) {
-		super(i, j, Material.circuits);
+
+		super(i, Material.circuits);
 		slipperiness = 1.0F;
 		loadSprites();
 	}
@@ -19,7 +26,7 @@ public class BlockCrink extends Block {
 	}
 
 	public BlockCrink(int par1, int par2, Material par3Material) {
-		super(par1, par2, par3Material);
+		super(par1, par3Material);
 		loadSprites();
 	}
 
@@ -48,16 +55,25 @@ public class BlockCrink extends Block {
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j) {
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j) {
 		if (!Block.leaves.graphicsLevel) {
-			return D[2];
+			return icons[2];
 		}
 
 		if (j > 0) {
-			return D[0]; // top 235
+			return icons[0]; // top 235
 		}
 
-		return D[1]; // D[0]
+		return icons[1]; // D[0]
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		icons = new Icon[3];
+		icons[0] = par1IconRegister.registerIcon("riseautomatons:crink");
+		icons[1] = par1IconRegister.registerIcon("riseautomatons:crink2");
+		icons[2] = par1IconRegister.registerIcon("riseautomatons:crink3");
 	}
 
 	@Override
@@ -86,10 +102,5 @@ public class BlockCrink extends Block {
 			0xffffff, // 0x0093bd,
 			0x496FD6, 0x003469, 0x96E6EB, 0x43cef1, 0x4b6e8a, 0x7D4B94,
 			0x292f3f, 0x08143a, 0x737a7b, 0x3ED613 };
-
-	@Override
-	public String getTextureFile() {
-		return Blocks.BLOCK_PNG;
-	}
 
 }

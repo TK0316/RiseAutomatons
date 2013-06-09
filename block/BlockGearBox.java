@@ -3,6 +3,7 @@ package riseautomatons.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
@@ -15,7 +16,7 @@ public class BlockGearBox extends Block {
 	int kt = 0;
 
 	protected BlockGearBox(int i, int j, Material mat) {
-		super(i, j, mat);
+		super(i, mat);
 		// setBlockBounds(f,f,f,1-f,1-f,1-f);
 	}
 
@@ -30,13 +31,14 @@ public class BlockGearBox extends Block {
 
 	@Override
 	public int colorMultiplier(IBlockAccess iblockaccess, int i, int j, int k) {
-		return iblockaccess.getBlockMetadata(i, j, k) == 0 ? 0xaa5555
-				: 0xffffff; // ColorizerGrass.getGrassColor(d, d1);
+		return super.colorMultiplier(iblockaccess, i, j, k);
+		//return iblockaccess.getBlockMetadata(i, j, k) == 0 ? 0xaa5555
+		//		: 0xffffff; // ColorizerGrass.getGrassColor(d, d1);
 	}
 
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-			EntityLiving par5EntityLiving) {
+			EntityLiving par5EntityLiving, ItemStack itemstack) {
 		computeState(par1World, par2, par3, par4);
 	}
 
@@ -51,7 +53,7 @@ public class BlockGearBox extends Block {
 				|| allow(world, i, j + 1, k, 8) || allow(world, i, j - 1, k, 7)) {
 		} else {
 			if (m != 0) {
-				world.setBlockMetadataWithNotify(i, j, k, 0);
+				world.setBlockMetadataWithNotify(i, j, k, 0, 3);
 			}
 		}
 	}
@@ -62,7 +64,7 @@ public class BlockGearBox extends Block {
 
 		if (b) {
 			if (world.getBlockMetadata(it, jt, kt) != g) {
-				world.setBlockMetadataWithNotify(it, jt, kt, g);
+				world.setBlockMetadataWithNotify(it, jt, kt, g, 3);
 			}
 		}
 

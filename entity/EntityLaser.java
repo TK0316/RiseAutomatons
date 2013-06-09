@@ -163,6 +163,12 @@ public class EntityLaser extends EntityThrowable {
 		super.onUpdate();
 		if(!this.worldObj.isRemote) {
 			worldObj.spawnParticle("reddust", posX, posY + 0.5D, posZ, 0.0D, 0.0D, 0.0D);
+			double x = (this.motionX);
+			double y = (this.motionY);
+			double z = (this.motionZ);
+			if(x * x + y * y + z * z < 0.0001D) {
+				this.setDead();
+			}
 		}
 	}
 

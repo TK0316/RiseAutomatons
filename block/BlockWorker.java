@@ -2,8 +2,12 @@ package riseautomatons.block;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
@@ -23,6 +27,13 @@ public class BlockWorker extends BlockContainer {
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		return new TileEntityBeacon();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		this.blockIcon = par1IconRegister
+				.registerIcon("stone");
 	}
 
 	@Override
@@ -80,7 +91,7 @@ public class BlockWorker extends BlockContainer {
         if (!canPlaceBlockAt(par1World, par2, par3, par4))
         {
             dropBlockAsItem_do(par1World, par2, par3, par4, new ItemStack(Ids.itemWorker, 1, 0));
-            par1World.setBlockWithNotify(par2, par3, par4, 0);
+            par1World.setBlock(par2, par3, par4, 0, 0, 3);
             return false;
         }
         else

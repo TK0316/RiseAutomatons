@@ -22,11 +22,11 @@ public class RenderToteBlock implements ISimpleBlockRenderingHandler {
 
 		Tessellator.instance.draw();
         Tessellator.instance.startDrawingQuads();
-        renderengine.bindTexture(renderengine.getTexture("/riseautomatons/tote.png"));
+        renderengine.bindTexture("/riseautomatons/tote.png");
         boolean bool = render(renderblocks, iblockaccess, block, i, j, k);
         Tessellator.instance.draw();
         Tessellator.instance.startDrawingQuads();
-        renderengine.bindTexture(renderengine.getTexture("/terrain.png"));
+        renderengine.bindTexture("/terrain.png");
         return bool;
 	}
 

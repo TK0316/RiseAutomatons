@@ -56,7 +56,7 @@ public class EntityVirus extends EntityThrowable {
                 		int meta = this.worldObj.getBlockMetadata(i, j, k);
                 		if(meta < 8) {
                 			//System.out.println(String.valueOf(i) + "," + String.valueOf(j) + "," + String.valueOf(k));
-                			this.worldObj.setBlockMetadataWithNotify(i, j, k, meta + 8);
+                			this.worldObj.setBlockMetadataWithNotify(i, j, k, meta + 8, 3);
                 		}
                 	}
                 }

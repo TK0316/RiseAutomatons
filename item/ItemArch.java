@@ -1,6 +1,7 @@
 package riseautomatons.item;
 
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.Icon;
 import riseautomatons.block.Blocks;
 
 public class ItemArch extends ItemBlock {
@@ -11,7 +12,7 @@ public class ItemArch extends ItemBlock {
 	}
 
 	@Override
-	public int getIconFromDamage(int i) {
+	public Icon getIconFromDamage(int i) {
 		return Blocks.arch.getBlockTextureFromSideAndMetadata(2, i);
 	}
 

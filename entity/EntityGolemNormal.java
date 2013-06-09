@@ -196,8 +196,8 @@ public class EntityGolemNormal extends EntityAniBot implements IBot,
 				b = Blocks.frass;
 			}
 			if (b.canPlaceBlockAt(worldObj, xx, yy, zz)) {
-				worldObj.setBlockAndMetadataWithNotify(xx, yy, zz, b.blockID,
-						getColo());
+				worldObj.setBlock(xx, yy, zz, b.blockID,
+						getColo(), 3);
 			}
 
 			setDead();

@@ -38,7 +38,7 @@ public class AbsorbSoul extends Spell {
 		if (!L.isEmpty()){
 			for (int n = 0; n < L.size(); n++){
 				EntityItem e = (EntityItem)L.get(n);
-				if (e.func_92014_d().itemID == Ids.soulCore && e.func_92014_d().getItemDamage() == 4){
+				if (e.getEntityItem().itemID == Ids.soulCore && e.getEntityItem().getItemDamage() == 4){
 					targetItem = e;
 					break;
 				}
@@ -68,8 +68,8 @@ public class AbsorbSoul extends Spell {
 						dropB(world,el);
 						// TODO Universal.gorey(world, i, j, k);
 						complete=true;
-						targetItem.func_92014_d().stackSize = 1;
-						targetItem.func_92014_d().setItemDamage(EnumSoulCore.SOULPURE.ordinal());
+						targetItem.getEntityItem().stackSize = 1;
+						targetItem.getEntityItem().setItemDamage(EnumSoulCore.SOULPURE.ordinal());
 						System.out.println("Pure Soul");
 
 					}else if(el instanceof EntityMob){
@@ -92,8 +92,8 @@ public class AbsorbSoul extends Spell {
 							// TODO Universal.gorey(world, i, j, k);
 						}
 						complete=true;
-						targetItem.func_92014_d().stackSize = 1;
-						targetItem.func_92014_d().setItemDamage(EnumSoulCore.SOULEVIL.ordinal());
+						targetItem.getEntityItem().stackSize = 1;
+						targetItem.getEntityItem().setItemDamage(EnumSoulCore.SOULEVIL.ordinal());
 						System.out.println("Evil Soul");
 					}
 

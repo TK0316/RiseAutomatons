@@ -212,8 +212,8 @@ public class ChalkLogic {
 		for (int z = startZ; z < endZ; z++) {
 			for (int x = startX; x < endX; x++) {
 				if (world.getBlockId(x, j, z) == Ids.blockChalk) {
-					world.setBlockMetadata(x, j, z, 0);
-					world.setBlockWithNotify(x, j, z, 0);
+					world.setBlock(x, j, z, 0, 0, 3);
+					world.setBlock(x, j, z, 0, 0, 3);
 				}
 			}
 		}

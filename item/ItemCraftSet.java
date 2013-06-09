@@ -2,11 +2,18 @@ package riseautomatons.item;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
+import net.minecraft.util.MathHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemCraftSet extends Item {
+
+	private Icon icons[];
 
 	public ItemCraftSet(int par1) {
 		super(par1);
@@ -15,8 +22,18 @@ public class ItemCraftSet extends Item {
 	}
 
 	@Override
-	public int getIconFromDamage(int par1) {
-		return par1;
+	public Icon getIconFromDamage(int par1) {
+		int i = MathHelper.clamp_int(par1, 0, EnumCraftSetType.values().length-1);
+		return icons[i];
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void updateIcons(IconRegister par1IconRegister) {
+		icons = new Icon[EnumCraftSetType.values().length];
+		for (int var4 = 0; var4 < EnumCraftSetType.values().length; ++var4) {
+			icons[var4] = par1IconRegister.registerIcon("riseautomatons:"+EnumCraftSetType.values()[var4].name);
+		}
 	}
 
 	@Override
@@ -28,8 +45,8 @@ public class ItemCraftSet extends Item {
 	}
 
 	@Override
-	public String getItemNameIS(ItemStack par1ItemStack) {
-		return super.getItemNameIS(par1ItemStack)
+	public String getUnlocalizedName(ItemStack par1ItemStack) {
+		return super.getUnlocalizedName(par1ItemStack)
 				+ EnumCraftSetType.values()[par1ItemStack.getItemDamage()].name;
 	}
 }

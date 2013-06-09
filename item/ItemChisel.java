@@ -23,11 +23,11 @@ public class ItemChisel extends Item {
 
 			if (id == 1) {
 				if (!world.isAirBlock(i, j + 1, k)) {
-					world.setBlockWithNotify(i, j, k, 4);
+					world.setBlock(i, j, k, 4, 0, 3);
 					itemstack.damageItem(4, entityplayer);
 				} else {
-					world.setBlockAndMetadataWithNotify(i, j, k, Ids.blockSlab,
-							1);
+					world.setBlock(i, j, k, Ids.blockSlab,
+							1, 3);
 					if (!world.isRemote)
 						world.spawnEntityInWorld(new EntityItem(world,
 								i + 0.5f, j + 1, k + 0.5f, new ItemStack(
@@ -41,10 +41,10 @@ public class ItemChisel extends Item {
 				int meta = world.getBlockMetadata(i, j, k);
 
 				if (meta < 15) {
-					world.setBlockAndMetadataWithNotify(i, j, k, Ids.blockSlab,
-							meta + 1); // Ids.chalk,
+					world.setBlock(i, j, k, Ids.blockSlab,
+							meta + 1, 3); // Ids.chalk,
 				} else {
-					world.setBlockWithNotify(i, j, k, 0);
+					world.setBlock(i, j, k, 0, 0, 3);
 				}
 
 				if (!world.isRemote)

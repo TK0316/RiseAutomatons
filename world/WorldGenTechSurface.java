@@ -32,7 +32,7 @@ public class WorldGenTechSurface extends WorldGenerator {
 					else {
 						continue;
 					}
-					world.setBlockAndMetadata(i, j, k, Ids.blockFrass, meta);
+					world.setBlock(i, j, k, Ids.blockFrass, meta, 3);
 					break;
 				}
 			}

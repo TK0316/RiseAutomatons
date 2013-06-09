@@ -9,13 +9,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 
 public class BlockBeacon extends BlockContainer {
 
 	protected BlockBeacon(int i) {
-		super(i, 5, Material.circuits);
+		super(i, Material.circuits);
 		setBlockBounds(6f / 16f, 0.0F, 6f / 16f, 10f / 16f, 0.875f, 10f / 16f);
 	}
 
@@ -31,9 +32,9 @@ public class BlockBeacon extends BlockContainer {
 				.getBlockTileEntity(i, j, k);
 		beacon.numeral = ii;
 	}
-
+/*
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j) {
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j) {
 		if (j == 0) {
 			return 64;
 		} else if (j == 1) {
@@ -41,7 +42,7 @@ public class BlockBeacon extends BlockContainer {
 		}
 		return 129;
 	}
-
+*/
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
@@ -72,7 +73,7 @@ public class BlockBeacon extends BlockContainer {
 
 	@Override
 	public void onBlockPlacedBy(World world, int i, int j, int k,
-			EntityLiving entity) {
+			EntityLiving entity, ItemStack itemstack) {
 		if (entity instanceof EntityPlayer) {
 			select(world, i, j, k, (EntityPlayer) entity);
 		}
@@ -85,7 +86,7 @@ public class BlockBeacon extends BlockContainer {
 		ItemStack is = ep.inventory.getCurrentItem();
 		if (is != null && is.itemID == Item.stick.itemID) {
 			beacon.mode = 2;
-			world.setBlockMetadataWithNotify(i, j, k, 2);
+			world.setBlockMetadataWithNotify(i, j, k, 2, 3);
 			world.markBlockForUpdate(i, j, k);
 		} else if (is != null && is.itemID == Item.compass.itemID) {
 			// beacon.mode=2;
@@ -94,11 +95,11 @@ public class BlockBeacon extends BlockContainer {
 			BeaconManager.alertPlayerOnBots(world, ep);
 		} else if (beacon.mode != 0) {
 			beacon.mode = 0;
-			world.setBlockMetadataWithNotify(i, j, k, 0);
+			world.setBlockMetadataWithNotify(i, j, k, 0, 3);
 			world.markBlockForUpdate(i, j, k);
 		} else {
 			beacon.mode = 1;
-			world.setBlockMetadataWithNotify(i, j, k, 1);
+			world.setBlockMetadataWithNotify(i, j, k, 1, 3);
 			world.markBlockForUpdate(i, j, k);
 		}
 	}

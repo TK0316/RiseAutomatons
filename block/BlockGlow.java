@@ -1,12 +1,19 @@
 package riseautomatons.block;
 
+import riseautomatons.Ids;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 
 public class BlockGlow extends Block {
+
+	private Icon icons[];
 
 	public int D[] = {27, 28};
 
@@ -34,12 +41,31 @@ public class BlockGlow extends Block {
 	}
 
 	@Override
-	public int getBlockTextureFromSide(int i) {
-		if (i <= 1) {
-			return D[1];
-		} else {
-			return D[0];
+	public Icon getBlockTextureFromSideAndMetadata(int i, int par2) {
+		if(this.blockID == Ids.blockGlowy) {
+			if (i <= 1) {
+				return icons[3];
+			} else {
+				return icons[2];
+			}
 		}
+		else {
+			if (i <= 1) {
+				return icons[1];
+			} else {
+				return icons[0];
+			}
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		icons = new Icon[4];
+		icons[0] = par1IconRegister.registerIcon("riseautomatons:crystal1");
+		icons[1] = par1IconRegister.registerIcon("riseautomatons:crystal2");
+		icons[2] = par1IconRegister.registerIcon("riseautomatons:glowy1");
+		icons[3] = par1IconRegister.registerIcon("riseautomatons:glowy2");
 	}
 
 	@Override

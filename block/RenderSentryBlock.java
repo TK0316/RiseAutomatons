@@ -22,11 +22,11 @@ public class RenderSentryBlock implements ISimpleBlockRenderingHandler {
 		RenderEngine renderengine = ModLoader.getMinecraftInstance().renderEngine;
         Tessellator.instance.draw();
         Tessellator.instance.startDrawingQuads();
-        renderengine.bindTexture(renderengine.getTexture(EntitySentry.SENTRYBLOCK_PNG));
+        renderengine.bindTexture(EntitySentry.SENTRYBLOCK_PNG);
         boolean bool = render(renderblocks, iblockaccess, block, i, j, k);
         Tessellator.instance.draw();
         Tessellator.instance.startDrawingQuads();
-        renderengine.bindTexture(renderengine.getTexture("/terrain.png"));
+        renderengine.bindTexture("/terrain.png");
         return bool;
 	}
 

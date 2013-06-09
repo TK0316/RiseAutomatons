@@ -4,12 +4,18 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockArch extends Block {
+
+	private Icon icons[];
 
 	public BlockArch(int par1, Material par2Material) {
 		super(par1, par2Material);
@@ -17,7 +23,7 @@ public class BlockArch extends Block {
 	}
 
 	protected BlockArch(int par1) {
-		super(par1, 0, Material.glass);
+		super(par1, Material.glass);
 		BlockArch.loadSprites();
 	}
 
@@ -36,31 +42,40 @@ public class BlockArch extends Block {
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j) {
+	public Icon getBlockTextureFromSideAndMetadata(int i, int j) {
 		if (j == 5) {
-			return D[1];
+			return icons[2];
 		}
-		return D[0];
+		return icons[0];
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		icons = new Icon[3];
+		icons[0] = par1IconRegister.registerIcon("riseautomatons:arch1");
+		icons[1] = par1IconRegister.registerIcon("riseautomatons:arch2");
+		icons[2] = par1IconRegister.registerIcon("riseautomatons:arch3");
 	}
 
 	public static boolean place(World world, int i, int j, int k) {
 		int id = world.getBlockId(i, j, k);
 
 		if (id == 3) {
-			world.setBlockAndMetadataWithNotify(i, j, k, Ids.blockArch, 4);
+			world.setBlock(i, j, k, Ids.blockArch, 4, 3);
 			return true;
 		} else if (id == 1 || id == 4) {
-			world.setBlockAndMetadataWithNotify(i, j, k, Ids.blockArch, 1);
+			world.setBlock(i, j, k, Ids.blockArch, 1, 3);
 			return true;
 		} else if (id == 8 || id == 9) {
-			world.setBlockAndMetadataWithNotify(i, j, k, Ids.blockArch, 2);
+			world.setBlock(i, j, k, Ids.blockArch, 2, 3);
 			return true;
 		} else if (id == 2) {
-			world.setBlockAndMetadataWithNotify(i, j, k, Ids.blockArch, 3);
+			world.setBlock(i, j, k, Ids.blockArch, 3, 3);
 			return true;
 		}/*
 		 * else if(id!=zei_Ids.arch && id!=zei_Ids.arch2&& id!=0){
-		 * world.setBlockAndMetadataWithNotify(i, j, k,zei_Ids.arch, 0);return
+		 * world.setBlock(i, j, k,zei_Ids.arch, 0);return
 		 * true; }
 		 */
 		return false;
@@ -74,7 +89,7 @@ public class BlockArch extends Block {
 				place(world, i, j - it, k);
 				it++;
 			}
-			world.setBlockWithNotify(i, 20, k, Ids.blockArchitect);
+			world.setBlock(i, 20, k, Ids.blockArchitect, 0, 3);
 		}
 	}
 
@@ -93,13 +108,13 @@ public class BlockArch extends Block {
 			int metadata) {
 
 		if (metadata == 4) {
-			world.setBlockWithNotify(i, j, k, Block.dirt.blockID);
+			world.setBlock(i, j, k, Block.dirt.blockID, 0, 3);
 		} else if (metadata == 1) {
-			world.setBlockWithNotify(i, j, k, Block.stone.blockID);
+			world.setBlock(i, j, k, Block.stone.blockID, 0, 3);
 		} else if (metadata == 2) {
-			world.setBlockWithNotify(i, j, k, 9);
+			world.setBlock(i, j, k, 9, 0, 3);
 		} else if (metadata == 3) {
-			world.setBlockWithNotify(i, j, k, 2);
+			world.setBlock(i, j, k, 2, 0, 3);
 		}
 
 		dropBlockAsItem_do(world, i, j, k, new ItemStack(blockID, 1, 0));

@@ -2,8 +2,12 @@ package riseautomatons.block;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -12,12 +16,17 @@ import riseautomatons.Ids;
 public class BlockArchitect extends BlockContainer {
 	protected BlockArchitect(int par1) {
 		super(par1, Material.rock);
-		blockIndexInTexture = 45;
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		return new TileEntityArchitect();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		this.blockIcon = par1IconRegister.registerIcon("piston_bottom");
 	}
 
 	@Override
@@ -71,7 +80,7 @@ public class BlockArchitect extends BlockContainer {
 	@Override
 	public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
 		if (l == Ids.blockChalk)
-			world.setBlockWithNotify(i, j, k, Ids.blockArchBend);
+			world.setBlock(i, j, k, Ids.blockArchBend, 0, 3);
 	}
 
 	@Override

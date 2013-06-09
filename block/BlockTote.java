@@ -2,11 +2,15 @@ package riseautomatons.block;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import riseautomatons.Ids;
 import riseautomatons.RiseAutomatons;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,7 +24,6 @@ public class BlockTote extends BlockContainer {
 
 	protected BlockTote(int i) {
 		super(i, Material.piston);
-		blockIndexInTexture = 1;
 		float F = 0.25f;
 		setBlockBounds(0.125F, 0.0F, 0.125F, 0.875F, 0.5625f, 0.875F);
 	}
@@ -28,6 +31,13 @@ public class BlockTote extends BlockContainer {
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		return new TileEntityLatch();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		this.blockIcon = par1IconRegister
+				.registerIcon("stone");
 	}
 
 	@Override
@@ -81,7 +91,7 @@ public class BlockTote extends BlockContainer {
 										itemstack.getItemDamage()));
 
 						if (itemstack.hasTagCompound()) {
-							entityitem.func_92014_d()
+							entityitem.getEntityItem()
 									.setTagCompound((NBTTagCompound) itemstack
 											.getTagCompound().copy());
 						}

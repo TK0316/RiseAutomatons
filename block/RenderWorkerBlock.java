@@ -23,11 +23,11 @@ public class RenderWorkerBlock implements ISimpleBlockRenderingHandler {
 
         Tessellator.instance.draw();
         Tessellator.instance.startDrawingQuads();
-        renderengine.bindTexture(renderengine.getTexture(EntityWorker.GOLEM1_PNG));
+        renderengine.bindTexture(EntityWorker.GOLEM1_PNG);
         boolean bool = render(renderblocks, iblockaccess, block, i, j, k);
         Tessellator.instance.draw();
         Tessellator.instance.startDrawingQuads();
-        renderengine.bindTexture(renderengine.getTexture("/terrain.png"));
+        renderengine.bindTexture("/terrain.png");
         return bool;
 	}
 

@@ -273,7 +273,7 @@ public class EntityTote extends EntityOwnedBot implements IInventory, IBot {
 			if (id == 0
 					|| Block.blocksList[id].getCollisionBoundingBoxFromPool(
 							worldObj, xx, yy, zz) == null) {
-				worldObj.setBlockWithNotify(xx, yy, zz, Ids.blockTote);
+				worldObj.setBlock(xx, yy, zz, Ids.blockTote, 0, 3);
 				TileEntityLatch latch = (TileEntityLatch) worldObj
 						.getBlockTileEntity(xx, yy, zz);
 				latch.dispenserContents = cargoItems.clone();
@@ -318,5 +318,15 @@ public class EntityTote extends EntityOwnedBot implements IInventory, IBot {
 				worldObj.spawnEntityInWorld(entityitem);
 			} while (true);
 		}
+	}
+	@Override
+	public boolean isInvNameLocalized() {
+		// TODO 自動生成されたメソッド・スタブ
+		return false;
+	}
+	@Override
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+		// TODO 自動生成されたメソッド・スタブ
+		return false;
 	}
 }

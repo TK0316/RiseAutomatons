@@ -67,7 +67,7 @@ public class WorldGenDwelling extends WorldGenerator {
 		for (int x = -w2; x <= width - w2; x++) {
 			for (int z = -l2; z <= length - l2; z++) {
 				for (int y = 0; y <= height; y++) {
-					world.setBlock(i + x, j + y, z + k, 0);
+					world.setBlock(i + x, j + y, z + k, 0, 0, 3);
 				}
 			}
 		}
@@ -78,8 +78,8 @@ public class WorldGenDwelling extends WorldGenerator {
 		for (int z = 0; z <= length; z++) {
 			for (int x = 0; x <= width; x++) {
 
-				world.setBlockAndMetadata(i + (x - (w2)), j, k + (z - (l2)),
-						Ids.blockSky, 0);
+				world.setBlock(i + (x - (w2)), j, k + (z - (l2)),
+						Ids.blockSky, 0, 3);
 			}
 		}
 
@@ -102,54 +102,54 @@ public class WorldGenDwelling extends WorldGenerator {
 		case 1:
 			for (int z = ph; z < length - ph; z++) {
 				for (int x = ph; x < width - ph; x++) {
-					world.setBlockAndMetadata(i + (x - (w2)), j + ho + 1, k
-							+ (z - (l2)), 44, 1);
+					world.setBlock(i + (x - (w2)), j + ho + 1, k
+							+ (z - (l2)), 44, 1, 3);
 				}
 			}
 			break;
 		case 2:
 			for (int z = ph; z < length - ph; z++) {
 				for (int x = ph; x < width - ph; x++) {
-					world.setBlockAndMetadata(i + (x - (w2)), j + ho + 1, k
-							+ (z - (l2)), Ids.blockTech, 3);
+					world.setBlock(i + (x - (w2)), j + ho + 1, k
+							+ (z - (l2)), Ids.blockTech, 3, 3);
 				}
 			}
 
 			for (int y = 2; y <= 6; y++) {
-				world.setBlockAndMetadata(i - 1, j + ho + y, k, Ids.blockSky, 0);
-				world.setBlockAndMetadata(i, j + ho + y, k - 1, Ids.blockSky, 0);
-				world.setBlockAndMetadata(i + 1, j + ho + y, k, Ids.blockSky, 0);
-				world.setBlockAndMetadata(i, j + ho + y, k + 1, Ids.blockSky, 0);
-				world.setBlockAndMetadata(i, j + ho + y + 5, k, Ids.blockSky, 0);
+				world.setBlock(i - 1, j + ho + y, k, Ids.blockSky, 0, 3);
+				world.setBlock(i, j + ho + y, k - 1, Ids.blockSky, 0, 3);
+				world.setBlock(i + 1, j + ho + y, k, Ids.blockSky, 0, 3);
+				world.setBlock(i, j + ho + y, k + 1, Ids.blockSky, 0, 3);
+				world.setBlock(i, j + ho + y + 5, k, Ids.blockSky, 0, 3);
 			}
 			break;
 
 		case 3:
 			for (int z = ph; z < length - ph; z++) {
 				for (int x = ph; x < width - ph; x++) {
-					world.setBlockAndMetadata(i + (x - (w2)), j + ho + 1, k
-							+ (z - (l2)), Ids.blockTech, 3);
+					world.setBlock(i + (x - (w2)), j + ho + 1, k
+							+ (z - (l2)), Ids.blockTech, 3, 3);
 				}
 			}
 
 			for (int y = 1; y <= 10; y++) {
-				world.setBlockAndMetadata(i - w4 + 1, j + ho + y, k + l4 - 1,
-						Ids.blockTech, 3);
-				world.setBlockAndMetadata(i - w4 + 1, j + ho + y, k - l4 + 1,
-						Ids.blockTech, 3);
-				world.setBlockAndMetadata(i + w4 - 1, j + ho + y, k - l4 + 1,
-						Ids.blockTech, 3);
-				world.setBlockAndMetadata(i + w4 - 1, j + ho + y, k + l4 - 1,
-						Ids.blockTech, 3);
+				world.setBlock(i - w4 + 1, j + ho + y, k + l4 - 1,
+						Ids.blockTech, 3, 3);
+				world.setBlock(i - w4 + 1, j + ho + y, k - l4 + 1,
+						Ids.blockTech, 3, 3);
+				world.setBlock(i + w4 - 1, j + ho + y, k - l4 + 1,
+						Ids.blockTech, 3, 3);
+				world.setBlock(i + w4 - 1, j + ho + y, k + l4 - 1,
+						Ids.blockTech, 3, 3);
 			}
-			world.setBlockAndMetadata(i - w4 + 1, j + ho + 10, k + l4 - 1,
-					Ids.blockSky, 1);
-			world.setBlockAndMetadata(i - w4 + 1, j + ho + 10, k - l4 + 1,
-					Ids.blockSky, 1);
-			world.setBlockAndMetadata(i + w4 - 1, j + ho + 10, k - l4 + 1,
-					Ids.blockSky, 1);
-			world.setBlockAndMetadata(i + w4 - 1, j + ho + 10, k + l4 - 1,
-					Ids.blockSky, 1);
+			world.setBlock(i - w4 + 1, j + ho + 10, k + l4 - 1,
+					Ids.blockSky, 1, 3);
+			world.setBlock(i - w4 + 1, j + ho + 10, k - l4 + 1,
+					Ids.blockSky, 1, 3);
+			world.setBlock(i + w4 - 1, j + ho + 10, k - l4 + 1,
+					Ids.blockSky, 1, 3);
+			world.setBlock(i + w4 - 1, j + ho + 10, k + l4 - 1,
+					Ids.blockSky, 1, 3);
 
 			break;
 		default:
@@ -157,8 +157,8 @@ public class WorldGenDwelling extends WorldGenerator {
 			for (int y = 1; y <= ph2; y++) {
 				for (int z = ph - 1; z <= length - ph; z++) {
 					for (int x = ph - 1; x <= width - ph; x++) {
-						world.setBlockAndMetadata(i + (x - (w2)), j + ho + y, k
-								+ (z - (l2)), Ids.blockTech, 1);
+						world.setBlock(i + (x - (w2)), j + ho + y, k
+								+ (z - (l2)), Ids.blockTech, 1, 3);
 					}
 				}
 				if (y % 2 == 1) {
@@ -200,50 +200,50 @@ public class WorldGenDwelling extends WorldGenerator {
 
 		for (int x = 0; x <= w3; x++) {
 			for (int y = 0; y <= height; y++) {
-				world.setBlockAndMetadataWithNotify((x - w4) + i, j + y,
-						k + l2, b, bb1);
+				world.setBlock((x - w4) + i, j + y,
+						k + l2, b, bb1, 3);
 			}
 		}
 
 		for (int x = 0; x <= w3; x++) {
 			for (int y = 0; y <= height; y++) {
-				world.setBlockAndMetadataWithNotify(((x - w4)) + i, j + y, k
-						- l2, b, bb1);
+				world.setBlock(((x - w4)) + i, j + y, k
+						- l2, b, bb1, 3);
 			}
 		}
 
 		// int l9=l2-1;
 		for (int z = 1; z < length; z++) {
 			for (int y = 0; y <= height; y++) {
-				world.setBlockAndMetadataWithNotify(i + w2, j + y,
-						k + (z - l2), b, bb1);
+				world.setBlock(i + w2, j + y,
+						k + (z - l2), b, bb1, 3);
 			}
 		}
 
 		for (int z = 1; z < length; z++) {
 			for (int y = 0; y <= height; y++) {
-				world.setBlockAndMetadataWithNotify(i - w2, j + y,
-						k + (z - l2), b, bb1);
+				world.setBlock(i - w2, j + y,
+						k + (z - l2), b, bb1, 3);
 			}
 		}
 
 		for (int y = 0; y < height; y++) {
-			world.setBlockAndMetadataWithNotify(i - w2, j + y, k - l2, b, bb2);
+			world.setBlock(i - w2, j + y, k - l2, b, bb2, 3);
 		}
 		for (int y = 0; y < height; y++) {
-			world.setBlockAndMetadataWithNotify(i - w2, j + y, k + l2, b, bb2);
+			world.setBlock(i - w2, j + y, k + l2, b, bb2, 3);
 		}
 		for (int y = 0; y < height; y++) {
-			world.setBlockAndMetadataWithNotify(i + w2, j + y, k + l2, b, bb2);
+			world.setBlock(i + w2, j + y, k + l2, b, bb2, 3);
 		}
 		for (int y = 0; y < height; y++) {
-			world.setBlockAndMetadataWithNotify(i + w2, j + y, k - l2, b, bb2);
+			world.setBlock(i + w2, j + y, k - l2, b, bb2, 3);
 		}
 
-		world.setBlockAndMetadataWithNotify(i + w2, j + height, k - l2, 44, 1);
-		world.setBlockAndMetadataWithNotify(i + w2, j + height, k + l2, 44, 1);
-		world.setBlockAndMetadataWithNotify(i - w2, j + height, k + l2, 44, 1);
-		world.setBlockAndMetadataWithNotify(i - w2, j + height, k - l2, 44, 1);
+		world.setBlock(i + w2, j + height, k - l2, 44, 1, 3);
+		world.setBlock(i + w2, j + height, k + l2, 44, 1, 3);
+		world.setBlock(i - w2, j + height, k + l2, 44, 1, 3);
+		world.setBlock(i - w2, j + height, k - l2, 44, 1, 3);
 		/*
 		 * for(int z=0;z<=l3;z++){ for(int y=0;y<=h3;y++){ for(int
 		 * x=0;x<=w3;x++){ world.setBlockWithNotify(i+(x-w4), j+y+1, k+(z-l4),
@@ -252,8 +252,8 @@ public class WorldGenDwelling extends WorldGenerator {
 
 		for (int z = 0; z <= l3; z++) {
 			for (int x = 0; x <= w3; x++) {
-				world.setBlockWithNotify(i + (x - w4), j, k + (z - l4),
-						Block.sandStone.blockID);
+				world.setBlock(i + (x - w4), j, k + (z - l4),
+						Block.sandStone.blockID, 0, 3);
 			}
 		}
 
@@ -262,21 +262,21 @@ public class WorldGenDwelling extends WorldGenerator {
 			switch (par) {
 			case 1:
 
-				world.setBlockWithNotify(i, j + height - 3, k + l2, 0);
-				world.setBlockWithNotify(i, j + height - 4, k + l2, 0);
+				world.setBlock(i, j + height - 3, k + l2, 0, 0, 3);
+				world.setBlock(i, j + height - 4, k + l2, 0, 0, 3);
 				break;
 			case 2:
-				world.setBlockWithNotify(i, j + height - 3, k - l2, 0);
-				world.setBlockWithNotify(i, j + height - 4, k - l2, 0);
+				world.setBlock(i, j + height - 3, k - l2, 0, 0, 3);
+				world.setBlock(i, j + height - 4, k - l2, 0, 0, 3);
 				break;
 
 			case 3:
-				world.setBlockWithNotify(i - w2, j + height - 3, k, 0);
-				world.setBlockWithNotify(i - w2, j + height - 4, k, 0);
+				world.setBlock(i - w2, j + height - 3, k, 0, 0, 3);
+				world.setBlock(i - w2, j + height - 4, k, 0, 0, 3);
 				break;
 			default:
-				world.setBlockWithNotify(i + w2, j + height - 3, k, 0);
-				world.setBlockWithNotify(i + w2, j + height - 4, k, 0);
+				world.setBlock(i + w2, j + height - 3, k, 0, 0, 3);
+				world.setBlock(i + w2, j + height - 4, k, 0, 0, 3);
 
 			}
 		} else {
@@ -287,62 +287,62 @@ public class WorldGenDwelling extends WorldGenerator {
 				if ((par & 1) == 0) {
 					if (mod != 0) {
 						for (int x = 0; x <= w3; x++) {
-							world.setBlockWithNotify((x - w4) + i, j + h3, k
-									+ l2, 102);
+							world.setBlock((x - w4) + i, j + h3, k
+									+ l2, 102, 0, 3);
 						}
 					} else {
-						world.setBlockAndMetadataWithNotify(i, j + h3, k + l2,
-								Ids.blockSky, 1);
-						world.setBlockAndMetadataWithNotify(i, j + h3 - 1, k
-								+ l2, Ids.blockSky, 1);
-						world.setBlockAndMetadataWithNotify(i, j + h3 - 2, k
-								+ l2, Ids.blockSky, 1);
+						world.setBlock(i, j + h3, k + l2,
+								Ids.blockSky, 1, 3);
+						world.setBlock(i, j + h3 - 1, k
+								+ l2, Ids.blockSky, 1, 3);
+						world.setBlock(i, j + h3 - 2, k
+								+ l2, Ids.blockSky, 1, 3);
 					}
 
 				}
 				if ((par & 2) == 0) {
 					if (mod != 0) {
 						for (int x = 0; x <= w3; x++) {
-							world.setBlockWithNotify(((x - w4)) + i, j + h3, k
-									- l2, 102);
+							world.setBlock(((x - w4)) + i, j + h3, k
+									- l2, 102, 0, 3);
 						}
 					} else {
-						world.setBlockAndMetadataWithNotify(i, j + h3, k - l2,
-								Ids.blockSky, 1);
-						world.setBlockAndMetadataWithNotify(i, j + h3 - 1, k
-								- l2, Ids.blockSky, 1);
-						world.setBlockAndMetadataWithNotify(i, j + h3 - 2, k
-								- l2, Ids.blockSky, 1);
+						world.setBlock(i, j + h3, k - l2,
+								Ids.blockSky, 1, 3);
+						world.setBlock(i, j + h3 - 1, k
+								- l2, Ids.blockSky, 1, 3);
+						world.setBlock(i, j + h3 - 2, k
+								- l2, Ids.blockSky, 1, 3);
 					}
 				}
 				if ((par & 4) == 0) {
 					if (mod != 0) {
 						for (int z = 0; z <= l3; z++) {
-							world.setBlockWithNotify(i + w2, j + h3, k
-									+ (z - l4), 102);
+							world.setBlock(i + w2, j + h3, k
+									+ (z - l4), 102, 0, 3);
 						}
 					} else {
-						world.setBlockAndMetadataWithNotify(i + w2, j + h3, k,
-								Ids.blockSky, 1);
-						world.setBlockAndMetadataWithNotify(i + w2, j + h3 - 1,
-								k, Ids.blockSky, 1);
-						world.setBlockAndMetadataWithNotify(i + w2, j + h3 - 2,
-								k, Ids.blockSky, 1);
+						world.setBlock(i + w2, j + h3, k,
+								Ids.blockSky, 1, 3);
+						world.setBlock(i + w2, j + h3 - 1,
+								k, Ids.blockSky, 1, 3);
+						world.setBlock(i + w2, j + h3 - 2,
+								k, Ids.blockSky, 1, 3);
 					}
 				}
 				if ((par & 8) == 0) {
 					if (mod != 0) {
 						for (int z = 0; z <= l3; z++) {
-							world.setBlockWithNotify(i - w2, j + h3, k
-									+ (z - l4), 102);
+							world.setBlock(i - w2, j + h3, k
+									+ (z - l4), 102, 0, 3);
 						}
 					} else {
-						world.setBlockAndMetadataWithNotify(i - w2, j + h3, k,
-								Ids.blockSky, 1);
-						world.setBlockAndMetadataWithNotify(i - w2, j + h3 - 1,
-								k, Ids.blockSky, 1);
-						world.setBlockAndMetadataWithNotify(i - w2, j + h3 - 2,
-								k, Ids.blockSky, 1);
+						world.setBlock(i - w2, j + h3, k,
+								Ids.blockSky, 1, 3);
+						world.setBlock(i - w2, j + h3 - 1,
+								k, Ids.blockSky, 1, 3);
+						world.setBlock(i - w2, j + h3 - 2,
+								k, Ids.blockSky, 1, 3);
 					}
 				}
 
@@ -351,19 +351,19 @@ public class WorldGenDwelling extends WorldGenerator {
 
 		if (bb > 4) {
 			for (int u = 1; u <= 4; u++) {
-				world.setBlockWithNotify(i + w2, j - u, k - l2, 101);
+				world.setBlock(i + w2, j - u, k - l2, 101, 0, 3);
 				// world.setBlockWithNotify(i+w2-1, j-u, k-l2, 101);
 				// world.setBlockWithNotify(i+w2, j-u, k-l2+1, 101);
 
-				world.setBlockWithNotify(i + w2, j - u, k + l2, 101);
+				world.setBlock(i + w2, j - u, k + l2, 101, 0, 3);
 				// world.setBlockWithNotify(i+w2-1, j-u, k+l2, 101);
 				// world.setBlockWithNotify(i+w2, j-u, k+l2-1, 101);
 
-				world.setBlockWithNotify(i - w2, j - u, k + l2, 101);
+				world.setBlock(i - w2, j - u, k + l2, 101, 0, 3);
 				// world.setBlockWithNotify(i-w2, j-u, k+l2-1, 101);
 				// world.setBlockWithNotify(i-w2+1, j-u, k+l2, 101);
 
-				world.setBlockWithNotify(i - w2, j - u, k - l2, 101);
+				world.setBlock(i - w2, j - u, k - l2, 101, 0, 3);
 				// world.setBlockWithNotify(i-w2+1, j-u, k-l2, 101);
 				// world.setBlockWithNotify(i-w2, j-u, k-l2+1, 101);
 			}

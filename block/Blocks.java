@@ -21,8 +21,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class Blocks {
 	public static final String BLOCK_PNG = "/riseautomatons/block.png";
 	public static final String PATTERNS_PNG = "/riseautomatons/patterns.png";
-	public static int skyIconIndex = 13;
-	public static int walkIconIndex  = 14;
 
 	public static void init() {
 		GameRegistry.registerBlock(worker);
@@ -115,114 +113,102 @@ public class Blocks {
 	}
 
 	public static Block worker = (new BlockWorker(Ids.blockWorker))
-			.setHardness(0.5F).setResistance(10F).setBlockName("Worker");
+			.setHardness(0.5F).setResistance(10F).setUnlocalizedName("riseautomatons:Worker");
     public static Block sentry = (new BlockSentry(Ids.blockSentry))
-    		.setHardness(0.5F).setResistance(10F).setBlockName("Sentry");
+    		.setHardness(0.5F).setResistance(10F).setUnlocalizedName("riseautomatons:Sentry");
 	public static Block tote = (new BlockTote(Ids.blockTote))
 			.setHardness(1F).setResistance(20F)
-			.setStepSound(Block.soundMetalFootstep).setBlockName("Tote");
+			.setStepSound(Block.soundMetalFootstep).setUnlocalizedName("riseautomatons:Tote");
 	public static Block beacon = (new BlockBeacon(Ids.blockBeacon))
-    		.setHardness(0.5F).setResistance(10F).setBlockName("Beacon");
+    		.setHardness(0.5F).setResistance(10F).setUnlocalizedName("riseautomatons:beacon");
 
 	public static Block gearbox = (new BlockGearBox(Ids.blockGearbox, 10, Material.iron))
-			.setTextureFile(BLOCK_PNG)
-			.setHardness(1F).setResistance(5F).setStepSound(Block.soundMetalFootstep).setBlockName("Gearbox")
+			.setHardness(1F).setResistance(5F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("riseautomatons:gearbox")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block chalk = (new BlockChalk(Ids.blockChalk, 164))
-			.setHardness(0f).setStepSound(Block.soundPowderFootstep).setBlockName("Chalk");
+			.setHardness(0f).setStepSound(Block.soundPowderFootstep).setUnlocalizedName("riseautomatons:Chalk");
 	public static Block turnBlock = (new BlockTurn(Ids.blockTurn))
 			.setHardness(0.05f).setResistance(0)
-			.setStepSound(Block.soundStoneFootstep).setBlockName("TurnBlock")
+			.setStepSound(Block.soundStoneFootstep).setUnlocalizedName("riseautomatons:TurnBlock")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block windmill = (new BlockWindmill(Ids.blockWindmill, 4,
 			Material.wood)).setHardness(0.5F).setResistance(1F)
-			.setStepSound(Block.soundWoodFootstep).setBlockName("Windmill")
+			.setStepSound(Block.soundWoodFootstep).setUnlocalizedName("riseautomatons:Windmill")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block slabBlock = (new BlockSlab(Ids.blockSlab))
-			.setHardness(1.5F).setResistance(10F).setBlockName("SlabBlock")
+			.setHardness(1.5F).setResistance(10F).setUnlocalizedName("riseautomatons:SlabBlock")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block sulfOre = (new BlockOre(Ids.sulfOre, 0))
-			.setTextureFile(BLOCK_PNG)
 			.setHardness(3F).setResistance(5F)
-			.setStepSound(Block.soundStoneFootstep).setBlockName("SulfOre")
+			.setStepSound(Block.soundStoneFootstep).setUnlocalizedName("riseautomatons:SulfOre")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block saltOre = (new BlockOre(Ids.saltOre, 1))
-			.setTextureFile(BLOCK_PNG)
 			.setHardness(3F).setResistance(5F)
-			.setStepSound(Block.soundStoneFootstep).setBlockName("SaltOre")
+			.setStepSound(Block.soundStoneFootstep).setUnlocalizedName("riseautomatons:SaltOre")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block tech = (new BlockComplex(Ids.blockTech))
 			.setHardness(1.0F).setResistance(5F)
-			.setStepSound(Block.soundStoneFootstep).setBlockName("tech")
+			.setStepSound(Block.soundStoneFootstep).setUnlocalizedName("riseautomatons:tech")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block arch = (new BlockArch(Ids.blockArch))
 			.setHardness(0.25F).setStepSound(Block.soundGlassFootstep)
-			.setBlockName("arch").setCreativeTab(RiseAutomatons.tabAutomatons);
+			.setUnlocalizedName("riseautomatons:arch").setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block sky = (new BlockLumo(Ids.blockSky)).setHardness(1F)
 			.setResistance(5F).setLightValue(1F)
-			.setStepSound(Block.soundGlassFootstep).setBlockName("sky")
+			.setStepSound(Block.soundGlassFootstep).setUnlocalizedName("riseautomatons:sky")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block archBend = (new BlockArchBend(Ids.blockArchBend))
 			.setHardness(0.15F).setStepSound(Block.soundGlassFootstep)
-			.setBlockName("archbend").setCreativeTab(RiseAutomatons.tabAutomatons);
+			.setUnlocalizedName("riseautomatons:archbend").setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block architect = (new BlockArchitect(Ids.blockArchitect))
 			.setBlockUnbreakable().setStepSound(Block.soundStoneFootstep)
-			.setBlockName("coreMachine")
+			.setUnlocalizedName("riseautomatons:coreMachine")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block crink = (new BlockCrink(Ids.blockCrink, 234))
 			.setHardness(0.1F).setLightOpacity(1).setLightValue(0.5F)
-			.setStepSound(Block.soundGlassFootstep).setBlockName("crink")
+			.setStepSound(Block.soundGlassFootstep).setUnlocalizedName("riseautomatons:crink")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
     public static Block frass = (new BlockFrass(Ids.blockFrass))
-			.setTextureFile(BLOCK_PNG)
-    		.setHardness(0.25F).setStepSound(Block.soundGlassFootstep).setBlockName("frass")
+    		.setHardness(0.25F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("riseautomatons:frass")
     		.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block plantMass = (new BlockPlant(Ids.blockPlantMass))
-			.setTextureFile(BLOCK_PNG)
 			.setHardness(0.5F).setStepSound(Block.soundGrassFootstep)
-			.setBlockName("plantMass")
+			.setUnlocalizedName("riseautomatons:plantMass")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block crystal = new BlockGlow(Ids.blockCrystal)
-			.setTextureFile(BLOCK_PNG)
 			.setHardness(0.4F).setResistance(5.0F)
-			.setLightValue(0.625F).setStepSound(Block.soundGlassFootstep).setBlockName("crystal")
+			.setLightValue(0.625F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("riseautomatons:crystal")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block fakeCrystal = new BlockBad(Ids.blockFakeCrystal)
-			.setTextureFile(BLOCK_PNG)
 			.setHardness(0.4F).setResistance(5.0F)
 			.setLightValue(0.625F).setStepSound(Block.soundGlassFootstep)
-			.setBlockName("crystal")
+			.setUnlocalizedName("riseautomatons:crystal")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block glowy = (new BlockGlow(Ids.blockGlowy))
-			.loadSprites(32,31).setTextureFile(BLOCK_PNG)
+			.loadSprites(32,31)
 			.setHardness(0.4F).setResistance(5.0F).setLightValue(0.95F)
-			.setStepSound(Block.soundGlassFootstep).setBlockName("glowy")
+			.setStepSound(Block.soundGlassFootstep).setUnlocalizedName("riseautomatons:glowy")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
     public static Block boing = (new BlockBoing(Ids.blockBoing))
-			.setTextureFile(BLOCK_PNG)
-			.setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setBlockName("boing")
+			.setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("riseautomatons:boing")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
     public static Block grower = new BlockGrower(Ids.blockGrower)
-			.setTextureFile(BLOCK_PNG)
-    		.setHardness(0.5F).setStepSound(Block.soundGlassFootstep).setBlockName("grower")
+    		.setHardness(0.5F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("riseautomatons:grower")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block heal = new BlockHeal(Ids.blockHeal)
-			.setTextureFile(BLOCK_PNG)
-			.setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setBlockName("heal")
+			.setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("riseautomatons:heal")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block dapling = new BlockDapling(Ids.blockDapling)
-			.setTextureFile(BLOCK_PNG)
 			.setHardness(0.0F).setStepSound(Block.soundGrassFootstep)
-			.setBlockName("dapling").setRequiresSelfNotify()
+			.setUnlocalizedName("riseautomatons:dapling")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block duplex = new BlockDuplex(Ids.blockDuplex)
-			.setTextureFile(BLOCK_PNG)
 			.setHardness(0.1F).setLightOpacity(1).setLightValue(0.5F)
-			.setStepSound(Block.soundGlassFootstep).setBlockName("duplex")
+			.setStepSound(Block.soundGlassFootstep).setUnlocalizedName("riseautomatons:duplex")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block latch = (new BlockLatch(Ids.blockLatch))
 			.setHardness(1F).setResistance(20F)
-			.setStepSound(Block.soundMetalFootstep).setBlockName("latch")
+			.setStepSound(Block.soundMetalFootstep).setUnlocalizedName("riseautomatons:latch")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 
 	public static void setFrassSpread(boolean enableFrassSpread) {

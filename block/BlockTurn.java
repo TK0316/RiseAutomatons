@@ -1,9 +1,13 @@
 package riseautomatons.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
@@ -14,7 +18,7 @@ public class BlockTurn extends BlockContainer {
 	float f = 0.375F;
 
 	protected BlockTurn(int i) {
-		super(i, 4, Material.wood);
+		super(i, Material.wood);
 		setBlockBounds(f, f, f, 1 - f, 1 - f, 1 - f);
 	}
 
@@ -24,11 +28,17 @@ public class BlockTurn extends BlockContainer {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		this.blockIcon = par1IconRegister.registerIcon("wood");
+	}
+
+	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-			EntityLiving par5EntityLiving) {
+			EntityLiving par5EntityLiving, ItemStack itemstack) {
 		int i = determineOrientation(par1World, par2, par3, par4,
 				(EntityPlayer) par5EntityLiving);
-		par1World.setBlockMetadataWithNotify(par2, par3, par4, i);
+		par1World.setBlockMetadataWithNotify(par2, par3, par4, i, 3);
 		computeState(par1World, par2, par3, par4);
 	}
 
@@ -80,18 +90,18 @@ public class BlockTurn extends BlockContainer {
 
 			if (allow(world, i, j, k - 1, 1, 2)) {
 				if (m != 1 && m != 2) {
-					world.setBlockMetadataWithNotify(i, j, k, 1);
+					world.setBlockMetadataWithNotify(i, j, k, 1, 3);
 				}
 			} else if (allow(world, i, j, k + 1, 2, 1)) {
 				if (m != 1 && m != 2) {
-					world.setBlockMetadataWithNotify(i, j, k, 2);
+					world.setBlockMetadataWithNotify(i, j, k, 2, 3);
 				}
 			} else {
 				// System.out.println("go to zero:" + i + "," + j + "," + k +
 				// "  " + m);
 
 				if (m != 0) {
-					world.setBlockMetadataWithNotify(i, j, k, 0);
+					world.setBlockMetadataWithNotify(i, j, k, 0, 3);
 				}
 			}
 		} else if (m < 6) {
@@ -100,15 +110,15 @@ public class BlockTurn extends BlockContainer {
 
 			if (allow(world, i - 1, j, k, 4, 5)) {
 				if (m != 4 && m != 5) {
-					world.setBlockMetadataWithNotify(i, j, k, 4);
+					world.setBlockMetadataWithNotify(i, j, k, 4, 3);
 				}
 			} else if (allow(world, i + 1, j, k, 5, 4)) {
 				if (m != 4 && m != 5) {
-					world.setBlockMetadataWithNotify(i, j, k, 5);
+					world.setBlockMetadataWithNotify(i, j, k, 5, 3);
 				}
 			} else {
 				if (m != 3) {
-					world.setBlockMetadataWithNotify(i, j, k, 3);
+					world.setBlockMetadataWithNotify(i, j, k, 3, 3);
 				}
 			}
 		} else {
@@ -117,15 +127,15 @@ public class BlockTurn extends BlockContainer {
 
 			if (allow(world, i, j - 1, k, 7, 8)) {
 				if (m != 7 && m != 8) {
-					world.setBlockMetadataWithNotify(i, j, k, 7);
+					world.setBlockMetadataWithNotify(i, j, k, 7, 3);
 				}
 			} else if (allow(world, i, j + 1, k, 8, 7)) {
 				if (m != 7 && m != 8) {
-					world.setBlockMetadataWithNotify(i, j, k, 8);
+					world.setBlockMetadataWithNotify(i, j, k, 8, 3);
 				}
 			} else {
 				if (m != 6) {
-					world.setBlockMetadataWithNotify(i, j, k, 6);
+					world.setBlockMetadataWithNotify(i, j, k, 6, 3);
 				}
 			}
 		}

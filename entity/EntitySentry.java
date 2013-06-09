@@ -186,10 +186,10 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 			int meta = MathHelper
 					.floor_double((double) (rotationYawHead * 4.0F / 360.0F) + 0.5D) & 3;
 
-			worldObj.setBlockAndMetadataWithNotify(
+			worldObj.setBlock(
 					MathHelper.floor_double(posX),
 					MathHelper.floor_double(posY),
-					MathHelper.floor_double(posZ), Ids.blockSentry, meta);
+					MathHelper.floor_double(posZ), Ids.blockSentry, meta, 3);
 			setDead();
 		}
 	}

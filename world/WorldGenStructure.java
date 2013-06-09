@@ -144,8 +144,8 @@ public class WorldGenStructure extends WorldGenerator {
 
 			for (int z = 0; z <= m; z++) {
 				for (int x = 0; x <= m; x++) {
-					world.setBlockAndMetadata(i + (x - m22), j, k + (z - m22),
-							Ids.blockSky, 1);
+					world.setBlock(i + (x - m22), j, k + (z - m22),
+							Ids.blockSky, 1, 3);
 				}
 			}
 		}
@@ -186,7 +186,7 @@ public class WorldGenStructure extends WorldGenerator {
 			int j = chests.get(ii).get(1);
 			int k = chests.get(ii).get(2);
 
-			world.setBlock(i, j, k, 54);
+			world.setBlock(i, j, k, 54, 0, 3);
 			chestMe(world, random, i, j, k);
 		}
 
@@ -206,32 +206,32 @@ public class WorldGenStructure extends WorldGenerator {
 
 			for (int x = xe - 3; x < xe + 3; x++) {
 				for (int z = k - 3; z <= k + 3; z++) {
-					world.setBlock(x, j, z, bb);
+					world.setBlock(x, j, z, bb, 0, 3);
 				}
 			}
 
 			for (int x = xe - 3; x < xe + 3; x++) {
 				for (int y = j + 1; y < j + 5; y++) {
-					world.setBlock(x, y, k - 3, bb);
+					world.setBlock(x, y, k - 3, bb, 0, 3);
 				}
 			}
 
 			for (int x = xe - 3; x < xe + 3; x++) {
 				for (int y = j + 1; y < j + 5; y++) {
-					world.setBlock(x, y, k + 3, bb);
+					world.setBlock(x, y, k + 3, bb, 0, 3);
 				}
 			}
 
 			for (int x = xe - 3; x < xe + 3; x++) {
 				for (int z = k - 3; z <= k + 3; z++) {
-					world.setBlock(x, j + 5, z, bb);
+					world.setBlock(x, j + 5, z, bb, 0, 3);
 				}
 			}
 
 			for (int x = xe - 3; x < xe + 3; x++) {
 				for (int z = k - 2; z <= k + 2; z++) {
 					for (int y = j + 1; y < j + 5; y++) {
-						world.setBlock(z, y, x, 0);
+						world.setBlock(z, y, x, 0, 0, 3);
 					}
 				}
 			}
@@ -246,32 +246,32 @@ public class WorldGenStructure extends WorldGenerator {
 
 			for (int x = xe - 3; x < xe + 3; x++) {
 				for (int z = k - 3; z <= k + 3; z++) {
-					world.setBlock(x, j, z, bb);
+					world.setBlock(x, j, z, bb, 0, 3);
 				}
 			}
 
 			for (int x = xe - 3; x < xe + 3; x++) {
 				for (int y = j + 1; y < j + 5; y++) {
-					world.setBlock(x, y, k - 3, bb);
+					world.setBlock(x, y, k - 3, bb, 0, 3);
 				}
 			}
 
 			for (int x = xe - 3; x < xe + 3; x++) {
 				for (int y = j + 1; y < j + 5; y++) {
-					world.setBlock(x, y, k + 3, bb);
+					world.setBlock(x, y, k + 3, bb, 0, 3);
 				}
 			}
 
 			for (int x = xe - 3; x < xe + 3; x++) {
 				for (int z = k - 3; z <= k + 3; z++) {
-					world.setBlock(x, j + 5, z, bb);
+					world.setBlock(x, j + 5, z, bb, 0, 3);
 				}
 			}
 
 			for (int x = xe - 3; x < xe + 3; x++) {
 				for (int z = k - 2; z <= k + 2; z++) {
 					for (int y = j + 1; y < j + 5; y++) {
-						world.setBlock(z, y, x, 0);
+						world.setBlock(z, y, x, 0, 0, 3);
 					}
 				}
 			}
@@ -285,32 +285,32 @@ public class WorldGenStructure extends WorldGenerator {
 
 			for (int x = xe - 3; x < xe + 3; x++) {
 				for (int z = i - 3; z <= i + 3; z++) {
-					world.setBlock(z, j, x, bb);
+					world.setBlock(z, j, x, bb, 0, 3);
 				}
 			}
 
 			for (int x = xe - 3; x < xe + 3; x++) {
 				for (int y = j + 1; y < j + 5; y++) {
-					world.setBlock(i - 3, y, x, bb);
+					world.setBlock(i - 3, y, x, bb, 0, 3);
 				}
 			}
 
 			for (int x = xe - 3; x < xe + 3; x++) {
 				for (int y = j + 1; y < j + 5; y++) {
-					world.setBlock(i + 3, y, x, bb);
+					world.setBlock(i + 3, y, x, bb, 0, 3);
 				}
 			}
 
 			for (int x = xe - 3; x < xe + 3; x++) {
 				for (int z = i - 3; z <= i + 3; z++) {
-					world.setBlock(z, j + 5, x, bb);
+					world.setBlock(z, j + 5, x, bb, 0, 3);
 				}
 			}
 
 			for (int x = xe - 3; x < xe + 3; x++) {
 				for (int z = i - 2; z <= i + 2; z++) {
 					for (int y = j + 1; y < j + 5; y++) {
-						world.setBlock(z, y, x, 0);
+						world.setBlock(z, y, x, 0, 0, 3);
 					}
 				}
 			}
@@ -324,32 +324,32 @@ public class WorldGenStructure extends WorldGenerator {
 
 			for (int x = (xe - 3); x <= (xe + 3); x++) {
 				for (int z = (i - 3); z <= (i + 3); z++) {
-					world.setBlock(z, j, x, bb);
+					world.setBlock(z, j, x, bb, 0, 3);
 				}
 			}
 
 			for (int x = xe - 3; x <= xe + 3; x++) {
 				for (int y = j + 1; y < j + 5; y++) {
-					world.setBlock(i - 3, y, x, bb);
+					world.setBlock(i - 3, y, x, bb, 0, 3);
 				}
 			}
 
 			for (int x = xe - 3; x <= xe + 3; x++) {
 				for (int y = j + 1; y < j + 5; y++) {
-					world.setBlock(i + 3, y, x, bb);
+					world.setBlock(i + 3, y, x, bb, 0, 3);
 				}
 			}
 
 			for (int x = (xe - 3); x <= (xe + 3); x++) {
 				for (int z = (i - 3); z <= (i + 3); z++) {
-					world.setBlock(z, j + 5, x, bb);
+					world.setBlock(z, j + 5, x, bb, 0, 3);
 				}
 			}
 
 			for (int x = xe - 3; x <= xe + 3; x++) {
 				for (int z = i - 2; z <= i + 2; z++) {
 					for (int y = j + 1; y < j + 5; y++) {
-						world.setBlock(z, y, x, 0);
+						world.setBlock(z, y, x, 0, 0, 3);
 					}
 				}
 			}
@@ -372,7 +372,7 @@ public class WorldGenStructure extends WorldGenerator {
 		for (int z = 0; z <= length; z++) {
 			for (int y = 0; y <= height; y++) {
 				for (int x = 0; x <= width; x++) {
-					world.setBlock(i + (x - w2), j + y, k + (z - l2), 0);
+					world.setBlock(i + (x - w2), j + y, k + (z - l2), 0, 0, 3);
 					// System.out.println("HERE: "+(x-w2));
 				}
 			}
@@ -391,16 +391,16 @@ public class WorldGenStructure extends WorldGenerator {
 		for (int z = 0; z <= length; z++) {
 
 			for (int x = 0; x <= width; x++) {
-				world.setBlockAndMetadata(i + (x - w2), j, k + (z - l2),
-						Ids.blockArch, 1); // AndMetadata
+				world.setBlock(i + (x - w2), j, k + (z - l2),
+						Ids.blockArch, 1, 3); // AndMetadata
 			}
 		}
-		world.setBlockAndMetadata(i, j, k, Ids.blockArchitect, 1);
+		world.setBlock(i, j, k, Ids.blockArchitect, 1, 3);
 
 		for (int z = 0; z <= length; z++) {
 			for (int y = 1; y <= he; y++) {
 				for (int x = 0; x <= width; x++) {
-					world.setBlock(i + (x - w2), j + y, k + (z - l2), 0);
+					world.setBlock(i + (x - w2), j + y, k + (z - l2), 0, 0, 3);
 				}
 			}
 		}
@@ -410,7 +410,7 @@ public class WorldGenStructure extends WorldGenerator {
 				for (int x = 0; x <= width; x++) {
 					// System.out.println(newheight+" : "+y);
 					if (random.nextInt(1 + newheight - y) != 0) {
-						world.setBlock(i + (x - w2), j + y, k + (z - l2), 0);
+						world.setBlock(i + (x - w2), j + y, k + (z - l2), 0, 0, 3);
 					}
 				}
 			}
@@ -467,19 +467,19 @@ public class WorldGenStructure extends WorldGenerator {
 
 		int h99 = height + 1;
 		for (int y = 0; y <= h99; y++) {
-			world.setBlockAndMetadata(i + w2, j + y, k + l2, b, m); // AndMetadata
+			world.setBlock(i + w2, j + y, k + l2, b, m, 3); // AndMetadata
 		}
 
 		for (int y = 0; y <= h99; y++) {
-			world.setBlockAndMetadata(i - w2, j + y, k + l2, b, m);
+			world.setBlock(i - w2, j + y, k + l2, b, m, 3);
 		}
 
 		for (int y = 0; y <= h99; y++) {
-			world.setBlockAndMetadata(i + w2, j + y, k - l2, b, m);
+			world.setBlock(i + w2, j + y, k - l2, b, m, 3);
 		}
 
 		for (int y = 0; y <= h99; y++) {
-			world.setBlockAndMetadata(i - w2, j + y, k - l2, b, m);
+			world.setBlock(i - w2, j + y, k - l2, b, m, 3);
 		}
 
 		int zh = 1;
@@ -487,31 +487,31 @@ public class WorldGenStructure extends WorldGenerator {
 
 			for (int x = 0; x <= w3; x++) {
 				for (int y = 0; y <= h5; y++) {
-					world.setBlockAndMetadata((x - w4) + i, j + y, k + l2 - zh,
-							b, m);
+					world.setBlock((x - w4) + i, j + y, k + l2 - zh,
+							b, m, 3);
 				}
 			}
 
 			for (int x = 0; x < w5; x++) {
-				world.setBlockAndMetadata((x - w4) + i, j + h2, k + l2 - zh,
-						b3, m3);
+				world.setBlock((x - w4) + i, j + h2, k + l2 - zh,
+						b3, m3, 3);
 			}
 			for (int x = w5 + 1; x <= w3; x++) {
-				world.setBlockAndMetadata((x - w4) + i, j + h2, k + l2 - zh,
-						b3, m3);
+				world.setBlock((x - w4) + i, j + h2, k + l2 - zh,
+						b3, m3, 3);
 			}
 
 			for (int x = 0; x <= w3; x++) {
 
-				world.setBlockAndMetadata((x - w4) + i, j + h5, k + l2 - zh,
-						Ids.blockSky, 0);
+				world.setBlock((x - w4) + i, j + h5, k + l2 - zh,
+						Ids.blockSky, 0, 3);
 
 			}
 
 			for (int x = 0; x <= w3; x++) {
 				for (int y = h5 + 1; y <= height; y++) {
-					world.setBlockAndMetadata((x - w4) + i, j + y, k + l2, b,
-							m2);
+					world.setBlock((x - w4) + i, j + y, k + l2, b,
+							m2, 3);
 				}
 			}
 
@@ -520,31 +520,31 @@ public class WorldGenStructure extends WorldGenerator {
 		if (zown) {
 			for (int x = 0; x <= w3; x++) {
 				for (int y = 0; y <= h5; y++) {
-					world.setBlockAndMetadata((x - w4) + i, j + y, k - l2 + zh,
-							b, m);
+					world.setBlock((x - w4) + i, j + y, k - l2 + zh,
+							b, m, 3);
 				}
 			}
 
 			for (int x = 0; x < w5; x++) {
-				world.setBlockAndMetadata((x - w4) + i, j + h2, k - l2 + zh,
-						b3, m3);
+				world.setBlock((x - w4) + i, j + h2, k - l2 + zh,
+						b3, m3, 3);
 			}
 			for (int x = w5 + 1; x <= w3; x++) {
-				world.setBlockAndMetadata((x - w4) + i, j + h2, k - l2 + zh,
-						b3, m3);
+				world.setBlock((x - w4) + i, j + h2, k - l2 + zh,
+						b3, m3, 3);
 			}
 
 			for (int x = 0; x <= w3; x++) {
 
-				world.setBlockAndMetadata((x - w4) + i, j + h5, k - l2 + zh,
-						Ids.blockSky, 0);
+				world.setBlock((x - w4) + i, j + h5, k - l2 + zh,
+						Ids.blockSky, 0, 3);
 
 			}
 
 			for (int x = 0; x <= w3; x++) {
 				for (int y = h5 + 1; y <= height; y++) {
-					world.setBlockAndMetadata((x - w4) + i, j + y, k - l2, b,
-							m2);
+					world.setBlock((x - w4) + i, j + y, k - l2, b,
+							m2, 3);
 				}
 			}
 
@@ -553,29 +553,29 @@ public class WorldGenStructure extends WorldGenerator {
 		if (xup) {
 			for (int z = 0; z <= l3; z++) {
 				for (int y = 0; y <= h5; y++) {
-					world.setBlockAndMetadata(i + w2 - zh, j + y, k + (z - l4),
-							b, m);
+					world.setBlock(i + w2 - zh, j + y, k + (z - l4),
+							b, m, 3);
 				}
 			}
 
 			for (int z = 0; z < l5; z++) {
-				world.setBlockAndMetadata(i + w2 - zh, j + h2, k + (z - l4),
-						b3, m3);
+				world.setBlock(i + w2 - zh, j + h2, k + (z - l4),
+						b3, m3, 3);
 			}
 			for (int z = l5 + 1; z <= l3; z++) {
-				world.setBlockAndMetadata(i + w2 - zh, j + h2, k + (z - l4),
-						b3, m3);
+				world.setBlock(i + w2 - zh, j + h2, k + (z - l4),
+						b3, m3, 3);
 			}
 
 			for (int z = 0; z <= l3; z++) {
-				world.setBlockAndMetadata(i + w2 - zh, j + h5, k + (z - l4),
-						Ids.blockSky, 0);
+				world.setBlock(i + w2 - zh, j + h5, k + (z - l4),
+						Ids.blockSky, 0, 3);
 			}
 
 			for (int z = 0; z <= l3; z++) {
 				for (int y = h5 + 1; y <= height; y++) {
-					world.setBlockAndMetadata(i + w2, j + y, k + (z - l4), b,
-							m2);
+					world.setBlock(i + w2, j + y, k + (z - l4), b,
+							m2, 3);
 				}
 			}
 
@@ -584,31 +584,31 @@ public class WorldGenStructure extends WorldGenerator {
 		if (xown) {
 			for (int z = 0; z <= l3; z++) {
 				for (int y = 0; y <= h5; y++) {
-					world.setBlockAndMetadata(i - w2 + zh, j + y, k + (z - l4),
-							b, m);
+					world.setBlock(i - w2 + zh, j + y, k + (z - l4),
+							b, m, 3);
 				}
 			}
 
 			for (int z = 0; z < l5; z++) {
-				world.setBlockAndMetadata(i - w2 + zh, j + h2, k + (z - l4),
-						b3, m3);
+				world.setBlock(i - w2 + zh, j + h2, k + (z - l4),
+						b3, m3, 3);
 			}
 			for (int z = l5 + 1; z <= l3; z++) {
-				world.setBlockAndMetadata(i - w2 + zh, j + h2, k + (z - l4),
-						b3, m3);
+				world.setBlock(i - w2 + zh, j + h2, k + (z - l4),
+						b3, m3, 3);
 			}
 
 			for (int z = 0; z <= l3; z++) {
 
-				world.setBlockAndMetadata(i - w2 + zh, j + h5, k + (z - l4),
-						Ids.blockSky, 0);
+				world.setBlock(i - w2 + zh, j + h5, k + (z - l4),
+						Ids.blockSky, 0, 3);
 
 			}
 
 			for (int z = 0; z <= l3; z++) {
 				for (int y = h5 + 1; y <= height; y++) {
-					world.setBlockAndMetadata(i - w2, j + y, k + (z - l4), b,
-							m2);
+					world.setBlock(i - w2, j + y, k + (z - l4), b,
+							m2, 3);
 				}
 			}
 
@@ -622,7 +622,7 @@ public class WorldGenStructure extends WorldGenerator {
 
 			for (int z = 1; z <= l3; z++) {
 				for (int x = 1; x <= w3; x++) {
-					world.setBlock(i + (x - w5), j, k + (z - l5), 1);
+					world.setBlock(i + (x - w5), j, k + (z - l5), 1, 0, 3);
 				}
 			}
 
@@ -754,7 +754,7 @@ public class WorldGenStructure extends WorldGenerator {
 			for (int z = -2; z <= 2; z++) {
 				for (int y = 0; y >= -height; y--) {
 					world.setBlock(i + x, j + y, k + z,
-							Block.cobblestoneMossy.blockID);
+							Block.cobblestoneMossy.blockID, 0, 3);
 				}
 			}
 		}
@@ -762,7 +762,7 @@ public class WorldGenStructure extends WorldGenerator {
 		for (int x = -1; x <= 1; x++) {
 			for (int z = -1; z <= 1; z++) {
 				for (int y = 0; y >= -height; y--) {
-					world.setBlock(i + x, j + y, k + z, 0);
+					world.setBlock(i + x, j + y, k + z, 0, 0, 3);
 				}
 			}
 		}

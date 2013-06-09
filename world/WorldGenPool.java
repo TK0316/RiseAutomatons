@@ -78,7 +78,7 @@ public class WorldGenPool extends WorldGenerator {
 			for (int y = 0; y < tall; y++) {
 				for (int z = 0; z < len; z++) {
 					world.setBlock(i + x - w2, j + y - h2, k + z - l2,
-							xyz[y][x][z]);
+							xyz[y][x][z], 0, 3);
 					// if(xyz[y][x][z]==AutomatonLogger.deployer){
 					// System.out.println((i+x-w2)+","+(j+y-h2)+","+(k+z-l2));
 					// }
@@ -86,7 +86,7 @@ public class WorldGenPool extends WorldGenerator {
 			}
 		}
 		if (bb) {
-			world.setBlockMetadata(i, j + 1, k, 1);
+			world.setBlockMetadataWithNotify(i, j + 1, k, 1, 3);
 			// System.out.println((i)+","+(j+1)+","+(k));
 		}
 

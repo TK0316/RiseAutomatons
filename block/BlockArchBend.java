@@ -2,8 +2,12 @@ package riseautomatons.block;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -17,9 +21,16 @@ import riseautomatons.entity.EntityGolemPure;
 public class BlockArchBend extends Block {
 
 	protected BlockArchBend(int par1) {
-		super(par1, 3, Material.glass);
+		super(par1, Material.glass);
 		setBlockBounds(0.25F, 0.0F, 0.25F, .75F, 1, .75F);
 		this.setTickRandomly(true);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		this.blockIcon = par1IconRegister
+				.registerIcon("riseautomatons:arch2");
 	}
 
 	@Override
@@ -50,8 +61,7 @@ public class BlockArchBend extends Block {
 						payload(world, i, j, k, random);
 
 					} else {
-						world.setBlockAndMetadataWithNotify(i, j + 1, k,
-								blockID, 1);
+						world.setBlock(i, j + 1, k, blockID, 1, 3);
 						archy(world, i, j, k);
 					}
 				} else if (!planterCheck(world, i, j, k)) {
@@ -59,28 +69,28 @@ public class BlockArchBend extends Block {
 						switch (random.nextInt(4)) {
 						case 1:
 							if (world.getBlockId(i - 1, j, k) != blockID)
-								world.setBlockAndMetadataWithNotify(i - 1, j,
-										k, blockID, 2);
+								world.setBlock(i - 1, j,
+										k, blockID, 2, 3);
 							break;
 						case 2:
 							if (world.getBlockId(i + 1, j, k) != blockID)
-								world.setBlockAndMetadataWithNotify(i + 1, j,
-										k, blockID, 2);
+								world.setBlock(i + 1, j,
+										k, blockID, 2, 3);
 							break;
 						case 3:
 							if (world.getBlockId(i, j, k - 1) != blockID)
-								world.setBlockAndMetadataWithNotify(i, j,
-										k - 1, blockID, 2);
+								world.setBlock(i, j,
+										k - 1, blockID, 2, 3);
 							break;
 						default:
 							if (world.getBlockId(i, j, k + 1) != blockID)
-								world.setBlockAndMetadataWithNotify(i, j,
-										k + 1, blockID, 2);
+								world.setBlock(i, j,
+										k + 1, blockID, 2, 3);
 							break;
 						}
 					} else {
 						archy(world, i, j, k);
-						world.setBlockWithNotify(i, j + 1, k, blockID);
+						world.setBlock(i, j + 1, k, blockID, 0, 3);
 					}
 				}
 			}
@@ -128,7 +138,7 @@ public class BlockArchBend extends Block {
 			boop(world, i + 1, j + 1, k + 1, ii);
 			boop(world, i + 1, j + 1, k - 1, ii);
 		} else {
-			world.setBlockAndMetadataWithNotify(i, j + 1, k, Ids.blockCrink, ii);
+			world.setBlock(i, j + 1, k, Ids.blockCrink, ii, 3);
 		}
 
 	}
@@ -145,7 +155,7 @@ public class BlockArchBend extends Block {
 
 	public void boop(World world, int i, int j, int k, int ii) {
 		if (world.getBlockId(i, j, k) == 0) {
-			world.setBlockAndMetadataWithNotify(i, j, k, Ids.blockCrink, ii);
+			world.setBlock(i, j, k, Ids.blockCrink, ii, 3);
 		}
 	}
 
@@ -153,7 +163,7 @@ public class BlockArchBend extends Block {
 		Material th = world.getBlockMaterial(i, j, k);
 		if (th == Material.wood || th == Material.vine || th == Material.plants
 				|| th == Material.leaves) {
-			world.setBlockAndMetadataWithNotify(i, j, k, blockID, 3);
+			world.setBlock(i, j, k, blockID, 3, 3);
 			return true;
 		}
 		return false;
@@ -169,7 +179,7 @@ public class BlockArchBend extends Block {
 	@Override
 	public void onBlockDestroyedByPlayer(World world, int i, int j, int k, int l) {
 		if (world.getBlockId(i, j + 1, k) == Ids.blockCrink) {
-			world.setBlockWithNotify(i, j + 1, k, 0);
+			world.setBlock(i, j + 1, k, 0, 0, 3);
 			dropBlockAsItem_do(world, i, j + 1, k, new ItemStack(Ids.blockCrink, 1,
 					0));
 		}
@@ -183,7 +193,7 @@ public class BlockArchBend extends Block {
 	protected final void checkBlockCoordValid(World world, int i, int j, int k) {
 		if (!canBlockStay(world, i, j, k)) {
 			dropBlockAsItem(world, i, j, k, 0, 0);
-			world.setBlockWithNotify(i, j, k, 0);
+			world.setBlock(i, j, k, 0, 0, 3);
 		}
 	}
 
@@ -291,7 +301,7 @@ public class BlockArchBend extends Block {
 
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-			EntityLiving par5EntityLiving) {
+			EntityLiving par5EntityLiving, ItemStack itemstack) {
 
 	}
 
@@ -300,11 +310,6 @@ public class BlockArchBend extends Block {
 			int y, int z) {
 		//onBlockDestroyedByPlayer(world, x, y, z, 0);
 		return super.removeBlockByPlayer(world, player, x, y, z);
-	}
-
-	@Override
-	public String getTextureFile() {
-		return Blocks.BLOCK_PNG;
 	}
 
 }

@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 public class BlockPlant extends Block {
 
 	protected BlockPlant(int i) {
-		super(i, 18, Material.ground);
+		super(i, Material.ground);
 		setBlockBounds(0.25F, 0.0F, 0.25F, .75F, 1, .75F);
 	}
 

@@ -77,28 +77,28 @@ public class AutomatonActions
       int j2 = k + nerp[l][2];
 			switch (k1) {
 			case 1:
-				world.setBlockAndMetadata(l1, i2, j2, Ids.blockFrass, 1);
+				world.setBlock(l1, i2, j2, Ids.blockFrass, 1, 3);
 				break;
 			case 2:
-				world.setBlockAndMetadata(l1, i2, j2, Ids.blockFrass, 2);
+				world.setBlock(l1, i2, j2, Ids.blockFrass, 2, 3);
 				break;
 			case 3:
-				world.setBlockAndMetadata(l1, i2, j2, Ids.blockFrass, 3);
+				world.setBlock(l1, i2, j2, Ids.blockFrass, 3, 3);
 				break;
 			case 4:
-				world.setBlockAndMetadata(l1, i2, j2, Ids.blockFrass, 4);
+				world.setBlock(l1, i2, j2, Ids.blockFrass, 4, 3);
 				break;
 			case 5:
-				world.setBlock(l1, i2, j2, Ids.blockGrower);
+				world.setBlock(l1, i2, j2, Ids.blockGrower, 0, 3);
 				break;
 			case 6:
-				world.setBlockAndMetadataWithNotify(l1, i2, j2, j1 != 17 ? Ids.blockCrink : Ids.blockTech, j1 != 17 ? 0 : 1);
+				world.setBlock(l1, i2, j2, j1 != 17 ? Ids.blockCrink : Ids.blockTech, j1 != 17 ? 0 : 1, 3);
 				break;
 			case 7:
-				world.setBlock(l1, i2, j2, Ids.blockDapling);
+				world.setBlock(l1, i2, j2, Ids.blockDapling, 0, 3);
 				break;
 			default:
-				world.setBlockWithNotify(l1, i2, j2, 0);
+				world.setBlock(l1, i2, j2, 0, 0, 3);
 			}
 
     }
@@ -121,7 +121,7 @@ public class AutomatonActions
     {
       if (world.getBlockId(j + nerp[i1][0], k + nerp[i1][1], l + nerp[i1][2]) == 0)
         continue;
-      world.setBlockWithNotify(j + nerp[i1][0], k + nerp[i1][1], l + nerp[i1][2], i);
+      world.setBlock(j + nerp[i1][0], k + nerp[i1][1], l + nerp[i1][2], i, 0, 3);
     }
   }
 
@@ -139,45 +139,45 @@ public class AutomatonActions
 			int metadata = world.getBlockMetadata(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2]);
 			if (blockId == Ids.blockFrass) {
 				if (metadata == 0) {
-					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], 0);
+					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], 0, 0, 3);
 				} else if (metadata == 1) {
-					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.sand.blockID);
+					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.sand.blockID, 0, 3);
 				} else if (metadata == 2) {
-					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.dirt.blockID);
+					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.dirt.blockID, 0, 3);
 				} else if (metadata == 3) {
-					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.blockClay.blockID);
+					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.blockClay.blockID, 0, 3);
 				} else if (metadata == 4) {
-					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.waterStill.blockID);
+					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.waterStill.blockID, 0, 3);
 				} else {
-					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], 0);
+					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], 0, 0, 3);
 				}
 			} else if (blockId == Ids.blockCrink) {
-				world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.leaves.blockID);
+				world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.leaves.blockID, 0, 3);
 			} else if (blockId == Ids.blockTech) {
 				if (metadata == 1) {
-					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.wood.blockID);
+					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.wood.blockID, 0, 3);
 				} else {
-					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.cobblestone.blockID);
+					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.cobblestone.blockID, 0, 3);
 				}
 			} else if ((blockId == Ids.blockGrower)) {
 				int stayingBlockId = world.getBlockId(i + nerp[l][0], j + nerp[l][1] - 1, k + nerp[l][2]);
 				if(stayingBlockId == 0 || stayingBlockId == Ids.blockGrower || stayingBlockId == Block.sapling.blockID || stayingBlockId == Block.plantYellow.blockID || stayingBlockId == Block.plantRed.blockID || stayingBlockId == Block.reed.blockID) {
-					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], 0);
+					world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], 0, 0, 3);
 				}
 				else {
 					int l1 = world.rand.nextInt(4);
 					switch (l1) {
 					case 0:
-						world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.sapling.blockID);
+						world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.sapling.blockID, 0, 3);
 						break;
 					case 1:
-						world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.plantYellow.blockID);
+						world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.plantYellow.blockID, 0, 3);
 						break;
 					case 2:
-						world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.plantRed.blockID);
+						world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.plantRed.blockID, 0, 3);
 						break;
 					default:
-						world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.reed.blockID);
+						world.setBlock(i + nerp[l][0], j + nerp[l][1], k + nerp[l][2], Block.reed.blockID, 0, 3);
 					}
 				}
 			}

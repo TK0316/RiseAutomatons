@@ -158,11 +158,11 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	public static void init() {
 		target.put(Block.cobblestone.blockID, Block.stone.blockID);
 
-		target.put(Item.coal.shiftedIndex, Block.oreCoal.blockID);
-		target.put(Item.dyePowder.shiftedIndex, Block.oreLapis.blockID);
-		target.put(Item.emerald.shiftedIndex, Block.oreEmerald.blockID);
-		target.put(Item.diamond.shiftedIndex, Block.oreDiamond.blockID);
-		target.put(Item.redstone.shiftedIndex, Block.oreRedstone.blockID);
+		target.put(Item.coal.itemID, Block.oreCoal.blockID);
+		target.put(Item.dyePowder.itemID, Block.oreLapis.blockID);
+		target.put(Item.emerald.itemID, Block.oreEmerald.blockID);
+		target.put(Item.diamond.itemID, Block.oreDiamond.blockID);
+		target.put(Item.redstone.itemID, Block.oreRedstone.blockID);
 	}
 
 	@Override
@@ -464,7 +464,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 				if (diggingCount >= bb.getBlockHardness(worldObj, dest.x, dest.y, dest.z) * 30)
 				{
 					int metadata = worldObj.getBlockMetadata(dest.x, dest.y, dest.z);
-					worldObj.setBlockWithNotify(dest.x, dest.y, dest.z, 0);
+					worldObj.setBlock(dest.x, dest.y, dest.z, 0, 0, 3);
 					int fortune = 0;
 					bb.dropBlockAsItem(worldObj, dest.x, dest.y, dest.z, metadata, fortune);
 					//EntityItem entityitem = new EntityItem(worldObj, dest.x, dest.y, dest.z, new ItemStack(bb.idDropped(0, rand, 0), 1, 0));
@@ -701,7 +701,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 				Entity entity = (Entity) list.get(j);
 
 				if (getItemID() != 0) {
-					ItemStack is = ((EntityItem) entity).func_92014_d();
+					ItemStack is = ((EntityItem) entity).getEntityItem();
 
 					if(is.hasTagCompound()) {
 						continue;
@@ -726,12 +726,12 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	{
 
 		EntityItem ent = (EntityItem) collectTargetItemEntity;
-		if(ent.func_92014_d().hasTagCompound()) {
+		if(ent.getEntityItem().hasTagCompound()) {
 			return;
 		}
-		setItemID(ent.func_92014_d().itemID);
-		setItemDamage(ent.func_92014_d().getItemDamage());
-		setStackSize(getStackSize() + ent.func_92014_d().stackSize);
+		setItemID(ent.getEntityItem().itemID);
+		setItemDamage(ent.getEntityItem().getItemDamage());
+		setStackSize(getStackSize() + ent.getEntityItem().stackSize);
 		ent.setDead();
 		collectTargetItemEntity = null;
 	}
@@ -803,7 +803,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			{
 				int meta = MathHelper.floor_double((double)(rotationYawHead * 4.0F / 360.0F) + 0.5D) & 3;
 
-				worldObj.setBlockAndMetadataWithNotify(xx, yy, zz, Ids.blockWorker, meta);
+				worldObj.setBlock(xx, yy, zz, Ids.blockWorker, meta, 3);
 			}
 			else
 			{

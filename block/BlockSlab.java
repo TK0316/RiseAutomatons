@@ -2,9 +2,14 @@ package riseautomatons.block;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
@@ -13,7 +18,7 @@ import riseautomatons.item.EnumCraftSetType;
 public class BlockSlab extends Block {
 
 	public BlockSlab(int par1) {
-		super(par1, 6, Material.rock);
+		super(par1,  Material.rock);
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
 	}
 
@@ -30,13 +35,14 @@ public class BlockSlab extends Block {
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int par1, int par2) {
-		return 1;
+	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
+		return blockIcon;
 	}
 
 	@Override
-	public int getBlockTextureFromSide(int par1) {
-		return getBlockTextureFromSideAndMetadata(par1, 0);
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		this.blockIcon = par1IconRegister.registerIcon("stone");
 	}
 
 	@Override

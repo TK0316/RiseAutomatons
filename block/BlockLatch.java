@@ -2,12 +2,16 @@ package riseautomatons.block;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import riseautomatons.Ids;
 import riseautomatons.RiseAutomatons;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -19,13 +23,18 @@ public class BlockLatch extends BlockContainer {
 
 	protected BlockLatch(int i) {
 		super(i, Material.iron);
-		blockIndexInTexture = 22;
 		float F = 0.25f;
 		setBlockBounds(0.125F, 0.0F, 0.125F, 0.875F, 0.875f, 0.875F);
 	}
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		return new TileEntityLatch();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		this.blockIcon = par1IconRegister.registerIcon("blockIron");
 	}
 
 	@Override
@@ -79,7 +88,7 @@ public class BlockLatch extends BlockContainer {
 										itemstack.getItemDamage()));
 
 						if (itemstack.hasTagCompound()) {
-							entityitem.func_92014_d()
+							entityitem.getEntityItem()
 									.setTagCompound((NBTTagCompound) itemstack
 											.getTagCompound().copy());
 						}
@@ -109,14 +118,14 @@ public class BlockLatch extends BlockContainer {
 							par4);
 
 			if (flag) {
-				world.scheduleBlockUpdate(par2, par3, par4, blockID, tickRate());
+				world.scheduleBlockUpdate(par2, par3, par4, blockID, tickRate(world));
 
 			}
 		}
 	}
 
 	@Override
-	public int tickRate() {
+	public int tickRate(World world) {
 		return 4;
 	}
 
@@ -175,27 +184,27 @@ public class BlockLatch extends BlockContainer {
 					if (world.getBlockId(x, y - 1, z) == 0
 							&& b.canPlaceBlockAt(world, x, y - 1, z)) {
 						latch.decrStackSize(id, 1);
-						world.setBlockWithNotify(x, y - 1, z, itemstack.itemID);
+						world.setBlock(x, y - 1, z, itemstack.itemID, 0, 3);
 					} else if (world.getBlockId(x - 1, y, z) == 0
 							&& b.canPlaceBlockAt(world, x - 1, y, z)) {
 						latch.decrStackSize(id, 1);
-						world.setBlockWithNotify(x - 1, y, z, itemstack.itemID);
+						world.setBlock(x - 1, y, z, itemstack.itemID, 0, 3);
 					} else if (world.getBlockId(x, y, z - 1) == 0
 							&& b.canPlaceBlockAt(world, x, y, z - 1)) {
 						latch.decrStackSize(id, 1);
-						world.setBlockWithNotify(x, y, z - 1, itemstack.itemID);
+						world.setBlock(x, y, z - 1, itemstack.itemID, 0, 3);
 					} else if (world.getBlockId(x + 1, y, z) == 0
 							&& b.canPlaceBlockAt(world, x + 1, y, z)) {
 						latch.decrStackSize(id, 1);
-						world.setBlockWithNotify(x + 1, y, z, itemstack.itemID);
+						world.setBlock(x + 1, y, z, itemstack.itemID, 0, 3);
 					} else if (world.getBlockId(x, y, z + 1) == 0
 							&& b.canPlaceBlockAt(world, x, y, z + 1)) {
 						latch.decrStackSize(id, 1);
-						world.setBlockWithNotify(x, y, z + 1, itemstack.itemID);
+						world.setBlock(x, y, z + 1, itemstack.itemID, 0, 3);
 					} else if (world.getBlockId(x, y + 1, z) == 0
 							&& b.canPlaceBlockAt(world, x, y + 1, z)) {
 						latch.decrStackSize(id, 1);
-						world.setBlockWithNotify(x, y + 1, z, itemstack.itemID);
+						world.setBlock(x, y + 1, z, itemstack.itemID, 0, 3);
 					}
 				}
 				world.playAuxSFX(2000, x, y, z, j + 1 + (k + 1) * 3);

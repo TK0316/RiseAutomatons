@@ -123,22 +123,22 @@ public class TileEntityArchitect extends TileEntity {
 					focz = zz;
 					focus = true;
 				} else {
-					worldObj.setBlockAndMetadataWithNotify(xx, yy, zz,
-							Ids.blockArchBend, 2);
+					worldObj.setBlock(xx, yy, zz,
+							Ids.blockArchBend, 2, 3);
 				}
 
 			} else if (Math.abs(zi) <= 1 && Math.abs(xi) <= 1 && yi > -1
 					&& yi < 5) {
 				if (yi == 4) {
-					worldObj.setBlockWithNotify(xx, yy, zz, 49);
+					worldObj.setBlock(xx, yy, zz, 49, 0, 3);
 				} else {
 					if (yi == 0
 							&& ((xi == 0 && Math.abs(zi) == 1) || (zi == 0 && Math
 									.abs(xi) == 1))) {
-						worldObj.setBlockAndMetadataWithNotify(xx, yy, zz,
-								Ids.blockArchBend, 4);
+						worldObj.setBlock(xx, yy, zz,
+								Ids.blockArchBend, 4, 3);
 					} else {
-						worldObj.setBlockWithNotify(xx, yy, zz, 0);
+						worldObj.setBlock(xx, yy, zz, 0, 0, 3);
 					}
 
 				}

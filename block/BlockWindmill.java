@@ -2,9 +2,14 @@ package riseautomatons.block;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
@@ -15,7 +20,7 @@ public class BlockWindmill extends BlockContainer {
 	float f = 0.75F; // 375
 
 	protected BlockWindmill(int i, int j, Material mat) {
-		super(i, j, mat);
+		super(i, mat);
 		setTickRandomly(true);
 
 	}
@@ -23,6 +28,12 @@ public class BlockWindmill extends BlockContainer {
 	@Override
 	public TileEntity createNewTileEntity(World var1) {
 		return new TileEntityWindmill();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		this.blockIcon = par1IconRegister.registerIcon("wood");
 	}
 
 	@Override
@@ -65,38 +76,38 @@ public class BlockWindmill extends BlockContainer {
 		if (hh % 2 == 0) {
 			if (hh == 0) {
 				if (b1) {
-					world.setBlockMetadataWithNotify(i, j, k, 1);
+					world.setBlockMetadataWithNotify(i, j, k, 1, 3);
 				}
 			} else if (hh == 2) {
 				if (b2) {
-					world.setBlockMetadataWithNotify(i, j, k, 3);
+					world.setBlockMetadataWithNotify(i, j, k, 3, 3);
 				}
 			} else if (hh == 4) {
 				if (b3) {
-					world.setBlockMetadataWithNotify(i, j, k, 5);
+					world.setBlockMetadataWithNotify(i, j, k, 5, 3);
 				}
 			} else if (hh == 6) {
 				if (b4) {
-					world.setBlockMetadataWithNotify(i, j, k, 7);
+					world.setBlockMetadataWithNotify(i, j, k, 7, 3);
 				}
 			}
 			// world.setBlockMetadataWithNotify(i, j, k,hh+1);
 		} else {
 			if (hh == 1) {
 				if (!b1) {
-					world.setBlockMetadataWithNotify(i, j, k, 0);
+					world.setBlockMetadataWithNotify(i, j, k, 0, 3);
 				}
 			} else if (hh == 3) {
 				if (!b2) {
-					world.setBlockMetadataWithNotify(i, j, k, 2);
+					world.setBlockMetadataWithNotify(i, j, k, 2, 3);
 				}
 			} else if (hh == 5) {
 				if (!b3) {
-					world.setBlockMetadataWithNotify(i, j, k, 4);
+					world.setBlockMetadataWithNotify(i, j, k, 4, 3);
 				}
 			} else if (hh == 7) {
 				if (!b4) {
-					world.setBlockMetadataWithNotify(i, j, k, 6);
+					world.setBlockMetadataWithNotify(i, j, k, 6, 3);
 				}
 			}
 		}
@@ -112,7 +123,7 @@ public class BlockWindmill extends BlockContainer {
 	}
 
 	@Override
-	public int tickRate() {
+	public int tickRate(World world) {
 		return 0;
 	}
 
@@ -162,10 +173,10 @@ public class BlockWindmill extends BlockContainer {
 
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-			EntityLiving par5EntityLiving) {
+			EntityLiving par5EntityLiving, ItemStack itemstack) {
 		int i = ((MathHelper
 				.floor_double((double) ((par5EntityLiving.rotationYaw * 4F) / 360F) + 0.5D) & 3) + 2) % 4;
-		par1World.setBlockMetadataWithNotify(par2, par3, par4, i * 2);
+		par1World.setBlockMetadataWithNotify(par2, par3, par4, i * 2, 3);
 	}
 
 }

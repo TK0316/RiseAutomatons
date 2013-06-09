@@ -8,8 +8,8 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class TileEntityTurnRenderer extends TileEntitySpecialRenderer {
-	static float ss = 6f / 256f;
-	static float ee = 10f / 256f;
+	static float ss = 6f / 16f;
+	static float ee = 10f / 16f;
 
 	public TileEntityTurnRenderer() {
 	}
@@ -32,7 +32,7 @@ public class TileEntityTurnRenderer extends TileEntitySpecialRenderer {
 			i = enti.getBlockMetadata();
 		}
 
-		bindTextureByName("/terrain.png");
+		bindTextureByName("/textures/blocks/wood.png");
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -82,59 +82,59 @@ public class TileEntityTurnRenderer extends TileEntitySpecialRenderer {
 		GL11.glColor4f(1, 1, 1, 1);
 		GL11.glBegin(GL11.GL_QUADS);
 		GL11.glNormal3f(0, 0, 1);
-		GL11.glTexCoord2f(0.25f, ss);
+		GL11.glTexCoord2f(0f, ss);
 		GL11.glVertex3f(0, 0.375f, 0.625f);
-		GL11.glTexCoord2f(0.3125f, ss);
+		GL11.glTexCoord2f(1f, ss);
 		GL11.glVertex3f(1, 0.375f, 0.625f);
-		GL11.glTexCoord2f(0.3125f, ee);
+		GL11.glTexCoord2f(1f, ee);
 		GL11.glVertex3f(1, 0.625f, 0.625f);
-		GL11.glTexCoord2f(0.25f, ee);
+		GL11.glTexCoord2f(0f, ee);
 		GL11.glVertex3f(0, 0.625f, 0.625f);
 		GL11.glNormal3f(0, 0, -1);
-		GL11.glTexCoord2f(0.3125f, ss);
+		GL11.glTexCoord2f(1f, ss);
 		GL11.glVertex3f(1, 0.375f, 0.375f);
-		GL11.glTexCoord2f(0.25f, ss);
+		GL11.glTexCoord2f(0f, ss);
 		GL11.glVertex3f(0, 0.375f, 0.375f);
-		GL11.glTexCoord2f(0.25f, ee);
+		GL11.glTexCoord2f(0f, ee);
 		GL11.glVertex3f(0, 0.625f, 0.375f);
-		GL11.glTexCoord2f(0.3125f, ee);
+		GL11.glTexCoord2f(1f, ee);
 		GL11.glVertex3f(1, 0.625f, 0.375f);
 		GL11.glNormal3f(0, -1, 0);
-		GL11.glTexCoord2f(0.25f, ss);
+		GL11.glTexCoord2f(0f, ss);
 		GL11.glVertex3f(0, 0.375f, 0.375f);
-		GL11.glTexCoord2f(0.3125f, ss);
+		GL11.glTexCoord2f(1f, ss);
 		GL11.glVertex3f(1, 0.375f, 0.375f);
-		GL11.glTexCoord2f(0.3125f, ee);
+		GL11.glTexCoord2f(1f, ee);
 		GL11.glVertex3f(1, 0.375f, 0.625f);
-		GL11.glTexCoord2f(0.25f, ee);
+		GL11.glTexCoord2f(0f, ee);
 		GL11.glVertex3f(0, 0.375f, 0.625f);
 		GL11.glNormal3f(0, 1, 0);
-		GL11.glTexCoord2f(0.3125f, ss);
+		GL11.glTexCoord2f(1f, ss);
 		GL11.glVertex3f(1, 0.625f, 0.375f);
-		GL11.glTexCoord2f(0.25f, ss);
+		GL11.glTexCoord2f(0f, ss);
 		GL11.glVertex3f(0, 0.625f, 0.375f);
-		GL11.glTexCoord2f(0.25f, ee);
+		GL11.glTexCoord2f(0f, ee);
 		GL11.glVertex3f(0, 0.625f, 0.625f);
-		GL11.glTexCoord2f(0.3125f, ee);
+		GL11.glTexCoord2f(1f, ee);
 		GL11.glVertex3f(1, 0.625f, 0.625f);
 		// ends
 		GL11.glNormal3f(-1, 0, 0);
-		GL11.glTexCoord2f(0.25f + ss, ss);
+		GL11.glTexCoord2f(0f + ss, ss);
 		GL11.glVertex3f(0, 0.375f, 0.375f);
-		GL11.glTexCoord2f(0.25f + ee, ss);
+		GL11.glTexCoord2f(0f + ee, ss);
 		GL11.glVertex3f(0, 0.375f, 0.625f);
-		GL11.glTexCoord2f(0.25f + ee, ee);
+		GL11.glTexCoord2f(0f + ee, ee);
 		GL11.glVertex3f(0, 0.625f, 0.625f);
-		GL11.glTexCoord2f(0.25f + ss, ee);
+		GL11.glTexCoord2f(0f + ss, ee);
 		GL11.glVertex3f(0, 0.625f, 0.375f);
 		GL11.glNormal3f(1, 0, 0);
-		GL11.glTexCoord2f(0.25f + ee, ss);
+		GL11.glTexCoord2f(0f + ee, ss);
 		GL11.glVertex3f(1, 0.375f, 0.625f);
-		GL11.glTexCoord2f(0.25f + ss, ss);
+		GL11.glTexCoord2f(0f + ss, ss);
 		GL11.glVertex3f(1, 0.375f, 0.375f);
-		GL11.glTexCoord2f(0.25f + ss, ee);
+		GL11.glTexCoord2f(0f + ss, ee);
 		GL11.glVertex3f(1, 0.625f, 0.375f);
-		GL11.glTexCoord2f(0.25f + ee, ee);
+		GL11.glTexCoord2f(0f + ee, ee);
 		GL11.glVertex3f(1, 0.625f, 0.625f);
 		GL11.glEnd();
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
