@@ -132,9 +132,10 @@ public class Items {
 				.setCreativeTab(RiseAutomatons.tabAutomatons);
 		chisel.setContainerItem(chisel);
 		mortar = new Item(Ids.mortar - 256)
-				.setMaxStackSize(1).setContainerItem(mortar)
+				.setMaxStackSize(1)
 				.setUnlocalizedName("riseautomatons:mortar")
 				.setCreativeTab(RiseAutomatons.tabAutomatons);
+		mortar.setContainerItem(mortar);
 	}
 }
 
