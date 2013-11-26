@@ -412,40 +412,22 @@ public class Recipes {
 			"D",
 			'O', new ItemStack(Ids.craftSet, 2, EnumCraftSetType.PLANTMATTER.ordinal()),
 			'D', new ItemStack(Ids.craftSet, 2, EnumCraftSetType.PARTICULATE.ordinal()) });
-		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 2, EnumCraftSetType.PLANTMATTER.ordinal()), new Object[] {
-			"O",
-			"D",
-			'O', Block.sapling,
-			'D', Items.mortar });
+		GameRegistry.addShapelessRecipe(new ItemStack(Ids.craftSet, 2, EnumCraftSetType.PLANTMATTER.ordinal()), new Object[] {
+			Block.sapling, Items.mortar });
 
-		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 2, EnumCraftSetType.PLANTMATTER.ordinal()), new Object[] {
-			"O",
-			"D",
-			'O', Item.seeds,
-			'D', Items.mortar });
+		GameRegistry.addShapelessRecipe(new ItemStack(Ids.craftSet, 2, EnumCraftSetType.PLANTMATTER.ordinal()), new Object[] {
+			Item.seeds, Items.mortar });
 
-		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 2, EnumCraftSetType.PARTICULATE.ordinal()), new Object[] {
-			"O",
-			"M",
-			'O', Blocks.frass,
-			'M', Items.mortar });
+		GameRegistry.addShapelessRecipe(new ItemStack(Ids.craftSet, 2, EnumCraftSetType.PARTICULATE.ordinal()), new Object[] {
+			Blocks.frass, Items.mortar });
 
-		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 2, EnumCraftSetType.PARTICULATE.ordinal()), new Object[] {
-			"O",
-			"D",
-			'O', Blocks.crink,
-			'D', Items.mortar });
-		GameRegistry.addRecipe(new ItemStack(Item.redstone, 3), new Object[] {
-			"O",
-			"D",
-			'O', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.BLUECORE.ordinal()),
-			'D', Items.mortar });
+		GameRegistry.addShapelessRecipe(new ItemStack(Ids.craftSet, 2, EnumCraftSetType.PARTICULATE.ordinal()), new Object[] {
+			Blocks.crink, Items.mortar });
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.redstone, 3), new Object[] {
+			new ItemStack(Ids.craftSet, 1, EnumCraftSetType.BLUECORE.ordinal()), Items.mortar });
 
-		GameRegistry.addRecipe(new ItemStack(Item.redstone, 6), new Object[] {
-			"O",
-			"D",
-			'O', new ItemStack(Ids.craftSet, 1, EnumCraftSetType.REDCORE.ordinal()),
-			'D', Items.mortar });
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.redstone, 6), new Object[] {
+			new ItemStack(Ids.craftSet, 1, EnumCraftSetType.REDCORE.ordinal()), Items.mortar });
 
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.slimeBall, 3), new Object[] {
 			new ItemStack(Block.sapling, 1, 0), Item.bucketWater, Item.clay});
