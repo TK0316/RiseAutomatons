@@ -2,7 +2,6 @@ package riseautomatons.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.RenderEngine;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.src.ModLoader;
 import net.minecraft.world.IBlockAccess;
