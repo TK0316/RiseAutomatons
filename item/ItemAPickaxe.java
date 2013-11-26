@@ -11,7 +11,7 @@ import riseautomatons.Ids;
 
 public class ItemAPickaxe extends ItemPickaxe {
 	  private static Block[] blocksEffectiveAgainst = {
-		    Block.cobblestone, Block.stone, Block.sandStone, Block.cobblestoneMossy, Block.oreIron, Block.blockSteel, Block.oreCoal, Block.blockGold,
+		    Block.cobblestone, Block.stone, Block.sandStone, Block.cobblestoneMossy, Block.oreIron, Block.blockIron, Block.oreCoal, Block.blockGold,
 		    Block.oreGold, Block.oreDiamond, Block.blockDiamond, Block.ice, Block.netherrack, Block.oreLapis, Block.blockLapis, Block.blocksList[Ids.blockTech], Block.blocksList[Ids.blockFrass] };
 
 	public ItemAPickaxe(int i, int j) {
