@@ -843,6 +843,18 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	}
 
 	@Override
+	public void onDeath(DamageSource damagesource) {
+		super.onDeath(damagesource);
+
+		if (!worldObj.isRemote) {
+
+			dropper();// a(field_34905_c > 0);
+			setDead();
+		}
+
+	}
+
+	@Override
 	public void setRevengeTarget(EntityLiving par1EntityLiving) {
 	}
 
