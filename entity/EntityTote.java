@@ -321,12 +321,10 @@ public class EntityTote extends EntityOwnedBot implements IInventory, IBot {
 	}
 	@Override
 	public boolean isInvNameLocalized() {
-		// TODO 自動生成されたメソッド・スタブ
 		return false;
 	}
 	@Override
 	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
-		// TODO 自動生成されたメソッド・スタブ
 		return false;
 	}
 	@Override
