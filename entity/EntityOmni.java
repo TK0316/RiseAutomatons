@@ -107,22 +107,16 @@ public class EntityOmni extends EntityOwnedBot implements IBot {
 						new Object[] { this.worldObj }));
 				return true;
 			} catch (InstantiationException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			} catch (IllegalArgumentException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			} catch (InvocationTargetException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			} catch (NoSuchMethodException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			} catch (SecurityException e) {
-				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
 			return super.interact(par1EntityPlayer);
@@ -169,30 +163,23 @@ public class EntityOmni extends EntityOwnedBot implements IBot {
 
 					}
 				} catch (InstantiationException e) {
-					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
-					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
 				} catch (IllegalArgumentException e) {
-					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
 				} catch (InvocationTargetException e) {
-					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
 				} catch (NoSuchMethodException e) {
 					//System.out.println("skip: " + c.getSimpleName());
-					// TODO 自動生成された catch ブロック
 					//e.printStackTrace();
 				} catch (SecurityException e) {
-					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
 				}
 
 			}
 
 		}
-		// TODO 自動生成されたメソッド・スタブ
 		return super.interact(par1EntityPlayer);
 	}
 
@@ -232,7 +219,6 @@ public class EntityOmni extends EntityOwnedBot implements IBot {
 
 	@Override
 	protected void entityInit() {
-		// TODO 自動生成されたメソッド・スタブ
 		super.entityInit();
 	}
 
