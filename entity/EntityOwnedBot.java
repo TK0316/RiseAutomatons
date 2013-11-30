@@ -25,7 +25,7 @@ public class EntityOwnedBot extends EntityGolem {
 	}
 
 	@Override
-	public boolean attackEntityFrom(DamageSource par1DamageSource, int par2) {
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
 
 		if (par1DamageSource == DamageSource.inWall) {
 			this.pushOutOfBlocks(posX, posY, posZ);

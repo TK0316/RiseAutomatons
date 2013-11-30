@@ -14,7 +14,7 @@ public abstract class EntityAniBot extends EntityMob {
 	}
 
 	@Override
-	public int getMaxHealth() {
+	public float getMaxHealth() {
 		return 0;
 	}
 

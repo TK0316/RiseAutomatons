@@ -178,7 +178,7 @@ public class EntityLaser extends EntityThrowable {
 	}
 
 	@Override
-	public boolean attackEntityFrom(DamageSource par1DamageSource, int par2) {
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
 
 		setBeenAttacked();
 		Entity entity = par1DamageSource.getSourceOfDamage();
