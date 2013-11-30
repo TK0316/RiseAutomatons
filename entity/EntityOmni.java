@@ -213,7 +213,7 @@ public class EntityOmni extends EntityOwnedBot implements IBot {
 	}
 
 	@Override
-	public String getTexture() {
+	public ResourceLocation getTexture() {
 		return OMNI_PNG;
 	}
 
