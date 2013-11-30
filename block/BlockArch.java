@@ -37,12 +37,8 @@ public class BlockArch extends Block {
 					// "/riseautomatons/arch3.png");
 	}
 
-	public String getTextureFile() {
-		return Blocks.BLOCK_PNG;
-	}
-
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int j) {
+	public Icon getIcon(int i, int j) {
 		if (j == 5) {
 			return icons[2];
 		}
