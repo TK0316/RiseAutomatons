@@ -2,8 +2,6 @@ package riseautomatons.item;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -19,6 +17,8 @@ import riseautomatons.block.TileEntityLatch;
 import riseautomatons.entity.EntitySentry;
 import riseautomatons.entity.EntityTote;
 import riseautomatons.entity.EntityWorker;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemSoulCore extends Item {
 	int textur[];
@@ -40,7 +40,7 @@ public class ItemSoulCore extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateIcons(IconRegister par1IconRegister) {
+	public void registerIcons(IconRegister par1IconRegister) {
 		icons = new Icon[EnumSoulCore.values().length];
 		for (int var4 = 0; var4 < EnumSoulCore.values().length; ++var4) {
 			icons[var4] = par1IconRegister.registerIcon("riseautomatons:"+EnumSoulCore.values()[var4].name);

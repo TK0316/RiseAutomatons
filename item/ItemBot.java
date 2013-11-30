@@ -1,7 +1,5 @@
 package riseautomatons.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +13,8 @@ import riseautomatons.Universal;
 import riseautomatons.entity.EntityFactotum;
 import riseautomatons.entity.EntityGuard;
 import riseautomatons.entity.EntityOmni;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 
 public class ItemBot extends Item {
@@ -38,7 +38,7 @@ public class ItemBot extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateIcons(IconRegister par1IconRegister) {
+	public void registerIcons(IconRegister par1IconRegister) {
 		icons = new Icon[EnumBotType.values().length];
 		for (int var4 = 0; var4 < EnumBotType.values().length; ++var4) {
 			icons[var4] = par1IconRegister.registerIcon("riseautomatons:"+EnumBotType.values()[var4].name);
