@@ -1,7 +1,5 @@
 package riseautomatons.entity;
 
-import riseautomatons.block.Blocks;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -10,6 +8,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import riseautomatons.block.Blocks;
 
 public class EntityVirus extends EntityThrowable {
 
