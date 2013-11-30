@@ -324,7 +324,7 @@ public class EntityTote extends EntityOwnedBot implements IInventory, IBot {
 		return false;
 	}
 	@Override
-	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		return false;
 	}
 	@Override
