@@ -2,9 +2,10 @@ package riseautomatons.entity;
 
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.src.ModLoader;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import org.lwjgl.opengl.GL11;
 
 public class EntityFwooshFX extends EntityFX {
 
@@ -85,7 +86,8 @@ public class EntityFwooshFX extends EntityFX {
 
 		// GL11.glEnable (GL11.GL_BLEND);
 		// GL11.glBlendFunc (GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_DST_ALPHA);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, rendererId);
+		ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(new ResourceLocation("riseautomatons", "textures/particles/fwoosh.png"));
+		//GL11.glBindTexture(GL11.GL_TEXTURE_2D, rendererId);
 		float f6 = m ? 0f : 0.5f;
 		float f7 = m ? 0.5f : 1f;
 

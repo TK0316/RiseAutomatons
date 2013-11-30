@@ -5,12 +5,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 
 public class EntityHelios extends EntityFlyingBot implements IBot {
 
-	public static final String HELIOS_PNG = "/riseautomatons/zei_ModelHelios.png";
+	public static final ResourceLocation HELIOS_PNG = new ResourceLocation("riseautomatons", "textures/entities/Helios.png");
 	public static int renderId;
 	public int courseChangeCooldown;
 	public double waypointX;
@@ -19,9 +20,8 @@ public class EntityHelios extends EntityFlyingBot implements IBot {
 
 	public EntityHelios(World world) {
 		super(world);
-		texture = HELIOS_PNG;
 		moveSpeed = 1.0F;
-		health = 3;
+		setHealth(3);
 		setSize(0.5F, 0.5F);
 		courseChangeCooldown = 10;
 	}
@@ -167,7 +167,7 @@ public class EntityHelios extends EntityFlyingBot implements IBot {
 	}
 
 	@Override
-	public String getTexture() {
+	public ResourceLocation getTexture() {
 		return HELIOS_PNG;
 	}
 

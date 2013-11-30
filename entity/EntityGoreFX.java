@@ -1,10 +1,9 @@
 package riseautomatons.entity;
 
 import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.src.ModLoader;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-
-import org.lwjgl.opengl.GL11;
 
 public class EntityGoreFX extends EntityFX {
 
@@ -21,6 +20,7 @@ public class EntityGoreFX extends EntityFX {
             double d3, double d4, double d5, float f)
     {
         super(world, d, d1, d2, 0.0D, 0.0D, 0.0D);
+		ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(new ResourceLocation("riseautomatons", "textures/particles/gore.png"));
         motionX = d3;
         motionY = d4;
         motionZ = d5;//

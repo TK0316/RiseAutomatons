@@ -2,6 +2,7 @@ package riseautomatons.entity;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 import riseautomatons.Universal;
@@ -9,14 +10,13 @@ import riseautomatons.item.EnumCraftSetType;
 
 public class EntityBobby extends EntityBot implements IBot {
 
-	public static final String BOBBY_PNG = "/riseautomatons/bobby.png";
+	public static final ResourceLocation BOBBY_PNG = new ResourceLocation("riseautomatons", "textures/entities/bobby.png");
 	public static int renderId;
 
 	public EntityBobby(World world) {
 		super(world);
-		texture = BOBBY_PNG;
 		setSize(0.9F, 0.9F);
-		health = 5;
+		setHealth(5);
 	}
 
 	public EntityBobby(World world, double d, double d1, double d2) {
@@ -120,7 +120,7 @@ public class EntityBobby extends EntityBot implements IBot {
 	}
 
 	@Override
-	public String getTexture() {
+	public ResourceLocation getTexture() {
 		return BOBBY_PNG;
 	}
 }

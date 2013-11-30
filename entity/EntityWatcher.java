@@ -12,18 +12,19 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 import riseautomatons.Universal;
 
 public class EntityWatcher extends EntityMob implements IBot {
 
-	public static final String WATCHER_PNG = "/riseautomatons/watcher.png";
+	public static final ResourceLocation WATCHER_PNG = new ResourceLocation("riseautomatons", "textures/entities/watcher.png");
 	public static int renderId;
 
 	public EntityWatcher(World world) {
 		super(world);
-		health = 60;
+		setHealth(60);
 		moveSpeed = 0.2F;
 		setSize(1.0F, 3.8F);
 		this.tasks.addTask(4, new EntityAIBotArrowAttack(this, this.moveSpeed,
@@ -148,7 +149,7 @@ public class EntityWatcher extends EntityMob implements IBot {
 	}
 
 	@Override
-	public String getTexture() {
+	public ResourceLocation getTexture() {
 		return WATCHER_PNG;
 	}
 }

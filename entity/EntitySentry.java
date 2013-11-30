@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 import riseautomatons.Universal;
@@ -24,10 +25,10 @@ import riseautomatons.item.EnumSoulCore;
 
 public class EntitySentry extends EntityOwnedBot implements IBot {
 
-	public static final String SENTRY1_PNG =  "/riseautomatons/sentry1.png";
-	public static final String SENTRY2_PNG =  "/riseautomatons/sentry2.png";
-	public static final String SENTRY3_PNG =  "/riseautomatons/sentry3.png";
-	public static final String SENTRYBLOCK_PNG =  "/riseautomatons/sentryBlock.png";
+	public static final ResourceLocation SENTRY1_PNG =  new ResourceLocation("riseautomatons", "textures/entities/sentry1.png");
+	public static final ResourceLocation SENTRY2_PNG =  new ResourceLocation("riseautomatons", "textures/entities/sentry2.png");
+	public static final ResourceLocation SENTRY3_PNG =  new ResourceLocation("riseautomatons", "textures/entities/sentry3.png");
+	public static final ResourceLocation SENTRYBLOCK_PNG =  new ResourceLocation("riseautomatons", "textures/entities/sentryBlock.png");
 
 	public static final int INDEX_MODE = 18;
 
@@ -37,7 +38,7 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 		super(world);
 		setSize(0.8F, 1.2F);
 		moveSpeed = 0.4F;
-		health = 20;
+		setHealth(20);
 
 		getNavigator().setAvoidsWater(true);
 
@@ -116,7 +117,7 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 				if (!worldObj.isRemote) {
 					dropper();
 				}
-				health = 0;
+				setHealth(0);
 			}
 		}
 	}
@@ -195,7 +196,7 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 	}
 
 	@Override
-	public String getTexture() {
+	public ResourceLocation getTexture() {
 		switch(getMode()) {
 		case STAY:
 			return SENTRY1_PNG;

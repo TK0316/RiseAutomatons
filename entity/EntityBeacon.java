@@ -5,22 +5,23 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 import riseautomatons.Universal;
 
 public class EntityBeacon extends EntityOwnedBot {
 
-	public static final String BEACON_PNG =  "/riseautomatons/beaco.png";
-	public static final String BEACON1_PNG =  "/riseautomatons/beac1.png";
-	public static final String BEACON2_PNG =  "/riseautomatons/beac2.png";
+	public static final ResourceLocation BEACON_PNG = new ResourceLocation("riseautomatons", "textures/entities/beaco.png");
+	public static final ResourceLocation BEACON1_PNG = new ResourceLocation("riseautomatons", "textures/entities/beac1.png");
+	public static final ResourceLocation BEACON2_PNG = new ResourceLocation("riseautomatons", "textures/entities/beac2.png");
 	public static int renderId;
 	protected int siren;
 
 	public EntityBeacon(World par1World) {
 		super(par1World);
 		setSize(0.3F, 1F);
-		health = 1;
+		setHealth(1);
 		siren = 0;
 	}
 
@@ -82,7 +83,7 @@ public class EntityBeacon extends EntityOwnedBot {
 	}
 
 	@Override
-	public String getTexture() {
+	public ResourceLocation getTexture() {
 		switch (getSiren()) {
 		case 1:
 			return BEACON1_PNG;

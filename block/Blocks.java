@@ -3,8 +3,7 @@ package riseautomatons.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
-import net.minecraft.src.ModLoader;
-import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.OreDictionary;
 import riseautomatons.Ids;
 import riseautomatons.RiseAutomatons;
@@ -19,8 +18,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class Blocks {
-	public static final String BLOCK_PNG = "/riseautomatons/block.png";
-	public static final String PATTERNS_PNG = "/riseautomatons/patterns.png";
+	public static final ResourceLocation BLOCK_PNG = new ResourceLocation("riseautomatons", "block.png");
+	public static final ResourceLocation PATTERNS_PNG = new ResourceLocation("riseautomatons", "patterns.png");
 
 	public static void init() {
 		GameRegistry.registerBlock(worker);
@@ -103,9 +102,7 @@ public class Blocks {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static void registerTextures() {
-		MinecraftForgeClient.preloadTexture(BLOCK_PNG);
-		MinecraftForgeClient.preloadTexture(PATTERNS_PNG);
+	public static void registerRenderer() {
 		RenderingRegistry.registerBlockHandler(new RenderWorkerBlock());
 		RenderingRegistry.registerBlockHandler(new RenderSentryBlock());
 		RenderingRegistry.registerBlockHandler(new RenderChalkBlock());
@@ -120,13 +117,18 @@ public class Blocks {
 			.setHardness(1F).setResistance(20F)
 			.setStepSound(Block.soundMetalFootstep).setUnlocalizedName("riseautomatons:Tote");
 	public static Block beacon = (new BlockBeacon(Ids.blockBeacon))
-    		.setHardness(0.5F).setResistance(10F).setUnlocalizedName("riseautomatons:beacon");
+    		.setHardness(0.5F).setResistance(10F)
+    		.setUnlocalizedName("riseautomatons:beacon")
+    		.func_111022_d("riseautomatons:beacon");
 
 	public static Block gearbox = (new BlockGearBox(Ids.blockGearbox, 10, Material.iron))
-			.setHardness(1F).setResistance(5F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("riseautomatons:gearbox")
+			.setHardness(1F).setResistance(5F).setStepSound(Block.soundMetalFootstep)
+			.setUnlocalizedName("riseautomatons:gearbox")
+			.func_111022_d("riseautomatons:gearbox")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block chalk = (new BlockChalk(Ids.blockChalk, 164))
-			.setHardness(0f).setStepSound(Block.soundPowderFootstep).setUnlocalizedName("riseautomatons:Chalk");
+			.setHardness(0f).setStepSound(Block.soundPowderFootstep)
+			.setUnlocalizedName("riseautomatons:Chalk");
 	public static Block turnBlock = (new BlockTurn(Ids.blockTurn))
 			.setHardness(0.05f).setResistance(0)
 			.setStepSound(Block.soundStoneFootstep).setUnlocalizedName("riseautomatons:TurnBlock")
@@ -174,6 +176,7 @@ public class Blocks {
 	public static Block plantMass = (new BlockPlant(Ids.blockPlantMass))
 			.setHardness(0.5F).setStepSound(Block.soundGrassFootstep)
 			.setUnlocalizedName("riseautomatons:plantMass")
+			.func_111022_d("riseautomatons:plantMass")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block crystal = new BlockGlow(Ids.blockCrystal)
 			.setHardness(0.4F).setResistance(5.0F)
@@ -201,10 +204,13 @@ public class Blocks {
 	public static Block dapling = new BlockDapling(Ids.blockDapling)
 			.setHardness(0.0F).setStepSound(Block.soundGrassFootstep)
 			.setUnlocalizedName("riseautomatons:dapling")
+			.func_111022_d("riseautomatons:dapling")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block duplex = new BlockDuplex(Ids.blockDuplex)
 			.setHardness(0.1F).setLightOpacity(1).setLightValue(0.5F)
-			.setStepSound(Block.soundGlassFootstep).setUnlocalizedName("riseautomatons:duplex")
+			.setStepSound(Block.soundGlassFootstep)
+			.setUnlocalizedName("riseautomatons:duplex")
+			.func_111022_d("riseautomatons:duplex")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block latch = (new BlockLatch(Ids.blockLatch))
 			.setHardness(1F).setResistance(20F)

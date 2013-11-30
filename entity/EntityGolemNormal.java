@@ -14,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 import riseautomatons.Universal;
@@ -22,7 +23,7 @@ import riseautomatons.block.Blocks;
 public class EntityGolemNormal extends EntityAniBot implements IBot,
 		IBehaviorDispenseItem {
 
-	public static final String GOLEM_PNG = "/riseautomatons/agol3.png";
+	public static final ResourceLocation GOLEM_PNG = new ResourceLocation("riseautomatons", "textures/entities/agol3.png");
 	public static int renderId;
 	int maxHealth = 5;
 	public int type = 0;
@@ -30,9 +31,8 @@ public class EntityGolemNormal extends EntityAniBot implements IBot,
 
 	public EntityGolemNormal(World par1World) {
 		super(par1World);
-		health = 5;
+		setHealth(5);
 		maxHealth = 5;
-		texture = GOLEM_PNG;
 	}
 
 	public EntityGolemNormal(World world, double d, double d1, double d2, int I,
@@ -48,7 +48,7 @@ public class EntityGolemNormal extends EntityAniBot implements IBot,
 		setPathToEntity(null);
 		setType(I);
 		setColo(dam);
-		health = h;
+		setHealth(h);
 		maxHealth = h;
 	}
 
@@ -249,7 +249,7 @@ public class EntityGolemNormal extends EntityAniBot implements IBot,
 	}
 
 	@Override
-	public String getTexture() {
+	public ResourceLocation getTexture() {
 		return GOLEM_PNG;
 	}
 

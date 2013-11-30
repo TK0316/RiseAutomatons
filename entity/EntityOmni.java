@@ -33,6 +33,7 @@ import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import riseautomatons.Universal;
 import riseautomatons.block.Blocks;
@@ -41,7 +42,7 @@ import riseautomatons.item.Items;
 
 public class EntityOmni extends EntityOwnedBot implements IBot {
 
-    public static final String OMNI_PNG = "/riseautomatons/omni.png";
+    public static final ResourceLocation OMNI_PNG = new ResourceLocation("riseautomatons", "textures/entities/omni.png");
 	public static int renderId;
 	public static Map<ItemStack, Class> preset = new LinkedHashMap();
 
@@ -49,8 +50,7 @@ public class EntityOmni extends EntityOwnedBot implements IBot {
     {
         super(world);
         setSize(0.3F, 1.2F);
-        health = 1;
-        texture = OMNI_PNG;
+        setHealth(1);
     }
 
     public EntityOmni(World world, double d, double d1, double d2)

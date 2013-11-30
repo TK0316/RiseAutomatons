@@ -19,21 +19,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 import riseautomatons.Universal;
 
 public class EntityGuard extends EntityOwnedBot implements IBot {
 
-	public static final String GUARD_PNG = "/riseautomatons/guardSkin.png";
+	public static final ResourceLocation GUARD_PNG = new ResourceLocation("riseautomatons", "textures/entities/guardSkin.png");
 	public static int renderId;
 
 	public EntityGuard(World world) {
 		super(world);
-		this.health = 20;
+		this.setHealth(20);
 		this.moveSpeed = 0.0F;
 		setSize(0.5F, 0.5F);
-		this.texture = GUARD_PNG;
 		this.tasks.addTask(4, new EntityAIBotArrowAttack(this, this.moveSpeed, 1, 6));
 
 		tasks.addTask(4, new EntityAIAttackOnCollide(this, moveSpeed, true));
@@ -65,7 +65,7 @@ public class EntityGuard extends EntityOwnedBot implements IBot {
 	}
 
 	@Override
-	public boolean attackEntityFrom(DamageSource damagesource, int i) {
+	public boolean attackEntityFrom(DamageSource damagesource, float i) {
 
 		Entity entity = damagesource.getEntity();
 		if ((entity != null) && (entity != this)

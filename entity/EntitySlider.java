@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 import riseautomatons.Universal;
@@ -14,16 +15,15 @@ import riseautomatons.item.EnumCraftSetType;
 
 public class EntitySlider extends EntityAniBot implements IBot {
 
-	public static final String SLIDER_PNG = "/riseautomatons/slider.png";
+	public static final ResourceLocation SLIDER_PNG = new ResourceLocation("riseautomatons", "textures/entities/slider.png");
 	public static int renderId;
 	private PathEntity pathToEntity;
 
 	public EntitySlider(World world) {
 		super(world);
-		texture = SLIDER_PNG;
 		moveSpeed = 1.0F;
 		// attackStrength = 0;
-		health = 8;
+		setHealth(8);
 		setSize(1.0F, 0.1F);
 	}
 
@@ -73,7 +73,7 @@ public class EntitySlider extends EntityAniBot implements IBot {
 	public void onLivingUpdate() {
 
 		if (isWet()) {
-			health = 0;
+			this.setHealth(0);
 		}
 
 		super.onLivingUpdate();
@@ -258,6 +258,11 @@ public class EntitySlider extends EntityAniBot implements IBot {
 				&& worldObj.difficultySetting == 0) {
 			setDead();
 		}
+	}
+
+	@Override
+	public ResourceLocation getTexture() {
+		return SLIDER_PNG;
 	}
 
 }

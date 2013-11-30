@@ -17,6 +17,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class EntityTote extends EntityOwnedBot implements IInventory, IBot {
@@ -29,7 +30,7 @@ public class EntityTote extends EntityOwnedBot implements IInventory, IBot {
 	public boolean getAvoidsWater() {
 		return true;
 	}
-	public static final String TOTE_PNG = "/riseautomatons/tote.png";
+	public static final ResourceLocation TOTE_PNG = new ResourceLocation("riseautomatons", "textures/entities/tote.png");
 	public ItemStack cargoItems[] = new ItemStack[9];
 	double angle = 90;
 	double dir = -10;
@@ -37,10 +38,9 @@ public class EntityTote extends EntityOwnedBot implements IInventory, IBot {
 	public EntityTote(World world)
 	{
 		super(world);
-		texture = TOTE_PNG;
 		setSize(0.4F, 0.5F);
 		moveSpeed = 0.2F;
-		health = 6;
+		setHealth(6);
 
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(5, new EntityAIBotFollowOwner(this, moveSpeed, 4F, 2.0F));
@@ -328,5 +328,9 @@ public class EntityTote extends EntityOwnedBot implements IInventory, IBot {
 	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
 		// TODO 自動生成されたメソッド・スタブ
 		return false;
+	}
+	@Override
+	public ResourceLocation getTexture() {
+		return TOTE_PNG;
 	}
 }

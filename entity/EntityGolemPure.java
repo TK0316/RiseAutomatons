@@ -7,21 +7,24 @@ import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 
 public class EntityGolemPure extends EntityGolemNormal implements IBot {
 
-	public static final String GOLEM_PURE_PNG = "/riseautomatons/agol1.png";
-	public static final String GOLEM_PURE_BI_PNG = "/riseautomatons/agol1.png";
-	public static final String GOLEM_PURE_LONG_PNG = "/riseautomatons/agol1.png";
+	public static final ResourceLocation GOLEM_PURE_PNG = new ResourceLocation("riseautomatons", "textures/entities/agol1.png");
+	public static final ResourceLocation GOLEM_PURE_BI_PNG = new ResourceLocation("riseautomatons", "textures/entities/agol1.png");
+	public static final ResourceLocation GOLEM_PURE_LONG_PNG = new ResourceLocation("riseautomatons", "textures/entities/agol1.png");
 	public int form = 0;
+	private ResourceLocation texture;
 
 	public EntityGolemPure(World par1World) {
 		super(par1World);
-		health = 5;
+		setHealth(5);
 		maxHealth = 5;
 		setForm(worldObj.rand.nextInt(3));
+		texture = GOLEM_PURE_PNG;
 	}
 
 	public EntityGolemPure(World world, double d, double d1, double d2, int I,
@@ -156,7 +159,7 @@ public class EntityGolemPure extends EntityGolemNormal implements IBot {
 	}
 
 	@Override
-	public String getTexture() {
+	public ResourceLocation getTexture() {
 		return texture;
 	}
 

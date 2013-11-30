@@ -2,6 +2,7 @@ package riseautomatons.entity;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -12,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.src.ModLoader;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 import riseautomatons.RiseAutomatons;
@@ -19,9 +21,9 @@ import riseautomatons.Universal;
 
 public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 
-	public static final String FACTOTUM1_PNG = "/riseautomatons/factotum1.png";
-	public static final String FACTOTUM2_PNG = "/riseautomatons/factotum2.png";
-	public static final String FACTOTUM3_PNG = "/riseautomatons/factotum3.png";
+	public static final ResourceLocation FACTOTUM1_PNG = new ResourceLocation("riseautomatons", "textures/entities/factotum1.png");
+	public static final ResourceLocation FACTOTUM2_PNG = new ResourceLocation("riseautomatons", "textures/entities/factotum2.png");
+	public static final ResourceLocation FACTOTUM3_PNG = new ResourceLocation("riseautomatons", "textures/entities/factotum3.png");
 	public static int renderId;
 	public int furnaceBurnTime;
 	public int currentItemBurnTime;
@@ -36,10 +38,9 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 	public EntityFactotum(World world) {
 		super(world);
 		cargoItems = new ItemStack[21];
-		texture = FACTOTUM1_PNG;
 		setSize(2F, 2F);
-		moveSpeed = 0.7F;
-		health = 10;
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.7F);
+		setHealth(10);
 		isImmuneToFire = true;
 		furnaceBurnTime = 0;
 		currentItemBurnTime = 0;
@@ -50,10 +51,9 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 			String username) {
 		super(world);
 		cargoItems = new ItemStack[21];
-		texture = FACTOTUM1_PNG;
 		setSize(2F, 2F);
-		moveSpeed = 0.7F;
-		health = 10;
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.7F);
+		setHealth(10);
 		isImmuneToFire = true;
 		furnaceBurnTime = 0;
 		currentItemBurnTime = 0;
@@ -187,7 +187,7 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 	}
 
 	@Override
-	public String getTexture() {
+	public ResourceLocation getTexture() {
 		if (furnaceBurnTime > 0) {
 			if ((furnaceBurnTime % 2) == 1) {
 				return FACTOTUM2_PNG;
