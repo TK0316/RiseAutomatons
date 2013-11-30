@@ -3,6 +3,7 @@ package riseautomatons.entity;
 import riseautomatons.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -18,7 +19,7 @@ public class EntityVirus extends EntityThrowable {
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
-	public EntityVirus(World par1World, EntityLiving par2EntityLiving) {
+	public EntityVirus(World par1World, EntityLivingBase par2EntityLiving) {
 		super(par1World, par2EntityLiving);
 		// TODO 自動生成されたコンストラクター・スタブ
 	}

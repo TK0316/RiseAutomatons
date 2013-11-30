@@ -3,6 +3,7 @@ package riseautomatons.item;
 import java.util.List;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -39,14 +40,14 @@ public class ItemSmack extends Item {
 
 	@Override
 	public boolean hitEntity(ItemStack itemstack,
-			EntityLiving entityliving, EntityLiving entityliving1) {
+			EntityLivingBase entityliving, EntityLivingBase entityliving1) {
 
 		itemstack.damageItem(1, entityliving1);
 		POW(entityliving, entityliving1);
 		return true;
 	}
 
-	public void POW(EntityLiving entityliving, EntityLiving entityliving1) {
+	public void POW(EntityLivingBase entityliving, EntityLivingBase entityliving1) {
 		World world = entityliving1.worldObj;
 		world.playSoundAtEntity(entityliving1, "mob.clank", 1.0F, 1.0F);
 		if (Universal.improperWorld(world)) {

@@ -3,6 +3,7 @@ package riseautomatons.item;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
@@ -33,7 +34,7 @@ public class ItemAPickaxe extends ItemPickaxe {
 
 	@Override
 	public boolean hitEntity(ItemStack itemstack,
-			EntityLiving par2EntityLiving, EntityLiving entityliving1) {
+			EntityLivingBase par2EntityLiving, EntityLivingBase entityliving1) {
 		itemstack.damageItem(2, entityliving1);
 	    return true;
 	}
@@ -41,7 +42,7 @@ public class ItemAPickaxe extends ItemPickaxe {
 	@Override
 	public boolean onBlockDestroyed(ItemStack itemstack, World par2World,
 			int par3, int par4, int par5, int par6,
-			EntityLiving entityliving) {
+			EntityLivingBase entityliving) {
 		itemstack.damageItem(1, entityliving);
 	    return true;
 	}

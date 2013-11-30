@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -50,11 +51,11 @@ public class AbsorbSoul extends Spell {
 		if (targetItem == null){
 			return false;
 		}
-		L = world.getEntitiesWithinAABB(EntityLiving.class, AxisAlignedBB.getBoundingBox(i - 2, j - 2, k - 2, i + 2, j + 2, k + 2));
+		L = world.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(i - 2, j - 2, k - 2, i + 2, j + 2, k + 2));
 		boolean complete=false;
 		if (!L.isEmpty()){
 			for(int n=0;n<L.size();n++){
-				EntityLiving el = (EntityLiving) L.get(n);
+				EntityLivingBase el = (EntityLivingBase) L.get(n);
 				if(!complete){
 					System.out.println();
 					if(el instanceof EntityPlayer || el instanceof IBot || el instanceof EntityTameable || el instanceof EntityDragon || el instanceof EntityGolem){

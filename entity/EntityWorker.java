@@ -6,7 +6,7 @@ import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIPanic;
@@ -857,7 +857,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	}
 
 	@Override
-	public void setRevengeTarget(EntityLiving par1EntityLiving) {
+	public void setRevengeTarget(EntityLivingBase par1EntityLiving) {
 	}
 
 	@Override

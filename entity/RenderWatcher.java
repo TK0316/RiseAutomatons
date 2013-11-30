@@ -28,7 +28,7 @@ public class RenderWatcher extends RenderLiving {
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLiving par1EntityLiving, float par2) {
+	protected void preRenderCallback(EntityLivingBase par1EntityLiving, float par2) {
 		GL11.glScalef(1.2f, 1.2f, 1.2f);
 	}
 

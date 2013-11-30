@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -26,7 +27,7 @@ public class RenderGolem extends RenderLiving {
 	}
 
 	@Override
-	protected void renderEquippedItems(EntityLiving entityliving, float par2) {
+	protected void renderEquippedItems(EntityLivingBase entityliving, float par2) {
 
 		if (entityliving instanceof EntityGolemNormal) {
 			EntityGolemNormal ea = ((EntityGolemNormal) entityliving);

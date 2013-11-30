@@ -3,7 +3,7 @@ package riseautomatons.entity;
 import net.minecraft.client.model.ModelQuadruped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
 public class ModelTote extends ModelQuadruped {
@@ -79,7 +79,7 @@ public class ModelTote extends ModelQuadruped {
 	}
 
 	@Override
-	public void setLivingAnimations(EntityLiving par1EntityLiving, float par2,
+	public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2,
 			float par3, float par4) {
 		EntityTote tote = (EntityTote) par1EntityLiving;
 		tote.angle += tote.dir;
