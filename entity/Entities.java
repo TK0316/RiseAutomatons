@@ -90,56 +90,29 @@ public class Entities {
 
 	@SideOnly(Side.CLIENT)
 	public static void registerTextures() {
-		MinecraftForgeClient.preloadTexture(EntityWorker.GOLEM1_PNG);
-		MinecraftForgeClient.preloadTexture(EntityWorker.GOLEM2_PNG);
-		MinecraftForgeClient.preloadTexture(EntityWorker.GOLEM3_PNG);
-		MinecraftForgeClient.preloadTexture(EntityWorker.GOLEM4_PNG);
-		MinecraftForgeClient.preloadTexture(EntityWorker.GOLEM5_PNG);
-		MinecraftForgeClient.preloadTexture(EntityWorker.GOLEM6_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntityWorker.class, new RenderWorker(new ModelWorker(), 0.5F));
 
-		MinecraftForgeClient.preloadTexture(EntitySentry.SENTRY1_PNG);
-		MinecraftForgeClient.preloadTexture(EntitySentry.SENTRY2_PNG);
-		MinecraftForgeClient.preloadTexture(EntitySentry.SENTRY3_PNG);
-		MinecraftForgeClient.preloadTexture(EntitySentry.SENTRYBLOCK_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySentry.class, new RenderBot(new ModelSentry(), 0.75F));
 
-		MinecraftForgeClient.preloadTexture(EntityTote.TOTE_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTote.class, new RenderTote(new ModelTote(), 0.5F));
 
-		MinecraftForgeClient.preloadTexture(EntityGolemNormal.GOLEM_PNG);
-		MinecraftForgeClient.preloadTexture(EntityGolemPure.GOLEM_PURE_PNG);
-		MinecraftForgeClient.preloadTexture(EntityGolemPure.GOLEM_PURE_BI_PNG);
-		MinecraftForgeClient.preloadTexture(EntityGolemPure.GOLEM_PURE_LONG_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntityGolemNormal.class, new RenderGolem(new ModelGolem(), 0.25F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityGolemPure.class, new RenderGolem(new ModelGolem(), 0.25F));
 
-		MinecraftForgeClient.preloadTexture(EntityWatcher.WATCHER_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntityWatcher.class, new RenderWatcher(new ModelWatcher(), 0.5F));
 
-		MinecraftForgeClient.preloadTexture(EntitySlider.SLIDER_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySlider.class, new RenderBot(new ModelSlider(), 1F));
 
-		MinecraftForgeClient.preloadTexture(EntityBobby.BOBBY_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBobby.class, new RenderBot(new ModelBobby(), 0.25F));
 
-		MinecraftForgeClient.preloadTexture(EntityHelios.HELIOS_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntityHelios.class, new RenderBot(new ModelHelios(), 0.3F));
 
-		MinecraftForgeClient.preloadTexture(EntityFactotum.FACTOTUM1_PNG);
-		MinecraftForgeClient.preloadTexture(EntityFactotum.FACTOTUM2_PNG);
-		MinecraftForgeClient.preloadTexture(EntityFactotum.FACTOTUM3_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntityFactotum.class, new RenderFactotum(new ModelFactotum(), 1.5F));
 
-		MinecraftForgeClient.preloadTexture(EntityBeacon.BEACON_PNG);
-		MinecraftForgeClient.preloadTexture(EntityBeacon.BEACON1_PNG);
-		MinecraftForgeClient.preloadTexture(EntityBeacon.BEACON2_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBeacon.class, new RenderBot(new ModelBeacon(), 0.5F));
 
-		MinecraftForgeClient.preloadTexture(EntityGuard.GUARD_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntityGuard.class, new RenderBot(new ModelGuard(), 0.3F));
 
-		MinecraftForgeClient.preloadTexture(EntityOmni.OMNI_PNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntityOmni.class, new RenderBot(new ModelOmni(), 0.25F));
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityLaser.class, new RenderLaser());
