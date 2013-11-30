@@ -1,6 +1,7 @@
 package riseautomatons.entity;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.util.MathHelper;
@@ -12,7 +13,7 @@ public class EntityAIBotArrowAttack extends EntityAIBase {
 
     /** The entity the AI instance has been applied to */
     EntityLiving entityHost;
-    EntityLiving attackTarget;
+    EntityLivingBase attackTarget;
 
     /**
      * A decrementing tick that spawns a ranged attack once this value reaches 0. It is then set back to the
@@ -46,7 +47,7 @@ public class EntityAIBotArrowAttack extends EntityAIBase {
      * Returns whether the EntityAIBase should begin execution.
      */
 	public boolean shouldExecute() {
-		EntityLiving var1 = this.entityHost.getAttackTarget();
+		EntityLivingBase var1 = this.entityHost.getAttackTarget();
 
 		if (var1 == null) {
 			return false;

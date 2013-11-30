@@ -1,11 +1,12 @@
 package riseautomatons.entity;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
 
 public class EntityAIBotOwnerHurtByTarget extends EntityAITarget {
 	EntityOwnedBot bot;
-    EntityLiving theOwnerAttacker;
+	EntityLivingBase theOwnerAttacker;
 
     public EntityAIBotOwnerHurtByTarget(EntityOwnedBot bot)
     {
@@ -25,7 +26,7 @@ public class EntityAIBotOwnerHurtByTarget extends EntityAITarget {
         }
         else
         {
-            EntityLiving var1 = this.bot.reallyGetBotOwner();
+        	EntityLivingBase var1 = this.bot.reallyGetBotOwner();
 
             if (var1 == null)
             {

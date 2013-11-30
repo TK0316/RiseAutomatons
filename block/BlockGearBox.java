@@ -3,6 +3,7 @@ package riseautomatons.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -38,7 +39,7 @@ public class BlockGearBox extends Block {
 
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-			EntityLiving par5EntityLiving, ItemStack itemstack) {
+			EntityLivingBase par5EntityLiving, ItemStack itemstack) {
 		computeState(par1World, par2, par3, par4);
 	}
 

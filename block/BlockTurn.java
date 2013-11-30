@@ -6,6 +6,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -35,7 +36,7 @@ public class BlockTurn extends BlockContainer {
 
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-			EntityLiving par5EntityLiving, ItemStack itemstack) {
+			EntityLivingBase par5EntityLiving, ItemStack itemstack) {
 		int i = determineOrientation(par1World, par2, par3, par4,
 				(EntityPlayer) par5EntityLiving);
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, i, 3);

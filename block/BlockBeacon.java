@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -73,7 +74,7 @@ public class BlockBeacon extends BlockContainer {
 
 	@Override
 	public void onBlockPlacedBy(World world, int i, int j, int k,
-			EntityLiving entity, ItemStack itemstack) {
+			EntityLivingBase entity, ItemStack itemstack) {
 		if (entity instanceof EntityPlayer) {
 			select(world, i, j, k, (EntityPlayer) entity);
 		}

@@ -1,6 +1,7 @@
 package riseautomatons.entity;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -28,7 +29,7 @@ public class EntityAIBotNearestAttackableTarget extends
 			return;
 		}
 		super.startExecuting();
-		EntityLiving target = taskOwner.getAttackTarget();
+		EntityLivingBase target = taskOwner.getAttackTarget();
 		if(target == null) return;
 
 		if(taskOwner instanceof EntityOwnedBot) {
