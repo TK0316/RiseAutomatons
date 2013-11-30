@@ -19,7 +19,7 @@ public class BlockLumo extends Block {
 		super(i, Material.rock);
 	}
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
+	public Icon getIcon(int par1, int par2) {
 		if(par2 == 1) {
 			return icons[0];
 		}

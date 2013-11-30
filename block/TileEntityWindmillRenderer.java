@@ -52,7 +52,7 @@ public class TileEntityWindmillRenderer extends TileEntitySpecialRenderer {
 
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 
-		this.func_110628_a(TEXTURE);
+		this.bindTexture(TEXTURE);
 
 		int j = 45;
 		int u = 45;

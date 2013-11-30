@@ -32,7 +32,7 @@ public class BlockComplex extends Block {
 	}
 
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int j) {
+	public Icon getIcon(int i, int j) {
 		int n = MathHelper.clamp_int(j, 0, 3);
 		return icons[n]; // D[0]
 	}

@@ -35,7 +35,7 @@ public class TileEntityTurnRenderer extends TileEntitySpecialRenderer {
 			i = enti.getBlockMetadata();
 		}
 
-		func_110628_a(TEXTURE);
+		bindTexture(TEXTURE);
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

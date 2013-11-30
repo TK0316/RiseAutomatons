@@ -22,7 +22,7 @@ public class ItemLumo extends ItemBlock {
 
 	@Override
 	public Icon getIconFromDamage(int i) {
-		return Blocks.sky.getBlockTextureFromSideAndMetadata(2, i);
+		return Blocks.sky.getIcon(2, i);
 	}
 
 	@Override

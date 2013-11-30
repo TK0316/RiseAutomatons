@@ -13,7 +13,7 @@ public class ItemArch extends ItemBlock {
 
 	@Override
 	public Icon getIconFromDamage(int i) {
-		return Blocks.arch.getBlockTextureFromSideAndMetadata(2, i);
+		return Blocks.arch.getIcon(2, i);
 	}
 
 	@Override

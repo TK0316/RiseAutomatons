@@ -12,7 +12,7 @@ import riseautomatons.entity.EntitySentry;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderSentryBlock implements ISimpleBlockRenderingHandler {
-	private static final ResourceLocation BLOCK_TEXTURE = TextureMap.field_110575_b;
+	private static final ResourceLocation BLOCK_TEXTURE = TextureMap.locationBlocksTexture;
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
@@ -25,11 +25,11 @@ public class RenderSentryBlock implements ISimpleBlockRenderingHandler {
 		TextureManager renderengine = ModLoader.getMinecraftInstance().renderEngine;
         Tessellator.instance.draw();
         Tessellator.instance.startDrawingQuads();
-        renderengine.func_110577_a(EntitySentry.SENTRYBLOCK_PNG);
+        renderengine.bindTexture(EntitySentry.SENTRYBLOCK_PNG);
         boolean bool = render(renderblocks, iblockaccess, block, i, j, k);
         Tessellator.instance.draw();
         Tessellator.instance.startDrawingQuads();
-        renderengine.func_110577_a(BLOCK_TEXTURE);
+        renderengine.bindTexture(BLOCK_TEXTURE);
         return bool;
 	}
 

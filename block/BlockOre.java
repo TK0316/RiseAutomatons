@@ -38,7 +38,7 @@ public class BlockOre extends Block {
 	}
 
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int j) {
+	public Icon getIcon(int i, int j) {
 		int n = MathHelper.clamp_int(j, 0, 1);
 		return icons[type];
 	}

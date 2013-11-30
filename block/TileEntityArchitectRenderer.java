@@ -18,7 +18,7 @@ public class TileEntityArchitectRenderer extends TileEntitySpecialRenderer {
 
 	public void renderEyeAt(TileEntityArchitect enti, double x, double y,
 			double z, float par8) {
-		func_110628_a(TEXTURE);
+		bindTexture(TEXTURE);
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		GL11.glDisable(GL11.GL_CULL_FACE);

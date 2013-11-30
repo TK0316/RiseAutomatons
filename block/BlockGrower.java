@@ -46,7 +46,7 @@ public class BlockGrower extends Block {
 	}
 
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int par2) {
+	public Icon getIcon(int i, int par2) {
 
 		if (i <= 1) {
 			return icons[1];

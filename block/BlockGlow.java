@@ -41,7 +41,7 @@ public class BlockGlow extends Block {
 	}
 
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int par2) {
+	public Icon getIcon(int i, int par2) {
 		if(this.blockID == Ids.blockGlowy) {
 			if (i <= 1) {
 				return icons[3];

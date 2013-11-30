@@ -55,7 +55,7 @@ public class BlockCrink extends Block {
 	}
 
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int j) {
+	public Icon getIcon(int i, int j) {
 		if (!Block.leaves.graphicsLevel) {
 			return icons[2];
 		}

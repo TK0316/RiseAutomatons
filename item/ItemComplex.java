@@ -21,7 +21,7 @@ public class ItemComplex extends ItemBlock {
 
 	@Override
 	public Icon getIconFromDamage(int i) {
-		return Blocks.tech.getBlockTextureFromSideAndMetadata(2, i);
+		return Blocks.tech.getIcon(2, i);
 	}
 
 	@Override

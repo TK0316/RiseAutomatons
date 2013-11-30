@@ -12,7 +12,7 @@ import riseautomatons.entity.EntityWorker;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderWorkerBlock implements ISimpleBlockRenderingHandler {
-	private static final ResourceLocation BLOCK_TEXTURE = TextureMap.field_110575_b;
+	private static final ResourceLocation BLOCK_TEXTURE = TextureMap.locationBlocksTexture;
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
@@ -26,11 +26,11 @@ public class RenderWorkerBlock implements ISimpleBlockRenderingHandler {
 
         Tessellator.instance.draw();
         Tessellator.instance.startDrawingQuads();
-        renderengine.func_110577_a(EntityWorker.GOLEM1_PNG);
+        renderengine.bindTexture(EntityWorker.GOLEM1_PNG);
         boolean bool = render(renderblocks, iblockaccess, block, i, j, k);
         Tessellator.instance.draw();
         Tessellator.instance.startDrawingQuads();
-        renderengine.func_110577_a(BLOCK_TEXTURE);
+        renderengine.bindTexture(BLOCK_TEXTURE);
         //renderengine.bindTexture("/terrain.png");
         return bool;
 	}

@@ -119,12 +119,12 @@ public class Blocks {
 	public static Block beacon = (new BlockBeacon(Ids.blockBeacon))
     		.setHardness(0.5F).setResistance(10F)
     		.setUnlocalizedName("riseautomatons:beacon")
-    		.func_111022_d("riseautomatons:beacon");
+    		.setTextureName("riseautomatons:beacon");
 
 	public static Block gearbox = (new BlockGearBox(Ids.blockGearbox, 10, Material.iron))
 			.setHardness(1F).setResistance(5F).setStepSound(Block.soundMetalFootstep)
 			.setUnlocalizedName("riseautomatons:gearbox")
-			.func_111022_d("riseautomatons:gearbox")
+			.setTextureName("riseautomatons:gearbox")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block chalk = (new BlockChalk(Ids.blockChalk, 164))
 			.setHardness(0f).setStepSound(Block.soundPowderFootstep)
@@ -176,7 +176,7 @@ public class Blocks {
 	public static Block plantMass = (new BlockPlant(Ids.blockPlantMass))
 			.setHardness(0.5F).setStepSound(Block.soundGrassFootstep)
 			.setUnlocalizedName("riseautomatons:plantMass")
-			.func_111022_d("riseautomatons:plantMass")
+			.setTextureName("riseautomatons:plantMass")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block crystal = new BlockGlow(Ids.blockCrystal)
 			.setHardness(0.4F).setResistance(5.0F)
@@ -204,13 +204,13 @@ public class Blocks {
 	public static Block dapling = new BlockDapling(Ids.blockDapling)
 			.setHardness(0.0F).setStepSound(Block.soundGrassFootstep)
 			.setUnlocalizedName("riseautomatons:dapling")
-			.func_111022_d("riseautomatons:dapling")
+			.setTextureName("riseautomatons:dapling")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block duplex = new BlockDuplex(Ids.blockDuplex)
 			.setHardness(0.1F).setLightOpacity(1).setLightValue(0.5F)
 			.setStepSound(Block.soundGlassFootstep)
 			.setUnlocalizedName("riseautomatons:duplex")
-			.func_111022_d("riseautomatons:duplex")
+			.setTextureName("riseautomatons:duplex")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Block latch = (new BlockLatch(Ids.blockLatch))
 			.setHardness(1F).setResistance(20F)

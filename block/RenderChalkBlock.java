@@ -11,7 +11,7 @@ import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderChalkBlock implements ISimpleBlockRenderingHandler {
-	private static final ResourceLocation BLOCK_TEXTURE = TextureMap.field_110575_b;
+	private static final ResourceLocation BLOCK_TEXTURE = TextureMap.locationBlocksTexture;
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
@@ -31,7 +31,7 @@ public class RenderChalkBlock implements ISimpleBlockRenderingHandler {
 		Tessellator.instance.startDrawingQuads();
 		//ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(new ResourceLocation("/terrain.png"));
 		//renderengine.bindTexture("/terrain.png");
-        renderengine.func_110577_a(BLOCK_TEXTURE);
+        renderengine.bindTexture(BLOCK_TEXTURE);
 		return true;
 	}
 
@@ -44,7 +44,7 @@ public class RenderChalkBlock implements ISimpleBlockRenderingHandler {
 		if (l > 0) {
 			l--;
 		}
-		ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(new ResourceLocation("riseautomatons", "textures/patterns.png"));
+		ModLoader.getMinecraftInstance().getTextureManager().bindTexture(new ResourceLocation("riseautomatons", "textures/patterns.png"));
 
 		tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess,
 				i, j, k));

@@ -180,7 +180,7 @@ public class BlockFrass extends Block {
 	}
 
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int par1, int meta) {
+	public Icon getIcon(int par1, int meta) {
 		if(meta == 0) {
 			return icons[7];
 		}
