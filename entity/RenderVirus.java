@@ -1,16 +1,19 @@
 package riseautomatons.entity;
 
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import riseautomatons.item.Items;
 
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.Icon;
-
 public class RenderVirus extends Render {
+
+	public static final ResourceLocation TEXTURE = new ResourceLocation("riseautomatons", "textures/items/virus.png");
 
 	public RenderVirus() {
 	}
@@ -22,7 +25,7 @@ public class RenderVirus extends Render {
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glScalef(0.5F, 0.5F, 0.5F);
-        this.loadTexture("/gui/items.png");
+        this.func_110776_a(TEXTURE);
         Tessellator var10 = Tessellator.instance;
 
         if(par1Entity instanceof EntityVirus) {
@@ -35,10 +38,10 @@ public class RenderVirus extends Render {
 
     private void func_77026_a(Tessellator par1Tessellator, Icon icon)
     {
-        float var3 = icon.getMinU();
-        float var4 = icon.getMinV();
-        float var5 = icon.getMaxU();
-        float var6 = icon.getMaxV();
+        float var3 = 0F;
+        float var4 = 1F;
+        float var5 = 0F;
+        float var6 = 1F;
         float var7 = 1.0F;
         float var8 = 0.5F;
         float var9 = 0.25F;
@@ -52,5 +55,10 @@ public class RenderVirus extends Render {
         par1Tessellator.addVertexWithUV((double)(0.0F - var8), (double)(var7 - var9), 0.0D, (double)var3, (double)var5);
         par1Tessellator.draw();
     }
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		return TEXTURE;
+	}
 
 }

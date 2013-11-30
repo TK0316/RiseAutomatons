@@ -7,6 +7,7 @@ import java.util.Map;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
@@ -21,6 +22,7 @@ import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import riseautomatons.Coord;
 import riseautomatons.Ids;
@@ -30,12 +32,12 @@ import riseautomatons.item.EnumSoulCore;
 
 public class EntityWorker extends EntityOwnedBot implements IBot {
 
-	public static final String GOLEM1_PNG = "/riseautomatons/golem1.png";
-	public static final String GOLEM2_PNG = "/riseautomatons/golem2.png";
-	public static final String GOLEM3_PNG = "/riseautomatons/golem3.png";
-	public static final String GOLEM4_PNG = "/riseautomatons/golem4.png";
-	public static final String GOLEM5_PNG = "/riseautomatons/golem5.png";
-	public static final String GOLEM6_PNG = "/riseautomatons/golem6.png";
+	public static final ResourceLocation GOLEM1_PNG = new ResourceLocation("riseautomatons", "textures/entities/golem1.png");
+	public static final ResourceLocation GOLEM2_PNG = new ResourceLocation("riseautomatons", "textures/entities/golem2.png");
+	public static final ResourceLocation GOLEM3_PNG = new ResourceLocation("riseautomatons", "textures/entities/golem3.png");
+	public static final ResourceLocation GOLEM4_PNG = new ResourceLocation("riseautomatons", "textures/entities/golem4.png");
+	public static final ResourceLocation GOLEM5_PNG = new ResourceLocation("riseautomatons", "textures/entities/golem5.png");
+	public static final ResourceLocation GOLEM6_PNG = new ResourceLocation("riseautomatons", "textures/entities/golem6.png");
 
 	public static final int INDEX_MODE = 18;
 	public static final int INDEX_STATE = 19;
@@ -302,7 +304,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	}
 
 	@Override
-	public String getTexture() {
+	public ResourceLocation getTexture() {
 		switch(getMode()) {
 		case STAY:
 			return GOLEM1_PNG;
@@ -602,7 +604,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 					}
 					// if target is faraway, move to target
 					else {
-						getNavigator().setPath(worldObj.getPathEntityToEntity(this, collectTargetItemEntity, 16F, true, true, false, true), moveSpeed);
+						getNavigator().setPath(worldObj.getPathEntityToEntity(this, collectTargetItemEntity, 16F, true, true, false, true), getEntityAttribute(SharedMonsterAttributes.movementSpeed));
 						if(getNavigator().getPath() == null) {
 							setState(EnumWorkState.ACTION);
 						}
@@ -737,7 +739,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	}
 
 	@Override
-	public boolean attackEntityFrom(DamageSource par1DamageSource, int par2) {
+	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
 		if (getMode() == EnumBotMode.PANIC) {
 			fleeingTick = 60;
 		}

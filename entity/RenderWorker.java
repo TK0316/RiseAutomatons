@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
@@ -91,6 +92,11 @@ public class RenderWorker extends RenderLiving {
 				GL11.glPopMatrix();
 			}
 		}
+	}
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		return ((IBot)entity).getTexture();
 	}
 
 }

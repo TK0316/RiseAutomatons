@@ -1,14 +1,15 @@
 package riseautomatons.entity;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
 
 public class GuiTote extends GuiContainer {
 
+	public static final ResourceLocation TEXTURE = new ResourceLocation("riseautomatons", "textures/gui/toteg.png");
     public GuiTote(InventoryPlayer inventoryplayer, IInventory e) {
     	super(new ContainerTote(inventoryplayer, e));
         tote = e;
@@ -19,7 +20,7 @@ public class GuiTote extends GuiContainer {
     @Override
 	protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture("/riseautomatons/toteg.png");
+		mc.renderEngine.func_110577_a(TEXTURE);
 		int j = (width - xSize) / 2;
 		int k = (height - ySize) / 2;
 		drawTexturedModalRect(j, k, 0, 0, xSize, ySize);

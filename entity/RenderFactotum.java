@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
@@ -34,5 +35,10 @@ public class RenderFactotum extends RenderLiving {
 	public void renderAutomaton(EntityCreature entityautomaton, double d,
 			double d1, double d2, float f, float f1) {
 		super.doRenderLiving(entityautomaton, d, d1, d2, f, f1);
+	}
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		return ((IBot)entity).getTexture();
 	}
 }

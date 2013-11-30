@@ -5,6 +5,8 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
@@ -35,6 +37,11 @@ public class RenderWatcher extends RenderLiving {
 			double d2, float f, float f1) {
 
 		renderAutomaton((EntityCreature) entity, d, d1, d2, f, f1);
+	}
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		return ((IBot)entity).getTexture();
 	}
 
 }

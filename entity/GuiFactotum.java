@@ -2,11 +2,13 @@ package riseautomatons.entity;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
 public class GuiFactotum extends GuiContainer {
 
+	public static final ResourceLocation TEXTURE = new ResourceLocation("riseautomatons", "textures/gui/factotumg.png");
 	private EntityFactotum furnaceInventory;
 
 	public GuiFactotum(InventoryPlayer inventoryplayer,
@@ -20,7 +22,7 @@ public class GuiFactotum extends GuiContainer {
 			int var3) {
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture("/riseautomatons/factotumg.png");
+		mc.renderEngine.func_110577_a(TEXTURE);
 		int j = (width - xSize) / 2;
 		int k = (height - ySize) / 2;
 		drawTexturedModalRect(j, k, 0, 0, xSize, ySize);

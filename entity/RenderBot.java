@@ -4,6 +4,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
 
 public class RenderBot extends RenderLiving {
 
@@ -26,6 +27,11 @@ public class RenderBot extends RenderLiving {
 	private void renderBot(EntityLiving entity, double d, double d1, double d2,
 			float f, float f1) {
 		super.doRenderLiving(entity, d, d1, d2, f, f1);
+	}
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		return ((IBot)entity).getTexture();
 	}
 
 }
