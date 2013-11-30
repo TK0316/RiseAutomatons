@@ -16,17 +16,14 @@ public class EntityVirus extends EntityThrowable {
 	public boolean active = false;
 	public EntityVirus(World par1World) {
 		super(par1World);
-		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
 	public EntityVirus(World par1World, EntityLivingBase par2EntityLiving) {
 		super(par1World, par2EntityLiving);
-		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
 	public EntityVirus(World par1World, double par2, double par4, double par6) {
 		super(par1World, par2, par4, par6);
-		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
 	@Override
