@@ -50,7 +50,6 @@ public class EntityGuard extends EntityOwnedBot implements IBot {
 
 		this(world);
 		setPosition(d, d1 + this.yOffset, d2);
-		this.texture = GUARD_PNG;
 		this.motionX = 0.0D;
 		this.motionY = 0.0D;
 		this.motionZ = 0.0D;
@@ -227,7 +226,7 @@ public class EntityGuard extends EntityOwnedBot implements IBot {
 	}
 
 	@Override
-	public String getTexture() {
+	public ResourceLocation getTexture() {
 		return GUARD_PNG;
 	}
 
