@@ -3,12 +3,16 @@ package riseautomatons.block;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.src.ModLoader;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import riseautomatons.entity.EntitySentry;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderSentryBlock implements ISimpleBlockRenderingHandler {
+	private static final ResourceLocation BLOCK_TEXTURE = TextureMap.field_110575_b;
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
@@ -18,14 +22,14 @@ public class RenderSentryBlock implements ISimpleBlockRenderingHandler {
 	@Override
 	public boolean renderWorldBlock(IBlockAccess iblockaccess, int i, int j, int k,
 			Block block, int modelId, RenderBlocks renderblocks) {
-		RenderEngine renderengine = ModLoader.getMinecraftInstance().renderEngine;
+		TextureManager renderengine = ModLoader.getMinecraftInstance().renderEngine;
         Tessellator.instance.draw();
         Tessellator.instance.startDrawingQuads();
-        renderengine.bindTexture(EntitySentry.SENTRYBLOCK_PNG);
+        renderengine.func_110577_a(EntitySentry.SENTRYBLOCK_PNG);
         boolean bool = render(renderblocks, iblockaccess, block, i, j, k);
         Tessellator.instance.draw();
         Tessellator.instance.startDrawingQuads();
-        renderengine.bindTexture("/terrain.png");
+        renderengine.func_110577_a(BLOCK_TEXTURE);
         return bool;
 	}
 

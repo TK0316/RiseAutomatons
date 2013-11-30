@@ -3,11 +3,15 @@ package riseautomatons.block;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.src.ModLoader;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderChalkBlock implements ISimpleBlockRenderingHandler {
+	private static final ResourceLocation BLOCK_TEXTURE = TextureMap.field_110575_b;
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
@@ -19,13 +23,16 @@ public class RenderChalkBlock implements ISimpleBlockRenderingHandler {
 			int k, Block block, int modelId, RenderBlocks renderer) {
 		Tessellator.instance.draw();
 		Tessellator.instance.startDrawingQuads();
-		RenderEngine renderengine = ModLoader.getMinecraftInstance().renderEngine;
-		renderengine.bindTexture(Blocks.PATTERNS_PNG);
+		//ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(Blocks.PATTERNS_PNG);
+		TextureManager renderengine = ModLoader.getMinecraftInstance().renderEngine;
+		//renderengine.func_110577_a(Blocks.PATTERNS_PNG);
 		boolean bool = RenderChalkBlock.chalkPatterns(block, i, j, k, iblockaccess);
 		Tessellator.instance.draw();
 		Tessellator.instance.startDrawingQuads();
-		renderengine.bindTexture("/terrain.png");
-		return bool;
+		//ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(new ResourceLocation("/terrain.png"));
+		//renderengine.bindTexture("/terrain.png");
+        renderengine.func_110577_a(BLOCK_TEXTURE);
+		return true;
 	}
 
 	private static boolean chalkPatterns(Block block, int i, int j, int k,
@@ -37,6 +44,7 @@ public class RenderChalkBlock implements ISimpleBlockRenderingHandler {
 		if (l > 0) {
 			l--;
 		}
+		ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(new ResourceLocation("riseautomatons", "textures/patterns.png"));
 
 		tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess,
 				i, j, k));

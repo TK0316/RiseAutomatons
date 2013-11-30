@@ -3,11 +3,14 @@ package riseautomatons.block;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class TileEntityWindmillRenderer extends TileEntitySpecialRenderer {
+
+	public static final ResourceLocation TEXTURE = new ResourceLocation("riseautomatons", "textures/windmill.png");
 
 	@Override
 	public void renderTileEntityAt(TileEntity par1TileEntity, double par2,
@@ -49,7 +52,7 @@ public class TileEntityWindmillRenderer extends TileEntitySpecialRenderer {
 
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 
-		bindTextureByName("/riseautomatons/windmill.png");
+		this.func_110628_a(TEXTURE);
 
 		int j = 45;
 		int u = 45;

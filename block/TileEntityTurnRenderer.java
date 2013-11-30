@@ -3,6 +3,7 @@ package riseautomatons.block;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -10,6 +11,8 @@ import org.lwjgl.opengl.GL12;
 public class TileEntityTurnRenderer extends TileEntitySpecialRenderer {
 	static float ss = 6f / 16f;
 	static float ee = 10f / 16f;
+
+	public static final ResourceLocation TEXTURE = new ResourceLocation("textures/blocks/planks_oak.png");
 
 	public TileEntityTurnRenderer() {
 	}
@@ -32,7 +35,7 @@ public class TileEntityTurnRenderer extends TileEntitySpecialRenderer {
 			i = enti.getBlockMetadata();
 		}
 
-		bindTextureByName("/textures/blocks/wood.png");
+		func_110628_a(TEXTURE);
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

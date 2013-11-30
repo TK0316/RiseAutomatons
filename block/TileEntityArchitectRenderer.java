@@ -1,6 +1,7 @@
 package riseautomatons.block;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -10,12 +11,14 @@ import riseautomatons.model.ModelEye;
 public class TileEntityArchitectRenderer extends TileEntitySpecialRenderer {
 	private ModelEye eyeModel = new ModelEye();
 
+	public static final ResourceLocation TEXTURE = new ResourceLocation("riseautomatons", "textures/entities/Eye.png");
+
 	public TileEntityArchitectRenderer() {
 	}
 
 	public void renderEyeAt(TileEntityArchitect enti, double x, double y,
 			double z, float par8) {
-		bindTextureByName("/riseautomatons/Eye.png");
+		func_110628_a(TEXTURE);
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		GL11.glDisable(GL11.GL_CULL_FACE);
