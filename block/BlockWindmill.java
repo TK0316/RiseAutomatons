@@ -32,7 +32,7 @@ public class BlockWindmill extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		this.blockIcon = par1IconRegister.registerIcon("wood");
+		this.blockIcon = par1IconRegister.registerIcon("planks_oak");
 	}
 
 	@Override
