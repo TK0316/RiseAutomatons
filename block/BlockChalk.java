@@ -38,7 +38,7 @@ public class BlockChalk extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		this.blockIcon = par1IconRegister.registerIcon("redstoneDust_cross");
+		this.blockIcon = par1IconRegister.registerIcon("redstone_dust_cross");
 	}
 
 	@Override
