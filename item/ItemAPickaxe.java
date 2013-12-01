@@ -48,11 +48,6 @@ public class ItemAPickaxe extends ItemPickaxe {
 	}
 
 	@Override
-	public int getDamageVsEntity(Entity par1Entity) {
-		return this.damageVsEntity;
-	}
-
-	@Override
 	public boolean isFull3D() {
 		return true;
 	}
