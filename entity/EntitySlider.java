@@ -1,7 +1,6 @@
 package riseautomatons.entity;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -29,7 +28,7 @@ public class EntitySlider extends EntityAniBot implements IBot {
 
 	public EntitySlider(World world, double d, double d1, double d2) {
 		this(world);
-		setPosition(d, d1 + (double) yOffset, d2);
+		setPosition(d, d1 + yOffset, d2);
 		motionX = 0.0D;
 		motionY = 0.0D;
 		motionZ = 0.0D;
@@ -39,6 +38,7 @@ public class EntitySlider extends EntityAniBot implements IBot {
 		// setPathToEntity(null);
 	}
 
+	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.0F);
@@ -46,7 +46,7 @@ public class EntitySlider extends EntityAniBot implements IBot {
 	}
 
 	@Override
-	public boolean attackEntityFrom(DamageSource damagesource, int i) {
+	public boolean attackEntityFrom(DamageSource damagesource, float i) {
 
 		if(damagesource.damageType == DamageSource.fall.damageType) {
 			return true;
@@ -119,11 +119,11 @@ public class EntitySlider extends EntityAniBot implements IBot {
 
 		for (int l = 0; l < 10; l++) {
 			int i1 = MathHelper
-					.floor_double((posX + (double) rand.nextInt(13)) - 6D);
+					.floor_double((posX + rand.nextInt(13)) - 6D);
 			int j1 = MathHelper
-					.floor_double((posY + (double) rand.nextInt(7)) - 3D);
+					.floor_double((posY + rand.nextInt(7)) - 3D);
 			int k1 = MathHelper
-					.floor_double((posZ + (double) rand.nextInt(13)) - 6D);
+					.floor_double((posZ + rand.nextInt(13)) - 6D);
 			float f1 = getBlockPathWeight(i1, j1, k1);
 
 			if (f1 > f) {
@@ -179,11 +179,11 @@ public class EntitySlider extends EntityAniBot implements IBot {
 			double d1 = rand.nextGaussian() * 0.02D;
 			double d2 = rand.nextGaussian() * 0.02D;
 			worldObj.spawnParticle("explode",
-					(posX + (double) (rand.nextFloat() * width * 2.0F))
-							- (double) width, posY
-							+ (double) (rand.nextFloat() * height),
-					(posZ + (double) (rand.nextFloat() * width * 2.0F))
-							- (double) width, d, d1, d2);
+					(posX + (rand.nextFloat() * width * 2.0F))
+							- width, posY
+							+ (rand.nextFloat() * height),
+					(posZ + (rand.nextFloat() * width * 2.0F))
+							- width, d, d1, d2);
 		}
 
 		if (!Universal.improperWorld(worldObj)) {
