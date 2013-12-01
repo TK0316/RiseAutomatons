@@ -84,11 +84,6 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 	}
 
 	@Override
-	public int getMaxHealth() {
-		return 20;
-	}
-
-	@Override
 	protected boolean isMovementCeased() {
 		return entityplayer == null;
 	}

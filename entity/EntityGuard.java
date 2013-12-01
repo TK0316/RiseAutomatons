@@ -193,11 +193,6 @@ public class EntityGuard extends EntityOwnedBot implements IBot {
 		}
 	}
 
-	@Override
-	public int getMaxHealth() {
-		return 20;
-	}
-
 	private Entity closest(List list) {
 		double d = 9000.0D;
 		Entity entity = null;

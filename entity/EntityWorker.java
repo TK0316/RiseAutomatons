@@ -46,6 +46,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	public static final int INDEX_ITEMDAMAGE = 22;
 	public static final int INDEX_HOME = 23;
 	public static final int INDEX_DEST = 24;
+	float moveSpeed = 0.25F;
 
 	private static Map<Integer, Integer> target = new LinkedHashMap<Integer, Integer>();
 
@@ -127,7 +128,6 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	public EntityWorker(World par1World) {
 		super(par1World);
 		setSize(0.6F, 0.8F);
-		float moveSpeed = 0.25F;
 
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(5, new EntityAIBotFollowOwner(this, moveSpeed, 7F, 2.0F));
@@ -160,6 +160,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.25F);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(6.0F);
 	}
 
 	public static void init() {
@@ -301,11 +302,6 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		if(getMode() == EnumBotMode.PANIC){
 			tasks.addTask(1, new EntityAIPanic(this, 0.38F));
 		}
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return 6;
 	}
 
 	@Override
@@ -609,7 +605,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 					}
 					// if target is faraway, move to target
 					else {
-						getNavigator().setPath(worldObj.getPathEntityToEntity(this, collectTargetItemEntity, 16F, true, true, false, true), getEntityAttribute(SharedMonsterAttributes.movementSpeed));
+						getNavigator().setPath(worldObj.getPathEntityToEntity(this, collectTargetItemEntity, 16F, true, true, false, true), moveSpeed);
 						if(getNavigator().getPath() == null) {
 							setState(EnumWorkState.ACTION);
 						}
