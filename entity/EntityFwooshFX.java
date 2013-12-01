@@ -114,4 +114,9 @@ public class EntityFwooshFX extends EntityFX {
 		// GL11.glDisable (GL11.GL_BLEND);
 	}
 
+	@Override
+	public int getFXLayer() {
+		return 2;
+	}
+
 }
