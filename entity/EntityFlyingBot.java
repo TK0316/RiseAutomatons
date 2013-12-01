@@ -64,12 +64,12 @@ public class EntityFlyingBot extends EntityBot {
             }
 
             this.moveEntity(this.motionX, this.motionY, this.motionZ);
-            this.motionX *= (double)var3;
-            this.motionY *= (double)var3;
-            this.motionZ *= (double)var3;
+            this.motionX *= var3;
+            this.motionY *= var3;
+            this.motionZ *= var3;
         }
 
-        this.prevLimbYaw = this.limbYaw;
+        this.prevLimbSwingAmount = this.limbSwingAmount;
         double var10 = this.posX - this.prevPosX;
         double var9 = this.posZ - this.prevPosZ;
         float var7 = MathHelper.sqrt_double(var10 * var10 + var9 * var9) * 4.0F;
@@ -79,8 +79,8 @@ public class EntityFlyingBot extends EntityBot {
             var7 = 1.0F;
         }
 
-        this.limbYaw += (var7 - this.limbYaw) * 0.4F;
-        this.limbSwing += this.limbYaw;
+        this.limbSwingAmount += (var7 - this.limbSwingAmount) * 0.4F;
+        this.limbSwing += this.limbSwingAmount;
 	}
 
 	@Override
