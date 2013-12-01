@@ -147,7 +147,7 @@ public class ContainerFactotum extends Container {
                         return null;
                     }
                 }
-                else if (par2 >= 48 && par2 < 57 && !this.mergeItemStack(var5, 21, 58, false))
+                else if (par2 >= 48 && par2 < 57 && !this.mergeItemStack(var5, 21, 57, false))
                 {
                     return null;
                 }
