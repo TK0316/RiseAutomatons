@@ -1,17 +1,16 @@
 package riseautomatons.entity;
 
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 
 public class EntityAIBotNearestAttackableTarget extends
 		EntityAINearestAttackableTarget {
 
-	public EntityAIBotNearestAttackableTarget(EntityLiving par1EntityLiving,
-			Class par2Class, float par3, int par4, boolean par5) {
-		super(par1EntityLiving, par2Class, par3, par4, par5);
+	public EntityAIBotNearestAttackableTarget(EntityCreature par1EntityCreature,
+			Class par2Class, int par3, boolean par4) {
+		super(par1EntityCreature, par2Class, par3, par4);
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
 

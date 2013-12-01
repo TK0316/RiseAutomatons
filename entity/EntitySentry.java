@@ -57,13 +57,13 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityMob.class, 1, true));
 		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityAniBot.class, 1, true));
 		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityBot.class, 1, true));
-		targetTasks.addTask(4, new EntityAIBotNearestAttackableTarget(this, EntityLiving.class, 24F, 1, true));
+		targetTasks.addTask(4, new EntityAIBotNearestAttackableTarget(this, EntityLiving.class, 1, true));
 	}
 
 	public EntitySentry(World world, double d, double d1, double d2, int turn,
 			String s) {
 		this(world);
-		setPosition(d, d1 + (double) yOffset, d2);
+		setPosition(d, d1 + yOffset, d2);
 		prevPosX = d;
 		prevPosY = d1;
 		prevPosZ = d2;
@@ -71,6 +71,7 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 		setBotOwner(s);
 	}
 
+	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(24.0D);
@@ -173,11 +174,11 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 			double d1 = rand.nextGaussian() * 0.02D;
 			double d2 = rand.nextGaussian() * 0.02D;
 			worldObj.spawnParticle("explode",
-					(posX + (double) (rand.nextFloat() * width * 2.0F))
-							- (double) width, posY
-							+ (double) (rand.nextFloat() * height),
-					(posZ + (double) (rand.nextFloat() * width * 2.0F))
-							- (double) width, d, d1, d2);
+					(posX + (rand.nextFloat() * width * 2.0F))
+							- width, posY
+							+ (rand.nextFloat() * height),
+					(posZ + (rand.nextFloat() * width * 2.0F))
+							- width, d, d1, d2);
 		}
 
 		if (!worldObj.isRemote) {
@@ -188,7 +189,7 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 			worldObj.spawnEntityInWorld(entityitem);
 			//
 			int meta = MathHelper
-					.floor_double((double) (rotationYawHead * 4.0F / 360.0F) + 0.5D) & 3;
+					.floor_double((rotationYawHead * 4.0F / 360.0F) + 0.5D) & 3;
 
 			worldObj.setBlock(
 					MathHelper.floor_double(posX),
