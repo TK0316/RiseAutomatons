@@ -24,8 +24,7 @@ public class Universal {
 			File files[] = jar.listFiles();
 			if (files != null && files.length > 0) {
 				for (int i = 0; i < files.length; i++) {
-					mc.sndManager.addSound("automatons/" + files[i].getName(),
-							files[i]);
+					mc.sndManager.addSound("automatons/" + files[i].getName());
 				}
 			}
 		}
