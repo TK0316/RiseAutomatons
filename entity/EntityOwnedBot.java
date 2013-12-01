@@ -7,7 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class EntityOwnedBot extends EntityGolem {
+public abstract class EntityOwnedBot extends EntityGolem implements IBot {
 
 	public EntityOwnedBot(World par1World) {
 		super(par1World);
