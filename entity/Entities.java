@@ -1,8 +1,8 @@
 package riseautomatons.entity;
 
-import net.minecraft.src.ModLoader;
-import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
 import riseautomatons.Ids;
+import riseautomatons.Particles;
 import riseautomatons.RiseAutomatons;
 import riseautomatons.block.BlockSentry;
 import riseautomatons.block.BlockTote;
@@ -82,10 +82,8 @@ public class Entities {
 
 	@SideOnly(Side.CLIENT)
 	public static void initEffect() {
-		EntityFwooshFX.rendererId = ModLoader.getMinecraftInstance().renderEngine
-				.getTexture("/riseautomatons/fwoosh.png");
-		EntityGoreFX.rendererId = ModLoader.getMinecraftInstance().renderEngine
-				.getTexture("/riseautomatons/gore.png");
+		MinecraftForge.EVENT_BUS.register(new Particles());
+
 	}
 
 	@SideOnly(Side.CLIENT)

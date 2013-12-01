@@ -42,9 +42,11 @@ public class Universal {
 			double ny = rand.nextFloat() - 0.5f;
 			double nz = rand.nextFloat() - 0.5f;
 			Minecraft mc = ModLoader.getMinecraftInstance();
-			mc.effectRenderer.addEffect(new EntityFwooshFX(world, (posX + nx),
+			EntityFwooshFX entityFwooshFX = new EntityFwooshFX(world, (posX + nx),
 					posY + ny, posZ + nz, nx * .2f, ny * 1.2f, nz * .2f, 10f,
-					true));
+					true);
+			entityFwooshFX.setParticleIcon(Particles.getInstance().getIcon("riseautomatons:particles/fwoosh"));
+			mc.effectRenderer.addEffect(entityFwooshFX);
 		}
 	}
 
