@@ -3,6 +3,7 @@ package riseautomatons.entity;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -21,8 +22,7 @@ public class EntityGolemPure extends EntityGolemNormal implements IBot {
 
 	public EntityGolemPure(World par1World) {
 		super(par1World);
-		setHealth(5);
-		maxHealth = 5;
+		setHealth(getMaxHealth());
 		setForm(worldObj.rand.nextInt(3));
 		texture = GOLEM_PURE_PNG;
 	}
@@ -37,6 +37,11 @@ public class EntityGolemPure extends EntityGolemNormal implements IBot {
 			int I, int h, int dam) {
 		super(world, d, d1, d2, I, h, dam);
 		setForm(u);
+	}
+
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(5.0D);
 	}
 
 	@Override

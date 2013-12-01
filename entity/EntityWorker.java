@@ -127,7 +127,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	public EntityWorker(World par1World) {
 		super(par1World);
 		setSize(0.6F, 0.8F);
-		moveSpeed = 0.25F;
+		float moveSpeed = 0.25F;
 
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(5, new EntityAIBotFollowOwner(this, moveSpeed, 7F, 2.0F));
@@ -155,6 +155,11 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		setBotOwner(s);
 
 
+	}
+
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.25F);
 	}
 
 	public static void init() {

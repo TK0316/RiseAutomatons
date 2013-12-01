@@ -12,11 +12,6 @@ public class EntityFlyingBot extends EntityBot {
 	}
 
 	@Override
-	public int getMaxHealth() {
-		return 10;
-	}
-
-	@Override
 	protected void fall(float par1) {
 	}
 

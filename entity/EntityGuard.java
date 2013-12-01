@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -31,19 +32,26 @@ public class EntityGuard extends EntityOwnedBot implements IBot {
 
 	public EntityGuard(World world) {
 		super(world);
-		this.setHealth(20);
-		this.moveSpeed = 0.0F;
+		this.setHealth(getMaxHealth());
+		float moveSpeed = 0.0F;
 		setSize(0.5F, 0.5F);
-		this.tasks.addTask(4, new EntityAIBotArrowAttack(this, this.moveSpeed, 1, 6));
+		this.tasks.addTask(4, new EntityAIBotArrowAttack(this, moveSpeed, 1, 6));
 
 		tasks.addTask(4, new EntityAIAttackOnCollide(this, moveSpeed, true));
 		tasks.addTask(8, new EntityAIWatchClosest(this, EntityMob.class, 8F));
 		tasks.addTask(9, new EntityAILookIdle(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityMob.class, 24F, 1, true));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityDragon.class, 24F, 1, true));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityFlying.class, 24F, 1, true));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySlime.class, 24F, 1, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityMob.class, 1, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityDragon.class, 1, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityFlying.class, 1, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySlime.class, 1, true));
+	}
+
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(24.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.0F);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(20.0D);
 	}
 
 	public EntityGuard(World world, double d, double d1, double d2) {

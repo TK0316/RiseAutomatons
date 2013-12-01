@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -24,18 +25,17 @@ public class EntityWatcher extends EntityMob implements IBot {
 
 	public EntityWatcher(World world) {
 		super(world);
-		setHealth(60);
-		moveSpeed = 0.2F;
+		setHealth(getMaxHealth());
+		float moveSpeed = 0.2F;
 		setSize(1.0F, 3.8F);
-		this.tasks.addTask(4, new EntityAIBotArrowAttack(this, this.moveSpeed,
-				1, 6));
+		this.tasks.addTask(4, new EntityAIBotArrowAttack(this, moveSpeed, 1, 6));
 
 		tasks.addTask(4, new EntityAIAttackOnCollide(this, moveSpeed, true));
 		tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8F));
 		tasks.addTask(9, new EntityAILookIdle(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 24F, 1, true));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityOwnedBot.class, 24F, 1, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 1, true));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityOwnedBot.class, 1, true));
 
 	}
 
@@ -50,9 +50,11 @@ public class EntityWatcher extends EntityMob implements IBot {
 		prevPosZ = d2;
 	}
 
-	@Override
-	public int getMaxHealth() {
-		return 60;
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(24.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.2F);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(60.0D);
 	}
 
 	@Override

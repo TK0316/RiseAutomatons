@@ -1,5 +1,6 @@
 package riseautomatons.entity;
 
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,7 +22,7 @@ public class EntityBeacon extends EntityOwnedBot {
 	public EntityBeacon(World par1World) {
 		super(par1World);
 		setSize(0.3F, 1F);
-		setHealth(1);
+		setHealth(getMaxHealth());
 		siren = 0;
 	}
 
@@ -37,9 +38,10 @@ public class EntityBeacon extends EntityOwnedBot {
 		prevPosZ = d2;
 		setBotOwner(s);
 	}
-	@Override
-	public int getMaxHealth() {
-		return 1;
+
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(1.0D);
 	}
 
 	@Override

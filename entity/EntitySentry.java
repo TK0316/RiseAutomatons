@@ -2,6 +2,7 @@ package riseautomatons.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
@@ -37,8 +38,8 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 	public EntitySentry(World world) {
 		super(world);
 		setSize(0.8F, 1.2F);
-		moveSpeed = 0.4F;
-		setHealth(20);
+		float moveSpeed = 0.4F;
+		setHealth(getMaxHealth());
 
 		getNavigator().setAvoidsWater(true);
 
@@ -51,11 +52,11 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 		targetTasks.addTask(1, new EntityAIBotOwnerHurtByTarget(this));
 		targetTasks.addTask(2, new EntityAIBotOwnerHurtTarget(this));
 		targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityChicken.class, 16F, 50, false));
-		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityCreeper.class, 24F, 1, true));
-		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityMob.class, 24F, 1, true));
-		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityAniBot.class, 24F, 1, true));
-		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityBot.class, 24F, 1, true));
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityChicken.class, 50, false));
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityCreeper.class, 1, true));
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityMob.class, 1, true));
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityAniBot.class, 1, true));
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityBot.class, 1, true));
 		targetTasks.addTask(4, new EntityAIBotNearestAttackableTarget(this, EntityLiving.class, 24F, 1, true));
 	}
 
@@ -68,6 +69,13 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 		prevPosZ = d2;
 		//Universal.rotateEntity(this, turn * 90);
 		setBotOwner(s);
+	}
+
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(24.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.4F);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(20.0D);
 	}
 
 	@Override

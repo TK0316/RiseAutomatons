@@ -1,6 +1,7 @@
 package riseautomatons.entity;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
@@ -20,8 +21,7 @@ public class EntityHelios extends EntityFlyingBot implements IBot {
 
 	public EntityHelios(World world) {
 		super(world);
-		moveSpeed = 1.0F;
-		setHealth(3);
+		setHealth(getMaxHealth());
 		setSize(0.5F, 0.5F);
 		courseChangeCooldown = 10;
 	}
@@ -37,9 +37,10 @@ public class EntityHelios extends EntityFlyingBot implements IBot {
 		prevPosZ = d2;
 	}
 
-	@Override
-	public int getMaxHealth() {
-		return 3;
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.0F);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(3.0D);
 	}
 
 	@Override

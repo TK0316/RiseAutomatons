@@ -2,6 +2,7 @@ package riseautomatons.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathEntity;
@@ -21,9 +22,8 @@ public class EntitySlider extends EntityAniBot implements IBot {
 
 	public EntitySlider(World world) {
 		super(world);
-		moveSpeed = 1.0F;
 		// attackStrength = 0;
-		setHealth(8);
+		setHealth(getMaxHealth());
 		setSize(1.0F, 0.1F);
 	}
 
@@ -39,9 +39,10 @@ public class EntitySlider extends EntityAniBot implements IBot {
 		// setPathToEntity(null);
 	}
 
-	@Override
-	public int getMaxHealth() {
-		return 8;
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.0F);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(8.0D);
 	}
 
 	@Override

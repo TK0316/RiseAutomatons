@@ -12,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -50,7 +51,7 @@ public class EntityOmni extends EntityOwnedBot implements IBot {
     {
         super(world);
         setSize(0.3F, 1.2F);
-        setHealth(1);
+        setHealth(getMaxHealth());
     }
 
     public EntityOmni(World world, double d, double d1, double d2)
@@ -64,9 +65,10 @@ public class EntityOmni extends EntityOwnedBot implements IBot {
         prevPosY = d1;
         prevPosZ = d2;
     }
-	@Override
-	public int getMaxHealth() {
-		return 1;
+
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(1.0D);
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import net.minecraft.dispenser.IBehaviorDispenseItem;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -25,14 +26,12 @@ public class EntityGolemNormal extends EntityAniBot implements IBot,
 
 	public static final ResourceLocation GOLEM_PNG = new ResourceLocation("riseautomatons", "textures/entities/agol3.png");
 	public static int renderId;
-	int maxHealth = 5;
 	public int type = 0;
 	public int colo = 0;
 
 	public EntityGolemNormal(World par1World) {
 		super(par1World);
-		setHealth(5);
-		maxHealth = 5;
+		setHealth(getMaxHealth());
 	}
 
 	public EntityGolemNormal(World world, double d, double d1, double d2, int I,
@@ -49,12 +48,12 @@ public class EntityGolemNormal extends EntityAniBot implements IBot,
 		setType(I);
 		setColo(dam);
 		setHealth(h);
-		maxHealth = h;
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(h);
 	}
 
-	@Override
-	public int getMaxHealth() {
-		return maxHealth;
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(5.0D);
 	}
 
 	@Override

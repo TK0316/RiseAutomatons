@@ -6,6 +6,7 @@ import riseautomatons.Universal;
 import riseautomatons.block.TileEntityLatch;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
@@ -39,8 +40,8 @@ public class EntityTote extends EntityOwnedBot implements IInventory, IBot {
 	{
 		super(world);
 		setSize(0.4F, 0.5F);
-		moveSpeed = 0.2F;
-		setHealth(6);
+		float moveSpeed = 0.2F;
+		setHealth(getMaxHealth());
 
 		getNavigator().setAvoidsWater(true);
 		tasks.addTask(5, new EntityAIBotFollowOwner(this, moveSpeed, 4F, 2.0F));
@@ -59,6 +60,12 @@ public class EntityTote extends EntityOwnedBot implements IInventory, IBot {
 		prevPosZ = d2;
 		setPathToEntity(null);
 		setBotOwner(s);
+	}
+
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.2F);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(6.0D);
 	}
 
 	@Override

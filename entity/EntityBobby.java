@@ -1,5 +1,6 @@
 package riseautomatons.entity;
 
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -16,7 +17,7 @@ public class EntityBobby extends EntityBot implements IBot {
 	public EntityBobby(World world) {
 		super(world);
 		setSize(0.9F, 0.9F);
-		setHealth(5);
+		setHealth(getMaxHealth());
 	}
 
 	public EntityBobby(World world, double d, double d1, double d2) {
@@ -31,10 +32,11 @@ public class EntityBobby extends EntityBot implements IBot {
 		setPathToEntity(null);
 	}
 
-	@Override
-	public int getMaxHealth() {
-		return 5;
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(5.0D);
 	}
+
 	@Override
 	public boolean getCanSpawnHere() {
 		return true;

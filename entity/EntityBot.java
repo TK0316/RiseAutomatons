@@ -11,9 +11,4 @@ public class EntityBot extends EntityMob {
 		super(par1World);
 	}
 
-	@Override
-	public int getMaxHealth() {
-		return 0;
-	}
-
 }

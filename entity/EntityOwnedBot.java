@@ -14,11 +14,6 @@ public class EntityOwnedBot extends EntityGolem {
 	}
 
 	@Override
-	public int getMaxHealth() {
-		return 0;
-	}
-
-	@Override
 	protected void entityInit() {
 		super.entityInit();
 		dataWatcher.addObject(15, "");

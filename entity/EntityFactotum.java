@@ -39,8 +39,7 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 		super(world);
 		cargoItems = new ItemStack[21];
 		setSize(2F, 2F);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.7F);
-		setHealth(10);
+		setHealth(getMaxHealth());
 		isImmuneToFire = true;
 		furnaceBurnTime = 0;
 		currentItemBurnTime = 0;
@@ -53,7 +52,7 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 		cargoItems = new ItemStack[21];
 		setSize(2F, 2F);
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.7F);
-		setHealth(10);
+		setHealth(getMaxHealth());
 		isImmuneToFire = true;
 		furnaceBurnTime = 0;
 		currentItemBurnTime = 0;
@@ -67,6 +66,12 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 		prevPosZ = f;
 		setPathToEntity(null);
 		setBotOwner(username);
+	}
+
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.7F);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(10.0D);
 	}
 
 	@Override

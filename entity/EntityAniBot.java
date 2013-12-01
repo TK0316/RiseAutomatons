@@ -14,11 +14,6 @@ public abstract class EntityAniBot extends EntityMob {
 	}
 
 	@Override
-	public float getMaxHealth() {
-		return 0;
-	}
-
-	@Override
 	public boolean attackEntityFrom(DamageSource damagesource, int i) {
 		if (damagesource == DamageSource.inWall) {
 			this.pushOutOfBlocks(posX, posY, posZ);
