@@ -1,6 +1,5 @@
 package riseautomatons.entity;
 
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
 
@@ -11,7 +10,7 @@ public class EntityAIBotOwnerHurtTarget extends EntityAITarget {
 
     public EntityAIBotOwnerHurtTarget(EntityOwnedBot bot)
     {
-        super(bot, 32.0F, false);
+        super(bot, false);
         this.bot = bot;
         this.setMutexBits(1);
     }
@@ -19,7 +18,8 @@ public class EntityAIBotOwnerHurtTarget extends EntityAITarget {
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute()
+    @Override
+	public boolean shouldExecute()
     {
         if (bot.reallyGetBotOwner() == null)
         {
@@ -44,7 +44,8 @@ public class EntityAIBotOwnerHurtTarget extends EntityAITarget {
     /**
      * Execute a one shot task or start executing a continuous task
      */
-    public void startExecuting()
+    @Override
+	public void startExecuting()
     {
         this.taskOwner.setAttackTarget(this.theTarget);
         super.startExecuting();
