@@ -2,18 +2,17 @@ package riseautomatons.block;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockWindmill extends BlockContainer {
 
@@ -173,7 +172,7 @@ public class BlockWindmill extends BlockContainer {
 
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-			EntityLiving par5EntityLiving, ItemStack itemstack) {
+			EntityLivingBase par5EntityLiving, ItemStack itemstack) {
 		int i = ((MathHelper
 				.floor_double((double) ((par5EntityLiving.rotationYaw * 4F) / 360F) + 0.5D) & 3) + 2) % 4;
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, i * 2, 3);
