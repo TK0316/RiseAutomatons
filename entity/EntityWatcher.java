@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import riseautomatons.Ids;
 import riseautomatons.Universal;
 
-public class EntityWatcher extends EntityMob implements IBot {
+public class EntityWatcher extends EntityBot implements IBot {
 
 	public static final ResourceLocation WATCHER_PNG = new ResourceLocation("riseautomatons", "textures/entities/watcher.png");
 	public static int renderId;
