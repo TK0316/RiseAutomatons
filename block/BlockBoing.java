@@ -1,15 +1,14 @@
 package riseautomatons.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 
 public class BlockBoing extends Block {
@@ -124,7 +123,7 @@ public class BlockBoing extends Block {
 	}
 
 	@Override
-	public void onSetBlockIDWithMetaData(World world, int i, int j,
+	public void onBlockPreDestroy(World world, int i, int j,
 			int k, int l) {
 		world.setBlockMetadataWithNotify(i, j, k, l, 3);
 	}
