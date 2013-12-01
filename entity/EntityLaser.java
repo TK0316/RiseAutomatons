@@ -1,18 +1,15 @@
 package riseautomatons.entity;
 
-import java.util.List;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import riseautomatons.Universal;
 
 public class EntityLaser extends EntityThrowable {
 
@@ -22,7 +19,7 @@ public class EntityLaser extends EntityThrowable {
 	private int inTile;
 	private boolean inGround;
 	public int shake;
-	public EntityLiving shootingEntity;
+	public EntityLivingBase shootingEntity;
 	private int ticksAlive;
 	private int ticksFlying;
 	public double accelerationX;
@@ -41,15 +38,15 @@ public class EntityLaser extends EntityThrowable {
 		setSize(0.2F, 0.2F);
 	}
 
-	public EntityLaser(World par1World, EntityLiving host, EntityLiving target, float par4, float par5) {
+	public EntityLaser(World par1World, EntityLiving host, EntityLivingBase target, float par4, float par5) {
 		super(par1World);
 		this.shootingEntity = host;
 		// this.doesArrowBelongToPlayer = host instanceof EntityPlayer;
-		this.posY = host.posY + (double) host.getEyeHeight() - 0.10000000149011612D;
+		this.posY = host.posY + host.getEyeHeight() - 0.10000000149011612D;
 		double var6 = target.posX - host.posX;
-		double var8 = target.posY + (double) target.getEyeHeight() - 1 - this.posY;
+		double var8 = target.posY + target.getEyeHeight() - 1 - this.posY;
 		double var10 = target.posZ - host.posZ;
-		double var12 = (double) MathHelper.sqrt_double(var6 * var6 + var10 * var10);
+		double var12 = MathHelper.sqrt_double(var6 * var6 + var10 * var10);
 		setSize(0.2F, 0.2F);
 		if (var12 >= 1.0E-7D) {
 			float var14 = (float) (Math.atan2(var10, var6) * 180.0D / Math.PI) - 90.0F;
@@ -59,27 +56,27 @@ public class EntityLaser extends EntityThrowable {
 			this.setLocationAndAngles(host.posX + var16, this.posY, host.posZ + var18, var14, var15);
 			this.yOffset = 0.0F;
 			float var20 = (float) var12 * 0.2F;
-			this.setArrowHeading(var6, var8 + (double) var20, var10, par4, par5);
+			this.setArrowHeading(var6, var8 + var20, var10, par4, par5);
 		}
 	}
 
 	public void setArrowHeading(double par1, double par3, double par5, float par7, float par8) {
 		float var9 = MathHelper.sqrt_double(par1 * par1 + par3 * par3 + par5 * par5);
-		par1 /= (double) var9;
-		par3 /= (double) var9;
-		par5 /= (double) var9;
-		par1 += this.rand.nextGaussian() * 0.007499999832361937D * (double) par8;
-		par3 += this.rand.nextGaussian() * 0.007499999832361937D * (double) par8;
-		par5 += this.rand.nextGaussian() * 0.007499999832361937D * (double) par8;
-		par1 *= (double) par7;
-		par3 *= (double) par7;
-		par5 *= (double) par7;
+		par1 /= var9;
+		par3 /= var9;
+		par5 /= var9;
+		par1 += this.rand.nextGaussian() * 0.007499999832361937D * par8;
+		par3 += this.rand.nextGaussian() * 0.007499999832361937D * par8;
+		par5 += this.rand.nextGaussian() * 0.007499999832361937D * par8;
+		par1 *= par7;
+		par3 *= par7;
+		par5 *= par7;
 		this.motionX = par1;
 		this.motionY = par3;
 		this.motionZ = par5;
 		float var10 = MathHelper.sqrt_double(par1 * par1 + par5 * par5);
 		this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(par1, par5) * 180.0D / Math.PI);
-		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(par3, (double) var10) * 180.0D / Math.PI);
+		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(par3, var10) * 180.0D / Math.PI);
 		// this.ticksInGround = 0;
 	}
 
@@ -101,7 +98,7 @@ public class EntityLaser extends EntityThrowable {
 		accelerationZ = (d5 / d6) * 0.10000000000000001D;
 	}
 
-	public EntityLaser(World world, EntityLiving entityliving, double dx, double dy, double dz, double accuracy) {
+	public EntityLaser(World world, EntityLivingBase entityliving, double dx, double dy, double dz, double accuracy) {
 		super(world);
 		xTile = -1;
 		yTile = -1;
@@ -244,7 +241,7 @@ public class EntityLaser extends EntityThrowable {
 						double dh = rand.nextGaussian() * 0.1D;
 						double dh1 = rand.nextGaussian() * 0.1D;
 						double dh2 = rand.nextGaussian() * 0.1D;
-						worldObj.spawnParticle("largesmoke", (posX + (double) (rand.nextFloat() * 2.0F)) - 1F, posY + (double) (rand.nextFloat() * 2.0F) - 1F, (posZ + (double) (rand.nextFloat() * 2.0F)) - 1F, dh, dh1, dh2);
+						worldObj.spawnParticle("largesmoke", (posX + (rand.nextFloat() * 2.0F)) - 1F, posY + (rand.nextFloat() * 2.0F) - 1F, (posZ + (rand.nextFloat() * 2.0F)) - 1F, dh, dh1, dh2);
 					}
 				}
 			}
