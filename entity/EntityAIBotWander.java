@@ -9,7 +9,7 @@ public class EntityAIBotWander extends EntityAIWander {
 	public EntityAIBotWander(EntityOwnedBot entityOwnedBot, float par2) {
 		super(entityOwnedBot, par2);
 		taskOwner = entityOwnedBot;
-		// TODO ©“®¶¬‚³‚ê‚½ƒRƒ“ƒXƒgƒ‰ƒNƒ^[EƒXƒ^ƒu
+		// TODO è‡ªå‹•ç”Ÿæˆã•ã‚ŒãŸã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ¼ãƒ»ã‚¹ã‚¿ãƒ–
 	}
 
 	@Override

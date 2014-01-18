@@ -11,7 +11,7 @@ public class EntityAIBotNearestAttackableTarget extends
 	public EntityAIBotNearestAttackableTarget(EntityCreature par1EntityCreature,
 			Class par2Class, int par3, boolean par4) {
 		super(par1EntityCreature, par2Class, par3, par4);
-		// TODO ©“®¶¬‚³‚ê‚½ƒRƒ“ƒXƒgƒ‰ƒNƒ^[EƒXƒ^ƒu
+		// TODO è‡ªå‹•ç”Ÿæˆã•ã‚ŒãŸã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãƒ¼ãƒ»ã‚¹ã‚¿ãƒ–
 	}
 
 	@Override
