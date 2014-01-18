@@ -9,7 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
@@ -86,13 +86,22 @@ public class BlockHeal extends Block {
 	@Override
 	public void onEntityCollidedWithBlock(World world, int i, int j,
 			int k, Entity entity) {
+		healEntity(world, i, j, k, entity);
+	}
 
-		if ((entity instanceof EntityLiving)) {
+	@Override
+	public void onEntityWalking(World world, int i, int j, int k, Entity entity) {
+		healEntity(world, i, j, k, entity);
+	}
+
+	private void healEntity(World world, int i, int j, int k, Entity entity) {
+
+		if ((entity instanceof EntityLivingBase)) {
 			int l = world.getBlockMetadata(i, j, k);
 			if (l > 0) {
 				world.spawnParticle("heart", i + 0.5F, j + 0.5F, k + 0.5F,
 						0.0D, 0.4000000059604645D, 0.0D);
-				((EntityLiving) entity).heal(l * 2);
+				((EntityLivingBase) entity).heal(l * 2);
 				world.setBlock(i, j, k, this.blockID, 0, 3);
 			}
 		}
