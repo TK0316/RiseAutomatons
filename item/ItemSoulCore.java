@@ -2,7 +2,6 @@ package riseautomatons.item;
 
 import java.util.List;
 
-
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -74,7 +73,7 @@ public class ItemSoulCore extends Item {
 				if (ii == Ids.blockWorker) {
 					int m = world.getBlockMetadata(i, j, k);
 					if (itemDamage == 0) {
-						world.spawnEntityInWorld(new EntityWorker(world, (float) i + 0.5F, (float) j, (float) k + 0.5F, m, entityplayer == null ? "" : entityplayer.username));
+						world.spawnEntityInWorld(new EntityWorker(world, i + 0.5F, j, k + 0.5F, m, entityplayer == null ? "" : entityplayer.username));
 						world.setBlock(i, j, k, 0, 0, 3);
 					}
 					/*else if (itemDamage == 5) {
@@ -100,7 +99,7 @@ public class ItemSoulCore extends Item {
 						return false;
 					}
 					int m = world.getBlockMetadata(i, j, k);
-					world.spawnEntityInWorld(new EntitySentry(world, (float) i + 0.5F, (float) j, (float) k + 0.5F, m, entityplayer == null ? "" : entityplayer.username));
+					world.spawnEntityInWorld(new EntitySentry(world, i + 0.5F, j, k + 0.5F, m, entityplayer == null ? "" : entityplayer.username));
 					world.setBlock(i, j, k, 0, 0, 3);
 				}
 				else if (ii == Ids.blockTote) {
@@ -108,7 +107,7 @@ public class ItemSoulCore extends Item {
 						return false;
 					}
 					int m = world.getBlockMetadata(i, j, k);
-					EntityTote tote = new EntityTote(world, (float) i + 0.5F, (float) j, (float) k + 0.5F, entityplayer == null ? "" : entityplayer.username);
+					EntityTote tote = new EntityTote(world, i + 0.5F, j, k + 0.5F, entityplayer == null ? "" : entityplayer.username);
 					world.spawnEntityInWorld(tote);
 					TileEntityLatch tot = (TileEntityLatch) world
 							.getBlockTileEntity(i, j, k);
