@@ -46,7 +46,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	public static final int INDEX_ITEMDAMAGE = 22;
 	public static final int INDEX_HOME = 23;
 	public static final int INDEX_DEST = 24;
-	float moveSpeed = 0.25F;
+	float moveSpeed = 0.5F;
 
 	private static Map<Integer, Integer> target = new LinkedHashMap<Integer, Integer>();
 
@@ -142,7 +142,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	public EntityWorker(World world, double d, double d1, double d2,int turn, String s)
 	{
 		this(world);
-		setPosition(d, d1 + (double)yOffset, d2);
+		setPosition(d, d1 + yOffset, d2);
 		prevPosX = d;
 		prevPosY = d1;
 		prevPosZ = d2;
@@ -157,9 +157,10 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 	}
 
+	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.25F);
+		// getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.35F);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(6.0F);
 	}
 
@@ -785,7 +786,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			double d = rand.nextGaussian() * 0.02D;
 			double d1 = rand.nextGaussian() * 0.02D;
 			double d2 = rand.nextGaussian() * 0.02D;
-			worldObj.spawnParticle("explode", (posX + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, posY + (double)(rand.nextFloat() * height), (posZ + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, d, d1, d2);
+			worldObj.spawnParticle("explode", (posX + (rand.nextFloat() * width * 2.0F)) - width, posY + (rand.nextFloat() * height), (posZ + (rand.nextFloat() * width * 2.0F)) - width, d, d1, d2);
 		}
 
 		if (!Universal.improperWorld(worldObj))
@@ -804,7 +805,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 			if (id == 0 || Block.blocksList[id].getCollisionBoundingBoxFromPool(worldObj, xx, yy, zz) == null)
 			{
-				int meta = MathHelper.floor_double((double)(rotationYawHead * 4.0F / 360.0F) + 0.5D) & 3;
+				int meta = MathHelper.floor_double((rotationYawHead * 4.0F / 360.0F) + 0.5D) & 3;
 
 				worldObj.setBlock(xx, yy, zz, Ids.blockWorker, meta, 3);
 			}
