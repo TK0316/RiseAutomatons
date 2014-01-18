@@ -47,8 +47,8 @@ public class BlockOre extends Block {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
 		icons = new Icon[2];
-		icons[0] = par1IconRegister.registerIcon("riseautomatons:saltOre");
-		icons[1] = par1IconRegister.registerIcon("riseautomatons:sulfOre");
+		icons[0] = par1IconRegister.registerIcon("riseautomatons:sulfOre");
+		icons[1] = par1IconRegister.registerIcon("riseautomatons:saltOre");
 	}
 
 	@Override
