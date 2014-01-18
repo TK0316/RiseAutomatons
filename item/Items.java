@@ -1,12 +1,9 @@
 package riseautomatons.item;
 
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.oredict.OreDictionary;
 import riseautomatons.Ids;
 import riseautomatons.RiseAutomatons;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class Items {
 
@@ -15,6 +12,7 @@ public class Items {
 	public static final ResourceLocation SOULCORE_PNG = new ResourceLocation("riseautomatons", "soulcore.png");
 
 	public static void init() {
+		/*
 		// Automatons
 		LanguageRegistry.instance().addNameForObject(worker, "en_US", "Worker");
 		LanguageRegistry.instance().addNameForObject(sentry, "en_US", "Sentry");
@@ -32,6 +30,7 @@ public class Items {
 		}
 		OreDictionary.registerOre("dustSalt", new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SALT.ordinal()));
 		OreDictionary.registerOre("dustSulfur", new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SURF.ordinal()));
+		OreDictionary.registerOre("itemIronRod", new ItemStack(Ids.craftSet, 1, EnumCraftSetType.ROD.ordinal()));
 
 		// SoulCore
 		for (int i = 0; i < EnumSoulCore.values().length; i++) {
@@ -55,6 +54,7 @@ public class Items {
 
 		LanguageRegistry.instance().addNameForObject(new ItemStack(Ids.itemVirus, 1, 0), "en_US", "Self-Destruction Program(Inactive)");
 		LanguageRegistry.instance().addNameForObject(new ItemStack(Ids.itemVirus, 1, 1), "en_US", "Self-Destruction Program(Active)");
+		*/
 	}
 	// Automatons
 	public static Item worker = (new ItemBot(Ids.itemWorker - 256, EnumBotType.WORKER))
@@ -94,6 +94,7 @@ public class Items {
 
 	// Normal Items
 	public static Item craftset = (new ItemCraftSet(Ids.craftSet - 256))
+			.setUnlocalizedName("riseautomatons:craftset")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 	public static Item chalk = (new ItemChalk(Ids.itemChalk - 256))
 			.setUnlocalizedName("riseautomatons:chalk")
