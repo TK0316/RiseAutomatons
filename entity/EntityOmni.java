@@ -18,7 +18,6 @@ import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityGhast;
-import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySkeleton;
@@ -57,7 +56,7 @@ public class EntityOmni extends EntityOwnedBot implements IBot {
     public EntityOmni(World world, double d, double d1, double d2)
     {
         this(world);
-        setPosition(d, d1 + (double)yOffset, d2);
+        setPosition(d, d1 + yOffset, d2);
         motionX = 0.0D;
         motionY = 0.0D;
         motionZ = 0.0D;
@@ -66,6 +65,7 @@ public class EntityOmni extends EntityOwnedBot implements IBot {
         prevPosZ = d2;
     }
 
+	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(1.0D);
@@ -102,26 +102,30 @@ public class EntityOmni extends EntityOwnedBot implements IBot {
 			return false;
 		}
 		ItemStack key = new ItemStack(itemStack.itemID, 1, itemStack.getItemDamage());
-		if(preset.containsKey(key)) {
-			try {
-				metamorph((Entity) preset.get(key).getConstructor(
-						new Class[] { World.class }).newInstance(
-						new Object[] { this.worldObj }));
-				return true;
-			} catch (InstantiationException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				e.printStackTrace();
+		for (ItemStack is : preset.keySet()) {
+			if (is.isItemEqual(key)) {
+				try {
+					metamorph((Entity) preset.get(is).getConstructor(
+							new Class[] { World.class }).newInstance(
+							new Object[] { this.worldObj }));
+					return true;
+				} catch (InstantiationException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					e.printStackTrace();
+				} catch (NoSuchMethodException e) {
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					e.printStackTrace();
+				}
+				return super.interact(par1EntityPlayer);
 			}
-			return super.interact(par1EntityPlayer);
+		}
+		if(preset.containsKey(key)) {
 		}
 		//System.out.println("CurrentItemID = "+ Item.itemsList[itemStack.itemID].getItemName());
 
@@ -143,6 +147,7 @@ public class EntityOmni extends EntityOwnedBot implements IBot {
 					if (!method.isAccessible()) {
 						AccessController
 								.doPrivileged(new PrivilegedAction<Object>() {
+									@Override
 									public Object run() {
 										method.setAccessible(true);
 										return null;
@@ -190,7 +195,7 @@ public class EntityOmni extends EntityOwnedBot implements IBot {
 			double d = posX;
 			double d1 = posY;
 			double d2 = posZ;
-			ep.setPosition(d, d1 + (double) yOffset, d2);
+			ep.setPosition(d, d1 + yOffset, d2);
 			ep.motionX = 0.0D;
 			ep.motionY = 0.0D;
 			ep.motionZ = 0.0D;
