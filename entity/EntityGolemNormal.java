@@ -7,7 +7,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.dispenser.IBehaviorDispenseItem;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -37,7 +36,7 @@ public class EntityGolemNormal extends EntityAniBot implements IBot,
 	public EntityGolemNormal(World world, double d, double d1, double d2, int I,
 			int h, int dam) {
 		this(world);
-		setPosition(d, d1 + (double) yOffset, d2);
+		setPosition(d, d1 + yOffset, d2);
 		motionX = 0.0D;
 		motionY = 0.0D;
 		motionZ = 0.0D;
@@ -51,8 +50,10 @@ public class EntityGolemNormal extends EntityAniBot implements IBot,
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(h);
 	}
 
+	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.4F);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(5.0D);
 	}
 
@@ -174,11 +175,11 @@ public class EntityGolemNormal extends EntityAniBot implements IBot,
 			double d1 = rand.nextGaussian() * 0.02D;
 			double d2 = rand.nextGaussian() * 0.02D;
 			worldObj.spawnParticle("explode",
-					(posX + (double) (rand.nextFloat() * width * 2.0F))
-							- (double) width, posY
-							+ (double) (rand.nextFloat() * height),
-					(posZ + (double) (rand.nextFloat() * width * 2.0F))
-							- (double) width, d, d1, d2);
+					(posX + (rand.nextFloat() * width * 2.0F))
+							- width, posY
+							+ (rand.nextFloat() * height),
+					(posZ + (rand.nextFloat() * width * 2.0F))
+							- width, d, d1, d2);
 		}
 
 		if (!Universal.improperWorld(worldObj)) {
