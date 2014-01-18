@@ -3,6 +3,9 @@ package riseautomatons.entity;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAILeapAtTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -34,16 +37,22 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 	private int who2Cook = 0;
 	private int who2Burn = 3;
 	private int availableSlot2 = 6;
+	private final float moveSpeed = 0.5F;
 
 	public EntityFactotum(World world) {
 		super(world);
 		cargoItems = new ItemStack[21];
 		setSize(2F, 2F);
 		setHealth(getMaxHealth());
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(moveSpeed);
 		isImmuneToFire = true;
 		furnaceBurnTime = 0;
 		currentItemBurnTime = 0;
 		furnaceCookTime = 0;
+		tasks.addTask(3, new EntityAILeapAtTarget(this, moveSpeed)); // 0.4f
+		tasks.addTask(5, new EntityAIBotFollowOwner(this, moveSpeed, 8F, 4.0F));
+		tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8F));
+		tasks.addTask(9, new EntityAILookIdle(this));
 	}
 
 	public EntityFactotum(World world, double d, double e, double f,
@@ -51,13 +60,13 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 		super(world);
 		cargoItems = new ItemStack[21];
 		setSize(2F, 2F);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.7F);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(moveSpeed);
 		setHealth(getMaxHealth());
 		isImmuneToFire = true;
 		furnaceBurnTime = 0;
 		currentItemBurnTime = 0;
 		furnaceCookTime = 0;
-		setPosition(d, e + (double) yOffset, f);
+		setPosition(d, e + yOffset, f);
 		motionX = 0.0D;
 		motionY = 0.0D;
 		motionZ = 0.0D;
@@ -66,11 +75,16 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 		prevPosZ = f;
 		setPathToEntity(null);
 		setBotOwner(username);
+		tasks.addTask(3, new EntityAILeapAtTarget(this, moveSpeed)); // 0.4f
+		tasks.addTask(5, new EntityAIBotFollowOwner(this, moveSpeed, 8F, 4.0F));
+		tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8F));
+		tasks.addTask(9, new EntityAILookIdle(this));
 	}
 
+	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.7F);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(moveSpeed);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(10.0D);
 	}
 
@@ -82,6 +96,16 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 	@Override
 	public ItemStack getStackInSlot(int i) {
 		return cargoItems[i];
+	}
+
+	@Override
+	protected boolean isAIEnabled() {
+		return true;
+	}
+
+	@Override
+	public EnumBotMode getMode() {
+		return EnumBotMode.FOLLOW;
 	}
 
 	@Override
@@ -234,7 +258,7 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 				}
 				itemstack.stackSize -= j;
 				EntityItem entityitem = new EntityItem(worldObj, posX
-						+ (double) f, posY + (double) f1, posZ + (double) f2,
+						+ f, posY + f1, posZ + f2,
 						new ItemStack(itemstack.itemID, j,
 								itemstack.getItemDamage()));
 				float f3 = 0.05F;
@@ -291,11 +315,11 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 			double d1 = rand.nextGaussian() * 0.02D;
 			double d2 = rand.nextGaussian() * 0.02D;
 			worldObj.spawnParticle("explode",
-					(posX + (double) (rand.nextFloat() * width * 2.0F))
-							- (double) width, posY
-							+ (double) (rand.nextFloat() * height),
-					(posZ + (double) (rand.nextFloat() * width * 2.0F))
-							- (double) width, d, d1, d2);
+					(posX + (rand.nextFloat() * width * 2.0F))
+							- width, posY
+							+ (rand.nextFloat() * height),
+					(posZ + (rand.nextFloat() * width * 2.0F))
+							- width, d, d1, d2);
 		}
 
 		if (!Universal.improperWorld(worldObj)) {
@@ -525,13 +549,13 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 
 	@Override
 	public boolean isInvNameLocalized() {
-		// TODO é©ìÆê∂ê¨Ç≥ÇÍÇΩÉÅÉ\ÉbÉhÅEÉXÉ^Éu
+		// TODO Ëá™ÂãïÁîüÊàê„Åï„Çå„Åü„É°„ÇΩ„ÉÉ„Éâ„Éª„Çπ„Çø„Éñ
 		return false;
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		// TODO é©ìÆê∂ê¨Ç≥ÇÍÇΩÉÅÉ\ÉbÉhÅEÉXÉ^Éu
+		// TODO Ëá™ÂãïÁîüÊàê„Åï„Çå„Åü„É°„ÇΩ„ÉÉ„Éâ„Éª„Çπ„Çø„Éñ
 		return false;
 	}
 }
