@@ -94,7 +94,7 @@ public class EntitySlider extends EntityAniBot implements IBot {
 	protected Entity findPlayerToAttack() {
 
 		EntityPlayer entityplayer = worldObj
-				.getClosestPlayerToEntity(this, 16D);
+				.getClosestVulnerablePlayerToEntity(this, 16D);
 
 		if (entityplayer != null && canEntityBeSeen(entityplayer)) {
 			return entityplayer;
