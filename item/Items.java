@@ -12,6 +12,9 @@ public class Items {
 	public static final ResourceLocation SOULCORE_PNG = new ResourceLocation("riseautomatons", "soulcore.png");
 
 	public static void init() {
+		OreDictionary.registerOre("dustSalt", new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SALT.ordinal()));
+		OreDictionary.registerOre("dustSulfur", new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SURF.ordinal()));
+		OreDictionary.registerOre("itemIronRod", new ItemStack(Ids.craftSet, 1, EnumCraftSetType.ROD.ordinal()));
 		/*
 		// Automatons
 		LanguageRegistry.instance().addNameForObject(worker, "en_US", "Worker");
@@ -28,9 +31,6 @@ public class Items {
 					new ItemStack(Ids.craftSet, 1, i), "en_US",
 					EnumCraftSetType.values()[i].fullname);
 		}
-		OreDictionary.registerOre("dustSalt", new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SALT.ordinal()));
-		OreDictionary.registerOre("dustSulfur", new ItemStack(Ids.craftSet, 1, EnumCraftSetType.SURF.ordinal()));
-		OreDictionary.registerOre("itemIronRod", new ItemStack(Ids.craftSet, 1, EnumCraftSetType.ROD.ordinal()));
 
 		// SoulCore
 		for (int i = 0; i < EnumSoulCore.values().length; i++) {
