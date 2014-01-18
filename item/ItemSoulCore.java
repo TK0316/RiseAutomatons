@@ -186,7 +186,7 @@ public class ItemSoulCore extends Item {
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
 		return (new StringBuilder()).append(super.getUnlocalizedName()).append(".")
-				.append(EnumSoulCore.values()[itemstack.getItemDamage()])
+				.append(EnumSoulCore.values()[itemstack.getItemDamage()].name)
 				.toString();
 	}
 
