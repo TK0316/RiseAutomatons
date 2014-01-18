@@ -10,7 +10,6 @@ import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,7 +37,7 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 	public EntitySentry(World world) {
 		super(world);
 		setSize(0.8F, 1.2F);
-		float moveSpeed = 0.4F;
+		float moveSpeed = 0.7F;
 		setHealth(getMaxHealth());
 
 		getNavigator().setAvoidsWater(true);
@@ -52,12 +51,12 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 		targetTasks.addTask(1, new EntityAIBotOwnerHurtByTarget(this));
 		targetTasks.addTask(2, new EntityAIBotOwnerHurtTarget(this));
 		targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityChicken.class, 50, false));
-		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityCreeper.class, 1, true));
-		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityMob.class, 1, true));
-		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityAniBot.class, 1, true));
-		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityBot.class, 1, true));
-		targetTasks.addTask(4, new EntityAIBotNearestAttackableTarget(this, EntityLiving.class, 1, true));
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityChicken.class, 1, false));
+		// targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityCreeper.class, 1, false));
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityMob.class, 1, false));
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityAniBot.class, 1, false));
+		targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityBot.class, 1, false));
+		targetTasks.addTask(4, new EntityAIBotNearestAttackableTarget(this, EntityLiving.class, 1, false));
 	}
 
 	public EntitySentry(World world, double d, double d1, double d2, int turn,
@@ -75,7 +74,7 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(24.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.4F);
+		//getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.7F);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(20.0D);
 	}
 
