@@ -3,14 +3,12 @@ package riseautomatons.entity;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -26,7 +24,7 @@ public class EntityWatcher extends EntityBot implements IBot {
 	public EntityWatcher(World world) {
 		super(world);
 		setHealth(getMaxHealth());
-		float moveSpeed = 0.2F;
+		float moveSpeed = 0.4F;
 		setSize(1.0F, 3.8F);
 		this.tasks.addTask(4, new EntityAIBotArrowAttack(this, moveSpeed, 1, 6));
 
@@ -41,7 +39,7 @@ public class EntityWatcher extends EntityBot implements IBot {
 
 	public EntityWatcher(World world, double d, double d1, double d2) {
 		this(world);
-		setPosition(d, d1 + (double) yOffset, d2);
+		setPosition(d, d1 + yOffset, d2);
 		motionX = 0.0D;
 		motionY = 0.0D;
 		motionZ = 0.0D;
@@ -50,10 +48,11 @@ public class EntityWatcher extends EntityBot implements IBot {
 		prevPosZ = d2;
 	}
 
+	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(24.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.2F);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.4F);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(60.0D);
 	}
 
@@ -81,15 +80,15 @@ public class EntityWatcher extends EntityBot implements IBot {
 			if (attackTime == 0) {
 				Entity targetedEntity = entity;
 				double d5 = targetedEntity.posX - posX;
-				double d6 = (targetedEntity.boundingBox.minY + (double) (targetedEntity.height / 2.0F))
-						- (posY + (double) (height));
+				double d6 = (targetedEntity.boundingBox.minY + (targetedEntity.height / 2.0F))
+						- (posY + (height));
 				double d7 = targetedEntity.posZ - posZ;
 				EntityLaser entityfireball = new EntityLaser(worldObj,
 						this, d5, d6, d7, 0.4D);
 				// double d8 = 4D;
 				// Vec3D vec3d = getLook(1.0F);
 				entityfireball.posX = posX;// + vec3d.xCoord * d8;
-				entityfireball.posY = posY + (double) (height);
+				entityfireball.posY = posY + (height);
 				entityfireball.posZ = posZ;// + vec3d.zCoord * d8;
 				worldObj.spawnEntityInWorld(entityfireball);
 				worldObj.playSoundAtEntity(this, "automatons.spark", 1.0F, 1.0F);
