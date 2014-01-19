@@ -1,9 +1,13 @@
 package riseautomatons.block;
 
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -17,29 +21,14 @@ public class BlockCrink extends Block {
 
 		super(i, Material.circuits);
 		slipperiness = 1.0F;
-		loadSprites();
 	}
 
 	public BlockCrink(int par1, Material par2Material) {
 		super(par1, par2Material);
-		loadSprites();
 	}
 
 	public BlockCrink(int par1, int par2, Material par3Material) {
 		super(par1, par3Material);
-		loadSprites();
-	}
-
-	static int D[];
-
-	static void loadSprites() {
-		D = new int[3];
-		D[0] = 9;// zei_Universal.modOverride("/terrain.png",
-					// "/riseautomatons/crink.png");
-		D[1] = 7;// zei_Universal.modOverride("/terrain.png",
-					// "/riseautomatons/crink2.png");
-		D[2] = 8;// zei_Universal.modOverride("/terrain.png",
-					// "/riseautomatons/crink3.png");
 	}
 
 	@Override
@@ -77,6 +66,13 @@ public class BlockCrink extends Block {
 	}
 
 	@Override
+	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) {
+		for (int j = 0; j < derk.length; ++j) {
+			par3List.add(new ItemStack(par1, 1, j));
+		}
+	}
+
+	@Override
 	public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer,
 			int par3, int par4, int par5, int par6) {
 		super.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
@@ -96,6 +92,12 @@ public class BlockCrink extends Block {
 	public int colorMultiplier(IBlockAccess iblockaccess, int i, int j, int k) {
 		int g = iblockaccess.getBlockMetadata(i, j, k);
 		return derk[g];
+	}
+
+    @Override
+	@SideOnly(Side.CLIENT)
+	public int getRenderColor(int par1) {
+		return derk[par1];
 	}
 
 	int derk[] = {

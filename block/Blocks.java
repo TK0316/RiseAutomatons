@@ -61,7 +61,7 @@ public class Blocks {
 		//LanguageRegistry.addName(architect, "Architect");
 		GameRegistry.registerBlock(archBend);
 		//LanguageRegistry.addName(archBend, "Architectural Connector");
-		GameRegistry.registerBlock(crink);
+		GameRegistry.registerBlock(crink, ItemCrink.class);
 		//LanguageRegistry.addName(crink, "Foliage Array");
 		GameRegistry.registerBlock(frass);
 		//LanguageRegistry.addName(frass, "Frass");
