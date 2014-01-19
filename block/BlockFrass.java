@@ -67,7 +67,7 @@ public class BlockFrass extends Block {
 						if(sun == false) {
 							continue;
 						}
-						if(random.nextInt(3) != 1) {
+						if(random.nextInt(10) != 1) {
 							continue;
 						}
 						int blockId = world.getBlockId(i + x, j + y, k + z);
@@ -103,7 +103,10 @@ public class BlockFrass extends Block {
 						if(isShine == false) {
 							continue;
 						}
-						world.setBlock(i + x, j + y, k + z, Ids.blockFrass, meta, 3);
+						
+						if(world.isDaytime()) {
+							world.setBlock(i + x, j + y, k + z, Ids.blockFrass, meta, 3);
+						}
 					}
 					else {
 						int blockId = world.getBlockId(i + x, j + y, k + z);
@@ -222,6 +225,7 @@ public class BlockFrass extends Block {
 		icons[7] = par1IconRegister.registerIcon("riseautomatons:frassn");
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(int par1, CreativeTabs tab, List subItems) {
 		subItems.add(new ItemStack(this, 1, 0));
