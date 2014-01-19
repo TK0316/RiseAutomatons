@@ -44,6 +44,11 @@ public class BlockCrink extends Block {
 	}
 
 	@Override
+	public int damageDropped(int par1) {
+		return par1;
+	}
+
+	@Override
 	public Icon getIcon(int i, int j) {
 		if (!Block.leaves.graphicsLevel) {
 			return icons[2];
@@ -100,7 +105,7 @@ public class BlockCrink extends Block {
 		return derk[par1];
 	}
 
-	int derk[] = {
+	public static int derk[] = {
 			0xffffff, // 0x0093bd,
 			0x496FD6, 0x003469, 0x96E6EB, 0x43cef1, 0x4b6e8a, 0x7D4B94,
 			0x292f3f, 0x08143a, 0x737a7b, 0x3ED613 };

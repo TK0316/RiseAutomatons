@@ -407,12 +407,6 @@ public class Recipes {
 			'O', Blocks.crystal,
 			'D', Blocks.crink });
 
-		for(int i = 0; i < 11; ++i) {
-			GameRegistry.addShapelessRecipe(new ItemStack(Ids.blockCrink, 1, (i + 1)% 11), new Object[] {
-				new ItemStack(Ids.blockCrink, 1, i) });
-		}
-		
-
 		GameRegistry.addRecipe(new ItemStack(Ids.craftSet, 1, EnumCraftSetType.BIONICCONGLOMERATE.ordinal()), new Object[] {
 			"O",
 			"D",

@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import riseautomatons.block.BlockCrink;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -59,7 +60,7 @@ public class ItemFunctional extends Item {
 				world.setWorldTime(13500L);
 			}
 		} else if (this.derp == 2) {
-			AutomatonActions.Frassify(world, entityplayer);
+			AutomatonActions.Frassify(world, entityplayer, world.rand.nextInt(BlockCrink.derk.length));
 		} else if (this.derp == 4) {
 			AutomatonActions.Naturalization(world, entityplayer);
 		}

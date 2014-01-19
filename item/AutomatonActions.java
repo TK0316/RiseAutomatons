@@ -1,15 +1,12 @@
 package riseautomatons.item;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
 import riseautomatons.Ids;
-import riseautomatons.block.BlockFrass;
 
 public class AutomatonActions
 {
@@ -52,15 +49,15 @@ public class AutomatonActions
 	  return 0;
   }
 
-  public static void Frassify(World world, EntityPlayer entityplayer)
+  public static void Frassify(World world, EntityPlayer entityplayer, int color)
   {
     int i = MathHelper.floor_double(entityplayer.posX);
     int j = MathHelper.floor_double(entityplayer.posY);
     int k = MathHelper.floor_double(entityplayer.posZ);
-    Frassify(world, i, j, k);
+    Frassify(world, i, j, k, color);
   }
 
-  public static void Frassify(World world, int i, int j, int k)
+  public static void Frassify(World world, int i, int j, int k, int color)
   {
     for (int l = 0; l < nerp.length; l++)
     {
@@ -92,7 +89,7 @@ public class AutomatonActions
 				world.setBlock(l1, i2, j2, Ids.blockGrower, 0, 3);
 				break;
 			case 6:
-				world.setBlock(l1, i2, j2, j1 != 17 ? Ids.blockCrink : Ids.blockTech, j1 != 17 ? 0 : 1, 3);
+				world.setBlock(l1, i2, j2, j1 != 17 ? Ids.blockCrink : Ids.blockTech, j1 != 17 ? color : 1, 3);
 				break;
 			case 7:
 				world.setBlock(l1, i2, j2, Ids.blockDapling, 0, 3);
