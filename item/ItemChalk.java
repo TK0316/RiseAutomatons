@@ -9,8 +9,8 @@ import riseautomatons.block.Blocks;
 
 public class ItemChalk extends Item {
 
-	public ItemChalk(int par1) {
-		super(par1);
+	public ItemChalk() {
+		super();
 		this.setMaxDamage(1000);
 		this.setMaxStackSize(1);
 	}
@@ -20,9 +20,9 @@ public class ItemChalk extends Item {
 			World world, int i, int j, int k, int l, float par8, float par9,
 			float par10) {
 
-		int id = world.getBlockId(i, j, k);
+		Block block = world.getBlock(i, j, k);
 
-		if (id == Blocks.chalk.blockID) {
+		if (block == Blocks.chalk) {
 			int meta = world.getBlockMetadata(i, j, k);
 
 			if (meta < 7) {
@@ -33,7 +33,7 @@ public class ItemChalk extends Item {
 			}
 		}
 
-		if (id != Block.snow.blockID) {
+		if (block != Blocks.snow) {
 			if (l == 0) {
 				j--;
 			}
@@ -58,8 +58,8 @@ public class ItemChalk extends Item {
 				i++;
 			}
 
-			id = world.getBlockId(i, j, k);
-			if (!world.isAirBlock(i, j, k) && world.getBlockId(i, j, k) != Blocks.chalk.blockID) {
+			block = world.getBlock(i, j, k);
+			if (!world.isAirBlock(i, j, k) && world.getBlock(i, j, k) != Blocks.chalk) {
 				return false;
 			}
 		}
@@ -71,11 +71,11 @@ public class ItemChalk extends Item {
 		if (Blocks.chalk.canPlaceBlockAt(world, i, j, k)) {
 			// itemstack.stackSize--;
 			itemstack.damageItem(1, entityplayer);
-			int meta = (id == Blocks.chalk.blockID) ? world.getBlockMetadata(i, j, k) : 0;
+			int meta = (block == Blocks.chalk) ? world.getBlockMetadata(i, j, k) : 0;
 			if (meta < 7) {
 				meta++;
 			}
-			world.setBlock(i, j, k, Blocks.chalk.blockID, meta, 3);
+			world.setBlock(i, j, k, Blocks.chalk, meta, 3);
 		}
 
 		return true;

@@ -9,8 +9,8 @@ import riseautomatons.entity.EntityLaser;
 
 public class ItemBlaster extends Item {
 
-	public ItemBlaster(int i) {
-		super(i);
+	public ItemBlaster() {
+		super();
 		maxStackSize = 1;
 	}
 
@@ -18,7 +18,7 @@ public class ItemBlaster extends Item {
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
 		// if(entityplayer.inventory.consumeInventoryItem(Item.arrow.itemID))
 		// {
-		world.playSoundAtEntity(entityplayer, "automatons.fwoom", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 0.8F));
+        world.playSoundAtEntity(entityplayer, "riseautomatons:fwoom", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
 		//if (!Universal.improperWorld(world)) {
 			// Entity targetedEntity=entity;

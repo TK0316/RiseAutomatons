@@ -7,10 +7,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 import riseautomatons.Universal;
@@ -20,8 +21,8 @@ public class BlockChalk extends Block {
 
 	public static int rendererId;
 
-	public BlockChalk(int i, int j) {
-		super(i, Material.circuits);
+	public BlockChalk(int j) {
+		super(Material.circuits);
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0625F, 1.0F);
 	}
 
@@ -37,7 +38,7 @@ public class BlockChalk extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon("redstone_dust_cross");
 	}
 
@@ -57,7 +58,7 @@ public class BlockChalk extends Block {
 		}
 
 		if (entityplayer.getCurrentEquippedItem() != null) {
-			if (entityplayer.getCurrentEquippedItem().itemID == Ids.itemChalk) {
+			if (entityplayer.getCurrentEquippedItem().getItem() == Ids.itemChalk) {
 				return false;
 			}
 		}
@@ -80,7 +81,7 @@ public class BlockChalk extends Block {
 	}
 
 	@Override
-	public boolean removeBlockByPlayer(World world, EntityPlayer player, int i, int j, int k) {
+	public boolean removedByPlayer(World world, EntityPlayer player, int i, int j, int k) {
 		int meta = world.getBlockMetadata(i, j, k);
 
 		if (meta > 0) {
@@ -89,11 +90,11 @@ public class BlockChalk extends Block {
 			notifyWireNeighborsOfNeighborChange(world, i, j, k - 1);
 			notifyWireNeighborsOfNeighborChange(world, i, j, k + 1);
 		}
-		return super.removeBlockByPlayer(world, player, i, j, k);
+		return super.removedByPlayer(world, player, i, j, k);
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
+	public void onNeighborBlockChange(World world, int i, int j, int k, Block l) {
 
 		if (world.isRemote) {
 			//return;
@@ -103,11 +104,11 @@ public class BlockChalk extends Block {
 		boolean flag = canPlaceBlockAt(world, i, j, k);
 
 		if (!flag) {
-			world.setBlock(i, j, k, 0, 0, 3);
+			world.setBlockToAir(i, j, k);
 		} else {
 			boolean flag1 = world.isBlockIndirectlyGettingPowered(i, j, k);
 
-			if ((flag1) && l != blockID) // || l > 0 &&
+			if ((flag1) && l != this) // || l > 0 &&
 											// Block.blocksList[l].canProvidePower()
 											// || l == 0
 			{
@@ -141,26 +142,26 @@ public class BlockChalk extends Block {
 	}
 
 	@Override
-	public int idDropped(int par1, Random par2Random, int par3) {
+	public Item getItemDropped(int par1, Random par2Random, int par3) {
 		return Ids.itemChalk;
 	}
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int i, int j, int k) {
-		int blockID = world.getBlockId(i, j, k);
+		Block block = world.getBlock(i, j, k);
 		int metadata = world.getBlockMetadata(i, j, k);
-		if(blockID == Blocks.chalk.blockID && metadata < 7) {
+		if(block == Blocks.chalk && metadata < 7) {
 			return true;
 		}
-		return world.isBlockNormalCube(i, j - 1, k);
+		return world.getBlock(i, j - 1, k).isNormalCube();
 	}
 
 	private void notifyWireNeighborsOfNeighborChange(World world, int i, int j,
 			int k) {
-		if (world.getBlockId(i, j, k) != blockID) {
+		if (world.getBlock(i, j, k) != this) {
 			return;
 		} else {
-			world.notifyBlocksOfNeighborChange(i, j, k, blockID);
+			world.notifyBlocksOfNeighborChange(i, j, k, this);
 			return;
 		}
 	}

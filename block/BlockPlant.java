@@ -9,8 +9,8 @@ import net.minecraft.world.World;
 
 public class BlockPlant extends Block {
 
-	protected BlockPlant(int i) {
-		super(i, Material.ground);
+	protected BlockPlant() {
+		super(Material.ground);
 		setBlockBounds(0.25F, 0.0F, 0.25F, .75F, 1, .75F);
 	}
 
@@ -35,13 +35,13 @@ public class BlockPlant extends Block {
 			int i, int j, int k) {
 
 		boolean bound[] = new boolean[6];
-		// int id=iblockaccess.getBlockId(i, j-1, k);
+		// int id=iblockaccess.getBlock(i, j-1, k);
 
-		bound[0] = iblockaccess.getBlockId(i - 1, j, k) == blockID;
-		bound[1] = iblockaccess.getBlockId(i, j, k - 1) == blockID;
-		bound[2] = iblockaccess.getBlockId(i + 1, j, k) == blockID;
-		bound[3] = iblockaccess.getBlockId(i, j, k + 1) == blockID;
-		bound[4] = iblockaccess.getBlockId(i, j + 1, k) == blockID;
+		bound[0] = iblockaccess.getBlock(i - 1, j, k) == this;
+		bound[1] = iblockaccess.getBlock(i, j, k - 1) == this;
+		bound[2] = iblockaccess.getBlock(i + 1, j, k) == this;
+		bound[3] = iblockaccess.getBlock(i, j, k + 1) == this;
+		bound[4] = iblockaccess.getBlock(i, j + 1, k) == this;
 		// boolean any=bound[0]||bound[1]||bound[2]||bound[3];
 
 		setBlockBounds(bound[0] ? 0 : 0.125F, 0.0F, bound[1] ? 0 : 0.125F,

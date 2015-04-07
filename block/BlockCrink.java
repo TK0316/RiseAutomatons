@@ -4,11 +4,12 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -16,31 +17,25 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCrink extends Block {
 
-	private Icon icons[];
-	protected BlockCrink(int i, int j) {
+	private IIcon icons[];
+	protected BlockCrink(int j) {
 
-		super(i, Material.circuits);
+		super( Material.circuits);
 		slipperiness = 1.0F;
 	}
 
-	public BlockCrink(int par1, Material par2Material) {
-		super(par1, par2Material);
+	public BlockCrink(Material par2Material) {
+		super(par2Material);
 	}
 
-	public BlockCrink(int par1, int par2, Material par3Material) {
-		super(par1, par3Material);
+	public BlockCrink(int par2, Material par3Material) {
+		super(par3Material);
 	}
 
 	@Override
 	public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i,
 			int j, int k, int l) {
-		int i1 = iblockaccess.getBlockId(i, j, k);
-
-		if (i1 == blockID) {
-			return false;
-		} else {
-			return super.shouldSideBeRendered(iblockaccess, i, j, k, l);
-		}
+		return super.shouldSideBeRendered(iblockaccess, i, j, k, l);
 	}
 
 	@Override
@@ -49,8 +44,9 @@ public class BlockCrink extends Block {
 	}
 
 	@Override
-	public Icon getIcon(int i, int j) {
-		if (!Block.leaves.graphicsLevel) {
+	public IIcon getIcon(int i, int j) {
+        //if (!Blocks.leaves.graphicsLevel) {
+        if (Blocks.leaves.isOpaqueCube()) {
 			return icons[2];
 		}
 
@@ -63,15 +59,15 @@ public class BlockCrink extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		icons = new Icon[3];
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
+		icons = new IIcon[3];
 		icons[0] = par1IconRegister.registerIcon("riseautomatons:crink");
 		icons[1] = par1IconRegister.registerIcon("riseautomatons:crink2");
 		icons[2] = par1IconRegister.registerIcon("riseautomatons:crink3");
 	}
 
 	@Override
-	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) {
+	public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
 		for (int j = 0; j < derk.length; ++j) {
 			par3List.add(new ItemStack(par1, 1, j));
 		}
@@ -85,12 +81,14 @@ public class BlockCrink extends Block {
 
 	@Override
 	public boolean isOpaqueCube() {
-		return (!Block.leaves.graphicsLevel);// ?1:0;//false;
+        //return (!Block.leaves.graphicsLevel);// ?1:0;//false;
+		return (Blocks.leaves.isOpaqueCube());// ?1:0;//false;
 	}
 
 	@Override
 	public int getRenderBlockPass() {
-		return (!Block.leaves.graphicsLevel) ? 0 : 1; // false;;
+        //return (!Block.leaves.graphicsLevel) ? 0 : 1; // false;;
+		return (Blocks.leaves.isOpaqueCube()) ? 0 : 1; // false;;
 	}
 
 	@Override

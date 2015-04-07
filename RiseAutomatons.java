@@ -1,11 +1,13 @@
 package riseautomatons;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeManager;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.Logger;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.Property;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 import riseautomatons.block.Blocks;
 import riseautomatons.entity.Entities;
 import riseautomatons.item.Items;
@@ -14,15 +16,12 @@ import riseautomatons.world.Biomes;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod(modid = "RiseAutomatons", name = "RiseAutomatons", version = "1.0")
-@NetworkMod(clientSideRequired = false, serverSideRequired = true, channels = { "rota" }, packetHandler = PacketHandler.class, connectionHandler = ConnectionHandler.class, versionBounds = "[1.0]")
 public class RiseAutomatons {
 	@SidedProxy(clientSide = "riseautomatons.ClientProxy", serverSide = "riseautomatons.CommonProxy")
 	public static CommonProxy proxy;
@@ -30,7 +29,6 @@ public class RiseAutomatons {
 	@Instance("RiseAutomatons")
 	public static RiseAutomatons instance;
 
-	public static Logger logger = Logger.getLogger("Minecraft");
 
 	public static boolean debug = false;
 
@@ -42,32 +40,28 @@ public class RiseAutomatons {
 	public static boolean enableFrassSpread = true;
 	public static boolean disableWatcherCrystal = false;
 
-	@Mod.Init
-	public void load(FMLInitializationEvent event) {
+    @Mod.EventHandler
+	public void init(FMLInitializationEvent event) {
 
-		Entities.init();
-		Blocks.init();
-		Blocks.setFrassSpread(enableFrassSpread);
-		Items.init();
 		Recipes.init();
 		Biomes.init(generateTechBiome);
 		if(enableCheatRecipe) {
 			Recipes.initCheatRecipe();
 		}
 		ChalkLogic.init();
-		NetworkRegistry.instance().registerGuiHandler(instance,  proxy);
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance,  proxy);
 		Universal.init();
 		proxy.regiserTextures();
 	}
 
-	@PreInit
+    @Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		Configuration cfg = new Configuration(
 				event.getSuggestedConfigurationFile());
 
 		try {
 			cfg.load();
-			Ids.soulCore = cfg.get(Configuration.CATEGORY_ITEM, "soulCore", Ids.soulCore).getInt();
+			/*Ids.soulCore = cfg.get(Configuration.CATEGORY_ITEM, "soulCore", Ids.soulCore).getInt();
 			Ids.itemChalk = cfg.get(Configuration.CATEGORY_ITEM, "itemChalk", Ids.itemChalk).getInt();
 			Ids.blaster = cfg.get(Configuration.CATEGORY_ITEM, "blaster", Ids.blaster).getInt();
 			Ids.smack = cfg.get(Configuration.CATEGORY_ITEM, "smack", Ids.smack).getInt();
@@ -117,7 +111,7 @@ public class RiseAutomatons {
 			Ids.blockHeal = cfg.get(Configuration.CATEGORY_BLOCK, "blockHeal", Ids.blockHeal).getInt();
 			Ids.blockDapling = cfg.get(Configuration.CATEGORY_BLOCK, "blockDapling", Ids.blockDapling).getInt();
 			Ids.blockDuplex = cfg.get(Configuration.CATEGORY_BLOCK, "blockDuplex", Ids.blockDuplex).getInt();
-			Ids.blockLatch = cfg.get(Configuration.CATEGORY_BLOCK, "blockLatch", Ids.blockLatch).getInt();
+			Ids.blockLatch = cfg.get(Configuration.CATEGORY_BLOCK, "blockLatch", Ids.blockLatch).getInt();*/
 
 			Ids.eupraxia = cfg.get(Configuration.CATEGORY_GENERAL, "eupraxia", Ids.eupraxia).getInt();
 
@@ -160,12 +154,16 @@ public class RiseAutomatons {
 			disableWatcherCrystal = cfg.get(Configuration.CATEGORY_GENERAL, "disableWatcherCrystal", false).getBoolean(false);
 		}
 		catch (Exception e) {
-            FMLLog.log(Level.SEVERE, e, "RiseAutomatons load config exception");
+            FMLLog.log(Level.ERROR, e, "RiseAutomatons load config exception");
         }
         finally
         {
             cfg.save();
         }
-	}
+        Entities.init();
+        Blocks.init();
+        Blocks.setFrassSpread(enableFrassSpread);
+        Items.init();
+    }
 
 }

@@ -5,13 +5,18 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import riseautomatons.Ids;
 import riseautomatons.block.Blocks;
 
-public class WorldGenTechRuin extends WorldGenerator {
+public class WorldGenTechRuin extends WorldGenAbstractTree {
 
-	@Override
+    public WorldGenTechRuin(boolean p_i45448_1_) {
+        super(p_i45448_1_);
+    }
+
+    @Override
 	public boolean generate(World world, Random random, int i, int j,
 			int k) {
 
@@ -24,11 +29,11 @@ public class WorldGenTechRuin extends WorldGenerator {
 	      {
 	        for (int y = j - 1; y <= j + byte0 + 1; y++)
 	        {
-	          Material material = world.getBlockMaterial(x, y, z);
+	          Material material = world.getBlock(x, y, z).getMaterial();
 	          if ((y == j - 1) && (!material.isSolid()))
 	          {
-	            int blockID = world.getBlockId(x, y, z);
-	            if ((blockID != Block.dirt.blockID) && (blockID != Block.grass.blockID) && (blockID != Block.sand.blockID))
+	            Block block = world.getBlock(x, y, z);
+	            if ((block != Blocks.dirt) && (block != Blocks.grass) && (block != Blocks.sand))
 	            {
 	              return false;
 	            }
@@ -56,7 +61,7 @@ public class WorldGenTechRuin extends WorldGenerator {
 	            world.setBlock(x, y, z, Ids.blockTech, 0, 3);
 	          }
 	          else if (y == j + byte0) {
-	            world.setBlock(x, y, z, Block.stoneDoubleSlab.blockID, 0, 3);
+	            world.setBlock(x, y, z, Blocks.double_stone_slab, 0, 3);
 	          }
 	          else if ((x == i - 1) || (z == k - 1) || (x == i + width) || (z == k + width))
 	          {
@@ -64,7 +69,7 @@ public class WorldGenTechRuin extends WorldGenerator {
 	          }
 	          else
 	          {
-	            world.setBlock(x, y, z, 0, 0, 3);
+	            world.setBlockToAir(x, y, z);
 	          }
 
 	        }
@@ -82,13 +87,13 @@ public class WorldGenTechRuin extends WorldGenerator {
 	      world.setBlock(i + width / 2, j + 1, k + width / 2, Ids.blockSky, 0, 3);
 	    }
 	    else if (r < 60) {
-	      world.setBlock(i + width / 2, j + 1, k + width / 2, Blocks.heal.blockID, 0, 3);
+	      world.setBlock(i + width / 2, j + 1, k + width / 2, Blocks.heal, 0, 3);
 	    }
 	    else if (r < 80) {
-	      world.setBlock(i + width / 2, j + 1, k + width / 2, Blocks.fakeCrystal.blockID, 0, 3);
+	      world.setBlock(i + width / 2, j + 1, k + width / 2, Blocks.fakeCrystal, 0, 3);
 	    }
 	    else {
-	      world.setBlock(i + width / 2, j + 1, k + width / 2, Blocks.crystal.blockID, 0, 3);
+	      world.setBlock(i + width / 2, j + 1, k + width / 2, Blocks.crystal, 0, 3);
 	    }
 
 	    return true;

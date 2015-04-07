@@ -4,22 +4,22 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockLumo extends Block {
 
-	private Icon icons[];
+	private IIcon icons[];
 
-	protected BlockLumo(int i) {
-		super(i, Material.rock);
+	protected BlockLumo() {
+		super(Material.rock);
 	}
 	@Override
-	public Icon getIcon(int par1, int par2) {
+	public IIcon getIcon(int par1, int par2) {
 		if(par2 == 1) {
 			return icons[0];
 		}
@@ -28,8 +28,8 @@ public class BlockLumo extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		icons = new Icon[2];
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
+		icons = new IIcon[2];
 		icons[0] = par1IconRegister.registerIcon("riseautomatons:sky");
 		icons[1] = par1IconRegister.registerIcon("riseautomatons:walk");
 	}

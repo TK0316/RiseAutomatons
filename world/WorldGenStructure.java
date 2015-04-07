@@ -8,24 +8,30 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import riseautomatons.Ids;
+import riseautomatons.block.Blocks;
 import riseautomatons.item.EnumCraftSetType;
 import riseautomatons.item.EnumSoulCore;
 import riseautomatons.item.Items;
 
-public class WorldGenStructure extends WorldGenerator {
+public class WorldGenStructure extends WorldGenAbstractTree {
 	public int M = 7;
 	public int W;
 	public int set = 0;
 
-	@Override
+    public WorldGenStructure(boolean p_i45448_1_) {
+        super(p_i45448_1_);
+    }
+
+    @Override
 	public boolean generate(World world, Random random, int i, int j,
 			int k) {
 
 		// JJ=j;
 
-		// int bb=world.getBlockId(i,j-1,k);
+		// int bb=world.getBlock(i,j-1,k);
 		// if(bb==2 || bb==12 || bb==AutomatonLogger.frass){
 
 		int m2 = M / 2;
@@ -44,7 +50,7 @@ public class WorldGenStructure extends WorldGenerator {
 		// k=(k/W)*W;
 		j = Ids.builderLevel;
 
-		if (world.getBlockId(i, j, k) == Ids.blockTech) {
+		if (world.getBlock(i, j, k) == Ids.blockTech) {
 			return true;
 		}
 
@@ -74,7 +80,7 @@ public class WorldGenStructure extends WorldGenerator {
 			int w = W;
 			// if(jj<m ){
 
-			int bb1 = world.getBlockId(i, j, k + w);
+			Block bb1 = world.getBlock(i, j, k + w);
 			// int mm1=world.getBlockMetadata(i,j,k+w);
 			bo[0] = !(bb1 == Ids.blockSky);
 
@@ -92,7 +98,7 @@ public class WorldGenStructure extends WorldGenerator {
 			// if(jj>0){
 			// bo[1]=!cell[ii][jj-1];
 
-			int bb2 = world.getBlockId(i, j, k - w);
+            Block bb2 = world.getBlock(i, j, k - w);
 			// int mm2=world.getBlockMetadata(i,j,k-w);
 			bo[1] = !(bb2 == Ids.blockSky);
 			/*
@@ -108,7 +114,7 @@ public class WorldGenStructure extends WorldGenerator {
 
 			// if(ii<m ){
 			// bo[2]=!cell[ii+1][jj];
-			int bb3 = world.getBlockId(i + w, j, k);
+            Block bb3 = world.getBlock(i + w, j, k);
 			// int mm3=world.getBlockMetadata(i+w,j,k);
 			bo[2] = !(bb3 == Ids.blockSky);
 			/*
@@ -124,7 +130,7 @@ public class WorldGenStructure extends WorldGenerator {
 
 			// if(ii>0){
 			// bo[3]=!cell[ii-1][jj];
-			int bb4 = world.getBlockId(i - w, j, k);
+            Block bb4 = world.getBlock(i - w, j, k);
 			// int mm4=world.getBlockMetadata(i-w,j,k);
 			bo[3] = !(bb4 == Ids.blockSky);
 			/*
@@ -186,7 +192,7 @@ public class WorldGenStructure extends WorldGenerator {
 			int j = chests.get(ii).get(1);
 			int k = chests.get(ii).get(2);
 
-			world.setBlock(i, j, k, 54, 0, 3);
+			world.setBlock(i, j, k, Blocks.chest, 0, 3);
 			chestMe(world, random, i, j, k);
 		}
 
@@ -194,11 +200,11 @@ public class WorldGenStructure extends WorldGenerator {
 
 	public void addTunnels(World world, int i, int j, int k) {
 
-		int bb = 4;
+		Block bb = Blocks.cobblestone;
 		int ww = (W / 2);
 		int WWW = W * 2;
-		int F;
-		F = world.getBlockId(i + WWW, j, k);
+		Block F;
+		F = world.getBlock(i + WWW, j, k);
 		if (F == Ids.blockSky
 				|| F == Ids.blockArch) {
 			// System.out.println("add tunnel south(-x)");
@@ -231,13 +237,13 @@ public class WorldGenStructure extends WorldGenerator {
 			for (int x = xe - 3; x < xe + 3; x++) {
 				for (int z = k - 2; z <= k + 2; z++) {
 					for (int y = j + 1; y < j + 5; y++) {
-						world.setBlock(z, y, x, 0, 0, 3);
+						world.setBlockToAir(z, y, x);
 					}
 				}
 			}
 
 		}
-		F = world.getBlockId(i - WWW, j, k);
+		F = world.getBlock(i - WWW, j, k);
 		if (F == Ids.blockSky
 				|| F == Ids.blockArch) {
 			// world.setBlock(i-ww,j,k,bb);
@@ -271,13 +277,13 @@ public class WorldGenStructure extends WorldGenerator {
 			for (int x = xe - 3; x < xe + 3; x++) {
 				for (int z = k - 2; z <= k + 2; z++) {
 					for (int y = j + 1; y < j + 5; y++) {
-						world.setBlock(z, y, x, 0, 0, 3);
+						world.setBlockToAir(z, y, x);
 					}
 				}
 			}
 
 		}
-		F = world.getBlockId(i, j, k + WWW);
+		F = world.getBlock(i, j, k + WWW);
 		if (F == Ids.blockSky
 				|| F == Ids.blockArch) {
 			// System.out.println("add tunnel west(+z)");
@@ -310,13 +316,13 @@ public class WorldGenStructure extends WorldGenerator {
 			for (int x = xe - 3; x < xe + 3; x++) {
 				for (int z = i - 2; z <= i + 2; z++) {
 					for (int y = j + 1; y < j + 5; y++) {
-						world.setBlock(z, y, x, 0, 0, 3);
+						world.setBlockToAir(z, y, x);
 					}
 				}
 			}
 
 		}
-		F = world.getBlockId(i, j, k - WWW);
+		F = world.getBlock(i, j, k - WWW);
 		if (F == Ids.blockSky
 				|| F == Ids.blockArch) {
 			// System.out.println("add tunnel east(-z)");
@@ -349,7 +355,7 @@ public class WorldGenStructure extends WorldGenerator {
 			for (int x = xe - 3; x <= xe + 3; x++) {
 				for (int z = i - 2; z <= i + 2; z++) {
 					for (int y = j + 1; y < j + 5; y++) {
-						world.setBlock(z, y, x, 0, 0, 3);
+						world.setBlockToAir(z, y, x);
 					}
 				}
 			}
@@ -372,7 +378,7 @@ public class WorldGenStructure extends WorldGenerator {
 		for (int z = 0; z <= length; z++) {
 			for (int y = 0; y <= height; y++) {
 				for (int x = 0; x <= width; x++) {
-					world.setBlock(i + (x - w2), j + y, k + (z - l2), 0, 0, 3);
+					world.setBlockToAir(i + (x - w2), j + y, k + (z - l2));
 					// System.out.println("HERE: "+(x-w2));
 				}
 			}
@@ -400,7 +406,7 @@ public class WorldGenStructure extends WorldGenerator {
 		for (int z = 0; z <= length; z++) {
 			for (int y = 1; y <= he; y++) {
 				for (int x = 0; x <= width; x++) {
-					world.setBlock(i + (x - w2), j + y, k + (z - l2), 0, 0, 3);
+					world.setBlockToAir(i + (x - w2), j + y, k + (z - l2));
 				}
 			}
 		}
@@ -410,7 +416,7 @@ public class WorldGenStructure extends WorldGenerator {
 				for (int x = 0; x <= width; x++) {
 					// System.out.println(newheight+" : "+y);
 					if (random.nextInt(1 + newheight - y) != 0) {
-						world.setBlock(i + (x - w2), j + y, k + (z - l2), 0, 0, 3);
+						world.setBlockToAir(i + (x - w2), j + y, k + (z - l2));
 					}
 				}
 			}
@@ -438,12 +444,12 @@ public class WorldGenStructure extends WorldGenerator {
 
 	private void struct(World world, Random random, boolean[] boo, int height,
 			int width, int length, int i, int j, int k) {
-		int b = Ids.blockTech;
+		Block b = Ids.blockTech;
 
 		int m = 2;
 		int m2 = 3;
 		int m3 = 8;
-		int b3 = Ids.blockCrink;
+		Block b3 = Ids.blockCrink;
 		int w2 = width / 2;
 		int l2 = length / 2;
 		int h2 = height / 2;
@@ -622,7 +628,7 @@ public class WorldGenStructure extends WorldGenerator {
 
 			for (int z = 1; z <= l3; z++) {
 				for (int x = 1; x <= w3; x++) {
-					world.setBlock(i + (x - w5), j, k + (z - l5), 1, 0, 3);
+					world.setBlock(i + (x - w5), j, k + (z - l5), Blocks.stone, 0, 3);
 				}
 			}
 
@@ -663,7 +669,7 @@ public class WorldGenStructure extends WorldGenerator {
 	public void chestMe(World world, Random random, int i, int j, int k) {
 
 		TileEntityChest tileentitychest = (TileEntityChest) world
-				.getBlockTileEntity(i, j, k);
+				.getTileEntity(i, j, k);
 		// random.nextInt(tileentitychest.getSizeInventory())
 		for(int x = 0; x < 27; x++) {
 			ItemStack itemstack = pickCheckLootItem(random);
@@ -679,7 +685,7 @@ public class WorldGenStructure extends WorldGenerator {
 			return new ItemStack(Ids.itemChalk, random.nextInt(20) + 1, 0);
 		}
 		if (i == 1) {
-			return new ItemStack(Item.ingotIron, random.nextInt(4) + 1);
+			return new ItemStack(Items.iron_ingot, random.nextInt(4) + 1);
 		}
 		if (i == 2) {
 			return new ItemStack(Ids.soulCore, 1, EnumSoulCore.STONEEMPTY.ordinal());
@@ -695,11 +701,11 @@ public class WorldGenStructure extends WorldGenerator {
 		}
 
 		if (i == 7) {
-			return new ItemStack(Item.ingotGold, random.nextInt(4) + 1);
+			return new ItemStack(Items.gold_ingot, random.nextInt(4) + 1);
 		}
 
 		if (i == 10) {
-			return new ItemStack(Item.silk, random.nextInt(40) + 1);
+			return new ItemStack(Items.string, random.nextInt(40) + 1);
 		}
 
 		if (i == 11) {
@@ -710,40 +716,26 @@ public class WorldGenStructure extends WorldGenerator {
 			return new ItemStack(Ids.soulCore, random.nextInt(20) + 3, EnumSoulCore.SOULPURE.ordinal());
 		}
 		if (i == 13) {
-			return new ItemStack(Item.diamond, 1);
+			return new ItemStack(Items.diamond, 1);
 		}
 		if (i == 14) {
 			return new ItemStack(Ids.craftSet, random.nextInt(15) + 3, random.nextInt(EnumCraftSetType.values().length));
 		}
 		if (i == 15) {
-			return new ItemStack(Item.reed, random.nextInt(15) + 3);
+			return new ItemStack(Items.reeds, random.nextInt(15) + 3);
 		}
 		if (i == 16) {
-			return new ItemStack(Item.appleRed, random.nextInt(10) + 1);
+			return new ItemStack(Items.apple, random.nextInt(10) + 1);
 		}
 
 		if (i == 17) {
-			return new ItemStack(Item.seeds, random.nextInt(7) + 1);
+			return new ItemStack(Items.wheat_seeds, random.nextInt(7) + 1);
 		}
 		if (i == 18) {
-			return new ItemStack(Block.sapling, random.nextInt(30) + 1);
+			return new ItemStack(Blocks.sapling, random.nextInt(30) + 1);
 		}
 		if (i == 19) {
 			return new ItemStack(Items.virus, random.nextInt(30) + 1, 0);
-		}
-		if( i > 40) {
-			int j = random.nextInt(1000);
-			int l = 0;
-			for(int k = 0;; k = (k+1) % Item.itemsList.length) {
-				if(Item.itemsList[k] != null) {
-					l++;
-				}
-				if(l >= j) {
-					if(Item.itemsList[k] != null) {
-						return new ItemStack(Item.itemsList[k], random.nextInt(30) + 1);
-					}
-				}
-			}
 		}
 
 		return null;
@@ -754,7 +746,7 @@ public class WorldGenStructure extends WorldGenerator {
 			for (int z = -2; z <= 2; z++) {
 				for (int y = 0; y >= -height; y--) {
 					world.setBlock(i + x, j + y, k + z,
-							Block.cobblestoneMossy.blockID, 0, 3);
+							Blocks.mossy_cobblestone, 0, 3);
 				}
 			}
 		}
@@ -762,7 +754,7 @@ public class WorldGenStructure extends WorldGenerator {
 		for (int x = -1; x <= 1; x++) {
 			for (int z = -1; z <= 1; z++) {
 				for (int y = 0; y >= -height; y--) {
-					world.setBlock(i + x, j + y, k + z, 0, 0, 3);
+					world.setBlockToAir(i + x, j + y, k + z);
 				}
 			}
 		}

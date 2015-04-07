@@ -49,7 +49,7 @@ public class EntityVirus extends EntityThrowable {
             		continue;
             	}
                 for(int k = z - range; k < z + range; k++) {
-                	if(this.worldObj.getBlockId(i, j, k) == Blocks.frass.blockID) {
+                	if(this.worldObj.getBlock(i, j, k) == Blocks.frass) {
                 		int meta = this.worldObj.getBlockMetadata(i, j, k);
                 		if(meta < 8) {
                 			//System.out.println(String.valueOf(i) + "," + String.valueOf(j) + "," + String.valueOf(k));

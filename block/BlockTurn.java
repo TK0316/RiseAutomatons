@@ -2,9 +2,10 @@ package riseautomatons.block;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,19 +19,19 @@ import riseautomatons.Ids;
 public class BlockTurn extends BlockContainer {
 	float f = 0.375F;
 
-	protected BlockTurn(int i) {
-		super(i, Material.wood);
+	protected BlockTurn() {
+		super(Material.wood);
 		setBlockBounds(f, f, f, 1 - f, 1 - f, 1 - f);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1) {
+	public TileEntity createNewTileEntity(World var1, int var2) {
 		return new TileEntityTurn();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon("planks_oak");
 	}
 
@@ -72,8 +73,8 @@ public class BlockTurn extends BlockContainer {
 		return false;
 	}
 
-	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, int par5) {
+    @Override
+	public void onNeighborBlockChange(World world, int i, int j, int k, Block par5) {
 		if (world.isRemote) {
 			return;
 		}
@@ -143,12 +144,12 @@ public class BlockTurn extends BlockContainer {
 	}
 
 	private boolean allow(World world, int i, int j, int k, int g, int g2) {
-		return (world.getBlockId(i, j, k) == Ids.blockWindmill && world
+		return (world.getBlock(i, j, k) == Ids.blockWindmill && world
 				.getBlockMetadata(i, j, k) % 2 == 1)
-				|| (world.getBlockId(i, j, k) == Ids.blockGearbox
+				|| (world.getBlock(i, j, k) == Ids.blockGearbox
 						&& world.getBlockMetadata(i, j, k) != 0 && world
 						.getBlockMetadata(i, j, k) != g2)
-				|| (world.getBlockId(i, j, k) == blockID && world
+				|| (world.getBlock(i, j, k) == this && world
 						.getBlockMetadata(i, j, k) == g);
 	}
 

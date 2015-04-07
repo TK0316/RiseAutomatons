@@ -25,6 +25,7 @@ import net.minecraft.world.World;
 import riseautomatons.Ids;
 import riseautomatons.entity.IBot;
 import riseautomatons.item.EnumSoulCore;
+import riseautomatons.item.Items;
 
 public class AbsorbSoul extends Spell {
 
@@ -39,7 +40,7 @@ public class AbsorbSoul extends Spell {
 		if (!L.isEmpty()){
 			for (int n = 0; n < L.size(); n++){
 				EntityItem e = (EntityItem)L.get(n);
-				if (e.getEntityItem().itemID == Ids.soulCore && e.getEntityItem().getItemDamage() == 4){
+				if (e.getEntityItem().getItem() == Ids.soulCore && e.getEntityItem().getItemDamage() == 4){
 					targetItem = e;
 					break;
 				}
@@ -59,7 +60,7 @@ public class AbsorbSoul extends Spell {
 				if(!complete){
 					System.out.println();
 					if(el instanceof EntityPlayer || el instanceof IBot || el instanceof EntityTameable || el instanceof EntityDragon || el instanceof EntityGolem){
-						System.out.println(el.getEntityName() + " is not target type");
+						System.out.println(el.getCommandSenderName() + " is not target type");
 
 					}else if(el instanceof EntityAnimal){
 						if (!(el instanceof EntityChicken)){
@@ -86,7 +87,7 @@ public class AbsorbSoul extends Spell {
 							dropC(world,el);
 							dropB(world,el);
 						}else if(el instanceof EntityEnderman){
-							EntityItem ei = new EntityItem(world, el.posX + Math.random() * 2 - 1, el.posY, el.posZ + Math.random() * 2 - 1, new ItemStack(Item.flint, 1));
+							EntityItem ei = new EntityItem(world, el.posX + Math.random() * 2 - 1, el.posY, el.posZ + Math.random() * 2 - 1, new ItemStack(Items.flint, 1));
 							world.spawnEntityInWorld(ei);
 						}else{
 							dropB(world,el);
@@ -119,7 +120,7 @@ public class AbsorbSoul extends Spell {
 	private static void dropB(World world,Entity e){
 		EntityItem ei;
 		for (int m = 0; m < 5; m++){
-			ei = new EntityItem(world, e.posX + Math.random() * 2 - 1, e.posY, e.posZ + Math.random() * 2 - 1, new ItemStack(Item.bone, 1));
+			ei = new EntityItem(world, e.posX + Math.random() * 2 - 1, e.posY, e.posZ + Math.random() * 2 - 1, new ItemStack(Items.bone, 1));
 			world.spawnEntityInWorld(ei);
 		}
 	}

@@ -134,7 +134,7 @@ public class ChalkLogic {
 		down = i > 0;
 		up = i < 15;
 
-		if (left && world.getBlockId(rx + (i - 1), j, k + rz) == Ids.blockChalk) {
+		if (left && world.getBlock(rx + (i - 1), j, k + rz) == Ids.blockChalk) {
 			if (A[i - 1][k] == 0) {
 				A[i - 1][k] = world.getBlockMetadata(rx + (i - 1), j, k + rz);
 				neighbor(world, i - 1, j, k);
@@ -143,7 +143,7 @@ public class ChalkLogic {
 
 		if (left
 				&& up
-				&& world.getBlockId(rx + (i - 1), j, rz + k + 1) == Ids.blockChalk) {
+				&& world.getBlock(rx + (i - 1), j, rz + k + 1) == Ids.blockChalk) {
 			if (A[i - 1][k + 1] == 0) {
 				A[i - 1][k + 1] = world.getBlockMetadata(rx + (i - 1), j, rz
 						+ k + 1);
@@ -151,7 +151,7 @@ public class ChalkLogic {
 			}
 		}
 
-		if (up && world.getBlockId(rx + i, j, rz + k + 1) == Ids.blockChalk) {
+		if (up && world.getBlock(rx + i, j, rz + k + 1) == Ids.blockChalk) {
 			if (A[i][k + 1] == 0) {
 				A[i][k + 1] = world.getBlockMetadata(rx + i, j, rz + k + 1);
 				neighbor(world, i, j, k + 1);
@@ -159,7 +159,7 @@ public class ChalkLogic {
 		}
 
 		if (up && right
-				&& world.getBlockId(rx + i + 1, j, rz + k + 1) == Ids.blockChalk) {
+				&& world.getBlock(rx + i + 1, j, rz + k + 1) == Ids.blockChalk) {
 			if (A[i + 1][k + 1] == 0) {
 				A[i + 1][k + 1] = world.getBlockMetadata(rx + i + 1, j, rz + k
 						+ 1);
@@ -167,7 +167,7 @@ public class ChalkLogic {
 			}
 		}
 
-		if (right && world.getBlockId(rx + i + 1, j, rz + k) == Ids.blockChalk) {
+		if (right && world.getBlock(rx + i + 1, j, rz + k) == Ids.blockChalk) {
 			if (A[i + 1][k] == 0) {
 				A[i + 1][k] = world.getBlockMetadata(rx + i + 1, j, rz + k);
 				neighbor(world, i + 1, j, k);
@@ -176,7 +176,7 @@ public class ChalkLogic {
 
 		if (down
 				&& right
-				&& world.getBlockId(rx + i + 1, j, rz + (k - 1)) == Ids.blockChalk) {
+				&& world.getBlock(rx + i + 1, j, rz + (k - 1)) == Ids.blockChalk) {
 			if (A[i + 1][k - 1] == 0) {
 				A[i + 1][k - 1] = world.getBlockMetadata(rx + i + 1, j, rz
 						+ (k - 1));
@@ -184,7 +184,7 @@ public class ChalkLogic {
 			}
 		}
 
-		if (down && world.getBlockId(rx + i, j, rz + (k - 1)) == Ids.blockChalk) {
+		if (down && world.getBlock(rx + i, j, rz + (k - 1)) == Ids.blockChalk) {
 			if (A[i][k - 1] == 0) {
 				A[i][k - 1] = world.getBlockMetadata(rx + i, j, rz + (k - 1));
 				neighbor(world, i, j, k - 1);
@@ -193,7 +193,7 @@ public class ChalkLogic {
 
 		if (left
 				&& down
-				&& world.getBlockId(rx + (i - 1), j, rz + (k - 1)) == Ids.blockChalk) {
+				&& world.getBlock(rx + (i - 1), j, rz + (k - 1)) == Ids.blockChalk) {
 			if (A[i - 1][k - 1] == 0) {
 				A[i - 1][k - 1] = world.getBlockMetadata(rx + (i - 1), j, rz
 						+ (k - 1));
@@ -211,9 +211,9 @@ public class ChalkLogic {
 
 		for (int z = startZ; z < endZ; z++) {
 			for (int x = startX; x < endX; x++) {
-				if (world.getBlockId(x, j, z) == Ids.blockChalk) {
-					world.setBlock(x, j, z, 0, 0, 3);
-					world.setBlock(x, j, z, 0, 0, 3);
+				if (world.getBlock(x, j, z) == Ids.blockChalk) {
+					world.setBlockToAir(x, j, z);
+					world.setBlockToAir(x, j, z);
 				}
 			}
 		}

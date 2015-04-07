@@ -1,15 +1,17 @@
 package riseautomatons.item;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 
 public class ItemChisel extends Item {
-	public ItemChisel(int i) {
-		super(i);
+	public ItemChisel() {
+		super();
 		setMaxDamage(63);
 	}
 
@@ -19,11 +21,11 @@ public class ItemChisel extends Item {
 			float par10) {
 
 		if (l != 0) {
-			int id = world.getBlockId(i, j, k);
+			Block block = world.getBlock(i, j, k);
 
-			if (id == 1) {
+			if (block == Blocks.stone) {
 				if (!world.isAirBlock(i, j + 1, k)) {
-					world.setBlock(i, j, k, 4, 0, 3);
+					world.setBlock(i, j, k, Blocks.cobblestone, 0, 3);
 					itemstack.damageItem(4, entityplayer);
 				} else {
 					world.setBlock(i, j, k, Ids.blockSlab,
@@ -37,14 +39,14 @@ public class ItemChisel extends Item {
 				}
 
 				return true;
-			} else if (id == Ids.blockSlab) {
+			} else if (block == Ids.blockSlab) {
 				int meta = world.getBlockMetadata(i, j, k);
 
 				if (meta < 15) {
 					world.setBlock(i, j, k, Ids.blockSlab,
 							meta + 1, 3); // Ids.chalk,
 				} else {
-					world.setBlock(i, j, k, 0, 0, 3);
+					world.setBlockToAir(i, j, k);
 				}
 
 				if (!world.isRemote)

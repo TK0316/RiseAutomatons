@@ -5,20 +5,20 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 
 public class BlockGlow extends Block {
 
-	private Icon icons[];
+	private IIcon icons[];
 
 	public int D[] = {27, 28};
 
-	protected BlockGlow(int i) {
-		super(i, Material.glass);
+	protected BlockGlow() {
+		super(Material.glass);
 		float f = 0.1875F;
 		float f2 = 1F - f;
 		this.setBlockBounds(f, 0, f, f2, 1F - 0.5F, f2);
@@ -41,8 +41,8 @@ public class BlockGlow extends Block {
 	}
 
 	@Override
-	public Icon getIcon(int i, int par2) {
-		if(this.blockID == Ids.blockGlowy) {
+	public IIcon getIcon(int i, int par2) {
+		if(this == Ids.blockGlowy) {
 			if (i <= 1) {
 				return icons[3];
 			} else {
@@ -60,8 +60,8 @@ public class BlockGlow extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		icons = new Icon[4];
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
+		icons = new IIcon[4];
 		icons[0] = par1IconRegister.registerIcon("riseautomatons:crystal1");
 		icons[1] = par1IconRegister.registerIcon("riseautomatons:crystal2");
 		icons[2] = par1IconRegister.registerIcon("riseautomatons:glowy1");
@@ -102,7 +102,7 @@ public class BlockGlow extends Block {
 
 	@Override
 	public boolean canBlockStay(World world, int i, int j, int k) {
-		if (world.getBlockMaterial(i, j - 1, k).isSolid()) {
+		if (world.getBlock(i, j - 1, k).getMaterial().isSolid()) {
 			return true;
 		} else {
 			return false;

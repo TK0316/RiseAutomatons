@@ -3,7 +3,7 @@ package riseautomatons.entity;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -36,7 +36,7 @@ public class RenderVirus extends Render {
         }
     }
 
-    private void func_77026_a(Tessellator par1Tessellator, Icon icon)
+    private void func_77026_a(Tessellator par1Tessellator, IIcon icon)
     {
         float var3 = 0F;
         float var4 = 1F;

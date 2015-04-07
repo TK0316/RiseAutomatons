@@ -11,7 +11,7 @@ import riseautomatons.RiseAutomatons;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -21,19 +21,19 @@ import net.minecraft.world.World;
 
 public class BlockLatch extends BlockContainer {
 
-	protected BlockLatch(int i) {
-		super(i, Material.iron);
+	protected BlockLatch() {
+		super(Material.iron);
 		float F = 0.25f;
 		setBlockBounds(0.125F, 0.0F, 0.125F, 0.875F, 0.875f, 0.875F);
 	}
 	@Override
-	public TileEntity createNewTileEntity(World var1) {
+	public TileEntity createNewTileEntity(World var1, int var2) {
 		return new TileEntityLatch();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon("iron_block");
 	}
 
@@ -62,7 +62,7 @@ public class BlockLatch extends BlockContainer {
 			int par4, int par5) {
 
 		TileEntityLatch latch = (TileEntityLatch) world
-				.getBlockTileEntity(par2, par3, par4);
+				.getTileEntity(par2, par3, par4);
 
 		if (latch != null) {
 			for (int i = 0; i < latch.getSizeInventory(); i++) {
@@ -84,7 +84,7 @@ public class BlockLatch extends BlockContainer {
 						EntityItem entityitem = new EntityItem(world,
 								(float) par2 + f, (float) par3 + f1,
 								(float) par4 + f2, new ItemStack(
-										itemstack.itemID, j,
+										itemstack.getItem(), j,
 										itemstack.getItemDamage()));
 
 						if (itemstack.hasTagCompound()) {
@@ -109,16 +109,16 @@ public class BlockLatch extends BlockContainer {
 
 	@Override
 	public void onNeighborBlockChange(World world, int par2, int par3,
-			int par4, int par5) {
+			int par4, Block par5) {
 
-		if (par5 > 0 && Block.blocksList[par5].canProvidePower()) {
+		if (par5 != Blocks.air && par5.canProvidePower()) {
 			boolean flag = world.isBlockIndirectlyGettingPowered(par2, par3,
 					par4)
 					|| world.isBlockIndirectlyGettingPowered(par2, par3 + 1,
 							par4);
 
 			if (flag) {
-				world.scheduleBlockUpdate(par2, par3, par4, blockID, tickRate(world));
+				world.scheduleBlockUpdate(par2, par3, par4, this, tickRate(world));
 
 			}
 		}
@@ -139,7 +139,7 @@ public class BlockLatch extends BlockContainer {
 		}
 
 		TileEntityLatch latch = (TileEntityLatch) world
-				.getBlockTileEntity(par2, par3, par4);
+				.getTileEntity(par2, par3, par4);
 
 		if (latch != null) {
 			ep.openGui(RiseAutomatons.instance, Ids.guiTote, world, par2, par3, par4);
@@ -165,7 +165,7 @@ public class BlockLatch extends BlockContainer {
 		}
 
 		TileEntityLatch latch = (TileEntityLatch) world
-				.getBlockTileEntity(x, y, z);
+				.getTileEntity(x, y, z);
 
 		if (latch != null) {
 			int id = latch.getNextStackFromInventory();
@@ -179,32 +179,33 @@ public class BlockLatch extends BlockContainer {
 				world.playAuxSFX(1001, x, y, z, 0);
 			} else {
 				itemstack = latch.dispenserContents[id];
-				if (itemstack.itemID < 256) {
-					Block b = Block.blocksList[itemstack.itemID];
-					if (world.getBlockId(x, y - 1, z) == 0
+
+                Block b = Block.getBlockFromItem(itemstack.getItem());
+				if (b != null) {
+					if (world.isAirBlock(x, y - 1, z)
 							&& b.canPlaceBlockAt(world, x, y - 1, z)) {
 						latch.decrStackSize(id, 1);
-						world.setBlock(x, y - 1, z, itemstack.itemID, 0, 3);
-					} else if (world.getBlockId(x - 1, y, z) == 0
+						world.setBlock(x, y - 1, z, b, 0, 3);
+					} else if (world.isAirBlock(x - 1, y, z)
 							&& b.canPlaceBlockAt(world, x - 1, y, z)) {
 						latch.decrStackSize(id, 1);
-						world.setBlock(x - 1, y, z, itemstack.itemID, 0, 3);
-					} else if (world.getBlockId(x, y, z - 1) == 0
+						world.setBlock(x - 1, y, z, b, 0, 3);
+					} else if (world.isAirBlock(x, y, z - 1)
 							&& b.canPlaceBlockAt(world, x, y, z - 1)) {
 						latch.decrStackSize(id, 1);
-						world.setBlock(x, y, z - 1, itemstack.itemID, 0, 3);
-					} else if (world.getBlockId(x + 1, y, z) == 0
+						world.setBlock(x, y, z - 1, b, 0, 3);
+					} else if (world.isAirBlock(x + 1, y, z)
 							&& b.canPlaceBlockAt(world, x + 1, y, z)) {
 						latch.decrStackSize(id, 1);
-						world.setBlock(x + 1, y, z, itemstack.itemID, 0, 3);
-					} else if (world.getBlockId(x, y, z + 1) == 0
+						world.setBlock(x + 1, y, z, b, 0, 3);
+					} else if (world.isAirBlock(x, y, z + 1)
 							&& b.canPlaceBlockAt(world, x, y, z + 1)) {
 						latch.decrStackSize(id, 1);
-						world.setBlock(x, y, z + 1, itemstack.itemID, 0, 3);
-					} else if (world.getBlockId(x, y + 1, z) == 0
+						world.setBlock(x, y, z + 1, b, 0, 3);
+					} else if (world.isAirBlock(x, y + 1, z)
 							&& b.canPlaceBlockAt(world, x, y + 1, z)) {
 						latch.decrStackSize(id, 1);
-						world.setBlock(x, y + 1, z, itemstack.itemID, 0, 3);
+						world.setBlock(x, y + 1, z, b, 0, 3);
 					}
 				}
 				world.playAuxSFX(2000, x, y, z, j + 1 + (k + 1) * 3);

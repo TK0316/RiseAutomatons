@@ -9,6 +9,7 @@ import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
@@ -25,7 +26,7 @@ public class EntityGolemNormal extends EntityAniBot implements IBot,
 
 	public static final ResourceLocation GOLEM_PNG = new ResourceLocation("riseautomatons", "textures/entities/agol3.png");
 	public static int renderId;
-	public int type = 0;
+	public Block blockType = Blocks.air;
 	public int colo = 0;
 
 	public EntityGolemNormal(World par1World) {
@@ -33,7 +34,7 @@ public class EntityGolemNormal extends EntityAniBot implements IBot,
 		setHealth(getMaxHealth());
 	}
 
-	public EntityGolemNormal(World world, double d, double d1, double d2, int I,
+	public EntityGolemNormal(World world, double d, double d1, double d2, Block I,
 			int h, int dam) {
 		this(world);
 		setPosition(d, d1 + yOffset, d2);
@@ -44,17 +45,17 @@ public class EntityGolemNormal extends EntityAniBot implements IBot,
 		prevPosY = d1;
 		prevPosZ = d2;
 		setPathToEntity(null);
-		setType(I);
+		setType(I.getUnlocalizedName());
 		setColo(dam);
 		setHealth(h);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(h);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(h);
 	}
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.4F);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(5.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4F);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(5.0D);
 	}
 
 	@Override
@@ -88,15 +89,19 @@ public class EntityGolemNormal extends EntityAniBot implements IBot,
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
 		super.writeEntityToNBT(nbttagcompound);
-		nbttagcompound.setInteger("type", getType());
+		nbttagcompound.setInteger("type", 0);
 		nbttagcompound.setInteger("colo", getColo());
+        Block block = getType();
+        String str = block == null ? Blocks.air.getUnlocalizedName() : block.getUnlocalizedName();
+        nbttagcompound.setString("blockType", str);
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
 		super.readEntityFromNBT(nbttagcompound);
-		setType(nbttagcompound.getInteger("type"));
+		nbttagcompound.getInteger("type");
 		setColo(nbttagcompound.getInteger("colo"));
+        setType(nbttagcompound.getString("blockType"));
 	}
 
 	@Override
@@ -110,25 +115,28 @@ public class EntityGolemNormal extends EntityAniBot implements IBot,
 				EntityPlayer.class,
 				boundingBox.expand(f, f, f));
 
-		int T = getType();
+		Block T = getType();
 		for (int j = 0; j < list1.size(); j++) {
 			EntityPlayer entityplayer = (EntityPlayer) list1.get(j);
 
 			if (entityplayer.getCurrentEquippedItem() != null
-					&& entityplayer.getCurrentEquippedItem().itemID == T) {
+					&& entityplayer.getCurrentEquippedItem().getItem() == Item.getItemFromBlock(T)) {
 				return entityplayer;
 			}
 		}
 		return null;
 	}
 
-	protected int getType() {
-		return dataWatcher.getWatchableObjectInt(16);
+	protected Block getType() {
+		String str  = dataWatcher.getWatchableObjectString(17);
+        return Block.getBlockFromName(str);
 	}
 
-	protected void setType(int i) {
-		type = i;
-		dataWatcher.updateObject(16, Integer.valueOf(i));
+	protected void setType(String str) {
+        Block block = Block.getBlockFromName(str);
+		blockType = block;
+        dataWatcher.updateObject(16, 0);
+        dataWatcher.updateObject(17, str);
 	}
 
 	@Override
@@ -139,8 +147,10 @@ public class EntityGolemNormal extends EntityAniBot implements IBot,
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(16, Integer.valueOf(type));
+		dataWatcher.addObject(16, 0);
 		dataWatcher.addObject(14, Integer.valueOf(colo));
+        String str = blockType == null ? Blocks.air.getUnlocalizedName() : blockType.getUnlocalizedName();
+        dataWatcher.addObject(17, str);
 	}
 
 	@Override
@@ -188,15 +198,14 @@ public class EntityGolemNormal extends EntityAniBot implements IBot,
 			int xx = MathHelper.floor_double(posX);
 			int yy = MathHelper.floor_double(posY);
 			int zz = MathHelper.floor_double(posZ);
-			Material mat = worldObj.getBlockMaterial(xx, yy, zz);
-			int iii = getType();
+			Material mat = worldObj.getBlock(xx, yy, zz).getMaterial();
 
-			Block b = Block.blocksList[iii];
+			Block b =  getType();
 			if(b == null) {
 				b = Blocks.frass;
 			}
 			if (b.canPlaceBlockAt(worldObj, xx, yy, zz)) {
-				worldObj.setBlock(xx, yy, zz, b.blockID,
+				worldObj.setBlock(xx, yy, zz, b,
 						getColo(), 3);
 			}
 
@@ -218,9 +227,9 @@ public class EntityGolemNormal extends EntityAniBot implements IBot,
 	}
 
 	@Override
-	protected int getDropItemId() {
-		return 0;
-	}
+    protected Item getDropItem() {
+        return null;
+    }
 
 	@Override
 	public boolean canBreatheUnderwater() {

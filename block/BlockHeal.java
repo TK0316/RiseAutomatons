@@ -7,11 +7,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -22,8 +22,8 @@ public class BlockHeal extends Block {
 			9386051, 11028307, 11753058, 13200761, 14586011, 14722220,
 			15774908, 16428224, 16763351 };
 
-	protected BlockHeal(int i) {
-		super(i, Material.grass);
+	protected BlockHeal() {
+		super(Material.grass);
 		setTickRandomly(true);
 	}
 
@@ -33,7 +33,7 @@ public class BlockHeal extends Block {
 	}
 
 	@Override
-	public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int i,
+	public IIcon getIcon(IBlockAccess par1iBlockAccess, int i,
 			int j, int k, int l) {
 
 	    if (l <= 1)
@@ -46,7 +46,7 @@ public class BlockHeal extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon("riseautomatons:thing");
 	}
 
@@ -67,7 +67,7 @@ public class BlockHeal extends Block {
 
 		int l = world.getBlockMetadata(i, j, k);
 		if (l < 4) {
-			world.setBlock(i, j, k, this.blockID, l + 1, 3);
+			world.setBlock(i, j, k, this, l + 1, 3);
 		}
 	}
 
@@ -102,7 +102,7 @@ public class BlockHeal extends Block {
 				world.spawnParticle("heart", i + 0.5F, j + 0.5F, k + 0.5F,
 						0.0D, 0.4000000059604645D, 0.0D);
 				((EntityLivingBase) entity).heal(l * 2);
-				world.setBlock(i, j, k, this.blockID, 0, 3);
+				world.setBlock(i, j, k, this, 0, 3);
 			}
 		}
 	}

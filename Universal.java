@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.ModLoader;
 import net.minecraft.world.World;
 import riseautomatons.entity.EntityFwooshFX;
 import cpw.mods.fml.relauncher.Side;
@@ -12,24 +11,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class Universal {
 
-	@SideOnly(Side.CLIENT)
-	public static void loadSound() {
-		Minecraft mc = ModLoader.getMinecraftInstance();
-		// mc.session.username="Aninon";
-		// effectRenderer=ModLoader.getMinecraftInstance().effectRenderer;
-		String path = mc.mcDataDir.getAbsolutePath()
-				+ "\\resources\\mod\\sound\\automatons";
-		File jar = new File(path);
-		if (jar.exists()) {
-			File files[] = jar.listFiles();
-			if (files != null && files.length > 0) {
-				for (int i = 0; i < files.length; i++) {
-					mc.sndManager.addSound("automatons/" + files[i].getName());
-				}
-			}
-		}
-		// mc.sndManager.addSound(par1Str, par2File)
-	}
+
 	public static void init() {
 	}
 
@@ -40,7 +22,7 @@ public class Universal {
 			double nx = rand.nextFloat() - 0.5f;
 			double ny = rand.nextFloat() - 0.5f;
 			double nz = rand.nextFloat() - 0.5f;
-			Minecraft mc = ModLoader.getMinecraftInstance();
+			Minecraft mc = Minecraft.getMinecraft();
 			EntityFwooshFX entityFwooshFX = new EntityFwooshFX(world, (posX + nx),
 					posY + ny, posZ + nz, nx * .2f, ny * 1.2f, nz * .2f, 10f,
 					true);

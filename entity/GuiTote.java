@@ -28,8 +28,8 @@ public class GuiTote extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		fontRenderer.drawString("Toter", 70, 6, 0x31a8d4);
-		fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);
+		fontRendererObj.drawString("Toter", 70, 6, 0x31a8d4);
+		fontRendererObj.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);
 	}
 
 }

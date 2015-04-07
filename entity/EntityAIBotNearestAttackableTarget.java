@@ -33,10 +33,10 @@ public class EntityAIBotNearestAttackableTarget extends
 
 		if(taskOwner instanceof EntityOwnedBot) {
 			if(target instanceof EntityPlayer) {
-				String targetName = ((EntityPlayer)target).getEntityName();
+				String targetName = ((EntityPlayer)target).getCommandSenderName();
 				EntityPlayer botOwner = ((EntityOwnedBot)taskOwner).reallyGetBotOwner();
 				if(botOwner == null) return;
-				if(targetName == botOwner.getEntityName()) {
+				if(targetName == botOwner.getCommandSenderName()) {
 					taskOwner.setAttackTarget(null);
 				}
 			}
@@ -45,7 +45,7 @@ public class EntityAIBotNearestAttackableTarget extends
 				EntityPlayer botOwner = ((EntityOwnedBot)taskOwner).reallyGetBotOwner();
 				if(botOwner == null) return;
 				if(targetOwner == null) return;
-				if(targetOwner.getEntityName() == botOwner.getEntityName()) {
+				if(targetOwner.getCommandSenderName() == botOwner.getCommandSenderName()) {
 					taskOwner.setAttackTarget(null);
 				}
 			}

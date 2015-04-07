@@ -2,6 +2,7 @@ package riseautomatons.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
@@ -39,23 +40,23 @@ public class EntityHelios extends EntityFlyingBot implements IBot {
 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.0F);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(3.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.0F);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(3.0D);
 	}
 
 	@Override
 	protected String getLivingSound() {
-		return "automatons.beep";
+		return "riseautomatons:beep";
 	}
 
 	@Override
 	protected String getHurtSound() {
-		return "automatons.clank";
+		return "riseautomatons:clank";
 	}
 
 	@Override
 	protected String getDeathSound() {
-		return "automatons.botdie";
+		return "riseautomatons:botdie";
 	}
 
 	@Override
@@ -135,9 +136,9 @@ public class EntityHelios extends EntityFlyingBot implements IBot {
 	}
 
 	@Override
-	protected int getDropItemId() {
-		return 0;
-	}
+    protected Item getDropItem() {
+        return null;
+    }
 
 	@Override
 	public void onLivingUpdate() {

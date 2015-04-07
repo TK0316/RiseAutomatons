@@ -10,19 +10,20 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
+import riseautomatons.item.Items;
 
 public class BlockBeacon extends BlockContainer {
 
-	protected BlockBeacon(int i) {
-		super(i, Material.circuits);
+	protected BlockBeacon() {
+		super(Material.circuits);
 		setBlockBounds(6f / 16f, 0.0F, 6f / 16f, 10f / 16f, 0.875f, 10f / 16f);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1) {
+	public TileEntity createNewTileEntity(World var1, int par2) {
 		return new TileEntityBeacon();
 	}
 
@@ -30,12 +31,12 @@ public class BlockBeacon extends BlockContainer {
 	public void onBlockAdded(World world, int i, int j, int k) {
 		int ii = BeaconManager.addBeacon(world, i, j, k);
 		TileEntityBeacon beacon = (TileEntityBeacon) world
-				.getBlockTileEntity(i, j, k);
+				.getTileEntity(i, j, k);
 		beacon.numeral = ii;
 	}
 /*
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int j) {
+	public IIcon getBlockTextureFromSideAndMetadata(int i, int j) {
 		if (j == 0) {
 			return 64;
 		} else if (j == 1) {
@@ -53,14 +54,14 @@ public class BlockBeacon extends BlockContainer {
 	public void onBlockDestroyedByPlayer(World world, int i, int j,
 			int k, int l) {
 		TileEntityBeacon beacon = (TileEntityBeacon) world
-				.getBlockTileEntity(i, j, k);
+				.getTileEntity(i, j, k);
 		if(beacon != null) {
 			BeaconManager.removeBeacon(world, beacon.numeral);
 		}
 	}
 
 	@Override
-	public int idDropped(int par1, Random par2Random, int par3) {
+	public Item getItemDropped(int par1, Random par2Random, int par3) {
 		return Ids.itemBeacon;
 	}
 
@@ -82,14 +83,14 @@ public class BlockBeacon extends BlockContainer {
 
 	void select(World world, int i, int j, int k, EntityPlayer ep) {
 		TileEntityBeacon beacon = (TileEntityBeacon) world
-				.getBlockTileEntity(i, j, k);
+				.getTileEntity(i, j, k);
 		BeaconManager.select(ep, beacon.numeral);
 		ItemStack is = ep.inventory.getCurrentItem();
-		if (is != null && is.itemID == Item.stick.itemID) {
+		if (is != null && is.getItem() == Items.stick) {
 			beacon.mode = 2;
 			world.setBlockMetadataWithNotify(i, j, k, 2, 3);
 			world.markBlockForUpdate(i, j, k);
-		} else if (is != null && is.itemID == Item.compass.itemID) {
+		} else if (is != null && is.getItem() == Items.compass) {
 			// beacon.mode=2;
 			// world.setBlockMetadataWithNotify(i, j, k, 2);
 			// world.markBlockAsNeedsUpdate(i, j, k);

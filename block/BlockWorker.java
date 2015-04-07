@@ -5,9 +5,11 @@ import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
@@ -18,20 +20,20 @@ public class BlockWorker extends BlockContainer {
 
 	public static int renderId;
 
-	protected BlockWorker(int par1) {
-		super(par1, Material.piston);
+	protected BlockWorker() {
+		super(Material.piston);
 		float f = 0.0625F;
 		setBlockBounds(f * 2f, 0.0F, f * 2f, 14f * f, 14f * f, 14f * f);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1) {
+    public TileEntity createNewTileEntity(World var1, int var2) {
 		return new TileEntityBeacon();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister
 				.registerIcon("stone");
 	}
@@ -40,7 +42,7 @@ public class BlockWorker extends BlockContainer {
 	public void onBlockAdded(World world, int i, int j, int k) {
 		int ii = BeaconManager.addBeacon(world, i, j, k);
 		TileEntityBeacon beacon = (TileEntityBeacon) world
-				.getBlockTileEntity(i, j, k);
+				.getTileEntity(i, j, k);
 		beacon.numeral = ii;
 		beacon.mode = 9; // worker
 	}
@@ -72,9 +74,9 @@ public class BlockWorker extends BlockContainer {
 		int i = par1World.getBlockMetadata(par2, par3, par4);
 
 		if (i > 0) {
-			par1World.notifyBlocksOfNeighborChange(par2, par3, par4, blockID);
+			par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this);
 			par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4,
-					blockID);
+                    this);
 		}
 
 		super.onBlockDestroyedByPlayer(par1World, par2, par3, par4, par5);
@@ -82,7 +84,7 @@ public class BlockWorker extends BlockContainer {
 
 	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3,
-			int par4, int par5) {
+			int par4, Block par5) {
 		canSnowStay(par1World, par2, par3, par4);
 	}
 
@@ -90,8 +92,8 @@ public class BlockWorker extends BlockContainer {
 
         if (!canPlaceBlockAt(par1World, par2, par3, par4))
         {
-            dropBlockAsItem_do(par1World, par2, par3, par4, new ItemStack(Ids.itemWorker, 1, 0));
-            par1World.setBlock(par2, par3, par4, 0, 0, 3);
+            dropBlockAsItem(par1World, par2, par3, par4, new ItemStack(Ids.itemWorker, 1, 0));
+            par1World.setBlockToAir(par2, par3, par4);
             return false;
         }
         else
@@ -100,13 +102,13 @@ public class BlockWorker extends BlockContainer {
         }	}
 
 	@Override
-	public int idDropped(int par1, Random par2Random, int par3) {
+	public Item getItemDropped(int par1, Random par2Random, int par3) {
 		return Ids.itemWorker;
 	}
 
 	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
-		return par1World.isBlockOpaqueCube(par2, par3 - 1, par4);
+		return par1World.getBlock(par2, par3 - 1, par4).isOpaqueCube();
 	}
 
 	@Override

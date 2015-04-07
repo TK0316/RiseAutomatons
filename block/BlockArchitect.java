@@ -5,27 +5,29 @@ import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 
 public class BlockArchitect extends BlockContainer {
-	protected BlockArchitect(int par1) {
-		super(par1, Material.rock);
+	protected BlockArchitect() {
+		super(Material.rock);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1) {
+	public TileEntity createNewTileEntity(World var1, int par2) {
 		return new TileEntityArchitect();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon("piston_bottom");
 	}
 
@@ -78,14 +80,14 @@ public class BlockArchitect extends BlockContainer {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
+	public void onNeighborBlockChange(World world, int i, int j, int k, Block l) {
 		if (l == Ids.blockChalk)
 			world.setBlock(i, j, k, Ids.blockArchBend, 0, 3);
 	}
 
 	@Override
-	public int idDropped(int par1, Random par2Random, int par3) {
-		return blockID;
+	public Item getItemDropped(int par1, Random par2Random, int par3) {
+		return Item.getItemFromBlock(this);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package riseautomatons.entity;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -14,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.src.ModLoader;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -44,7 +45,7 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 		cargoItems = new ItemStack[21];
 		setSize(2F, 2F);
 		setHealth(getMaxHealth());
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(moveSpeed);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(moveSpeed);
 		isImmuneToFire = true;
 		furnaceBurnTime = 0;
 		currentItemBurnTime = 0;
@@ -60,7 +61,7 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 		super(world);
 		cargoItems = new ItemStack[21];
 		setSize(2F, 2F);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(moveSpeed);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(moveSpeed);
 		setHealth(getMaxHealth());
 		isImmuneToFire = true;
 		furnaceBurnTime = 0;
@@ -84,8 +85,8 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(moveSpeed);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(10.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(moveSpeed);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
 	}
 
 	@Override
@@ -145,7 +146,7 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 	}
 
 	@Override
-	public String getInvName() {
+	public String getInventoryName() {
 		return "Factotum";
 	}
 
@@ -155,7 +156,7 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 	}
 
 	@Override
-	public void onInventoryChanged() {
+	public void markDirty() {
 	}
 
 	@Override
@@ -164,11 +165,11 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 	}
 
 	@Override
-	public void openChest() {
+	public void openInventory() {
 	}
 
 	@Override
-	public void closeChest() {
+	public void closeInventory() {
 	}
 
 	@Override
@@ -195,11 +196,11 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 	public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
 		super.readEntityFromNBT(nbttagcompound);
 
-		NBTTagList nbttaglist = nbttagcompound.getTagList("Items");
+		NBTTagList nbttaglist = (NBTTagList)nbttagcompound.getTag("Items");
 		cargoItems = new ItemStack[getSizeInventory()];
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
 			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
+					.getCompoundTagAt(i);
 			int j = nbttagcompound1.getByte("Slot") & 0xff;
 			if (j >= 0 && j < cargoItems.length) {
 				cargoItems[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
@@ -259,7 +260,7 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 				itemstack.stackSize -= j;
 				EntityItem entityitem = new EntityItem(worldObj, posX
 						+ f, posY + f1, posZ + f2,
-						new ItemStack(itemstack.itemID, j,
+						new ItemStack(itemstack.getItem(), j,
 								itemstack.getItemDamage()));
 				float f3 = 0.05F;
 				entityitem.motionX = (float) rand.nextGaussian() * f3;
@@ -291,12 +292,12 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 
 	@Override
 	protected String getLivingSound() {
-		return "automatons.techy";
+		return "riseautomatons:techy";
 	}
 
 	@Override
 	protected String getHurtSound() {
-		return "automatons.thunk";
+		return "riseautomatons:thunk";
 	}
 
 	@Override
@@ -361,17 +362,17 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 
 		if (cargoItems[0] != null) {
 			itemstack1 = FurnaceRecipes.smelting().getSmeltingResult(
-					cargoItems[0].getItem().itemID);
+					cargoItems[0]);
 		}
 
 		if (cargoItems[1] != null) {
 			itemstack2 = FurnaceRecipes.smelting().getSmeltingResult(
-					cargoItems[1].getItem().itemID);
+					cargoItems[1]);
 		}
 
 		if (cargoItems[2] != null) {
 			itemstack3 = FurnaceRecipes.smelting().getSmeltingResult(
-					cargoItems[2].getItem().itemID);
+					cargoItems[2]);
 		}
 
 		ItemStack itemstack;
@@ -459,7 +460,7 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 		}
 
 		if (flag1) {
-			onInventoryChanged();
+			markDirty();
 		}
 	}
 
@@ -489,11 +490,11 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 		}
 
 		ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(
-				cargoItems[who2Cook].getItem().itemID);
+				cargoItems[who2Cook]);
 
 		if (cargoItems[availableSlot2] == null) {
 			cargoItems[availableSlot2] = itemstack.copy();
-		} else if (cargoItems[availableSlot2].itemID == itemstack.itemID) {
+		} else if (cargoItems[availableSlot2] == itemstack) {
 			cargoItems[availableSlot2].stackSize += itemstack.stackSize;
 		}
 
@@ -513,42 +514,11 @@ public class EntityFactotum extends EntityOwnedBot implements IInventory, IBot {
 	}
 
 	public static int getItemBurnTime2(ItemStack par1ItemStack) {
-		if (par1ItemStack == null) {
-			return 0;
-		}
-
-		int i = par1ItemStack.getItem().itemID;
-
-		if (i < 256 && Block.blocksList[i].blockMaterial == Material.wood) {
-			return 300;
-		}
-
-		if (i == Item.stick.itemID) {
-			return 100;
-		}
-
-		if (i == Item.coal.itemID) {
-			return 1600;
-		}
-
-		if (i == Item.bucketLava.itemID) {
-			return 20000;
-		}
-
-		if (i == Block.sapling.blockID) {
-			return 100;
-		}
-
-		if (i == Item.blazeRod.itemID) {
-			return 2400;
-		} else {
-			return ModLoader.addAllFuel(par1ItemStack.itemID,
-					par1ItemStack.getItemDamage());
-		}
+        return TileEntityFurnace.getItemBurnTime(par1ItemStack);
 	}
 
 	@Override
-	public boolean isInvNameLocalized() {
+	public boolean hasCustomInventoryName() {
 		// TODO 自動生成されたメソッド・スタブ
 		return false;
 	}

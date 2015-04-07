@@ -31,7 +31,7 @@ public class TileEntityLatch extends TileEntity implements IInventory {
 			if (dispenserContents[par1].stackSize <= par2) {
 				ItemStack itemstack = dispenserContents[par1];
 				dispenserContents[par1] = null;
-				onInventoryChanged();
+                markDirty();
 				return itemstack;
 			}
 
@@ -41,7 +41,7 @@ public class TileEntityLatch extends TileEntity implements IInventory {
 				dispenserContents[par1] = null;
 			}
 
-			onInventoryChanged();
+			markDirty();
 			return itemstack1;
 		} else {
 			return null;
@@ -70,15 +70,15 @@ public class TileEntityLatch extends TileEntity implements IInventory {
 			par2ItemStack.stackSize = getInventoryStackLimit();
 		}
 
-		onInventoryChanged();
+        markDirty();
 	}
 
 	@Override
-	public String getInvName() {
+	public String getInventoryName() {
 		return "container.latch";
 	}
 
-	@Override
+    @Override
 	public int getInventoryStackLimit() {
 		return 64;
 	}
@@ -87,12 +87,12 @@ public class TileEntityLatch extends TileEntity implements IInventory {
 	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
 
 		super.readFromNBT(par1NBTTagCompound);
-		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
+		NBTTagList nbttaglist = (NBTTagList)par1NBTTagCompound.getTag("Items");
 		dispenserContents = new ItemStack[getSizeInventory()];
 
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
 			NBTTagCompound nbttagcompound = (NBTTagCompound) nbttaglist
-					.tagAt(i);
+					.getCompoundTagAt(i);
 			int j = nbttagcompound.getByte("Slot") & 0xff;
 
 			if (j >= 0 && j < dispenserContents.length) {
@@ -123,7 +123,7 @@ public class TileEntityLatch extends TileEntity implements IInventory {
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
 
-		if (worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this) {
+		if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != this) {
 			return false;
 		}
 
@@ -133,11 +133,11 @@ public class TileEntityLatch extends TileEntity implements IInventory {
 	}
 
 	@Override
-	public void openChest() {
+	public void openInventory() {
 	}
 
 	@Override
-	public void closeChest() {
+	public void closeInventory() {
 	}
 
 	public int getNextStackFromInventory() {
@@ -156,7 +156,7 @@ public class TileEntityLatch extends TileEntity implements IInventory {
 	}
 
 	@Override
-	public boolean isInvNameLocalized() {
+	public boolean hasCustomInventoryName() {
 		return false;
 	}
 

@@ -68,7 +68,7 @@ public class EntityOmni extends EntityOwnedBot implements IBot {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(1.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1.0D);
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public class EntityOmni extends EntityOwnedBot implements IBot {
 		if(itemStack == null) {
 			return false;
 		}
-		ItemStack key = new ItemStack(itemStack.itemID, 1, itemStack.getItemDamage());
+		ItemStack key = new ItemStack(itemStack.getItem(), 1, itemStack.getItemDamage());
 		for (ItemStack is : preset.keySet()) {
 			if (is.isItemEqual(key)) {
 				try {
@@ -109,20 +109,10 @@ public class EntityOmni extends EntityOwnedBot implements IBot {
 							new Class[] { World.class }).newInstance(
 							new Object[] { this.worldObj }));
 					return true;
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					e.printStackTrace();
-				} catch (SecurityException e) {
+				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
 					e.printStackTrace();
 				}
-				return super.interact(par1EntityPlayer);
+                return super.interact(par1EntityPlayer);
 			}
 		}
 		if(preset.containsKey(key)) {
@@ -138,11 +128,11 @@ public class EntityOmni extends EntityOwnedBot implements IBot {
 				try {
 					boolean obfuscated = true;
 					try {
-						c.getDeclaredMethod("func_70633_aT");
+						c.getDeclaredMethod("func_146068_u");
 					} catch (NoSuchMethodException e) {
 						obfuscated = false;
 					}
-					final Method method = obfuscated ? c.getDeclaredMethod("func_70633_aT") : c.getDeclaredMethod("getDropItemId");
+					final Method method = obfuscated ? c.getDeclaredMethod("func_146068_u") : c.getDeclaredMethod("getDropItem");
 
 					if (!method.isAccessible()) {
 						AccessController
@@ -155,14 +145,14 @@ public class EntityOmni extends EntityOwnedBot implements IBot {
 								});
 					}
 
-					int itemID = (Integer) method.invoke(c.getConstructor(
+					Item item = (Item) method.invoke(c.getConstructor(
 							new Class[] { World.class }).newInstance(
 							new Object[] { this.worldObj }));
-					if(itemID > 0 && Item.itemsList[itemID] != null) {
+					if(item != null) {
 						//System.out.println("DropItemId = "+ Item.itemsList[itemID].getItemName() + " : " + c.getSimpleName());
 					}
 
-					if (itemID == itemStack.itemID) {
+					if (item == itemStack.getItem()) {
 						metamorph((Entity) c.getConstructor(
 								new Class[] { World.class }).newInstance(
 								new Object[] { this.worldObj }));
@@ -230,34 +220,34 @@ public class EntityOmni extends EntityOwnedBot implements IBot {
 	}
 
 	static {
-		preset.put(new ItemStack(Item.gunpowder), EntityCreeper.class);
-		preset.put(new ItemStack(Item.bone), EntitySkeleton.class);
-		preset.put(new ItemStack(Item.silk), EntitySpider.class);
+		preset.put(new ItemStack(Items.gunpowder), EntityCreeper.class);
+		preset.put(new ItemStack(Items.bone), EntitySkeleton.class);
+		preset.put(new ItemStack(Items.string), EntitySpider.class);
 		//preset.put(EntityGiantZombie.class, null);
-		preset.put(new ItemStack(Item.rottenFlesh), EntityZombie.class);
-		preset.put(new ItemStack(Item.slimeBall), EntitySlime.class);
-		preset.put(new ItemStack(Item.ghastTear), EntityGhast.class);
-		preset.put(new ItemStack(Item.swordGold), EntityPigZombie.class);
-		preset.put(new ItemStack(Item.enderPearl), EntityEnderman.class);
-		preset.put(new ItemStack(Block.web), EntityCaveSpider.class);
+		preset.put(new ItemStack(Items.rotten_flesh), EntityZombie.class);
+		preset.put(new ItemStack(Items.slime_ball), EntitySlime.class);
+		preset.put(new ItemStack(Items.ghast_tear), EntityGhast.class);
+		preset.put(new ItemStack(Items.golden_sword), EntityPigZombie.class);
+		preset.put(new ItemStack(Items.ender_pearl), EntityEnderman.class);
+		preset.put(new ItemStack(Blocks.web), EntityCaveSpider.class);
 		//preset.put(EntitySilverfish.class, null);
-		preset.put(new ItemStack(Item.blazeRod), EntityBlaze.class);
-		preset.put(new ItemStack(Item.magmaCream), EntityMagmaCube.class);
+		preset.put(new ItemStack(Items.blaze_rod), EntityBlaze.class);
+		preset.put(new ItemStack(Items.magma_cream), EntityMagmaCube.class);
 		//preset.put(EntityDragon.class, null);
 		//preset.put(EntityWither.class, null);
 		//preset.put(EntityBat.class, null);
 		//preset.put(EntityWitch.class, null);
-		preset.put(new ItemStack(Item.porkRaw), EntityPig.class);
-		preset.put(new ItemStack(Item.porkCooked), EntityPig.class);
-		preset.put(new ItemStack(Block.cloth), EntitySheep.class);
-		preset.put(new ItemStack(Item.leather), EntityCow.class);
-		preset.put(new ItemStack(Item.egg), EntityChicken.class);
-		preset.put(new ItemStack(Item.chickenRaw), EntityChicken.class);
-		preset.put(new ItemStack(Item.feather), EntityChicken.class);
-		preset.put(new ItemStack(Item.dyePowder, 1, 0), EntitySquid.class);
+		preset.put(new ItemStack(Items.porkchop), EntityPig.class);
+		preset.put(new ItemStack(Items.cooked_porkchop), EntityPig.class);
+		preset.put(new ItemStack(Blocks.wool), EntitySheep.class);
+		preset.put(new ItemStack(Items.leather), EntityCow.class);
+		preset.put(new ItemStack(Items.egg), EntityChicken.class);
+		preset.put(new ItemStack(Items.chicken), EntityChicken.class);
+		preset.put(new ItemStack(Items.feather), EntityChicken.class);
+		preset.put(new ItemStack(Items.dye, 1, 0), EntitySquid.class);
 		//preset.put(EntityWolf.class, null);
 		//preset.put(EntityMooshroom.class,  null);
-		preset.put(new ItemStack(Item.snowball), EntitySnowman.class);
+		preset.put(new ItemStack(Items.snowball), EntitySnowman.class);
 		//preset.put(EntityOcelot.class,  null);
 		//preset.put(EntityIronGolem.class,  null);
 		//preset.put(EntityVillager.class,  null);

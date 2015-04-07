@@ -3,11 +3,13 @@ package riseautomatons.entity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 import riseautomatons.Universal;
@@ -41,8 +43,8 @@ public class EntitySlider extends EntityAniBot implements IBot {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(1.0F);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(8.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.0F);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8.0D);
 	}
 
 	@Override
@@ -148,17 +150,17 @@ public class EntitySlider extends EntityAniBot implements IBot {
 
 	@Override
 	protected String getLivingSound() {
-		return "automatons.crank";
+		return "riseautomatons:crank";
 	}
 
 	@Override
 	protected String getHurtSound() {
-		return "automatons.crank";
+		return "riseautomatons:crank";
 	}
 
 	@Override
 	protected String getDeathSound() {
-		return "automatons.botdie";
+		return "riseautomatons:botdie";
 	}
 
 	@Override
@@ -205,8 +207,8 @@ public class EntitySlider extends EntityAniBot implements IBot {
 		}
 	}
 	@Override
-	protected int getDropItemId() {
-		return 0;
+	protected Item getDropItem() {
+		return null;
 	}
 
 	@Override
@@ -245,7 +247,7 @@ public class EntitySlider extends EntityAniBot implements IBot {
 			d1 *= 1.0F; // - entityCollisionReduction;
 			addVelocity(-d, 0.0D, -d1);
 			entity.addVelocity(f, 0.75D, f1);
-			worldObj.playSoundAtEntity(this, "automatons.clank", 1.0F, 1.0F);
+			worldObj.playSoundAtEntity(this, "riseautomatons:clank", 1.0F, 1.0F);
 			// entity.posY+=5;
 		}
 	}
@@ -256,7 +258,7 @@ public class EntitySlider extends EntityAniBot implements IBot {
 		super.onUpdate();
 
 		if (!Universal.improperWorld(worldObj)
-				&& worldObj.difficultySetting == 0) {
+				&& worldObj.difficultySetting == EnumDifficulty.PEACEFUL) {
 			setDead();
 		}
 	}

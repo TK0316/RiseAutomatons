@@ -21,9 +21,9 @@ public class TeleporterEupraxia extends Teleporter {
 			//Material m = par1Entity.worldObj.getBlockMaterial(x, j - 2, z);
 			//if(m == null) continue;
 			//if(m.isSolid() == false) continue;
-			if(par1Entity.worldObj.getBlockId(x, j - 1, z) != 0) continue;
-			if(par1Entity.worldObj.getBlockId(x, j, z) != 0) continue;
-			if(par1Entity.worldObj.getBlockId(x, j + 1, z) != 0) continue;
+			if(!par1Entity.worldObj.isAirBlock(x, j - 1, z)) continue;
+			if(!par1Entity.worldObj.isAirBlock(x, j, z)) continue;
+			if(!par1Entity.worldObj.isAirBlock(x, j + 1, z)) continue;
 			par1Entity.setLocationAndAngles(x, j + 2, z, 0, 0);
 			break;
 		}

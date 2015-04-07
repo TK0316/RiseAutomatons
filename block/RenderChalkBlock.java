@@ -1,11 +1,11 @@
 package riseautomatons.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.src.ModLoader;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -24,7 +24,7 @@ public class RenderChalkBlock implements ISimpleBlockRenderingHandler {
 		Tessellator.instance.draw();
 		Tessellator.instance.startDrawingQuads();
 		//ModLoader.getMinecraftInstance().func_110434_K().func_110577_a(Blocks.PATTERNS_PNG);
-		TextureManager renderengine = ModLoader.getMinecraftInstance().renderEngine;
+		TextureManager renderengine = Minecraft.getMinecraft().renderEngine;
 		//renderengine.func_110577_a(Blocks.PATTERNS_PNG);
 		boolean bool = RenderChalkBlock.chalkPatterns(block, i, j, k, iblockaccess);
 		Tessellator.instance.draw();
@@ -35,7 +35,7 @@ public class RenderChalkBlock implements ISimpleBlockRenderingHandler {
 		return true;
 	}
 
-	private static boolean chalkPatterns(Block block, int i, int j, int k,
+    private static boolean chalkPatterns(Block block, int i, int j, int k,
 			IBlockAccess blockAccess) {
 
 		Tessellator tessellator = Tessellator.instance;
@@ -44,7 +44,7 @@ public class RenderChalkBlock implements ISimpleBlockRenderingHandler {
 		if (l > 0) {
 			l--;
 		}
-		ModLoader.getMinecraftInstance().getTextureManager().bindTexture(new ResourceLocation("riseautomatons", "textures/patterns.png"));
+        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("riseautomatons", "textures/patterns.png"));
 
 		tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess,
 				i, j, k));
@@ -66,10 +66,10 @@ public class RenderChalkBlock implements ISimpleBlockRenderingHandler {
 		// GL11.glColor3f(f9, f9, f2);
 		// tessellator.setColorOpaque_F(f9, f9, f2);
 		tessellator.setColorOpaque_F(1, 1, 1);
-		boolean left = block.blockID == blockAccess.getBlockId(i - 1, j, k);
-		boolean right = block.blockID == blockAccess.getBlockId(i + 1, j, k);
-		boolean down = block.blockID == blockAccess.getBlockId(i, j, k - 1);
-		boolean up = block.blockID == blockAccess.getBlockId(i, j, k + 1);
+		boolean left = block == blockAccess.getBlock(i - 1, j, k);
+		boolean right = block == blockAccess.getBlock(i + 1, j, k);
+		boolean down = block == blockAccess.getBlock(i, j, k - 1);
+		boolean up = block == blockAccess.getBlock(i, j, k + 1);
 
 		if (l > 6) {
 			l = 6;
@@ -224,7 +224,7 @@ public class RenderChalkBlock implements ISimpleBlockRenderingHandler {
 		 * (float)(xo + 16) / 64f; double d3 = ((float)(xo + 16) + 15.99F) /
 		 * 64f; double d5 = (float)yo / 64f; double d7 = ((float)yo + 15.99F) /
 		 * 64f; if(blockAccess.isBlockNormalCube(i - 1, j, k) &&
-		 * blockAccess.getBlockId(i - 1, j + 1, k) == zei_Ids.chalk) {
+		 * blockAccess.getBlock(i - 1, j + 1, k) == zei_Ids.chalk) {
 		 * tessellator.setColorOpaque_F(f * f2, f * f2,f * f2);
 		 * tessellator.addVertexWithUV((double)i + 0.015625D, (float)(j + 1) +
 		 * 0.021875F, k + 1, d3, d5); tessellator.addVertexWithUV((double)i +
@@ -239,7 +239,7 @@ public class RenderChalkBlock implements ISimpleBlockRenderingHandler {
 		 * 0, k + 0, d1, d7 + 0.0625D); tessellator.addVertexWithUV((double)i +
 		 * 0.015625D, (float)(j + 1) + 0.021875F, k + 0, d3, d7 + 0.0625D); }
 		 * if(blockAccess.isBlockNormalCube(i + 1, j, k) &&
-		 * blockAccess.getBlockId(i + 1, j + 1, k) == zei_Ids.chalk) {
+		 * blockAccess.getBlock(i + 1, j + 1, k) == zei_Ids.chalk) {
 		 * tessellator.setColorOpaque_F(f * f2, f * f2, f * f2);
 		 * tessellator.addVertexWithUV((double)(i + 1) - 0.015625D, j + 0, k +
 		 * 1, d1, d7); tessellator.addVertexWithUV((double)(i + 1) - 0.015625D,
@@ -255,7 +255,7 @@ public class RenderChalkBlock implements ISimpleBlockRenderingHandler {
 		 * 1) + 0.021875F, k + 0, d3, d5 + 0.0625D);
 		 * tessellator.addVertexWithUV((double)(i + 1) - 0.015625D, j + 0, k +
 		 * 0, d1, d5 + 0.0625D); } if(blockAccess.isBlockNormalCube(i, j, k - 1)
-		 * && blockAccess.getBlockId(i, j + 1, k - 1) == zei_Ids.chalk) {
+		 * && blockAccess.getBlock(i, j + 1, k - 1) == zei_Ids.chalk) {
 		 * tessellator.setColorOpaque_F(f * f2, f * f2, f * f2);
 		 * tessellator.addVertexWithUV(i + 1, j + 0, (double)k + 0.015625D, d1,
 		 * d7); tessellator.addVertexWithUV(i + 1, (float)(j + 1) + 0.021875F,
@@ -270,7 +270,7 @@ public class RenderChalkBlock implements ISimpleBlockRenderingHandler {
 		 * (double)k + 0.015625D, d3, d5 + 0.0625D);
 		 * tessellator.addVertexWithUV(i + 0, j + 0, (double)k + 0.015625D, d1,
 		 * d5 + 0.0625D); } if(blockAccess.isBlockNormalCube(i, j, k + 1) &&
-		 * blockAccess.getBlockId(i, j + 1, k + 1) == zei_Ids.chalk) {
+		 * blockAccess.getBlock(i, j + 1, k + 1) == zei_Ids.chalk) {
 		 * tessellator.setColorOpaque_F(f * f2, f * f2, f * f2);
 		 * tessellator.addVertexWithUV(i + 1, (float)(j + 1) + 0.021875F,
 		 * (double)(k + 1) - 0.015625D, d3, d5); tessellator.addVertexWithUV(i +
@@ -289,10 +289,10 @@ public class RenderChalkBlock implements ISimpleBlockRenderingHandler {
 		return true;
 	}
 
-	@Override
-	public boolean shouldRender3DInInventory() {
-		return false;
-	}
+    @Override
+    public boolean shouldRender3DInInventory(int modelId) {
+        return false;
+    }
 
 	@Override
 	public int getRenderId() {

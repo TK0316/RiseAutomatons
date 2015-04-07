@@ -13,8 +13,7 @@ import riseautomatons.Universal;
 
 public class ItemSmack extends Item {
 
-	public ItemSmack(int i) {
-		super(i);
+	public ItemSmack() {
 		setMaxDamage(25);
 		this.maxStackSize = 1;
 	}

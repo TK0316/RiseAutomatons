@@ -4,13 +4,14 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import riseautomatons.RiseAutomatons;
 import riseautomatons.entity.EntityWatcher;
@@ -19,12 +20,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBad extends Block {
 
-	private Icon icons[];
+	private IIcon icons[];
 
 	public int D[] = {27, 28};
 
-	protected BlockBad(int i) {
-		super(i, Material.glass);
+	protected BlockBad() {
+		super(Material.glass);
 		float f = 0.1875F;
 		float f2 = 1F - f;
 		this.setBlockBounds(f, 0, f, f2, 1F - 0.5F, f2);
@@ -41,7 +42,7 @@ public class BlockBad extends Block {
 	}
 
 	@Override
-	public Icon getIcon(int i, int par2) {
+	public IIcon getIcon(int i, int par2) {
 		if (i <= 1) {
 			return icons[1];
 		} else {
@@ -51,8 +52,8 @@ public class BlockBad extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		icons = new Icon[2];
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
+		icons = new IIcon[2];
 		icons[0] = par1IconRegister.registerIcon("riseautomatons:crystal1");
 		icons[1] = par1IconRegister.registerIcon("riseautomatons:crystal2");
 	}
@@ -105,7 +106,7 @@ public class BlockBad extends Block {
 
 	@Override
 	public boolean canBlockStay(World world, int i, int j, int k) {
-		if (world.getBlockMaterial(i, j - 1, k).isSolid()) {
+		if (world.getBlock(i, j - 1, k).getMaterial().isSolid()) {
 			return true;
 		} else {
 			return false;
@@ -113,8 +114,8 @@ public class BlockBad extends Block {
 	}
 
 	@Override
-	public int idDropped(int par1, Random par2Random, int par3) {
-		return 0;
+	public Item getItemDropped(int par1, Random par2Random, int par3) {
+		return null;
 	}
 
 }

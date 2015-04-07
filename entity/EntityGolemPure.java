@@ -2,10 +2,12 @@ package riseautomatons.entity;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -27,21 +29,21 @@ public class EntityGolemPure extends EntityGolemNormal implements IBot {
 		texture = GOLEM_PURE_PNG;
 	}
 
-	public EntityGolemPure(World world, double d, double d1, double d2, int I,
+	public EntityGolemPure(World world, double d, double d1, double d2, Block I,
 			int h, int dam) {
 		super(world, d, d1, d2, I, h, dam);
 		setForm(worldObj.rand.nextInt(3));
 	}
 
 	public EntityGolemPure(int u, World world, double d, double d1, double d2,
-			int I, int h, int dam) {
+			Block I, int h, int dam) {
 		super(world, d, d1, d2, I, h, dam);
 		setForm(u);
 	}
 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(5.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(5.0D);
 	}
 
 	@Override
@@ -65,12 +67,12 @@ public class EntityGolemPure extends EntityGolemNormal implements IBot {
 				EntityPlayer.class,
 				boundingBox.expand(f, f, f));
 
-		int T = getType();
+		Block T = getType();
 		for (int j = 0; j < list1.size(); j++) {
 			EntityPlayer entityplayer = (EntityPlayer) list1.get(j);
 
 			if (entityplayer.getCurrentEquippedItem() != null
-					&& entityplayer.getCurrentEquippedItem().itemID == T) {
+					&& entityplayer.getCurrentEquippedItem().getItem() == Item.getItemFromBlock(T)) {
 				return entityplayer;
 			}
 		}
@@ -89,9 +91,10 @@ public class EntityGolemPure extends EntityGolemNormal implements IBot {
 	}
 
 	@Override
-	protected void setType(int i) {
-		this.tasks.addTask(1, new EntityAITempt(this, 0.25F, i, false));
-		super.setType(i);
+    protected void setType(String str) {
+        Block block = Block.getBlockFromName(str);
+		this.tasks.addTask(1, new EntityAITempt(this, 0.25F, Item.getItemFromBlock(block), false));
+		super.setType(str);
 	}
 
 	@Override

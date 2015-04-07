@@ -70,14 +70,12 @@ public class WorldGenFakeTrees extends WorldGenTrees
                     {
                         if (var8 >= 0 && var8 < 256)
                         {
-                            var12 = par1World.getBlockId(var10, var8, var11);
+                            Block block = par1World.getBlock(var10, var8, var11);
 
-                            Block block = Block.blocksList[var12];
-
-                            if (var12 != 0 &&
+                            if (block != Blocks.air &&
                                !block.isLeaves(par1World, var10, var8, var11) &&
-                                var12 != Block.grass.blockID &&
-                                var12 != Block.dirt.blockID &&
+                                    block != Blocks.grass &&
+                                    block != Blocks.dirt &&
                                !block.isWood(par1World, var10, var8, var11))
                             {
                                 var7 = false;
@@ -97,12 +95,12 @@ public class WorldGenFakeTrees extends WorldGenTrees
             }
             else
             {
-                var8 = par1World.getBlockId(par3, par4 - 1, par5);
+                Block b = par1World.getBlock(par3, par4 - 1, par5);
 
-                if ((var8 == Block.grass.blockID || var8 == Block.dirt.blockID || var8 == Blocks.frass.blockID) && par4 < 256 - var6 - 1)
+                if ((b == Blocks.grass || b == Blocks.dirt || b == Blocks.frass) && par4 < 256 - var6 - 1)
                 {
-                	if(var8 == Block.grass.blockID) {
-                		this.setBlock(par1World, par3, par4 - 1, par5, Block.dirt.blockID);
+                	if(b == Blocks.grass) {
+                		this.setBlockAndNotifyAdequately(par1World, par3, par4 - 1, par5, Blocks.dirt, 0);
                 	}
                     var9 = 3;
                     byte var18 = 0;
@@ -123,12 +121,12 @@ public class WorldGenFakeTrees extends WorldGenTrees
                             {
                                 int var17 = var16 - par5;
 
-                                Block block = Block.blocksList[par1World.getBlockId(var14, var11, var16)];
+                                Block block = par1World.getBlock(var14, var11, var16);
 
                                 if ((Math.abs(var15) != var13 || Math.abs(var17) != var13 || par2Random.nextInt(2) != 0 && var12 != 0) &&
                                     (block == null || block.canBeReplacedByLeaves(par1World, var14, var11, var16)))
                                 {
-                                    this.setBlockAndMetadata(par1World, var14, var11, var16, Ids.blockCrink, this.metaLeaves);
+                                    this.setBlockAndNotifyAdequately(par1World, var14, var11, var16, Ids.blockCrink, this.metaLeaves);
                                 }
                             }
                         }
@@ -136,34 +134,33 @@ public class WorldGenFakeTrees extends WorldGenTrees
 
                     for (var11 = 0; var11 < var6; ++var11)
                     {
-                        var12 = par1World.getBlockId(par3, par4 + var11, par5);
 
-                        Block block = Block.blocksList[var12];
+                        Block block = par1World.getBlock(par3, par4 + var11, par5);
 
-                        if (var12 == 0 || block == null || block.isLeaves(par1World, par3, par4 + var11, par5))
+                        if (block == Blocks.air || block == null || block.isLeaves(par1World, par3, par4 + var11, par5))
                         {
-                            this.setBlockAndMetadata(par1World, par3, par4 + var11, par5, Ids.blockTech, 1);
+                            this.setBlockAndNotifyAdequately(par1World, par3, par4 + var11, par5, Ids.blockTech, 1);
 
                             if (this.vinesGrow && var11 > 0)
                             {
                                 if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3 - 1, par4 + var11, par5))
                                 {
-                                    this.setBlockAndMetadata(par1World, par3 - 1, par4 + var11, par5, Block.vine.blockID, 8);
+                                    this.setBlockAndNotifyAdequately(par1World, par3 - 1, par4 + var11, par5, Blocks.vine, 8);
                                 }
 
                                 if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3 + 1, par4 + var11, par5))
                                 {
-                                    this.setBlockAndMetadata(par1World, par3 + 1, par4 + var11, par5, Block.vine.blockID, 2);
+                                    this.setBlockAndNotifyAdequately(par1World, par3 + 1, par4 + var11, par5, Blocks.vine, 2);
                                 }
 
                                 if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3, par4 + var11, par5 - 1))
                                 {
-                                    this.setBlockAndMetadata(par1World, par3, par4 + var11, par5 - 1, Block.vine.blockID, 1);
+                                    this.setBlockAndNotifyAdequately(par1World, par3, par4 + var11, par5 - 1, Blocks.vine, 1);
                                 }
 
                                 if (par2Random.nextInt(3) > 0 && par1World.isAirBlock(par3, par4 + var11, par5 + 1))
                                 {
-                                    this.setBlockAndMetadata(par1World, par3, par4 + var11, par5 + 1, Block.vine.blockID, 4);
+                                    this.setBlockAndNotifyAdequately(par1World, par3, par4 + var11, par5 + 1, Blocks.vine, 4);
                                 }
                             }
                         }
@@ -180,25 +177,25 @@ public class WorldGenFakeTrees extends WorldGenTrees
                             {
                                 for (var15 = par5 - var13; var15 <= par5 + var13; ++var15)
                                 {
-                                    Block block = Block.blocksList[par1World.getBlockId(var14, var11, var15)];
+                                    Block block = par1World.getBlock(var14, var11, var15);
                                     if (block != null && block.isLeaves(par1World, var14, var11, var15))
                                     {
-                                        if (par2Random.nextInt(4) == 0 && par1World.getBlockId(var14 - 1, var11, var15) == 0)
+                                        if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(var14 - 1, var11, var15))
                                         {
                                             this.growVines(par1World, var14 - 1, var11, var15, 8);
                                         }
 
-                                        if (par2Random.nextInt(4) == 0 && par1World.getBlockId(var14 + 1, var11, var15) == 0)
+                                        if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(var14 + 1, var11, var15))
                                         {
                                             this.growVines(par1World, var14 + 1, var11, var15, 2);
                                         }
 
-                                        if (par2Random.nextInt(4) == 0 && par1World.getBlockId(var14, var11, var15 - 1) == 0)
+                                        if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(var14, var11, var15 - 1))
                                         {
                                             this.growVines(par1World, var14, var11, var15 - 1, 1);
                                         }
 
-                                        if (par2Random.nextInt(4) == 0 && par1World.getBlockId(var14, var11, var15 + 1) == 0)
+                                        if (par2Random.nextInt(4) == 0 && par1World.isAirBlock(var14, var11, var15 + 1))
                                         {
                                             this.growVines(par1World, var14, var11, var15 + 1, 4);
                                         }
@@ -216,7 +213,7 @@ public class WorldGenFakeTrees extends WorldGenTrees
                                     if (par2Random.nextInt(4 - var11) == 0)
                                     {
                                         var13 = par2Random.nextInt(3);
-                                        this.setBlockAndMetadata(par1World, par3 + Direction.offsetX[Direction.rotateOpposite[var12]], par4 + var6 - 5 + var11, par5 + Direction.offsetZ[Direction.rotateOpposite[var12]], Block.cocoaPlant.blockID, var13 << 2 | var12);
+                                        this.setBlockAndNotifyAdequately(par1World, par3 + Direction.offsetX[Direction.rotateOpposite[var12]], par4 + var6 - 5 + var11, par5 + Direction.offsetZ[Direction.rotateOpposite[var12]], Blocks.cocoa, var13 << 2 | var12);
                                     }
                                 }
                             }

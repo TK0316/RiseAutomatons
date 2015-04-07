@@ -18,55 +18,55 @@ public class Entities {
 		// Automatons
 		//LanguageRegistry.instance().addStringLocalization("entity.Worker.name", "en_US", "Worker");
 		BlockWorker.renderId = RenderingRegistry.getNextAvailableRenderId();
-		EntityRegistry.registerGlobalEntityID(EntityWorker.class, "Worker", Ids.entityWorkerId, 0xCCCCCC, 0xFFFFFF);
+		EntityRegistry.registerModEntity(EntityWorker.class, "Worker", Ids.entityWorkerId, RiseAutomatons.instance, 64, 2, true);
 
 		//LanguageRegistry.instance().addStringLocalization("entity.Sentry.name", "en_US", "Sentry");
 		BlockSentry.renderId = RenderingRegistry.getNextAvailableRenderId();
-		EntityRegistry.registerGlobalEntityID(EntitySentry.class, "Sentry", Ids.entitySentryId, 0xCCCCCC, 0xFFFFFF);
+		EntityRegistry.registerModEntity(EntitySentry.class, "Sentry", Ids.entitySentryId, RiseAutomatons.instance, 64, 2, true);
 
 		//LanguageRegistry.instance().addStringLocalization("entity.Tote.name", "en_US", "Tote");
 		BlockTote.renderId = RenderingRegistry.getNextAvailableRenderId();
-		EntityRegistry.registerGlobalEntityID(EntityTote.class, "Tote", Ids.entityToteId, 0xCCCCCC, 0xFFFFFF);
+		EntityRegistry.registerModEntity(EntityTote.class, "Tote", Ids.entityToteId, RiseAutomatons.instance, 64, 2, true);
 
 		//LanguageRegistry.instance().addStringLocalization("entity.Golem.name", "en_US", "Golem");
 		EntityGolemNormal.renderId = RenderingRegistry.getNextAvailableRenderId();
-		EntityRegistry.registerGlobalEntityID(EntityGolemNormal.class, "Golem", Ids.entityGolemId, 0xCCCCCC, 0xFFFFFF);
+		EntityRegistry.registerModEntity(EntityGolemNormal.class, "Golem", Ids.entityGolemId, RiseAutomatons.instance, 64, 2, true);
 
 		//LanguageRegistry.instance().addStringLocalization("entity.GolemPure.name", "en_US", "GolemPure");
 		EntityGolemNormal.renderId = RenderingRegistry.getNextAvailableRenderId();
-		EntityRegistry.registerGlobalEntityID(EntityGolemPure.class, "GolemPure", Ids.entityGolemPureId, 0xCCCCCC, 0xFFFFFF);
+		EntityRegistry.registerModEntity(EntityGolemPure.class, "GolemPure", Ids.entityGolemPureId, RiseAutomatons.instance, 64, 2, true);
 
 		//LanguageRegistry.instance().addStringLocalization("entity.Watcher.name", "en_US", "Watcher");
 		EntityWatcher.renderId = RenderingRegistry.getNextAvailableRenderId();
-		EntityRegistry.registerGlobalEntityID(EntityWatcher.class, "Watcher", Ids.entityWatcherId, 0xCCCCCC, 0xFFFFFF);
+		EntityRegistry.registerModEntity(EntityWatcher.class, "Watcher", Ids.entityWatcherId, RiseAutomatons.instance, 64, 2, true);
 
 		//LanguageRegistry.instance().addStringLocalization("entity.Slider.name", "en_US", "Slider");
 		EntitySlider.renderId = RenderingRegistry.getNextAvailableRenderId();
-		EntityRegistry.registerGlobalEntityID(EntitySlider.class, "Slider", Ids.entitySliderId, 0xCCCCCC, 0xFFFFFF);
+		EntityRegistry.registerModEntity(EntitySlider.class, "Slider", Ids.entitySliderId, RiseAutomatons.instance, 64, 2, true);
 
 		//LanguageRegistry.instance().addStringLocalization("entity.Bobby.name", "en_US", "Bobby");
 		EntityBobby.renderId = RenderingRegistry.getNextAvailableRenderId();
-		EntityRegistry.registerGlobalEntityID(EntityBobby.class, "Bobby", Ids.entityBobbyId, 0xCCCCCC, 0xFFFFFF);
+		EntityRegistry.registerModEntity(EntityBobby.class, "Bobby", Ids.entityBobbyId, RiseAutomatons.instance, 64, 2, true);
 
 		//LanguageRegistry.instance().addStringLocalization("entity.Helios.name", "en_US", "Helios");
 		EntityHelios.renderId = RenderingRegistry.getNextAvailableRenderId();
-		EntityRegistry.registerGlobalEntityID(EntityHelios.class, "Helios", Ids.entityHeliosId, 0xCCCCCC, 0xFFFFFF);
+		EntityRegistry.registerModEntity(EntityHelios.class, "Helios", Ids.entityHeliosId, RiseAutomatons.instance, 64, 2, true);
 
 		//LanguageRegistry.instance().addStringLocalization("entity.Factotum.name", "en_US", "Factotum");
 		EntityFactotum.renderId = RenderingRegistry.getNextAvailableRenderId();
-		EntityRegistry.registerGlobalEntityID(EntityFactotum.class, "Factotum", Ids.entityFactotumId, 0xCCCCCC, 0xFFFFFF);
+		EntityRegistry.registerModEntity(EntityFactotum.class, "Factotum", Ids.entityFactotumId, RiseAutomatons.instance, 64, 2, true);
 
 		//LanguageRegistry.instance().addStringLocalization("entity.Beacon.name", "en_US", "Beacon");
 		EntityBeacon.renderId = RenderingRegistry.getNextAvailableRenderId();
-		EntityRegistry.registerGlobalEntityID(EntityBeacon.class, "Beacon", Ids.entityBeaconId, 0xCCCCCC, 0xFFFFFF);
+		EntityRegistry.registerModEntity(EntityBeacon.class, "Beacon", Ids.entityBeaconId, RiseAutomatons.instance, 64, 2, true);
 
 		//LanguageRegistry.instance().addStringLocalization("entity.Guard.name", "en_US", "Guard");
 		EntityGuard.renderId = RenderingRegistry.getNextAvailableRenderId();
-		EntityRegistry.registerGlobalEntityID(EntityGuard.class, "Guard", Ids.entityGuardId, 0xCCCCCC, 0xFFFFFF);
+		EntityRegistry.registerModEntity(EntityGuard.class, "Guard", Ids.entityGuardId, RiseAutomatons.instance, 64, 2, true);
 
 		//LanguageRegistry.instance().addStringLocalization("entity.Omni.name", "en_US", "Omni");
 		EntityOmni.renderId = RenderingRegistry.getNextAvailableRenderId();
-		EntityRegistry.registerGlobalEntityID(EntityOmni.class, "Omni", Ids.entityOmniId, 0xCCCCCC, 0xFFFFFF);
+		EntityRegistry.registerModEntity(EntityOmni.class, "Omni", Ids.entityOmniId, RiseAutomatons.instance, 64, 2, true);
 
 		EntityRegistry.registerModEntity(EntityLaser.class, "Laser", Ids.entityLaserId, RiseAutomatons.instance, 64, 2, true);
 		EntityRegistry.registerGlobalEntityID(EntityLaser.class, "Laser", Ids.entityLaserId);

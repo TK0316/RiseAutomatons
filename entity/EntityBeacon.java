@@ -10,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 import riseautomatons.Universal;
+import riseautomatons.item.Items;
 
 public class EntityBeacon extends EntityOwnedBot {
 
@@ -41,7 +42,7 @@ public class EntityBeacon extends EntityOwnedBot {
 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(1.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(1.0D);
 	}
 
 	@Override
@@ -121,11 +122,11 @@ public class EntityBeacon extends EntityOwnedBot {
 	@Override
 	public boolean interact(EntityPlayer entityplayer) {
 
-		if (entityplayer.username.equalsIgnoreCase(getBotOwner())) {
+		if (entityplayer.getCommandSenderName().equalsIgnoreCase(getBotOwner())) {
 			ItemStack itemstack = entityplayer.inventory.getCurrentItem();
 
 			if (itemstack != null
-					&& itemstack.itemID == Item.stick.itemID) {
+					&& itemstack.getItem() == Items.stick) {
 					setSiren(2);
 			} else {
 				if (getSiren() != 0) {

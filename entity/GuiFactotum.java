@@ -40,9 +40,9 @@ public class GuiFactotum extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		fontRenderer.drawString("Furnace", 12, 6, 0xD14600);
-		fontRenderer.drawString("Chest", 110, 6, 0x8C7632);
-		fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);
+		fontRendererObj.drawString("Furnace", 12, 6, 0xD14600);
+		fontRendererObj.drawString("Chest", 110, 6, 0x8C7632);
+		fontRendererObj.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);
 	}
 
 }

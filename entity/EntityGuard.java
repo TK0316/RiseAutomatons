@@ -49,9 +49,9 @@ public class EntityGuard extends EntityOwnedBot implements IBot {
 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(24.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.0F);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(20.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(24.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.0F);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
 	}
 
 	public EntityGuard(World world, double d, double d1, double d2) {
@@ -83,8 +83,8 @@ public class EntityGuard extends EntityOwnedBot implements IBot {
 	}
 
 	@Override
-	protected int getDropItemId() {
-		return 0;
+	protected Item getDropItem() {
+		return null;
 	}
 
 	@Override
@@ -104,12 +104,12 @@ public class EntityGuard extends EntityOwnedBot implements IBot {
 
 	@Override
 	protected String getLivingSound() {
-		return "automatons.swee";
+		return "riseautomatons:swee";
 	}
 
 	@Override
 	protected String getHurtSound() {
-		return "automatons.clank";
+		return "riseautomatons:clank";
 	}
 
 	@Override
@@ -135,7 +135,7 @@ public class EntityGuard extends EntityOwnedBot implements IBot {
 				entitylaser.posY = (this.posY + this.height / 1.5F);
 				entitylaser.posZ = this.posZ;
 				this.worldObj.spawnEntityInWorld(entitylaser);
-				this.worldObj.playSoundAtEntity(this, "automatons.fwoom", 1.0F, 1.0F);
+				this.worldObj.playSoundAtEntity(this, "riseautomatons:fwoom", 1.0F, 1.0F);
 				this.attackTime = 40;
 			}
 			this.rotationYawHead = (float) ((Math.atan2(d1, d)) * 180D / Math.PI - 90D);
@@ -183,10 +183,10 @@ public class EntityGuard extends EntityOwnedBot implements IBot {
 	@Override
 	public void onLivingUpdate() {
 		if (!Universal.improperWorld(this.worldObj)) {
-			if (!this.worldObj.getBlockMaterial(
+			if (!this.worldObj.getBlock(
 					MathHelper.floor_double(this.posX),
 					MathHelper.floor_double(this.posY) - 1,
-					MathHelper.floor_double(this.posZ)).isSolid()) {
+					MathHelper.floor_double(this.posZ)).getMaterial().isSolid()) {
 				dropper();
 			}
 			updateEntityActionState();

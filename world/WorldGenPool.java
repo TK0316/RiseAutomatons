@@ -2,64 +2,75 @@ package riseautomatons.world;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import riseautomatons.Ids;
+import static net.minecraft.init.Blocks.air;
+import static net.minecraft.init.Blocks.double_stone_slab;
+import static net.minecraft.init.Blocks.stone_slab;
+import static net.minecraft.init.Blocks.cobblestone;
+import static net.minecraft.init.Blocks.mossy_cobblestone;
+import static net.minecraft.init.Blocks.stone_pressure_plate;
+import static net.minecraft.init.Blocks.flowing_water;
+import static net.minecraft.init.Blocks.water;
+import static net.minecraft.init.Blocks.stone;
+import static net.minecraft.init.Blocks.redstone_torch;
 
 public class WorldGenPool extends WorldGenerator {
 
-	int xyz1[][][]={{
-	{43,43,43,43,43},
-	{43,43,43,43,43},
-	{43,43,43,43,43},
-	{43,43,43,43,43},
-	{43,43,43,43,43}},
+	Block xyz1[][][]={{
+	{double_stone_slab,double_stone_slab,double_stone_slab,double_stone_slab,double_stone_slab},
+	{double_stone_slab,double_stone_slab,double_stone_slab,double_stone_slab,double_stone_slab},
+	{double_stone_slab,double_stone_slab,double_stone_slab,double_stone_slab,double_stone_slab},
+	{double_stone_slab,double_stone_slab,double_stone_slab,double_stone_slab,double_stone_slab},
+	{double_stone_slab,double_stone_slab,double_stone_slab,double_stone_slab,double_stone_slab}},
 	{
-	{43,43,43,43,43},
-	{43,9,9,9,43},
-	{43,9,43,9,43},
-	{43,9,9,9,43},
-	{43,43,43,43,43}},
+	{double_stone_slab,double_stone_slab,double_stone_slab,double_stone_slab,double_stone_slab},
+	{double_stone_slab,water,water,water,double_stone_slab},
+	{double_stone_slab,water,double_stone_slab,water,double_stone_slab},
+	{double_stone_slab,water,water,water,double_stone_slab},
+	{double_stone_slab,double_stone_slab,double_stone_slab,double_stone_slab,double_stone_slab}},
 	{
-	{0,44,44,44,0},
-	{44,0,0,0,44},
-	{44,0,1,0,44},
-	{44,0,0,0,44},
-	{0,44,44,44,0}},
+	{air,stone_slab,stone_slab,stone_slab,air},
+	{stone_slab,air,air,air,stone_slab},
+	{stone_slab,air,stone,air,stone_slab},
+	{stone_slab,air,air,air,stone_slab},
+	{air,stone_slab,stone_slab,stone_slab,air}},
 	{
-	{0,0,0,0,0},
-	{0,0,0,0,0},
-	{0,0,8,0,0},
-	{0,0,0,0,0},
-	{0,0,0,0,0}}};
+	{air,air,air,air,air},
+	{air,air,air,air,air},
+	{air,air,flowing_water,air,air},
+	{air,air,air,air,air},
+	{air,air,air,air,air}}};
 
 
-	int S=Ids.blockGearbox; //deployer
-	int t=Ids.blockTech;
-	int xyz2[][][]={{
-	{4,4,4,48,4},
-	{48,4,4,48,4},
-	{4,48,4,4,4},
-	{4,4,4,4,48},
-	{4,4,4,4,4}},
+	Block S=Ids.blockGearbox; //deployer
+	Block t=Ids.blockTech;
+	Block xyz2[][][]={{
+	{cobblestone,cobblestone,cobblestone,mossy_cobblestone,cobblestone},
+	{mossy_cobblestone,cobblestone,cobblestone,mossy_cobblestone,cobblestone},
+	{cobblestone,mossy_cobblestone,cobblestone,cobblestone,cobblestone},
+	{cobblestone,cobblestone,cobblestone,cobblestone,mossy_cobblestone},
+	{cobblestone,cobblestone,cobblestone,cobblestone,cobblestone}},
 	{
 	{t,t,t,t,t},
-	{t,4,4,48,t},
-	{t,4,76,4,t},
-	{t,4,48,4,t},
+	{t,cobblestone,cobblestone,mossy_cobblestone,t},
+	{t,cobblestone,redstone_torch,cobblestone,t},
+	{t,cobblestone,mossy_cobblestone,cobblestone,t},
 	{t,t,t,t,t}},
 	{
-	{0,0,0,0,0},
-	{0,70,70,70,0},
-	{0,70,S,70,0},
-	{0,70,70,70,0},
-	{0,0,0,0,0}}
+	{air,air,air,air,air},
+	{air,stone_pressure_plate,stone_pressure_plate,stone_pressure_plate,air},
+	{air,stone_pressure_plate,S,stone_pressure_plate,air},
+	{air,stone_pressure_plate,stone_pressure_plate,stone_pressure_plate,air},
+	{air,air,air,air,air}}
 	};
 
 	@Override
 	public boolean generate(World world, Random random, int i, int j, int k) {
 
-		int xyz[][][];
+		Block xyz[][][];
 		boolean bb = false;
 		if (random.nextInt(3) == 0) {
 			xyz = xyz1;

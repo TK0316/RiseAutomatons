@@ -4,31 +4,28 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
+import static net.minecraft.init.Blocks.*;
 
 public class ItemAPickaxe extends ItemPickaxe {
 	  private static Block[] blocksEffectiveAgainst = {
-		    Block.cobblestone, Block.stone, Block.sandStone, Block.cobblestoneMossy, Block.oreIron, Block.blockIron, Block.oreCoal, Block.blockGold,
-		    Block.oreGold, Block.oreDiamond, Block.blockDiamond, Block.ice, Block.netherrack, Block.oreLapis, Block.blockLapis, Block.blocksList[Ids.blockTech], Block.blocksList[Ids.blockFrass] };
+		    cobblestone, stone, sandstone, mossy_cobblestone, iron_ore, iron_block, coal_ore, coal_block, emerald_block, emerald_ore, obsidian, gold_block,
+              gold_ore, diamond_ore, diamond_block, ice, netherrack, lapis_ore, lapis_block, Ids.blockTech, Ids.blockFrass };
 
-	public ItemAPickaxe(int i, int j) {
-		super(i, EnumToolMaterial.EMERALD);
+	public ItemAPickaxe() {
+		super(Item.ToolMaterial.EMERALD);
 		this.efficiencyOnProperMaterial = 4.0F;
 		setMaxDamage(4);
 		this.efficiencyOnProperMaterial = 100.0F;
-		this.damageVsEntity = (j + 2);
-	}
-
-	public ItemAPickaxe(int i) {
-		this(i, 2);
 	}
 
 	@Override
-	public float getStrVsBlock(ItemStack par1ItemStack, Block block) {
+	public float func_150893_a(ItemStack par1ItemStack, Block block) {
 		return block.getBlockHardness(null, 0,0,0) > 3.0F ? 1.0F : 100.0F;
 	}
 
@@ -41,7 +38,7 @@ public class ItemAPickaxe extends ItemPickaxe {
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack itemstack, World par2World,
-			int par3, int par4, int par5, int par6,
+			Block par3, int par4, int par5, int par6,
 			EntityLivingBase entityliving) {
 		itemstack.damageItem(1, entityliving);
 	    return true;
@@ -53,7 +50,7 @@ public class ItemAPickaxe extends ItemPickaxe {
 	}
 
 	@Override
-	public boolean canHarvestBlock(Block block) {
+	public boolean func_150897_b(Block block) {
 		return block.getBlockHardness(null, 0,0,0) <= 3.0F;
 	}
 

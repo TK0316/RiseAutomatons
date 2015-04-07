@@ -5,10 +5,11 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
@@ -18,12 +19,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockFrass extends Block {
 
-	private Icon icons[];
+	private IIcon icons[];
 
 	public static boolean spread = true;
 
-	public BlockFrass(int par1) {
-		super(par1, Material.grass);
+	public BlockFrass() {
+		super(Material.grass);
 		setTickRandomly(true);
 
 	}
@@ -31,9 +32,9 @@ public class BlockFrass extends Block {
 	@Override
 	public boolean shouldSideBeRendered(IBlockAccess iblockaccess,
 			int i, int j, int k, int l) {
-		int i1 = iblockaccess.getBlockId(i, j, k);
+		Block i1 = iblockaccess.getBlock(i, j, k);
 
-		if (i1 == blockID) {
+		if (i1 == this) {
 			return false;
 		} else {
 			return super.shouldSideBeRendered(iblockaccess, i, j, k, l);
@@ -42,7 +43,7 @@ public class BlockFrass extends Block {
 
 	@Override
 	public boolean isOpaqueCube() {
-		return (!Block.leaves.graphicsLevel);
+		return Blocks.leaves.isOpaqueCube();
 	}
 
 	@Override
@@ -70,24 +71,24 @@ public class BlockFrass extends Block {
 						if(random.nextInt(10) != 1) {
 							continue;
 						}
-						int blockId = world.getBlockId(i + x, j + y, k + z);
+						Block block = world.getBlock(i + x, j + y, k + z);
 						int meta = 0;
-						if(blockId == Block.sand.blockID) {
+						if(block == Blocks.sand) {
 							meta = 1;
 						}
-						else if(blockId == Block.grass.blockID) {
+						else if(block == Blocks.grass) {
 							meta = 2;
 						}
-						else if(blockId == Block.dirt.blockID) {
+						else if(block == Blocks.dirt) {
 							meta = 2;
 						}
-						else if(blockId == Block.blockClay.blockID) {
+						else if(block == Blocks.clay) {
 							meta = 3;
 						}
-						else if(blockId == Block.waterStill.blockID) {
+						else if(block == Blocks.water) {
 							meta = 4;
 						}
-						else if(blockId == Block.ice.blockID) {
+						else if(block == Blocks.ice) {
 							meta = 4;
 						}
 						else {
@@ -109,9 +110,9 @@ public class BlockFrass extends Block {
 						}
 					}
 					else {
-						int blockId = world.getBlockId(i + x, j + y, k + z);
+						Block block = world.getBlock(i + x, j + y, k + z);
 						int meta = world.getBlockMetadata(i + x, j + y, k + z);
-						if(blockId == Blocks.frass.blockID) {
+						if(block == Blocks.frass) {
 							if(meta < 8) {
 								world.setBlock(i + x, j + y, k + z, Ids.blockFrass, meta + 8, 3);
 							}
@@ -125,19 +126,19 @@ public class BlockFrass extends Block {
 		}
 		switch(m) {
 		case 8:
-			world.setBlock(i, j, k, 0, 0, 3);
+			world.setBlockToAir(i, j, k);
 			break;
 		case 9:
-			world.setBlock(i, j, k, Block.sand.blockID, 0, 3);
+			world.setBlock(i, j, k, Blocks.sand, 0, 3);
 			break;
 		case 10:
-			world.setBlock(i, j, k, Block.dirt.blockID, 0, 3);
+			world.setBlock(i, j, k, Blocks.dirt, 0, 3);
 			break;
 		case 11:
-			world.setBlock(i, j, k, Block.blockClay.blockID, 0, 3);
+			world.setBlock(i, j, k, Blocks.clay, 0, 3);
 			break;
 		case 12:
-			world.setBlock(i, j, k, Block.waterStill.blockID, 0, 3);
+			world.setBlock(i, j, k, Blocks.water, 0, 3);
 			break;
 		default:
 			break;
@@ -149,23 +150,23 @@ public class BlockFrass extends Block {
 			int k, int l) {
 		switch(l) {
 		case 0:
-			world.setBlock(i, j, k, 0, 0, 3);
+			world.setBlockToAir(i, j, k);
 			break;
 		case 1:
 		case 9:
-			world.setBlock(i, j, k, Block.sand.blockID, 0, 3);
+			world.setBlock(i, j, k, Blocks.sand, 0, 3);
 			break;
 		case 2:
 		case 10:
-			world.setBlock(i, j, k, Block.dirt.blockID, 0, 3);
+			world.setBlock(i, j, k, Blocks.dirt, 0, 3);
 			break;
 		case 3:
 		case 11:
-			world.setBlock(i, j, k, Block.blockClay.blockID, 0, 3);
+			world.setBlock(i, j, k, Blocks.clay, 0, 3);
 			break;
 		case 4:
 		case 12:
-			world.setBlock(i, j, k, Block.waterStill.blockID, 0, 3);
+			world.setBlock(i, j, k, Blocks.water, 0, 3);
 			break;
 		default:
 			break;
@@ -179,11 +180,11 @@ public class BlockFrass extends Block {
 
 	@Override
 	public int getRenderBlockPass() {
-		return (!Block.leaves.graphicsLevel) ? 0 : 1;
+		return (Blocks.leaves.isOpaqueCube()) ? 0 : 1;
 	}
 
 	@Override
-	public Icon getIcon(int par1, int meta) {
+	public IIcon getIcon(int par1, int meta) {
 		if(meta == 0) {
 			return icons[7];
 		}
@@ -213,8 +214,8 @@ public class BlockFrass extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		icons = new Icon[8];
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
+		icons = new IIcon[8];
 		icons[0] = par1IconRegister.registerIcon("riseautomatons:frass1");
 		icons[1] = par1IconRegister.registerIcon("riseautomatons:frass2");
 		icons[2] = par1IconRegister.registerIcon("riseautomatons:frass3");
@@ -227,7 +228,7 @@ public class BlockFrass extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(int par1, CreativeTabs tab, List subItems) {
+	public void getSubBlocks(Item par1, CreativeTabs tab, List subItems) {
 		subItems.add(new ItemStack(this, 1, 0));
 		subItems.add(new ItemStack(this, 1, 8));
 	}

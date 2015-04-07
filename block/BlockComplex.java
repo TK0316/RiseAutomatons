@@ -4,43 +4,43 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockComplex extends Block {
 
-	private Icon icons[];
+	private IIcon icons[];
 
-	protected BlockComplex(int i) {
-		super(i, Material.rock);
+	protected BlockComplex() {
+		super(Material.rock);
 		loadSprites();
 	}
 
-	public BlockComplex(int par1, int par2, Material par3Material) {
-		super(par1,  Material.rock);
+	public BlockComplex(int par2, Material par3Material) {
+		super(Material.rock);
 		loadSprites();
 	}
 
-	public BlockComplex(int par1, Material par2Material) {
-		super(par1, Material.rock);
+	public BlockComplex(Material par2Material) {
+		super(Material.rock);
 		loadSprites();
 	}
 
 	@Override
-	public Icon getIcon(int i, int j) {
+	public IIcon getIcon(int i, int j) {
 		int n = MathHelper.clamp_int(j, 0, 3);
 		return icons[n]; // D[0]
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		icons = new Icon[4];
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
+		icons = new IIcon[4];
 		icons[0] = par1IconRegister.registerIcon("riseautomatons:tech");
 		icons[1] = par1IconRegister.registerIcon("riseautomatons:tree");
 		icons[2] = par1IconRegister.registerIcon("riseautomatons:wallo");

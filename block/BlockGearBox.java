@@ -16,13 +16,13 @@ public class BlockGearBox extends Block {
 	int jt = 0;
 	int kt = 0;
 
-	protected BlockGearBox(int i, int j, Material mat) {
-		super(i, mat);
+	protected BlockGearBox(int j, Material mat) {
+		super(mat);
 		// setBlockBounds(f,f,f,1-f,1-f,1-f);
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, int par5) {
+	public void onNeighborBlockChange(World world, int i, int j, int k, Block par5) {
 		if (world.isRemote) {
 			return;
 		}
@@ -60,7 +60,7 @@ public class BlockGearBox extends Block {
 	}
 
 	private boolean allow(World world, int i, int j, int k, int g) {
-		boolean b = (world.getBlockId(i, j, k) == Ids.blockTurn && world
+		boolean b = (world.getBlock(i, j, k) == Ids.blockTurn && world
 				.getBlockMetadata(i, j, k) == g);
 
 		if (b) {

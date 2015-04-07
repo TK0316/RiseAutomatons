@@ -1,5 +1,7 @@
 package riseautomatons.item;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -7,7 +9,11 @@ import net.minecraftforge.oredict.OreDictionary;
 import riseautomatons.Ids;
 import riseautomatons.RiseAutomatons;
 
-public class Items {
+import java.awt.*;
+
+import static net.minecraft.init.Items.*;
+
+public class Items extends net.minecraft.init.Items {
 
 	public static final ResourceLocation ITEMS_PNG = new ResourceLocation("riseautomatons", "textures/items.png");
 	public static final ResourceLocation CRAFTSET_PNG = new ResourceLocation("riseautomatons", "craftset.png");
@@ -57,101 +63,128 @@ public class Items {
 		LanguageRegistry.instance().addNameForObject(new ItemStack(Ids.itemVirus, 1, 0), "en_US", "Self-Destruction Program(Inactive)");
 		LanguageRegistry.instance().addNameForObject(new ItemStack(Ids.itemVirus, 1, 1), "en_US", "Self-Destruction Program(Active)");
 		*/
+        GameRegistry.registerItem(worker, "itemWorker");
+        GameRegistry.registerItem(sentry, "itemSentry");
+        GameRegistry.registerItem(factotum, "itemFactotum");
+        GameRegistry.registerItem(beacon, "itemBeacon");
+        GameRegistry.registerItem(guard, "itemGuard");
+        GameRegistry.registerItem(omni, "itemOmni");
+        GameRegistry.registerItem(tote, "itemTote");
+        GameRegistry.registerItem(craftset, "itemCraftset");
+        GameRegistry.registerItem(chalk, "itemChalk");
+        GameRegistry.registerItem(spring, "spring");
+        GameRegistry.registerItem(soulCore, "itemSoulCore");
+        GameRegistry.registerItem(skull, "itemSkull");
+        GameRegistry.registerItem(skullAnimal, "itemSkullAnimal");
+        GameRegistry.registerItem(blaster, "itemBlaster");
+        GameRegistry.registerItem(smack, "itemSmack");
+        GameRegistry.registerItem(naturizer, "itemNaturizer");
+        GameRegistry.registerItem(techifier, "itemTechifier");
+        GameRegistry.registerItem(pickTech, "itemPickTech");
+        GameRegistry.registerItem(virus, "itemVirus");
+        GameRegistry.registerItem(chisel, "itemChisel");
+        GameRegistry.registerItem(mortar, "itemMortar");
+        GameRegistry.registerItem(spawnEgg, "itemSpawnEgg");
 	}
 	// Automatons
-	public static Item worker = (new ItemBot(Ids.itemWorker - 256, EnumBotType.WORKER))
+	public static Item worker = (new ItemBot(EnumBotType.WORKER))
 			.setUnlocalizedName("riseautomatons:worker")
-			.setTextureName("riseautomatons:worker")
+			//.setTextureName("riseautomatons:worker")
 			.setMaxStackSize(8)
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-    public static Item sentry = (new ItemBot(Ids.itemSentry - 256, EnumBotType.SENTRY))
+    public static Item sentry = (new ItemBot(EnumBotType.SENTRY))
 			.setUnlocalizedName("riseautomatons:sentry")
 			.setTextureName("riseautomatons:sentry")
 			.setMaxStackSize(1)
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-	public static Item factotum = (new ItemBot(Ids.itemFactotum - 256,EnumBotType.FACTOTUM))
+	public static Item factotum = (new ItemBot(EnumBotType.FACTOTUM))
 			.setUnlocalizedName("riseautomatons:itemfactotum")
 			.setTextureName("riseautomatons:itemfactotum")
 			.setMaxStackSize(1)
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-	public static Item beacon = (new ItemBot(Ids.itemBeacon - 256, EnumBotType.BEACON))
+	public static Item beacon = (new ItemBot(EnumBotType.BEACON))
 			.setUnlocalizedName("riseautomatons:beacon")
 			.setTextureName("riseautomatons:beacon")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-	public static Item guard = (new ItemBot(Ids.itemGuard - 256, EnumBotType.GUARD))
+	public static Item guard = (new ItemBot(EnumBotType.GUARD))
 			.setUnlocalizedName("riseautomatons:guard")
 			.setTextureName("riseautomatons:guard")
 			.setMaxStackSize(64)
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-	public static Item omni = (new ItemBot(Ids.itemOmni - 256, EnumBotType.OMNI))
+	public static Item omni = (new ItemBot(EnumBotType.OMNI))
 			.setUnlocalizedName("riseautomatons:itemOmni")
 			.setTextureName("riseautomatons:itemOmni")
 			.setMaxStackSize(1)
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-	public static Item tote = (new ItemBot(Ids.itemTote - 256, EnumBotType.TOTE))
+	public static Item tote = (new ItemBot(EnumBotType.TOTE))
 			.setUnlocalizedName("riseautomatons:itemTote")
 			.setTextureName("riseautomatons:itemTote")
 			.setMaxStackSize(1)
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
 
 	// Normal Items
-	public static Item craftset = (new ItemCraftSet(Ids.craftSet - 256))
+	public static Item craftset = (new ItemCraftSet())
 			.setUnlocalizedName("riseautomatons:craftset")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-	public static Item chalk = (new ItemChalk(Ids.itemChalk - 256))
+	public static Item chalk = (new ItemChalk())
 			.setUnlocalizedName("riseautomatons:chalk")
 			.setTextureName("riseautomatons:chalk")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-	public static Item spring = (new Item(Ids.spring - 256))
+	public static Item spring = (new Item())
 			.setUnlocalizedName("riseautomatons:spring")
 			.setTextureName("riseautomatons:spring")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-	public static Item soulCore = (new ItemSoulCore(Ids.soulCore - 256))
+	public static Item soulCore = (new ItemSoulCore())
 			.setUnlocalizedName("riseautomatons:soulCore")
 			.setTextureName("riseautomatons:soulCore")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-	public static Item skull = (new ItemSkull(Ids.skull - 256))
+	public static Item skull = (new ItemSkull())
 			.setUnlocalizedName("riseautomatons:skull")
 			.setTextureName("riseautomatons:skull")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-	public static Item skullAnimal = (new ItemSkullAnimal(Ids.skullA - 256))
+	public static Item skullAnimal = (new ItemSkullAnimal())
 			.setUnlocalizedName("riseautomatons:skullA")
 			.setTextureName("riseautomatons:skullA")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-	public static Item blaster = (new ItemBlaster(Ids.blaster - 256))
+	public static Item blaster = (new ItemBlaster())
 			.setUnlocalizedName("riseautomatons:blaster")
 			.setTextureName("riseautomatons:blaster")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-	public static Item smack = new ItemSmack(Ids.smack - 256)
+	public static Item smack = new ItemSmack()
 			.setUnlocalizedName("riseautomatons:sliderpan")
 			.setTextureName("riseautomatons:sliderpan")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-	public static Item naturizer = new ItemFunctional(Ids.naturizer - 256, 4)
+	public static Item naturizer = new ItemFunctional(4)
 			.setUnlocalizedName("riseautomatons:naturizer")
 			.setTextureName("riseautomatons:naturizer")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-	public static Item techifier = new ItemFunctional(Ids.techifier - 256, 2)
+	public static Item techifier = new ItemFunctional(2)
 			.setUnlocalizedName("riseautomatons:techifier")
 			.setTextureName("riseautomatons:techifier")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-	public static Item pickTech = new ItemAPickaxe(Ids.pickTech - 256)
+	public static Item pickTech = new ItemAPickaxe()
 			.setUnlocalizedName("riseautomatons:picktech")
 			.setTextureName("riseautomatons:picktech")
 			.setCreativeTab(RiseAutomatons.tabAutomatons);
-	public static Item virus = new ItemVirus(Ids.itemVirus - 256)
+	public static Item virus = new ItemVirus()
 	.setUnlocalizedName("riseautomatons:virus")
 	.setTextureName("riseautomatons:virus")
 	.setCreativeTab(RiseAutomatons.tabAutomatons);
+    public static Item spawnEgg = new ItemSpawnEgg(0xCCCCCC, 0xFFFFFF)
+            .setUnlocalizedName("riseautomatons:spawn_egg")
+            .setTextureName("spawn_egg")
+            .setCreativeTab(RiseAutomatons.tabAutomatons);
 
-	public static Item chisel;
+
+    public static Item chisel;
 	public static Item mortar;
 	static {
-		chisel = (new ItemChisel(Ids.chisel - 256)).setMaxStackSize(1)
+		chisel = (new ItemChisel()).setMaxStackSize(1)
 				.setUnlocalizedName("riseautomatons:Chisel")
 				.setTextureName("riseautomatons:Chisel")
 				.setCreativeTab(RiseAutomatons.tabAutomatons);
 		chisel.setContainerItem(chisel);
-		mortar = new Item(Ids.mortar - 256)
+		mortar = new Item()
 				.setMaxStackSize(1)
 				.setUnlocalizedName("riseautomatons:mortar")
 				.setTextureName("riseautomatons:mortar")

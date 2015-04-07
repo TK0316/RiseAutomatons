@@ -27,8 +27,10 @@ import net.minecraft.world.World;
 import riseautomatons.Coord;
 import riseautomatons.Ids;
 import riseautomatons.Universal;
+import riseautomatons.block.Blocks;
 import riseautomatons.block.TileEntityBeacon;
 import riseautomatons.item.EnumSoulCore;
+import riseautomatons.item.Items;
 
 public class EntityWorker extends EntityOwnedBot implements IBot {
 
@@ -48,7 +50,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	public static final int INDEX_DEST = 24;
 	float moveSpeed = 0.5F;
 
-	private static Map<Integer, Integer> target = new LinkedHashMap<Integer, Integer>();
+	private static Map<Item, Item> target = new LinkedHashMap<Item, Item>();
 
 	enum EnumWorkState {MOVE, CHECK, ACTION, RETURN};
 	private int dig;
@@ -56,12 +58,17 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 	private Entity collectTargetItemEntity = null;
 
-	int getItemID() {
-		return dataWatcher.getWatchableObjectInt(INDEX_ITEMID);
-	}
+	Item getItemID() {
+		int itemID = dataWatcher.getWatchableObjectInt(INDEX_ITEMID);
+        if(itemID == 0) {
+            return null;
+        }
+        return (Item)Item.itemRegistry.getObjectById(itemID);
+    }
 
-	private void setItemID(int itemID) {
-		dataWatcher.updateObject(INDEX_ITEMID, itemID);
+	private void setItemID(Item item) {
+        int itemID = item == null ? 0 : Item.itemRegistry.getIDForObject(item);
+        dataWatcher.updateObject(INDEX_ITEMID, itemID);
 	}
 
 	private int getStackSize() {
@@ -161,17 +168,17 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		// getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.35F);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(6.0F);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(6.0F);
 	}
 
 	public static void init() {
-		target.put(Block.cobblestone.blockID, Block.stone.blockID);
+		target.put(Item.getItemFromBlock(Blocks.cobblestone), Item.getItemFromBlock(Blocks.stone));
 
-		target.put(Item.coal.itemID, Block.oreCoal.blockID);
-		target.put(Item.dyePowder.itemID, Block.oreLapis.blockID);
-		target.put(Item.emerald.itemID, Block.oreEmerald.blockID);
-		target.put(Item.diamond.itemID, Block.oreDiamond.blockID);
-		target.put(Item.redstone.itemID, Block.oreRedstone.blockID);
+		target.put(Items.coal, Item.getItemFromBlock(Blocks.coal_ore));
+		target.put(Items.dye, Item.getItemFromBlock(Blocks.lapis_ore));
+		target.put(Items.emerald, Item.getItemFromBlock(Blocks.emerald_ore));
+		target.put(Items.diamond, Item.getItemFromBlock(Blocks.diamond_ore));
+		target.put(Items.redstone, Item.getItemFromBlock(Blocks.redstone_ore));
 	}
 
 	@Override
@@ -182,7 +189,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			if(reallyGetBotOwner() != entityplayer) {
 				return true;
 			}
-			setItemID(0);
+			setItemID(null);
 			setStackSize(0);
 			setItemDamage(0);
 			if(getMode() == EnumBotMode.STAY) {
@@ -192,9 +199,9 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 				setMode(EnumBotMode.STAY);
 			}
 		}
-		else if(itemstack.itemID == Ids.soulCore && itemstack.getItemDamage() == EnumSoulCore.SOULSYNTH.ordinal()) {
+		else if(itemstack.getItem() == Ids.soulCore && itemstack.getItemDamage() == EnumSoulCore.SOULSYNTH.ordinal()) {
 			if(getBotOwner() == "") {
-				setBotOwner(entityplayer.username);
+				setBotOwner(entityplayer.getCommandSenderName());
 				setMode(EnumBotMode.FOLLOW);
 			}
 			else {
@@ -202,15 +209,15 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			}
 		}
 		// when hand block and right click again, mode chage PICKUP to DIG
-		else if(itemstack.itemID == getItemID()) {
+		else if(itemstack.getItem() == getItemID()) {
 			if(reallyGetBotOwner() != entityplayer) {
 				return true;
 			}
-			if(target.containsKey(itemstack.itemID)) {
-				setItemID(target.get(itemstack.itemID));
+			if(target.containsKey(itemstack.getItem())) {
+				setItemID(target.get(itemstack.getItem()));
 			}
 			else {
-				setItemID(itemstack.itemID);
+				setItemID(itemstack.getItem());
 			}
 			setMode(EnumBotMode.DIG);
 		}
@@ -219,7 +226,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 				return true;
 			}
 			setMode(EnumBotMode.PICKUP);
-			setItemID(itemstack.itemID);
+			setItemID(itemstack.getItem());
 			setStackSize(0);
 			setItemDamage(itemstack.getItemDamage());
 		}
@@ -254,7 +261,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		for (int j = 0; j < i; j++)
 		{
 			int d = ad1[j];
-			nbttaglist.appendTag(new NBTTagInt(null, d));
+			nbttaglist.appendTag(new NBTTagInt(d));
 		}
 
 		return nbttaglist;
@@ -265,7 +272,9 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		super.writeEntityToNBT(par1nbtTagCompound);
 		par1nbtTagCompound.setInteger("Mode", getMode().ordinal());
 		par1nbtTagCompound.setInteger("State", getState().ordinal());
-		par1nbtTagCompound.setInteger("ItemID", getItemID());
+        Item item = getItemID();
+        int itemID = item == null ? 0 : Item.itemRegistry.getIDForObject(item);
+		par1nbtTagCompound.setInteger("ItemID", itemID);
 		par1nbtTagCompound.setInteger("StackSize", getStackSize());
 		par1nbtTagCompound.setInteger("ItemDamage", getItemDamage());
 		Coord home = getHomeCoord();
@@ -286,18 +295,20 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		super.readEntityFromNBT(par1nbtTagCompound);
 		setMode(EnumBotMode.values()[par1nbtTagCompound.getInteger("Mode")]);
 		setState(EnumWorkState.values()[par1nbtTagCompound.getInteger("State")]);
-		setItemID(par1nbtTagCompound.getInteger("ItemID"));
+        int itemID = par1nbtTagCompound.getInteger("ItemID");
+        Item item = itemID == 0 ? null : (Item)Item.itemRegistry.getObjectById(itemID);
+		setItemID(item);
 		setStackSize(par1nbtTagCompound.getInteger("StackSize"));
 		setItemDamage(par1nbtTagCompound.getInteger("ItemDamage"));
-		NBTTagList homeTag = par1nbtTagCompound.getTagList("Home");
-		int x = ((NBTTagInt)homeTag.tagAt(0)).data;
-		int y = ((NBTTagInt)homeTag.tagAt(1)).data;
-		int z = ((NBTTagInt)homeTag.tagAt(2)).data;
+		NBTTagList homeTag = (NBTTagList)par1nbtTagCompound.getTag("Home");
+		int x = ((NBTTagInt)homeTag.getCompoundTagAt(0).copy()).func_150287_d();
+		int y = ((NBTTagInt)homeTag.getCompoundTagAt(1).copy()).func_150287_d();
+		int z = ((NBTTagInt)homeTag.getCompoundTagAt(2).copy()).func_150287_d();
 		setHomeCoord(new Coord(x,y,z));
-		NBTTagList destTag = par1nbtTagCompound.getTagList("Dest");
-		x = ((NBTTagInt)destTag.tagAt(0)).data;
-		y = ((NBTTagInt)destTag.tagAt(1)).data;
-		z = ((NBTTagInt)destTag.tagAt(2)).data;
+		NBTTagList destTag = (NBTTagList)par1nbtTagCompound.getTag("Dest");
+		x = ((NBTTagInt)destTag.getCompoundTagAt(0).copy()).func_150287_d();
+		y = ((NBTTagInt)destTag.getCompoundTagAt(1).copy()).func_150287_d();
+		z = ((NBTTagInt)destTag.getCompoundTagAt(2).copy()).func_150287_d();
 		setDestCoord(new Coord(x,y,z));
 
 		if(getMode() == EnumBotMode.PANIC){
@@ -349,14 +360,14 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		if(homeCoord.isValid() == false) {
 			return null;
 		}
-		if (worldObj.getBlockId(homeCoord.x, homeCoord.y, homeCoord.z) != Ids.blockBeacon) {
+		if (worldObj.getBlock(homeCoord.x, homeCoord.y, homeCoord.z) != Ids.blockBeacon) {
 			home = null;
 			return home;
 		} else {
 			if (home == null) {
 				home = null;
 				TileEntityBeacon beacon = (TileEntityBeacon) worldObj
-						.getBlockTileEntity(homeCoord.x, homeCoord.y, homeCoord.z);
+						.getTileEntity(homeCoord.x, homeCoord.y, homeCoord.z);
 				if (beacon != null) {
 					home = beacon;
 				}
@@ -371,14 +382,14 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		setHomeCoord(homeCoord);
 	}
 
-	private boolean isTargetBlockId(int blockId) {
-		if (blockId == Block.grass.blockID && getItemID() == Block.dirt.blockID) {
+	private boolean isTargetBlock(Block block) {
+		if (block == Blocks.grass && getItemID() == Item.getItemFromBlock(Blocks.dirt)) {
 			return true;
 		}
-		if (blockId == Block.dirt.blockID && getItemID() == Block.grass.blockID) {
+		if (block == Blocks.dirt && getItemID() == Item.getItemFromBlock(Blocks.grass)) {
 			return true;
 		}
-		if (blockId == getItemID()) {
+		if (Item.getItemFromBlock(block) == getItemID()) {
 			return true;
 		}
 		return false;
@@ -416,7 +427,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			// if home exists, search farther
 			Coord homePosition = hasHome ? new Coord(getHomeCoord()) : new Coord(posX, posY, posZ) ;
 			Coord nextDest = hasHome ? getNextDest(homePosition, 32, 4, 32) : getNextDest(homePosition, 16, 4, 16);
-			if(isTargetBlockId(worldObj.getBlockId(nextDest.x, nextDest.y, nextDest.z)) == false) {
+			if(isTargetBlock(worldObj.getBlock(nextDest.x, nextDest.y, nextDest.z)) == false) {
 				nextDest =  new Coord();
 			}
 
@@ -454,13 +465,13 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		}
 		else if (getState() == EnumWorkState.ACTION)
 		{
-			if(isTargetBlockId(worldObj.getBlockId(dest.x, dest.y, dest.z)) == false) {
+			if(isTargetBlock(worldObj.getBlock(dest.x, dest.y, dest.z)) == false) {
 				setState(EnumWorkState.MOVE);
 			}
 			else
 			{
 				int diggingCount = getDig();
-				Block bb = Block.blocksList[getItemID()];
+				Block bb = Block.getBlockFromItem(getItemID());
 
 				if(bb==null)
 					return;
@@ -468,7 +479,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 				if (diggingCount >= bb.getBlockHardness(worldObj, dest.x, dest.y, dest.z) * 30)
 				{
 					int metadata = worldObj.getBlockMetadata(dest.x, dest.y, dest.z);
-					worldObj.setBlock(dest.x, dest.y, dest.z, 0, 0, 3);
+					worldObj.setBlockToAir(dest.x, dest.y, dest.z);
 					int fortune = 0;
 					bb.dropBlockAsItem(worldObj, dest.x, dest.y, dest.z, metadata, fortune);
 					//EntityItem entityitem = new EntityItem(worldObj, dest.x, dest.y, dest.z, new ItemStack(bb.idDropped(0, rand, 0), 1, 0));
@@ -523,7 +534,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 	private boolean derp(int xo, int yo, int zo)
 	{
-		if(isTargetBlockId(worldObj.getBlockId(xo, yo, zo)))
+		if(isTargetBlock(worldObj.getBlock(xo, yo, zo)))
 		{
 			setDestCoord(new Coord(xo, yo, zo));
 			return true;
@@ -545,7 +556,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			return;
 		}
 
-		if(getItemID() == 0) {
+		if(getItemID() == null) {
 			setMode(EnumBotMode.STAY);
 			return;
 		}
@@ -567,7 +578,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			Coord homePosition = hasHome ? new Coord(getHomeCoord()) : new Coord(posX, posY, posZ) ;
 			Coord nextDest = hasHome ? getNextDest(homePosition, 5, 3, 5) : getNextDest(homePosition, 3, 3, 3);
 
-			if (worldObj.getBlockId(nextDest.x, nextDest.y, nextDest.z) == Block.chest.blockID)
+			if (worldObj.getBlock(nextDest.x, nextDest.y, nextDest.z) == Blocks.chest)
 			{
 				dest.setCoord(nextDest);
 				setDestCoord(dest);
@@ -577,7 +588,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		else if (getState() == EnumWorkState.CHECK)
 		{
 			Coord dest = getDestCoord();
-			if (worldObj.getBlockId(dest.x, dest.y, dest.z) == Block.chest.blockID)
+			if (worldObj.getBlock(dest.x, dest.y, dest.z) == Blocks.chest)
 			{
 				int num = getStackSize();
 
@@ -622,7 +633,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		else if (getState() == EnumWorkState.ACTION)
 		{
 			Coord dest = getDestCoord();
-			if (worldObj.getBlockId(dest.x, dest.y, dest.z) == Block.chest.blockID)
+			if (worldObj.getBlock(dest.x, dest.y, dest.z) == Blocks.chest)
 			{
 				if (getDistance(dest.x, dest.y, dest.z) < 2)
 				{
@@ -640,9 +651,9 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		{
 			Coord dest = getDestCoord();
 
-			if (worldObj.getBlockId(dest.x, dest.y, dest.z) == Block.chest.blockID)
+			if (worldObj.getBlock(dest.x, dest.y, dest.z) == Blocks.chest)
 			{
-				TileEntityChest tc = ((TileEntityChest)worldObj.getBlockTileEntity(dest.x, dest.y, dest.z));
+				TileEntityChest tc = ((TileEntityChest)worldObj.getTileEntity(dest.x, dest.y, dest.z));
 				int sl = 0;
 
 				while (sl < tc.getSizeInventory())
@@ -657,7 +668,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 						setState(EnumWorkState.CHECK);
 						break;
 					}
-					else if ((is.itemID == getItemID() && is.getItemDamage() == getItemDamage() && is.getItem() != null && is.stackSize < is.getMaxStackSize()))
+					else if ((is.getItem() == getItemID() && is.getItemDamage() == getItemDamage() && is.getItem() != null && is.stackSize < is.getMaxStackSize()))
 					{
 						if (is.stackSize + getStackSize() <= is.getMaxStackSize())
 						{
@@ -704,14 +715,14 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			for (int j = 0; j < list.size(); j++) {
 				Entity entity = (Entity) list.get(j);
 
-				if (getItemID() != 0) {
+				if (getItemID() != null) {
 					ItemStack is = ((EntityItem) entity).getEntityItem();
 
 					if(is.hasTagCompound()) {
 						continue;
 					}
 
-					if (is.itemID == getItemID()
+					if (is.getItem() == getItemID()
 							&& is.getItemDamage() == getItemDamage()) {
 						return entity;
 					}
@@ -733,7 +744,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 		if(ent.getEntityItem().hasTagCompound()) {
 			return;
 		}
-		setItemID(ent.getEntityItem().itemID);
+		setItemID(ent.getEntityItem().getItem());
 		setItemDamage(ent.getEntityItem().getItemDamage());
 		setStackSize(getStackSize() + ent.getEntityItem().stackSize);
 		ent.setDead();
@@ -751,7 +762,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 
 	@Override
 	protected String getLivingSound() {
-		return "automatons.beep";
+		return "riseautomatons:beep";
 	}
 
 	@Override
@@ -801,9 +812,9 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			int xx = MathHelper.floor_double(posX);
 			int yy = MathHelper.floor_double(posY);
 			int zz = MathHelper.floor_double(posZ);
-			int id = worldObj.getBlockId(xx, yy, zz);
+			Block block = worldObj.getBlock(xx, yy, zz);
 
-			if (id == 0 || Block.blocksList[id].getCollisionBoundingBoxFromPool(worldObj, xx, yy, zz) == null)
+			if (block == Blocks.air || block.getCollisionBoundingBoxFromPool(worldObj, xx, yy, zz) == null)
 			{
 				int meta = MathHelper.floor_double((rotationYawHead * 4.0F / 360.0F) + 0.5D) & 3;
 
@@ -829,7 +840,7 @@ public class EntityWorker extends EntityOwnedBot implements IBot {
 			setStackSize(0);
 			setItemDamage(0);
 		}
-		setItemID(0);
+		setItemID(null);
 
 	}
 

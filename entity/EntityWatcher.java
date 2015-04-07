@@ -10,6 +10,7 @@ import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -51,9 +52,9 @@ public class EntityWatcher extends EntityBot implements IBot {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(24.0D);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.4F);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(60.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(24.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4F);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(60.0D);
 	}
 
 	@Override
@@ -91,7 +92,7 @@ public class EntityWatcher extends EntityBot implements IBot {
 				entityfireball.posY = posY + (height);
 				entityfireball.posZ = posZ;// + vec3d.zCoord * d8;
 				worldObj.spawnEntityInWorld(entityfireball);
-				worldObj.playSoundAtEntity(this, "automatons.spark", 1.0F, 1.0F);
+				worldObj.playSoundAtEntity(this, "riseautomatons:spark", 1.0F, 1.0F);
 				attackTime = 10;
 			}
 
@@ -107,12 +108,12 @@ public class EntityWatcher extends EntityBot implements IBot {
 
 	@Override
 	protected String getHurtSound() {
-		return "automatons.thunk";
+		return "riseautomatons:thunk";
 	}
 
 	@Override
 	protected String getDeathSound() {
-		return "automatons.thunk";
+		return "riseautomatons:thunk";
 	}
 
 	@Override
@@ -131,13 +132,13 @@ public class EntityWatcher extends EntityBot implements IBot {
 		int i = rand.nextInt(3);
 
 		for (int j = 0; j < i; j++) {
-			dropItem(Ids.blockCrystal, 1);
+			dropItem(Item.getItemFromBlock(Ids.blockCrystal), 1);
 		}
 	}
 	@Override
-	protected int getDropItemId() {
-		return 0;
-	}
+    protected Item getDropItem() {
+        return null;
+    }
 
 	@Override
 	protected boolean isAIEnabled() {

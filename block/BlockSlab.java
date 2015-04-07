@@ -7,9 +7,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
@@ -17,8 +18,8 @@ import riseautomatons.item.EnumCraftSetType;
 
 public class BlockSlab extends Block {
 
-	public BlockSlab(int par1) {
-		super(par1,  Material.rock);
+	public BlockSlab() {
+		super(Material.rock);
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
 	}
 
@@ -35,13 +36,13 @@ public class BlockSlab extends Block {
 	}
 
 	@Override
-	public Icon getIcon(int par1, int par2) {
+	public IIcon getIcon(int par1, int par2) {
 		return blockIcon;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon("stone");
 	}
 
@@ -64,7 +65,7 @@ public class BlockSlab extends Block {
 	}
 
 	@Override
-	public int idDropped(int par1, Random par2Random, int par3) {
+	public Item getItemDropped(int par1, Random par2Random, int par3) {
 		return Ids.craftSet;
 	}
 

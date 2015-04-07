@@ -73,9 +73,9 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(24.0D);
+		getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(24.0D);
 		//getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.7F);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(20.0D);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
 	}
 
 	@Override
@@ -132,7 +132,7 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 
 	@Override
 	protected String getLivingSound() {
-		return "automatons.techy";
+		return "riseautomatons:techy";
 	}
 
 	@Override
@@ -228,9 +228,9 @@ public class EntitySentry extends EntityOwnedBot implements IBot {
 	@Override
 	public boolean interact(EntityPlayer entityplayer) {
 		ItemStack itemstack = entityplayer.inventory.getCurrentItem();
-		if(itemstack != null && itemstack.itemID == Ids.soulCore && itemstack.getItemDamage() == EnumSoulCore.SOULSYNTH.ordinal()) {
+		if(itemstack != null && itemstack.getItem() == Ids.soulCore && itemstack.getItemDamage() == EnumSoulCore.SOULSYNTH.ordinal()) {
 			if(getBotOwner() == "") {
-				setBotOwner(entityplayer.username);
+				setBotOwner(entityplayer.getCommandSenderName());
 				setMode(EnumBotMode.FOLLOW);
 				Universal.poof(worldObj, posX, posY, posZ);
 			}

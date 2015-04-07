@@ -21,31 +21,13 @@ public class RenderWorker extends RenderLiving {
 		model = (ModelWorker)par1ModelBase;
 	}
 
-	@Override
-	public void doRenderLiving(EntityLiving entityliving, double d,
-			double d1, double d2, float f, float f1) {
-		renderAutomaton((EntityCreature)entityliving, d, d1, d2, f, f1);
-	}
-
-	@Override
-	public void doRender(Entity entity, double d, double d1,
-			double d2, float f, float f1) {
-		renderAutomaton((EntityCreature)entity, d, d1, d2, f, f1);
-	}
-
-    public void renderAutomaton(EntityCreature entityautomaton, double d, double d1, double d2,
-            float f, float f1)
-    {
-        super.doRenderLiving(entityautomaton, d, d1, d2, f, f1);
-    }
-
     protected void renderEquippedItems(EntityLiving entityliving, float f)
  {
 		if (entityliving instanceof EntityWorker) {
 			EntityWorker ea = ((EntityWorker) entityliving);
-			int ii = ea.getItemID();
+			Item ii = ea.getItemID();
 
-			if (ii > 0) {
+			if (ii != null) {
 				ItemStack itemstack = new ItemStack(ii, 1,
 						ea.getItemDamage());
 				// if(itemstack.itemID!=0){
@@ -53,10 +35,10 @@ public class RenderWorker extends RenderLiving {
 				model.light.postRender(0.0625F);
 				GL11.glTranslatef(-0.0625F, 0.4375F, 0.0625F);
 
-				if (itemstack.itemID < 256
+                Block block = Block.getBlockFromItem(itemstack.getItem());
+				if (block != null
 						&& RenderBlocks
-								.renderItemIn3d(Block.blocksList[itemstack.itemID]
-										.getRenderType())) {
+								.renderItemIn3d(block.getRenderType())) {
 					float f1 = 0.3F;
 					GL11.glTranslatef(0.0875F, -0.9F, -0.1F);// GL11.glTranslatef(0.0F,
 																// -0.1875F,
@@ -64,7 +46,7 @@ public class RenderWorker extends RenderLiving {
 					// f1 *= 0.75F;
 					// GL11.glRotatef(20F, 1.0F, 0.0F, 0.0F);
 					GL11.glScalef(f1, -f1, f1);
-				} else if (Item.itemsList[itemstack.itemID].isFull3D()) {
+				} else if (itemstack.getItem().isFull3D()) {
 					float f2 = 0.3125F;
 					GL11.glTranslatef(0.1F, -0.8F, 0.4F);
 					GL11.glScalef(f2, -f2, f2);

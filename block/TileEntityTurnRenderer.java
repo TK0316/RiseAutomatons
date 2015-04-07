@@ -28,7 +28,7 @@ public class TileEntityTurnRenderer extends TileEntitySpecialRenderer {
 			float par8) {
 		int i;
 
-		if (enti.worldObj == null) {
+		if (enti.getWorldObj() == null) {
 			i = 0;
 		} else {
 			Block block = enti.getBlockType();

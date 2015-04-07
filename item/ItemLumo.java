@@ -1,14 +1,15 @@
 package riseautomatons.item;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import riseautomatons.block.Blocks;
 
 public class ItemLumo extends ItemBlock {
 
-	public ItemLumo(int i) {
-		super(i);
+	public ItemLumo(Block par1) {
+        super(par1);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 	}
@@ -21,7 +22,7 @@ public class ItemLumo extends ItemBlock {
 	}
 
 	@Override
-	public Icon getIconFromDamage(int i) {
+	public IIcon getIconFromDamage(int i) {
 		return Blocks.sky.getIcon(2, i);
 	}
 

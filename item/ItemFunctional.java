@@ -1,10 +1,10 @@
 package riseautomatons.item;
 
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import riseautomatons.block.BlockCrink;
 import cpw.mods.fml.relauncher.Side;
@@ -12,13 +12,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemFunctional extends Item {
 
-	private Icon icons[];
+	private IIcon icons[];
 
 	public int derp;
 
-	public ItemFunctional(int i, int j) {
+	public ItemFunctional(int j) {
 
-		super(i);
 		this.derp = 0;
 		if (j == 1) {
 			setMaxDamage(1);
@@ -33,7 +32,7 @@ public class ItemFunctional extends Item {
 	}
 
 	@Override
-	public Icon getIconFromDamage(int par1) {
+	public IIcon getIconFromDamage(int par1) {
 		if(derp == 2) {
 			return icons[0];
 		}
@@ -42,8 +41,8 @@ public class ItemFunctional extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		icons = new Icon[2];
+	public void registerIcons(IIconRegister par1IconRegister) {
+		icons = new IIcon[2];
 		icons[0] = par1IconRegister.registerIcon("riseautomatons:techifier");
 		icons[1] = par1IconRegister.registerIcon("riseautomatons:naturizer");
 	}

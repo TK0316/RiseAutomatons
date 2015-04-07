@@ -17,25 +17,8 @@ public class RenderFactotum extends RenderLiving {
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityliving, double d,
-			double d1, double d2, float f, float f1) {
-		renderAutomaton((EntityCreature)entityliving, d, d1, d2, f, f1);
-	}
-
-	@Override
 	protected void preRenderCallback(EntityLivingBase par1EntityLiving, float par2) {
 		GL11.glScalef(2f, 2f, 2f);
-	}
-
-	@Override
-	public void doRender(Entity entity, double d, double d1,
-			double d2, float f, float f1) {
-		renderAutomaton((EntityCreature)entity, d, d1, d2, f, f1);
-	}
-
-	public void renderAutomaton(EntityCreature entityautomaton, double d,
-			double d1, double d2, float f, float f1) {
-		super.doRenderLiving(entityautomaton, d, d1, d2, f, f1);
 	}
 
 	@Override

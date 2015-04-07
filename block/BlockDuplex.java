@@ -9,16 +9,16 @@ import net.minecraft.world.World;
 
 public class BlockDuplex extends Block {
 
-	public BlockDuplex(int par1) {
-		super(par1, Material.glass);
+	public BlockDuplex() {
+		super(Material.glass);
 	}
 
 	@Override
 	public boolean shouldSideBeRendered(IBlockAccess iblockaccess,
 			int i, int j, int k, int l) {
 
-	    int i1 = iblockaccess.getBlockId(i, j, k);
-	    if (i1 == this.blockID)
+	    Block i1 = iblockaccess.getBlock(i, j, k);
+	    if (i1 == this)
 	    {
 	      return false;
 	    }
@@ -36,29 +36,29 @@ public class BlockDuplex extends Block {
 			int k, int par5) {
 
 	    world.spawnParticle("reddust", i + 0.5F, j + 0.5F, k + 0.5F, 0.0D, 0.2000000029802322D, 0.0D);
-	    if (world.getBlockId(i + 1, j, k) == this.blockID)
+	    if (world.getBlock(i + 1, j, k) == this)
 	    {
-	      world.setBlock(i + 1, j, k, 0, 0, 3);
+	      world.setBlockToAir(i + 1, j, k);
 	    }
-	    if (world.getBlockId(i - 1, j, k) == this.blockID)
+	    if (world.getBlock(i - 1, j, k) == this)
 	    {
-	      world.setBlock(i - 1, j, k, 0, 0, 3);
+	      world.setBlockToAir(i - 1, j, k);
 	    }
-	    if (world.getBlockId(i, j, k - 1) == this.blockID)
+	    if (world.getBlock(i, j, k - 1) == this)
 	    {
-	      world.setBlock(i, j, k - 1, 0, 0, 3);
+	      world.setBlockToAir(i, j, k - 1);
 	    }
-	    if (world.getBlockId(i, j, k + 1) == this.blockID)
+	    if (world.getBlock(i, j, k + 1) == this)
 	    {
-	      world.setBlock(i, j, k + 1, 0, 0, 3);
+	      world.setBlockToAir(i, j, k + 1);
 	    }
-	    if (world.getBlockId(i, j - 1, k) == this.blockID)
+	    if (world.getBlock(i, j - 1, k) == this)
 	    {
-	      world.setBlock(i, j - 1, k, 0, 0, 3);
+	      world.setBlockToAir(i, j - 1, k);
 	    }
-	    if (world.getBlockId(i, j + 1, k) == this.blockID)
+	    if (world.getBlock(i, j + 1, k) == this)
 	    {
-	      world.setBlock(i, j + 1, k, 0, 0, 3);
+	      world.setBlockToAir(i, j + 1, k);
 	    }
 	}
 

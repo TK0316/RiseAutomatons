@@ -5,12 +5,13 @@ import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import net.minecraft.item.Item;
 import riseautomatons.Ids;
 import riseautomatons.RiseAutomatons;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -22,20 +23,20 @@ public class BlockTote extends BlockContainer {
 
 	public static int renderId;
 
-	protected BlockTote(int i) {
-		super(i, Material.piston);
+	protected BlockTote() {
+		super(Material.piston);
 		float F = 0.25f;
 		setBlockBounds(0.125F, 0.0F, 0.125F, 0.875F, 0.5625f, 0.875F);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1) {
+	public TileEntity createNewTileEntity(World var1, int var2) {
 		return new TileEntityLatch();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister
 				.registerIcon("stone");
 	}
@@ -65,7 +66,7 @@ public class BlockTote extends BlockContainer {
 			int par4, int par5) {
 
 		TileEntityLatch latch = (TileEntityLatch) world
-				.getBlockTileEntity(par2, par3, par4);
+				.getTileEntity(par2, par3, par4);
 
 		if (latch != null) {
 			for (int i = 0; i < latch.getSizeInventory(); i++) {
@@ -87,7 +88,7 @@ public class BlockTote extends BlockContainer {
 						EntityItem entityitem = new EntityItem(world,
 								(float) par2 + f, (float) par3 + f1,
 								(float) par4 + f2, new ItemStack(
-										itemstack.itemID, j,
+										itemstack.getItem(), j,
 										itemstack.getItemDamage()));
 
 						if (itemstack.hasTagCompound()) {
@@ -111,7 +112,7 @@ public class BlockTote extends BlockContainer {
 	}
 
 	@Override
-	public int idDropped(int par1, Random par2Random, int par3) {
+	public Item getItemDropped(int par1, Random par2Random, int par3) {
 		return Ids.itemTote;
 	}
 
@@ -124,12 +125,12 @@ public class BlockTote extends BlockContainer {
 			return true;
 		}
 		ItemStack it = ep.inventory.getCurrentItem();
-		if (it != null && it.itemID == Ids.soulCore) {
+		if (it != null && it.getItem() == Ids.soulCore) {
 			return false;
 		}
 
 		TileEntityLatch latch = (TileEntityLatch) world
-				.getBlockTileEntity(par2, par3, par4);
+				.getTileEntity(par2, par3, par4);
 
 		if (latch != null) {
 			ep.openGui(RiseAutomatons.instance, Ids.guiTote, world, par2, par3, par4);

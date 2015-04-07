@@ -11,7 +11,6 @@ public class ClientProxy extends CommonProxy {
 		Entities.registerTextures();
 		Blocks.registerTileEntities();
 		Blocks.registerRenderer();
-		Universal.loadSound();
 
 	}
 

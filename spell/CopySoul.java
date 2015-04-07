@@ -24,7 +24,7 @@ public class CopySoul extends Spell {
 			{
 				EntityItem e = (EntityItem)L.get(n);
 
-				if (e.getEntityItem().itemID == Ids.soulCore && e.getEntityItem().getItemDamage() >= 5)
+				if (e.getEntityItem().getItem() == Ids.soulCore && e.getEntityItem().getItemDamage() >= 5)
 				{
 					targetItem = e;
 					break;
@@ -43,7 +43,7 @@ public class CopySoul extends Spell {
 		{
 			EntityItem e = (EntityItem)L.get(n);
 
-			if (e.getEntityItem().itemID == Ids.soulCore && e.getEntityItem().getItemDamage() == 4)
+			if (e.getEntityItem().getItem() == Ids.soulCore && e.getEntityItem().getItemDamage() == 4)
 			{
 				e.getEntityItem().setItemDamage(0);
 				success = true;

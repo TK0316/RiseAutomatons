@@ -13,23 +13,20 @@ public class RenderTote extends RenderLiving {
 		super(par1ModelBase, par2);
 	}
 
-	@Override
-	public void doRenderLiving(EntityLiving entityliving, double d,
-			double d1, double d2, float f, float f1) {
-		renderTote((EntityCreature)entityliving, d, d1, d2, f, f1);
-	}
+    @Override
+    public void doRender(EntityLiving entityliving, double d, double d1, double d2, float f, float f1) {
+        renderTote((EntityCreature)entityliving, d, d1, d2, f, f1);
+    }
 
-	@Override
-	public void doRender(Entity entity, double d, double d1,
-			double d2, float f, float f1) {
-		renderTote((EntityCreature)entity, d, d1, d2, f, f1);
-	}
+    @Override
+    public void doRender(Entity entity, double d, double d1, double d2, float f, float f1) {
+        renderTote((EntityCreature)entity, d, d1, d2, f, f1);
+    }
 
-	public void renderTote(EntityCreature e, double d, double d1,
-			double d2, float f, float f1) {
-		super.doRenderLiving(e, d, d1, d2, f, f1);
+    public void renderTote(EntityCreature e, double d, double d1, double d2, float f, float f1) {
+        super.doRender(e, d, d1, d2, f, f1);
 
-	}
+    }
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {

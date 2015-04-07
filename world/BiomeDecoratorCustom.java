@@ -6,7 +6,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 public class BiomeDecoratorCustom extends BiomeDecorator {
 
 	public BiomeDecoratorCustom(BiomeGenBase par1BiomeGenBase) {
-		super(par1BiomeGenBase);
+		super();
 	}
 
 	public void setTreesPerChunk(int per1) {

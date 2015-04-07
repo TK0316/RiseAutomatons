@@ -78,9 +78,9 @@ public class EntityAIBotFollowOwner extends EntityAIBase {
 		for (int l = 0; l <= 4; l++) {
 			for (int i1 = 0; i1 <= 4; i1++) {
 				if ((l < 1 || i1 < 1 || l > 3 || i1 > 3)
-						&& bot.worldObj.isBlockNormalCube(i + l, k - 1, j + i1)
-						&& !bot.worldObj.isBlockNormalCube(i + l, k, j + i1)
-						&& !bot.worldObj.isBlockNormalCube(i + l, k + 1, j + i1)) {
+						&& bot.worldObj.isBlockNormalCubeDefault(i + l, k - 1, j + i1, false)
+						&& !bot.worldObj.isBlockNormalCubeDefault(i + l, k, j + i1, false)
+						&& !bot.worldObj.isBlockNormalCubeDefault(i + l, k + 1, j + i1, false)) {
 					bot.setLocationAndAngles((float) (i + l) + 0.5F, k,
 							(float) (j + i1) + 0.5F, bot.rotationYaw,
 							bot.rotationPitch);

@@ -4,9 +4,9 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
@@ -15,15 +15,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockArch extends Block {
 
-	private Icon icons[];
+	private IIcon icons[];
 
-	public BlockArch(int par1, Material par2Material) {
-		super(par1, par2Material);
+	public BlockArch(Material par2Material) {
+		super(par2Material);
 		BlockArch.loadSprites();
 	}
 
-	protected BlockArch(int par1) {
-		super(par1, Material.glass);
+	protected BlockArch() {
+		super(Material.glass);
 		BlockArch.loadSprites();
 	}
 
@@ -38,7 +38,7 @@ public class BlockArch extends Block {
 	}
 
 	@Override
-	public Icon getIcon(int i, int j) {
+	public IIcon getIcon(int i, int j) {
 		if (j == 5) {
 			return icons[2];
 		}
@@ -47,26 +47,26 @@ public class BlockArch extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		icons = new Icon[3];
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
+		icons = new IIcon[3];
 		icons[0] = par1IconRegister.registerIcon("riseautomatons:arch1");
 		icons[1] = par1IconRegister.registerIcon("riseautomatons:arch2");
 		icons[2] = par1IconRegister.registerIcon("riseautomatons:arch3");
 	}
 
 	public static boolean place(World world, int i, int j, int k) {
-		int id = world.getBlockId(i, j, k);
+		Block id = world.getBlock(i, j, k);
 
-		if (id == 3) {
+		if (id == Blocks.dirt) {
 			world.setBlock(i, j, k, Ids.blockArch, 4, 3);
 			return true;
-		} else if (id == 1 || id == 4) {
+		} else if (id == Blocks.stone || id == Blocks.cobblestone) {
 			world.setBlock(i, j, k, Ids.blockArch, 1, 3);
 			return true;
-		} else if (id == 8 || id == 9) {
+		} else if (id == Blocks.water || id == Blocks.flowing_water) {
 			world.setBlock(i, j, k, Ids.blockArch, 2, 3);
 			return true;
-		} else if (id == 2) {
+		} else if (id == Blocks.grass) {
 			world.setBlock(i, j, k, Ids.blockArch, 3, 3);
 			return true;
 		}/*
@@ -104,16 +104,16 @@ public class BlockArch extends Block {
 			int metadata) {
 
 		if (metadata == 4) {
-			world.setBlock(i, j, k, Block.dirt.blockID, 0, 3);
+			world.setBlock(i, j, k, Blocks.dirt, 0, 3);
 		} else if (metadata == 1) {
-			world.setBlock(i, j, k, Block.stone.blockID, 0, 3);
+			world.setBlock(i, j, k, Blocks.stone, 0, 3);
 		} else if (metadata == 2) {
-			world.setBlock(i, j, k, 9, 0, 3);
+			world.setBlock(i, j, k, Blocks.water, 0, 3);
 		} else if (metadata == 3) {
-			world.setBlock(i, j, k, 2, 0, 3);
+			world.setBlock(i, j, k, Blocks.grass, 0, 3);
 		}
 
-		dropBlockAsItem_do(world, i, j, k, new ItemStack(blockID, 1, 0));
+		dropBlockAsItem(world, i, j, k, new ItemStack(this, 1, 0));
 	}
 
 	@Override
@@ -133,7 +133,7 @@ public class BlockArch extends Block {
 			for (int var8 = -1; var8 <= 1; ++var8) {
 				for (int var9 = -1; var9 <= 1; ++var9) {
 					int var10 = par1IBlockAccess.getBiomeGenForCoords(i + var9,
-							k + var8).getBiomeGrassColor();
+							k + var8).getBiomeGrassColor(i, j, k);
 					var5 += (var10 & 16711680) >> 16;
 					var6 += (var10 & 65280) >> 8;
 					var7 += var10 & 255;

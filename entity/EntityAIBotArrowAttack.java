@@ -114,7 +114,7 @@ public class EntityAIBotArrowAttack extends EntityAIBase {
 			EntityLaser var1 = new EntityLaser(this.worldObj, this.entityHost,
 					this.attackTarget, 1.6F, 12.0F);
 			this.worldObj.playSoundAtEntity(this.entityHost,
-					"automatons.spark", 1.0F, 1.0F / (this.entityHost.getRNG()
+					"riseautomatons:spark", 1.0F, 1.0F / (this.entityHost.getRNG()
 							.nextFloat() * 0.4F + 0.8F));
 			this.worldObj.spawnEntityInWorld(var1);
 		} else if (this.rangedAttackID == 2) {

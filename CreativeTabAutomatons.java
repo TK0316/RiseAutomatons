@@ -4,6 +4,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import riseautomatons.item.Items;
 
 
 public class CreativeTabAutomatons extends CreativeTabs {
@@ -20,8 +21,8 @@ public class CreativeTabAutomatons extends CreativeTabs {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem() {
-		// TODO CreativeTabs Icon
-		return Item.appleGold;
+		// TODO CreativeTabs IIcon
+		return Items.golden_apple;
 	}
 
 }

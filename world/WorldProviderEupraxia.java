@@ -5,6 +5,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkProvider;
 import riseautomatons.Ids;
+import riseautomatons.block.Blocks;
 
 public class WorldProviderEupraxia extends WorldProvider {
 
@@ -30,12 +31,12 @@ public class WorldProviderEupraxia extends WorldProvider {
 
 	@Override
 	public boolean canCoordinateBeSpawn(int par1, int par2) {
-		int i = worldObj.getFirstUncoveredBlock(par1, par2);
+		Block i = worldObj.getTopBlock(par1, par2);
 
-		if (i == 0) {
+		if (i == Blocks.air) {
 			return false;
 		} else {
-			return Block.blocksList[i].blockMaterial.blocksMovement();
+			return i.getMaterial().blocksMovement();
 		}
 	}
 

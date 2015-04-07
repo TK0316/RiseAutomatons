@@ -1,6 +1,7 @@
 package riseautomatons.entity;
 
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -35,8 +36,8 @@ public class EntityBobby extends EntityBot implements IBot {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.4F);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(5.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4F);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(5.0D);
 	}
 
 	@Override
@@ -49,15 +50,15 @@ public class EntityBobby extends EntityBot implements IBot {
 	}
 	@Override
 	protected String getLivingSound() {
-		return "automatons.beep";
+		return "riseautomatons:beep";
 	}
 	@Override
 	protected String getHurtSound() {
-		return "automatons.clank";
+		return "riseautomatons:clank";
 	}
 	@Override
 	protected String getDeathSound() {
-		return "automatons.botdie";
+		return "riseautomatons:botdie";
 	}
 	@Override
 	public void onDeath(DamageSource damagesource) {
@@ -106,9 +107,10 @@ public class EntityBobby extends EntityBot implements IBot {
 	}
 
 	@Override
-	protected int getDropItemId() {
-		return 0;
+	protected Item getDropItem() {
+		return null;
 	}
+
 	@Override
 	public void onLivingUpdate() {
 

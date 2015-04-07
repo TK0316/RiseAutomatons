@@ -4,7 +4,7 @@ import java.util.Random;
 
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenForest;
-import net.minecraft.world.biome.SpawnListEntry;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import riseautomatons.entity.EntityBobby;
 import riseautomatons.entity.EntityGolemNormal;
@@ -16,9 +16,8 @@ public class BiomeGenTech extends BiomeGenForest {
 
 	WorldGenerator worldGeneratorBigTree = new WorldGenFakeBigTree(false);
 	public BiomeGenTech(int par1) {
-		super(par1);
+		super(par1, 1);
 		worldGeneratorTrees = new WorldGenFakeTrees(false);
-		worldGeneratorForest = new WorldGenFakeForest(false);
 		worldGeneratorBigTree = new WorldGenFakeBigTree(false);
 
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityHelios.class, 16, 4, 4));
@@ -29,13 +28,14 @@ public class BiomeGenTech extends BiomeGenForest {
 	}
 
 	@Override
-	public WorldGenerator getRandomWorldGenForTrees(Random par1Random) {
+    //public WorldGenerator getRandomWorldGenForTrees(Random par1Random) {
+    public WorldGenAbstractTree func_150567_a(Random par1Random) {
 
 		if (par1Random.nextInt(5) == 0) {
-			return this.worldGeneratorForest;
+			return func_150567_a(par1Random);
 		}
 		if (par1Random.nextInt(10) == 0) {
-			return new WorldGenTechRuin();
+			return new WorldGenTechRuin(false);
 			//return this.worldGeneratorBigTree;
 		}
 

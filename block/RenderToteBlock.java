@@ -1,11 +1,11 @@
 package riseautomatons.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.src.ModLoader;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -23,7 +23,7 @@ public class RenderToteBlock implements ISimpleBlockRenderingHandler {
 	@Override
 	public boolean renderWorldBlock(IBlockAccess iblockaccess, int i, int j, int k,
 			Block block, int modelId, RenderBlocks renderblocks) {
-		TextureManager renderengine = ModLoader.getMinecraftInstance().renderEngine;
+		TextureManager renderengine = Minecraft.getMinecraft().renderEngine;
 
 		Tessellator.instance.draw();
         Tessellator.instance.startDrawingQuads();
@@ -81,7 +81,7 @@ public class RenderToteBlock implements ISimpleBlockRenderingHandler {
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory() {
+	public boolean shouldRender3DInInventory(int modelId) {
 		return false;
 	}
 

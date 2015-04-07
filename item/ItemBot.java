@@ -1,15 +1,16 @@
 package riseautomatons.item;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 import riseautomatons.Universal;
+import riseautomatons.block.Blocks;
 import riseautomatons.entity.EntityFactotum;
 import riseautomatons.entity.EntityGuard;
 import riseautomatons.entity.EntityOmni;
@@ -19,12 +20,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemBot extends Item {
 
-	private Icon icons[];
+	private IIcon icons[];
 
 	private EnumBotType type;
 
-	public ItemBot(int i, EnumBotType type) {
-		super(i);
+	public ItemBot( EnumBotType type) {
+		super();
 		this.type = type;
 		if(type == EnumBotType.TOTE) {
 			maxStackSize = 8;
@@ -32,14 +33,14 @@ public class ItemBot extends Item {
 	}
 
 	@Override
-	public Icon getIconFromDamage(int par1) {
+	public IIcon getIconFromDamage(int par1) {
 		return icons[type.ordinal()];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		icons = new Icon[EnumBotType.values().length];
+	public void registerIcons(IIconRegister par1IconRegister) {
+		icons = new IIcon[EnumBotType.values().length];
 		for (int var4 = 0; var4 < EnumBotType.values().length; ++var4) {
 			icons[var4] = par1IconRegister.registerIcon("riseautomatons:"+EnumBotType.values()[var4].name);
 		}
@@ -50,7 +51,7 @@ public class ItemBot extends Item {
 			EntityPlayer entityplayer, World world, int i, int j,
 			int k, int l, float par8, float par9, float par10) {
 
-		if (world.getBlockId(i, j, k) != Block.snow.blockID) {
+		if (world.getBlock(i, j, k) != Blocks.snow) {
 			if (l == 0) {
 				j--;
 			}
@@ -76,7 +77,7 @@ public class ItemBot extends Item {
 			}
 
 			if (!world.isAirBlock(i, j, k)
-					|| !world.getBlockMaterial(i, j - 1, k).isSolid()) {
+					|| !world.getBlock(i, j - 1, k).getMaterial().isSolid()) {
 				return false;
 			}
 		}
@@ -95,7 +96,7 @@ public class ItemBot extends Item {
 			break;
 		case FACTOTUM:
 			if (!Universal.improperWorld(world)) {
-				world.spawnEntityInWorld(new EntityFactotum(world, (double)i + 0.5, (double)j + 0.5, (double)k + 0.5, entityplayer.username));
+				world.spawnEntityInWorld(new EntityFactotum(world, (double)i + 0.5, (double)j + 0.5, (double)k + 0.5, entityplayer.getCommandSenderName()));
 			}
 			break;
 		case BEACON:

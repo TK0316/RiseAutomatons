@@ -2,9 +2,10 @@ package riseautomatons.block;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -18,20 +19,20 @@ public class BlockWindmill extends BlockContainer {
 
 	float f = 0.75F; // 375
 
-	protected BlockWindmill(int i, int j, Material mat) {
-		super(i, mat);
+	protected BlockWindmill(int j, Material mat) {
+		super(mat);
 		setTickRandomly(true);
 
 	}
 
-	@Override
-	public TileEntity createNewTileEntity(World var1) {
-		return new TileEntityWindmill();
-	}
+    @Override
+    public TileEntity createNewTileEntity(World var1, int var2){
+        return new TileEntityWindmill();
+    }
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon("planks_oak");
 	}
 
@@ -113,7 +114,7 @@ public class BlockWindmill extends BlockContainer {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, int l) {
+	public void onNeighborBlockChange(World world, int i, int j, int k, Block l) {
 		if (world.isRemote) {
 			return;
 		}
@@ -177,5 +178,4 @@ public class BlockWindmill extends BlockContainer {
 				.floor_double((double) ((par5EntityLiving.rotationYaw * 4F) / 360F) + 0.5D) & 3) + 2) % 4;
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, i * 2, 3);
 	}
-
 }

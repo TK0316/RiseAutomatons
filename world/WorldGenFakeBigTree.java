@@ -2,10 +2,12 @@ package riseautomatons.world;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import riseautomatons.Ids;
+import riseautomatons.block.Blocks;
 
 public class WorldGenFakeBigTree extends WorldGenerator {
 
@@ -137,7 +139,7 @@ public class WorldGenFakeBigTree extends WorldGenerator {
         System.arraycopy(var2, 0, this.leafNodes, 0, var4);
     }
 
-    void genTreeLayer(int par1, int par2, int par3, float par4, byte par5, int par6)
+    void genTreeLayer(int par1, int par2, int par3, float par4, byte par5, Block par6)
     {
         int var7 = (int)((double)par4 + 0.618D);
         byte var8 = otherCoordPairs[par5];
@@ -163,15 +165,15 @@ public class WorldGenFakeBigTree extends WorldGenerator {
                 else
                 {
                     var11[var9] = var10[var9] + var13;
-                    int var14 = this.worldObj.getBlockId(var11[0], var11[1], var11[2]);
+                    Block var14 = this.worldObj.getBlock(var11[0], var11[1], var11[2]);
 
-                    if (var14 != 0 && var14 != Ids.blockCrink)
+                    if (var14 != Blocks.air && var14 != Ids.blockCrink)
                     {
                         ++var13;
                     }
                     else
                     {
-                        this.setBlockAndMetadata(this.worldObj, var11[0], var11[1], var11[2], par6, 0);
+                        this.setBlockAndNotifyAdequately(this.worldObj, var11[0], var11[1], var11[2], par6, 0);
                         ++var13;
                     }
                 }
@@ -234,7 +236,7 @@ public class WorldGenFakeBigTree extends WorldGenerator {
     /**
      * Places a line of the specified block ID into the world from the first coordinate triplet to the second.
      */
-    void placeBlockLine(int[] par1ArrayOfInteger, int[] par2ArrayOfInteger, int par3)
+    void placeBlockLine(int[] par1ArrayOfInteger, int[] par2ArrayOfInteger, Block par3)
     {
         int[] var4 = new int[] {0, 0, 0};
         byte var5 = 0;
@@ -292,7 +294,7 @@ public class WorldGenFakeBigTree extends WorldGenerator {
                     }
                 }
 
-                this.setBlockAndMetadata(this.worldObj, var14[0], var14[1], var14[2], par3, var17);
+                this.setBlockAndNotifyAdequately(this.worldObj, var14[0], var14[1], var14[2], par3, var17);
             }
         }
     }
@@ -366,7 +368,7 @@ public class WorldGenFakeBigTree extends WorldGenerator {
 
             if (this.leafNodeNeedsBase(var6))
             {
-                this.placeBlockLine(var3, var5, (byte)Ids.blockTech);
+                this.placeBlockLine(var3, var5, Ids.blockTech);
             }
         }
     }
@@ -421,9 +423,9 @@ public class WorldGenFakeBigTree extends WorldGenerator {
                 var13[var5] = par1ArrayOfInteger[var5] + var14;
                 var13[var6] = MathHelper.floor_double((double)par1ArrayOfInteger[var6] + (double)var14 * var9);
                 var13[var7] = MathHelper.floor_double((double)par1ArrayOfInteger[var7] + (double)var14 * var11);
-                int var16 = this.worldObj.getBlockId(var13[0], var13[1], var13[2]);
+                Block var16 = this.worldObj.getBlock(var13[0], var13[1], var13[2]);
 
-                if (var16 != 0 && var16 != Ids.blockCrink)
+                if (var16 != Blocks.air && var16 != Ids.blockCrink)
                 {
                     break;
                 }
@@ -441,9 +443,9 @@ public class WorldGenFakeBigTree extends WorldGenerator {
     {
         int[] var1 = new int[] {this.basePos[0], this.basePos[1], this.basePos[2]};
         int[] var2 = new int[] {this.basePos[0], this.basePos[1] + this.heightLimit - 1, this.basePos[2]};
-        int var3 = this.worldObj.getBlockId(this.basePos[0], this.basePos[1] - 1, this.basePos[2]);
+        Block var3 = this.worldObj.getBlock(this.basePos[0], this.basePos[1] - 1, this.basePos[2]);
 
-        if (var3 != 2 && var3 != 3)
+        if (var3 != Blocks.grass && var3 != Blocks.dirt)
         {
             return false;
         }

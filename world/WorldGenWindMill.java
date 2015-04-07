@@ -3,13 +3,18 @@ package riseautomatons.world;
 import java.util.Random;
 
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import riseautomatons.Ids;
 
-public class WorldGenWindMill extends WorldGenerator {
+public class WorldGenWindMill extends WorldGenAbstractTree {
 	int MAX = 12;
 
-	@Override
+    public WorldGenWindMill(boolean p_i45448_1_) {
+        super(p_i45448_1_);
+    }
+
+    @Override
 	public boolean generate(World world, Random random, int i, int j,
 			int k) {
 		path(0, world, random, i, j, k);

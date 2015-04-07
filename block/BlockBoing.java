@@ -2,7 +2,7 @@ package riseautomatons.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
@@ -13,8 +13,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBoing extends Block {
 
-	protected BlockBoing(int i) {
-		super(i, Material.grass);
+	protected BlockBoing() {
+		super(Material.grass);
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class BlockBoing extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.blockIcon = par1IconRegister.registerIcon("riseautomatons:boing");
 	}
 

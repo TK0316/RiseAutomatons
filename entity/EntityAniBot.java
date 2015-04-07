@@ -13,7 +13,8 @@ public abstract class EntityAniBot extends EntityMob {
 	@Override
 	public boolean attackEntityFrom(DamageSource damagesource, float i) {
 		if (damagesource == DamageSource.inWall) {
-			this.pushOutOfBlocks(posX, posY, posZ);
+            //pushOutOfBlocks
+			this.func_145771_j(posX, posY, posZ);
 			return false;
 		}
 		return super.attackEntityFrom(damagesource, i);

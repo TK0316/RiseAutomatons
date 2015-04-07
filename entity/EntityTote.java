@@ -3,6 +3,7 @@ package riseautomatons.entity;
 import riseautomatons.Ids;
 import riseautomatons.RiseAutomatons;
 import riseautomatons.Universal;
+import riseautomatons.block.Blocks;
 import riseautomatons.block.TileEntityLatch;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -40,11 +41,11 @@ public class EntityTote extends EntityOwnedBot implements IInventory, IBot {
 	{
 		super(world);
 		setSize(0.4F, 0.5F);
-		float moveSpeed = 0.2F;
+		float moveSpeed = 0.5F;
 		setHealth(getMaxHealth());
 
 		getNavigator().setAvoidsWater(true);
-		tasks.addTask(5, new EntityAIBotFollowOwner(this, moveSpeed, 4F, 2.0F));
+		tasks.addTask(5, new EntityAIBotFollowOwner(this, moveSpeed, 7F, 2.0F));
 		tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8F));
 		tasks.addTask(9, new EntityAILookIdle(this));
 	}
@@ -64,8 +65,9 @@ public class EntityTote extends EntityOwnedBot implements IInventory, IBot {
 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.2F);
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(6.0D);
+        getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(24.0D);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5F);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(6.0D);
 	}
 
 	@Override
@@ -89,11 +91,11 @@ public class EntityTote extends EntityOwnedBot implements IInventory, IBot {
 	public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
 		super.readEntityFromNBT(nbttagcompound);
 
-		NBTTagList nbttaglist = nbttagcompound.getTagList("Items");
+		NBTTagList nbttaglist = (NBTTagList)nbttagcompound.getTag("Items");
 		cargoItems = new ItemStack[getSizeInventory()];
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
-			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
+			NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
 			int j = nbttagcompound1.getByte("Slot") & 0xff;
 			if(j >= 0 && j < cargoItems.length)
 			{
@@ -104,7 +106,7 @@ public class EntityTote extends EntityOwnedBot implements IInventory, IBot {
 
 	@Override
 	protected String getLivingSound() {
-		return "automatons.beep";
+		return "riseautomatons:beep";
 	}
 
 	@Override
@@ -223,17 +225,17 @@ public class EntityTote extends EntityOwnedBot implements IInventory, IBot {
 	}
 
 	@Override
-	public String getInvName() {
+	public String getInventoryName() {
 		return "Tote";
 	}
 
-	@Override
+    @Override
 	public int getInventoryStackLimit() {
 		return 64;
 	}
 
 	@Override
-	public void onInventoryChanged() {
+	public void markDirty() {
 	}
 
 	@Override
@@ -242,12 +244,12 @@ public class EntityTote extends EntityOwnedBot implements IInventory, IBot {
 	}
 
 	@Override
-	public void openChest() {
+	public void openInventory() {
 		dir = -10;
 	}
 
 	@Override
-	public void closeChest() {
+	public void closeInventory() {
 		dir = 2.5;
 	}
 
@@ -275,14 +277,14 @@ public class EntityTote extends EntityOwnedBot implements IInventory, IBot {
 			int xx = MathHelper.floor_double(posX);
 			int yy = MathHelper.floor_double(posY);
 			int zz = MathHelper.floor_double(posZ);
-			int id = worldObj.getBlockId(xx, yy, zz);
+			Block block = worldObj.getBlock(xx, yy, zz);
 
-			if (id == 0
-					|| Block.blocksList[id].getCollisionBoundingBoxFromPool(
-							worldObj, xx, yy, zz) == null) {
+			if (block == Blocks.air
+                    || block.getCollisionBoundingBoxFromPool(
+                    worldObj, xx, yy, zz) == null) {
 				worldObj.setBlock(xx, yy, zz, Ids.blockTote, 0, 3);
 				TileEntityLatch latch = (TileEntityLatch) worldObj
-						.getBlockTileEntity(xx, yy, zz);
+						.getTileEntity(xx, yy, zz);
 				latch.dispenserContents = cargoItems.clone();
 				cargoItems = null;
 				// inv=null;
@@ -316,7 +318,7 @@ public class EntityTote extends EntityOwnedBot implements IInventory, IBot {
 				itemstack.stackSize -= j;
 				EntityItem entityitem = new EntityItem(worldObj, posX
 						+ (double) f, posY + (double) f1, posZ + (double) f2,
-						new ItemStack(itemstack.itemID, j,
+						new ItemStack(itemstack.getItem(), j,
 								itemstack.getItemDamage()));
 				float f3 = 0.05F;
 				entityitem.motionX = (float) rand.nextGaussian() * f3;
@@ -326,10 +328,12 @@ public class EntityTote extends EntityOwnedBot implements IInventory, IBot {
 			} while (true);
 		}
 	}
-	@Override
-	public boolean isInvNameLocalized() {
-		return false;
-	}
+
+    @Override
+    public boolean hasCustomInventoryName() {
+        return false;
+    }
+
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		return false;

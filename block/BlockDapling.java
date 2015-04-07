@@ -11,8 +11,8 @@ import riseautomatons.world.WorldGenFakeTrees;
 
 public class BlockDapling extends Block {
 
-	protected BlockDapling(int i) {
-		super(i, Material.plants);
+	protected BlockDapling() {
+		super(Material.plants);
 		setTickRandomly(true);
 		float f = 0.4F;
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
@@ -53,23 +53,23 @@ public class BlockDapling extends Block {
 
 	@Override
 	public void onBlockAdded(World world, int i, int j, int k) {
-		world.scheduleBlockUpdate(i, j, k, blockID, 3);
+		world.scheduleBlockUpdate(i, j, k, this, 3);
 	}
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int i, int j, int k) {
-		int bbb = world.getBlockId(i, j - 1, k);
-		return world.getBlockId(i, j, k) == 0
+		Block bbb = world.getBlock(i, j - 1, k);
+		return world.getBlock(i, j, k).isAir(world, i, j, k)
 				&& (bbb == Ids.blockArch || bbb == Ids.blockArchBend || bbb == Ids.blockFrass);
 	}
 
 	public void growTree(World world, int i, int j, int k, Random random) {
 		// int l = world.getBlockMetadata(i, j, k) & 3;
-		world.setBlock(i, j, k, 0, 0, 3);
+		world.setBlockToAir(i, j, k);
 		WorldGenFakeTrees obj = new WorldGenFakeTrees(false);
 
 		if (!obj.generate(world, random, i, j, k)) {
-			world.setBlock(i, j, k, blockID, 0, 3);
+			world.setBlock(i, j, k, this, 0, 3);
 		}
 	}
 }

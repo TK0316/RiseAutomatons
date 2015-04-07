@@ -1,12 +1,15 @@
 package riseautomatons.block;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 import riseautomatons.Ids;
 
 public class BeaconManager {
 
-	public static boolean okay(int i) {
+	public static boolean okay(Block i) {
 		return i == Ids.blockWorker || i == Ids.blockBeacon
 				|| i == Ids.blockSentry || i == Ids.blockTote;
 
@@ -34,14 +37,14 @@ public class BeaconManager {
 	}
 
 	public static void select(EntityPlayer ep, int i) {
-		String s = "SBeacon_" + ep.username;
+		String s = "SBeacon_" + ep.getCommandSenderName();
 		BeaconDataCore select = new BeaconDataCore(s, i);
 		select.markDirty();
 		ep.worldObj.setItemData(s, select);
 	}
 
 	public static TileEntityBeacon getSelection(EntityPlayer ep) {
-		String s = "SBeacon_" + ep.username;
+		String s = "SBeacon_" + ep.getCommandSenderName();
 		BeaconDataCore core = (BeaconDataCore) ep.worldObj
 				.loadItemData(BeaconDataCore.class, s);
 		if (core == null)
@@ -54,7 +57,7 @@ public class BeaconManager {
 			return null;
 
 		TileEntityBeacon tile = (TileEntityBeacon) ep.worldObj
-				.getBlockTileEntity(beacon.x, beacon.y, beacon.z);
+				.getTileEntity(beacon.x, beacon.y, beacon.z);
 
 		return tile;
 	}
@@ -63,7 +66,7 @@ public class BeaconManager {
 
 		int y = nearest(ep.worldObj, ep.posX, ep.posY, ep.posZ, 16);
 		if (y != 0) {
-			String s = "SBeacon_" + ep.username;
+			String s = "SBeacon_" + ep.getCommandSenderName();
 			BeaconDataCore select = new BeaconDataCore(s, y);
 			select.markDirty();
 			ep.worldObj.setItemData(s, select);
@@ -142,7 +145,7 @@ public class BeaconManager {
 		for (int i = 1; i <= count; i++) {
 			BeaconData data = (BeaconData) world.loadItemData(
 					BeaconData.class, "beacon_" + i);
-			int id = world.getBlockId(data.x, data.y, data.z);
+			Block id = world.getBlock(data.x, data.y, data.z);
 			if (!okay(id)) {
 				removeBeacon(world, i);
 				count--;
@@ -156,17 +159,17 @@ public class BeaconManager {
 		for (int i = 1; i <= count; i++) {
 			BeaconData data = (BeaconData) world.loadItemData(
 					BeaconData.class, "beacon_" + i);
-			int id = world.getBlockId(data.x, data.y, data.z);
+			Block id = world.getBlock(data.x, data.y, data.z);
 			System.out.println("t" + i);
 			if (id == Ids.blockWorker) {
-				player.addChatMessage("Worker at: " + data.x + "," + data.y
-						+ "," + data.z);
+                Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentTranslation("Worker at: " + data.x + "," + data.y
+                        + "," + data.z));
 			} else if (id == Ids.blockSentry) {
-				player.addChatMessage("Sentry at: " + data.x + "," + data.y
-						+ "," + data.z);
+                Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentTranslation("Sentry at: " + data.x + "," + data.y
+                        + "," + data.z));
 			} else if (id == Ids.blockTote) {
-				player.addChatMessage("Toter at: " + data.x + "," + data.y
-						+ "," + data.z);
+                Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentTranslation("Toter at: " + data.x + "," + data.y
+                        + "," + data.z));
 			} else if (id != Ids.blockBeacon) {
 				removeBeacon(world, i);
 				count--;

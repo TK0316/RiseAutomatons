@@ -1,13 +1,14 @@
 package riseautomatons.item;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import riseautomatons.block.Blocks;
 
 public class ItemComplex extends ItemBlock {
 
-	public ItemComplex(int par1) {
+	public ItemComplex(Block par1) {
 		super(par1);
 		setMaxDamage(0);
 		setHasSubtypes(true);
@@ -20,7 +21,7 @@ public class ItemComplex extends ItemBlock {
 	}
 
 	@Override
-	public Icon getIconFromDamage(int i) {
+	public IIcon getIconFromDamage(int i) {
 		return Blocks.tech.getIcon(2, i);
 	}
 

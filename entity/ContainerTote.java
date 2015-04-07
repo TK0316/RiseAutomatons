@@ -15,7 +15,7 @@ public class ContainerTote extends Container {
 			IInventory par2IInventory) {
 		lowerChestInventory = par2IInventory;
 		numRows = 3;// par2IInventory.getSizeInventory() / 9;
-		par2IInventory.openChest();
+		par2IInventory.openInventory();
 		int i = (numRows - 4) * 18;
 
 		for (int j = 0; j < 3; j++) {
@@ -74,7 +74,7 @@ public class ContainerTote extends Container {
 	@Override
 	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
 		super.onContainerClosed(par1EntityPlayer);
-		this.lowerChestInventory.closeChest();
+		this.lowerChestInventory.closeInventory();
 	}
 
 }

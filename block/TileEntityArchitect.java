@@ -93,7 +93,7 @@ public class TileEntityArchitect extends TileEntity {
 		Random rand = worldObj.rand;
 		if (focus) {
 			// System.out.println("focus!");
-			if (worldObj.getBlockId(focx, focy, focz) == Ids.blockArchBend) {
+			if (worldObj.getBlock(focx, focy, focz) == Ids.blockArchBend) {
 				focy++;
 			} else {
 				((BlockArchBend) Blocks.archBend).grow(worldObj, focx,
@@ -117,7 +117,7 @@ public class TileEntityArchitect extends TileEntity {
 			}
 			if ((zi == 2 && (xi == 2 || xi == -2))
 					|| (zi == -2 && (xi == 2 || xi == -2))) {
-				if (worldObj.getBlockId(xx, yy, zz) == Ids.blockArchBend) {
+				if (worldObj.getBlock(xx, yy, zz) == Ids.blockArchBend) {
 					focx = xx;
 					focy = yy;
 					focz = zz;
@@ -130,7 +130,7 @@ public class TileEntityArchitect extends TileEntity {
 			} else if (Math.abs(zi) <= 1 && Math.abs(xi) <= 1 && yi > -1
 					&& yi < 5) {
 				if (yi == 4) {
-					worldObj.setBlock(xx, yy, zz, 49, 0, 3);
+					worldObj.setBlock(xx, yy, zz, Blocks.obsidian, 0, 3);
 				} else {
 					if (yi == 0
 							&& ((xi == 0 && Math.abs(zi) == 1) || (zi == 0 && Math
@@ -138,12 +138,12 @@ public class TileEntityArchitect extends TileEntity {
 						worldObj.setBlock(xx, yy, zz,
 								Ids.blockArchBend, 4, 3);
 					} else {
-						worldObj.setBlock(xx, yy, zz, 0, 0, 3);
+						worldObj.setBlockToAir(xx, yy, zz);
 					}
 
 				}
 
-			} else if (worldObj.isBlockOpaqueCube(xx, yy, zz)) {
+			} else if (worldObj.getBlock(xx, yy, zz).isOpaqueCube()) {
 				BlockArch.place(worldObj, xx, yy, zz);
 			}
 

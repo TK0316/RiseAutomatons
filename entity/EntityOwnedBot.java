@@ -3,6 +3,7 @@ package riseautomatons.entity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -23,14 +24,15 @@ public abstract class EntityOwnedBot extends EntityGolem implements IBot {
 	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
 
 		if (par1DamageSource == DamageSource.inWall) {
-			this.pushOutOfBlocks(posX, posY, posZ);
+            //this.pushOutOfBlocks(posX, posY, posZ);
+            this.func_145771_j(posX, posY, posZ);
 			return false;
 		}
 		Entity entity = par1DamageSource.getEntity();
 
 		if (entity != null && entity != this
 				&& (entity instanceof EntityPlayer)
-				&& ((EntityPlayer) entity).username.equals(getBotOwner())) {
+				&& ((EntityPlayer) entity).getCommandSenderName().equals(getBotOwner())) {
 			par2 = 20;
 		}
 
@@ -38,8 +40,8 @@ public abstract class EntityOwnedBot extends EntityGolem implements IBot {
 	}
 
 	@Override
-	protected int getDropItemId() {
-		return 0;
+	protected Item getDropItem() {
+		return null;
 	}
 
 	@Override

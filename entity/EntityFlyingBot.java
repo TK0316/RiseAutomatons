@@ -3,6 +3,7 @@ package riseautomatons.entity;
 import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import riseautomatons.block.Blocks;
 
 
 public class EntityFlyingBot extends EntityBot {
@@ -40,11 +41,11 @@ public class EntityFlyingBot extends EntityBot {
             if (this.onGround)
             {
                 var3 = 0.54600006F;
-                int var4 = this.worldObj.getBlockId(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
+                Block var4 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
 
-                if (var4 > 0)
+                if (var4 != Blocks.air)
                 {
-                    var3 = Block.blocksList[var4].slipperiness * 0.91F;
+                    var3 = var4.slipperiness * 0.91F;
                 }
             }
 
@@ -55,11 +56,11 @@ public class EntityFlyingBot extends EntityBot {
             if (this.onGround)
             {
                 var3 = 0.54600006F;
-                int var5 = this.worldObj.getBlockId(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
+                Block var5 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.boundingBox.minY) - 1, MathHelper.floor_double(this.posZ));
 
-                if (var5 > 0)
+                if (var5 != Blocks.air)
                 {
-                    var3 = Block.blocksList[var5].slipperiness * 0.91F;
+                    var3 = var5.slipperiness * 0.91F;
                 }
             }
 

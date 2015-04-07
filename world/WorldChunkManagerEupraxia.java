@@ -148,7 +148,7 @@ public class WorldChunkManagerEupraxia extends WorldChunkManager {
 
         for (int var7 = 0; var7 < par4 * par5; ++var7)
         {
-            float var8 = (float)biomeList[var6[var7]].getIntTemperature() / 65536.0F;
+            float var8 = (float)biomeList[var6[var7]].getFloatTemperature(par2, par3, par4) / 65536.0F;
 
             if (var8 > 1.0F)
             {

@@ -1,62 +1,67 @@
 package riseautomatons;
 
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import riseautomatons.block.Blocks;
+import riseautomatons.item.Items;
+
 public class Ids {
 
-	// Items
-	public static int soulCore = 2001;
-	public static int itemChalk = 2002;
-	public static int blaster = 2003;
-	public static int smack = 2004;
-	public static int pickTech = 2005;
-	public static int mortar = 2006;
-	public static int chisel = 2007;
-	public static int techifier = 2008;
-	public static int naturizer = 2009;
-	public static int craftSet = 2010;
-	public static int spring = 2011;
-	public static int skull = 2012;
-	public static int skullA = 2013;
+    // Items
+    public static Item soulCore = Items.soulCore;
+    public static Item itemChalk = Items.chalk;
+    public static Item blaster = Items.blaster;
+    public static Item smack = Items.smack;
+    public static Item pickTech = Items.pickTech;
+    public static Item mortar = Items.mortar;
+    public static Item chisel = Items.chisel;
+    public static Item techifier = Items.techifier;
+    public static Item naturizer = Items.naturizer;
+    public static Item craftSet = Items.craftset;
+    public static Item spring = Items.spring;
+    public static Item skull = Items.skull;
+    public static Item skullA = Items.skullAnimal;
 
-	public static int itemWorker = 2031;
-	public static int itemSentry = 2032;
-	public static int itemFactotum = 2033;
-	public static int itemBeacon = 2034;
-	public static int itemGuard = 2035;
-	public static int itemOmni = 2036;
-	public static int itemVirus = 2037;
-	public static int itemTote = 2038;
+    public static Item itemWorker = Items.worker;
+    public static Item itemSentry = Items.sentry;
+    public static Item itemFactotum = Items.factotum;
+    public static Item itemBeacon = Items.beacon;
+    public static Item itemGuard = Items.guard;
+    public static Item itemOmni = Items.omni;
+    public static Item itemVirus = Items.virus;
+    public static Item itemTote = Items.tote;
 
 
-	// Blocks
-	public static int blockWorker = 2301;
-	public static int blockChalk = 2302;
-	public static int blockGearbox = 2303;
-	public static int blockTurn = 2304;
-	public static int blockWindmill = 2305;
-	public static int blockSlab = 2306;
-	public static int saltOre = 2307;
-	public static int sulfOre = 2308;
-	public static int blockSentry = 2309;
-	public static int blockTech = 2310;
-	public static int blockArch = 2311;
-	public static int blockSky = 2312;
-	public static int blockArchBend = 2313;
-	public static int blockArchitect = 2314;
-	public static int blockCrink = 2315;
-	public static int blockFrass = 2316;
-	public static int blockPlantMass = 2317;
-	public static int blockCrystal = 2318;
-	public static int blockFakeCrystal = 2319;
-	public static int blockGlowy = 2320;
-	public static int blockBoing = 2321;
-	public static int blockBeacon = 2322;
-	public static int blockTote = 2323;
-	public static int blockGrower = 2324;
-	public static int blockHeal = 2325;
-	public static int blockDapling = 2326;
-	public static int blockDuplex = 2327;
-	public static int blockLatch = 2328;
+    // Blocks
+    public static Block blockWorker = Blocks.worker;
+    public static Block blockChalk = Blocks.chalk;
+    public static Block blockGearbox = Blocks.gearbox;
+    public static Block blockTurn = Blocks.turnBlock;
+    public static Block blockWindmill = Blocks.windmill;
+    public static Block blockSlab = Blocks.slabBlock;
+    public static Block saltOre = Blocks.saltOre;
+    public static Block sulfOre = Blocks.sulfOre;
+    public static Block blockSentry = Blocks.sentry;
+    public static Block blockTech = Blocks.tech;
+    public static Block blockArch = Blocks.arch;
+    public static Block blockSky = Blocks.sky;
+    public static Block blockArchBend = Blocks.archBend;
+    public static Block blockArchitect = Blocks.architect;
+    public static Block blockCrink = Blocks.crink;
+    public static Block blockFrass = Blocks.frass;
+    public static Block blockPlantMass = Blocks.plantMass;
+    public static Block blockCrystal = Blocks.crystal;
+    public static Block blockFakeCrystal = Blocks.fakeCrystal;
+    public static Block blockGlowy = Blocks.glowy;
+    public static Block blockBoing = Blocks.boing;
+    public static Block blockBeacon = Blocks.beacon;
+    public static Block blockTote = Blocks.tote;
+    public static Block blockGrower = Blocks.grower;
+    public static Block blockHeal = Blocks.heal;
+    public static Block blockDapling = Blocks.dapling;
+    public static Block blockDuplex = Blocks.duplex;
+    public static Block blockLatch = Blocks.latch;
 
 	// Dimension
 	public static int eupraxia = 99;
